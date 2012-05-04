@@ -1,0 +1,59 @@
+<h1>Listing references</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Authors</th>
+    <th>Year</th>
+    <th>Year disambiguation letter</th>
+    <th>Article title</th>
+    <th>Editors</th>
+    <th>Bibtex type</th>
+    <th>Book title</th>
+    <th>City</th>
+    <th>Issue</th>
+    <th>Journal</th>
+    <th>Pages</th>
+    <th>Publisher</th>
+    <th>Series title</th>
+    <th>Url</th>
+    <th>Volume</th>
+    <th>Latex cite key</th>
+    <th>Additional information</th>
+    <th>Full reference</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @references.each do |reference| %>
+  <tr>
+    <td><%= reference.id %></td>
+    <td><%= reference.authors %></td>
+    <td><%= reference.year %></td>
+    <td><%= reference.year_disambiguation_letter %></td>
+    <td><%= reference.article_title %></td>
+    <td><%= reference.editors %></td>
+    <td><%= reference.bibtex_type %></td>
+    <td><%= reference.book_title %></td>
+    <td><%= reference.city %></td>
+    <td><%= reference.issue %></td>
+    <td><%= reference.journal %></td>
+    <td><%= reference.pages %></td>
+    <td><%= reference.publisher %></td>
+    <td><%= reference.series_title %></td>
+    <td><%= reference.url %></td>
+    <td><%= reference.volume %></td>
+    <td><%= reference.latex_cite_key %></td>
+    <td><%= reference.additional_information %></td>
+    <td><%= reference.full_reference %></td>
+    <td><%= link_to 'Show', reference %></td>
+    <td><%= link_to 'Edit', edit_reference_path(reference) %></td>
+    <td><%= link_to 'Destroy', reference, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Reference', new_reference_path %>

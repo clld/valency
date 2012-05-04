@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  verb: 
+  alternation: 
+  alternation_occurs: MyString
+  alternation_comment: MyText
+
+two:
+  verb: 
+  alternation: 
+  alternation_occurs: MyString
+  alternation_comment: MyText

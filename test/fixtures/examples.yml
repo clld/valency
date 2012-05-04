@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  language: 
+  reference: 
+  person: 
+  primary_text: MyString
+  original_orthography: MyString
+  analyzed_text: MyString
+  gloss: MyString
+  translation: MyString
+  translation_other: MyString
+  comment: MyText
+  media_file_name: MyString
+  media_file_timecode: MyString
+  reference_pages: MyString
+
+two:
+  id: 1
+  language: 
+  reference: 
+  person: 
+  primary_text: MyString
+  original_orthography: MyString
+  analyzed_text: MyString
+  gloss: MyString
+  translation: MyString
+  translation_other: MyString
+  comment: MyText
+  media_file_name: MyString
+  media_file_timecode: MyString
+  reference_pages: MyString

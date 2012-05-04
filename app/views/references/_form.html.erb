@@ -1,0 +1,93 @@
+<%= form_for(@reference) do |f| %>
+  <% if @reference.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reference.errors.count, "error") %> prohibited this reference from being saved:</h2>
+
+      <ul>
+      <% @reference.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br />
+    <%= f.number_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :authors %><br />
+    <%= f.text_field :authors %>
+  </div>
+  <div class="field">
+    <%= f.label :year %><br />
+    <%= f.text_field :year %>
+  </div>
+  <div class="field">
+    <%= f.label :year_disambiguation_letter %><br />
+    <%= f.text_field :year_disambiguation_letter %>
+  </div>
+  <div class="field">
+    <%= f.label :article_title %><br />
+    <%= f.text_field :article_title %>
+  </div>
+  <div class="field">
+    <%= f.label :editors %><br />
+    <%= f.text_field :editors %>
+  </div>
+  <div class="field">
+    <%= f.label :bibtex_type %><br />
+    <%= f.text_field :bibtex_type %>
+  </div>
+  <div class="field">
+    <%= f.label :book_title %><br />
+    <%= f.text_field :book_title %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :issue %><br />
+    <%= f.text_field :issue %>
+  </div>
+  <div class="field">
+    <%= f.label :journal %><br />
+    <%= f.text_field :journal %>
+  </div>
+  <div class="field">
+    <%= f.label :pages %><br />
+    <%= f.text_field :pages %>
+  </div>
+  <div class="field">
+    <%= f.label :publisher %><br />
+    <%= f.text_field :publisher %>
+  </div>
+  <div class="field">
+    <%= f.label :series_title %><br />
+    <%= f.text_field :series_title %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </div>
+  <div class="field">
+    <%= f.label :volume %><br />
+    <%= f.text_field :volume %>
+  </div>
+  <div class="field">
+    <%= f.label :latex_cite_key %><br />
+    <%= f.text_field :latex_cite_key %>
+  </div>
+  <div class="field">
+    <%= f.label :additional_information %><br />
+    <%= f.text_area :additional_information %>
+  </div>
+  <div class="field">
+    <%= f.label :full_reference %><br />
+    <%= f.text_area :full_reference %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

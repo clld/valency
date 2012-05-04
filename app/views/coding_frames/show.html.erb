@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Id:</b>
+  <%= @coding_frame.id %>
+</p>
+
+<p>
+  <b>Language:</b>
+  <%= @coding_frame.language %>
+</p>
+
+<p>
+  <b>Coding frame schema:</b>
+  <%= @coding_frame.coding_frame_schema %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @coding_frame.description %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%= @coding_frame.comment %>
+</p>
+
+
+<%= link_to 'Edit', edit_coding_frame_path(@coding_frame) %> |
+<%= link_to 'Back', coding_frames_path %>

@@ -1,4 +1,20 @@
 Valency::Application.routes.draw do
+  resources :examples
+
+  resources :references
+
+  resources :alternations
+
+  resources :coding_frames
+
+  resources :people
+
+  resources :meanings
+
+  resources :verbs
+
+  resources :languages
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

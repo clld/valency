@@ -1,0 +1,100 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Id:</b>
+  <%= @reference.id %>
+</p>
+
+<p>
+  <b>Authors:</b>
+  <%= @reference.authors %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%= @reference.year %>
+</p>
+
+<p>
+  <b>Year disambiguation letter:</b>
+  <%= @reference.year_disambiguation_letter %>
+</p>
+
+<p>
+  <b>Article title:</b>
+  <%= @reference.article_title %>
+</p>
+
+<p>
+  <b>Editors:</b>
+  <%= @reference.editors %>
+</p>
+
+<p>
+  <b>Bibtex type:</b>
+  <%= @reference.bibtex_type %>
+</p>
+
+<p>
+  <b>Book title:</b>
+  <%= @reference.book_title %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @reference.city %>
+</p>
+
+<p>
+  <b>Issue:</b>
+  <%= @reference.issue %>
+</p>
+
+<p>
+  <b>Journal:</b>
+  <%= @reference.journal %>
+</p>
+
+<p>
+  <b>Pages:</b>
+  <%= @reference.pages %>
+</p>
+
+<p>
+  <b>Publisher:</b>
+  <%= @reference.publisher %>
+</p>
+
+<p>
+  <b>Series title:</b>
+  <%= @reference.series_title %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @reference.url %>
+</p>
+
+<p>
+  <b>Volume:</b>
+  <%= @reference.volume %>
+</p>
+
+<p>
+  <b>Latex cite key:</b>
+  <%= @reference.latex_cite_key %>
+</p>
+
+<p>
+  <b>Additional information:</b>
+  <%= @reference.additional_information %>
+</p>
+
+<p>
+  <b>Full reference:</b>
+  <%= @reference.full_reference %>
+</p>
+
+
+<%= link_to 'Edit', edit_reference_path(@reference) %> |
+<%= link_to 'Back', references_path %>

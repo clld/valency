@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Id:</b>
+  <%= @alternation.id %>
+</p>
+
+<p>
+  <b>Language:</b>
+  <%= @alternation.language %>
+</p>
+
+<p>
+  <b>Alternation name:</b>
+  <%= @alternation.alternation_name %>
+</p>
+
+<p>
+  <b>Alternation type:</b>
+  <%= @alternation.alternation_type %>
+</p>
+
+<p>
+  <b>Coding frames of alternation:</b>
+  <%= @alternation.coding_frames_of_alternation %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @alternation.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_alternation_path(@alternation) %> |
+<%= link_to 'Back', alternations_path %>

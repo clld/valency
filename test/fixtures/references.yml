@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  authors: MyString
+  year: MyString
+  year_disambiguation_letter: MyString
+  article_title: MyString
+  editors: MyString
+  bibtex_type: MyString
+  book_title: MyString
+  city: MyString
+  issue: MyString
+  journal: MyString
+  pages: MyString
+  publisher: MyString
+  series_title: MyString
+  url: MyString
+  volume: MyString
+  latex_cite_key: MyString
+  additional_information: MyText
+  full_reference: MyText
+
+two:
+  id: 1
+  authors: MyString
+  year: MyString
+  year_disambiguation_letter: MyString
+  article_title: MyString
+  editors: MyString
+  bibtex_type: MyString
+  book_title: MyString
+  city: MyString
+  issue: MyString
+  journal: MyString
+  pages: MyString
+  publisher: MyString
+  series_title: MyString
+  url: MyString
+  volume: MyString
+  latex_cite_key: MyString
+  additional_information: MyText
+  full_reference: MyText

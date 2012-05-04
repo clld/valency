@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  name: MyString
+  iso_code: MyString
+  family: MyString
+  variety: MyString
+
+two:
+  id: 1
+  name: MyString
+  iso_code: MyString
+  family: MyString
+  variety: MyString

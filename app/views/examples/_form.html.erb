@@ -1,0 +1,73 @@
+<%= form_for(@example) do |f| %>
+  <% if @example.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@example.errors.count, "error") %> prohibited this example from being saved:</h2>
+
+      <ul>
+      <% @example.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br />
+    <%= f.number_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :language %><br />
+    <%= f.text_field :language %>
+  </div>
+  <div class="field">
+    <%= f.label :reference %><br />
+    <%= f.text_field :reference %>
+  </div>
+  <div class="field">
+    <%= f.label :person %><br />
+    <%= f.text_field :person %>
+  </div>
+  <div class="field">
+    <%= f.label :primary_text %><br />
+    <%= f.text_field :primary_text %>
+  </div>
+  <div class="field">
+    <%= f.label :original_orthography %><br />
+    <%= f.text_field :original_orthography %>
+  </div>
+  <div class="field">
+    <%= f.label :analyzed_text %><br />
+    <%= f.text_field :analyzed_text %>
+  </div>
+  <div class="field">
+    <%= f.label :gloss %><br />
+    <%= f.text_field :gloss %>
+  </div>
+  <div class="field">
+    <%= f.label :translation %><br />
+    <%= f.text_field :translation %>
+  </div>
+  <div class="field">
+    <%= f.label :translation_other %><br />
+    <%= f.text_field :translation_other %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %><br />
+    <%= f.text_area :comment %>
+  </div>
+  <div class="field">
+    <%= f.label :media_file_name %><br />
+    <%= f.text_field :media_file_name %>
+  </div>
+  <div class="field">
+    <%= f.label :media_file_timecode %><br />
+    <%= f.text_field :media_file_timecode %>
+  </div>
+  <div class="field">
+    <%= f.label :reference_pages %><br />
+    <%= f.text_field :reference_pages %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

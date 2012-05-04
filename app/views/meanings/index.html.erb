@@ -1,0 +1,33 @@
+<h1>Listing meanings</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Number</th>
+    <th>Label</th>
+    <th>Role frame</th>
+    <th>Typical context</th>
+    <th>Meaning list</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @meanings.each do |meaning| %>
+  <tr>
+    <td><%= meaning.id %></td>
+    <td><%= meaning.number %></td>
+    <td><%= meaning.label %></td>
+    <td><%= meaning.role_frame %></td>
+    <td><%= meaning.typical_context %></td>
+    <td><%= meaning.meaning_list %></td>
+    <td><%= link_to 'Show', meaning %></td>
+    <td><%= link_to 'Edit', edit_meaning_path(meaning) %></td>
+    <td><%= link_to 'Destroy', meaning, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Meaning', new_meaning_path %>

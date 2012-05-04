@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Language:</b>
+  <%= @verb.language %>
+</p>
+
+<p>
+  <b>Id:</b>
+  <%= @verb.id %>
+</p>
+
+<p>
+  <b>Coding frame:</b>
+  <%= @verb.coding_frame %>
+</p>
+
+<p>
+  <b>Verb form:</b>
+  <%= @verb.verb_form %>
+</p>
+
+<p>
+  <b>Original script:</b>
+  <%= @verb.original_script %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%= @verb.comment %>
+</p>
+
+
+<%= link_to 'Edit', edit_verb_path(@verb) %> |
+<%= link_to 'Back', verbs_path %>

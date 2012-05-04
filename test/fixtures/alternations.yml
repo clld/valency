@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  language: 
+  alternation_name: MyString
+  alternation_type: MyString
+  coding_frames_of_alternation: MyString
+  description: MyText
+
+two:
+  id: 1
+  language: 
+  alternation_name: MyString
+  alternation_type: MyString
+  coding_frames_of_alternation: MyString
+  description: MyText

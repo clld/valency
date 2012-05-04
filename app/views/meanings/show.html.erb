@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Id:</b>
+  <%= @meaning.id %>
+</p>
+
+<p>
+  <b>Number:</b>
+  <%= @meaning.number %>
+</p>
+
+<p>
+  <b>Label:</b>
+  <%= @meaning.label %>
+</p>
+
+<p>
+  <b>Role frame:</b>
+  <%= @meaning.role_frame %>
+</p>
+
+<p>
+  <b>Typical context:</b>
+  <%= @meaning.typical_context %>
+</p>
+
+<p>
+  <b>Meaning list:</b>
+  <%= @meaning.meaning_list %>
+</p>
+
+
+<%= link_to 'Edit', edit_meaning_path(@meaning) %> |
+<%= link_to 'Back', meanings_path %>

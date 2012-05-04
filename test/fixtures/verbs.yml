@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  language: 
+  id: 1
+  coding_frame: 
+  verb_form: MyString
+  original_script: MyString
+  comment: MyText
+
+two:
+  language: 
+  id: 1
+  coding_frame: 
+  verb_form: MyString
+  original_script: MyString
+  comment: MyText
