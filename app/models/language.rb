@@ -1,3 +1,3 @@
 class Language < ActiveRecord::Base
-  attr_accessible :family, :id, :iso_code, :name, :variety
+  attr_accessible :family, :id, :iso_code, :name, :variety 
 end
