@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120504064422) do
+ActiveRecord::Schema.define(:version => 20120511082555) do
 
   create_table "alternation_values", :force => true do |t|
     t.integer  "verb_id"
@@ -37,12 +37,12 @@ ActiveRecord::Schema.define(:version => 20120504064422) do
 
   create_table "alternations", :force => true do |t|
     t.integer  "language_id"
-    t.string   "alternation_name"
-    t.string   "alternation_type"
-    t.string   "coding_frames_of_alternation"
+    t.string   "name"
+    t.string   "type"
+    t.string   "coding_frames_text"
     t.text     "description"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   add_index "alternations", ["id"], :name => "index_alternations_on_id", :unique => true

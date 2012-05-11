@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
 
+gem 'ginjo-rfm' # up-to-date fork of Ruby FileMaker API
+gem 'highline' # for reading the password from stdin
+
 # Gems for development
 group :development do
   gem 'sqlite3'
