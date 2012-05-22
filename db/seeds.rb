@@ -1,14 +1,13 @@
-# Find file names in the data directory, try to convert them into class constants
-# Delete all reccords of every model whose class name matches one of the files
+# Delete all reccords of every model
 # Read and parse tab-separated file, use column headers as field names,
 # create records with values from the file
+
+require_relative './rfm_models'
 
 def is_number?(str) # helper method to check if a string can be converted to a number
   true if Float(str) rescue false
 end
 
-data_dir = File.join(Dir.home,'Desktop/data') # set data directory
-ext = '.csv' # file name extension of data
 log = File.join(data_dir, 'import.log')
 
 File.open(log, 'w+') do |errlog|
@@ -33,28 +32,28 @@ File.open(log, 'w+') do |errlog|
     File.foreach(filename) do |line|
       line.chomp! # remove trailing newline
       if linecount == 0 # first line: read the keys
-  	    keys = line.split("\t").map! {|k| k.to_sym } # :symbols
-  	    puts 'Keys: '+(keys.map {|k| k.inspect}).join(', ')
-  	  elsif line.match(/\t/) and not line.strip.empty?
-    		begin
-    		  # hack: by appending "\tEND" to the line, we ensure that there are no nil values after split
-    		  fields = (line+"\tEND").split("\t")
-    		  valuesHash = {}
-    		  for i in 0...keys.length
-    		    unless fields[i].nil? or fields[i].empty?
-    		      field = fields[i]
-    		      field = field.to_i if is_number?(field) # converts number strings to integers!
-    		      valuesHash[keys[i]] = field
-    		    end
-    		  end
-    		  # Create the record
-    		  cls.create(valuesHash) unless valuesHash.empty?
-    		  print '.'
-    		rescue Exception => e
-    		  print 'e'
-    		  errcount += 1
-    		  errlog << "#{filename}:#{linecount} #{e.message}\n"
-    		end 
+        keys = line.split("\t").map! {|k| k.to_sym } # :symbols
+        puts 'Keys: '+(keys.map {|k| k.inspect}).join(', ')
+      elsif line.match(/\t/) and not line.strip.empty?
+        begin
+          # hack: by appending "\tEND" to the line, we ensure that there are no nil values after split
+          fields = (line+"\tEND").split("\t")
+          valuesHash = {}
+          for i in 0...keys.length
+            unless fields[i].nil? or fields[i].empty?
+              field = fields[i]
+              field = field.to_i if is_number?(field) # converts number strings to integers!
+              valuesHash[keys[i]] = field
+            end
+          end
+          # Create the record
+          cls.create(valuesHash) unless valuesHash.empty?
+          print '.'
+        rescue Exception => e
+          print 'e'
+          errcount += 1
+          errlog << "#{filename}:#{linecount} #{e.message}\n"
+        end 
       end
       linecount += 1
     end # done looping through lines of one file

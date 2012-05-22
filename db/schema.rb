@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120511082555) do
+ActiveRecord::Schema.define(:version => 20120516143050) do
 
   create_table "alternation_values", :force => true do |t|
     t.integer  "verb_id"
@@ -110,8 +110,14 @@ ActiveRecord::Schema.define(:version => 20120511082555) do
     t.string   "iso_code"
     t.string   "family"
     t.string   "variety"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
+    t.text     "alternation_occurs_judgement_criteria"
+    t.text     "characterization_of_flagging_resources"
+    t.text     "characterization_of_indexing_resources"
+    t.text     "characterization_of_ordering_resources"
+    t.text     "comments"
+    t.text     "data_sources_generalizations_contributor_backgrounds"
   end
 
   add_index "languages", ["id"], :name => "index_languages_on_id", :unique => true
