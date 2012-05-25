@@ -11,28 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120516143050) do
+ActiveRecord::Schema.define(:version => 20120525045841) do
 
   create_table "alternation_values", :force => true do |t|
-    t.integer  "verb_id"
-    t.integer  "alternation_id"
-    t.string   "alternation_occurs"
-    t.text     "alternation_comment"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.integer "verb_id"
+    t.integer "alternation_id"
+    t.string  "alternation_occurs"
+    t.text    "alternation_comment"
   end
 
   add_index "alternation_values", ["alternation_id"], :name => "index_alternation_values_on_alternation_id"
   add_index "alternation_values", ["verb_id"], :name => "index_alternation_values_on_verb_id"
 
-  create_table "alternation_values_examples", :force => true do |t|
-    t.integer  "alternation_id"
-    t.integer  "example_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+  create_table "alternation_values_examples", :id => false, :force => true do |t|
+    t.integer "alternation_value_id"
+    t.integer "example_id"
   end
 
-  add_index "alternation_values_examples", ["alternation_id"], :name => "index_alternation_values_examples_on_alternation_id"
+  add_index "alternation_values_examples", ["alternation_value_id"], :name => "index_alternation_values_examples_on_alternation_value_id"
   add_index "alternation_values_examples", ["example_id"], :name => "index_alternation_values_examples_on_example_id"
 
   create_table "alternations", :force => true do |t|
@@ -48,6 +44,32 @@ ActiveRecord::Schema.define(:version => 20120516143050) do
   add_index "alternations", ["id"], :name => "index_alternations_on_id", :unique => true
   add_index "alternations", ["language_id"], :name => "index_alternations_on_language_id"
 
+  create_table "argument_types", :force => true do |t|
+    t.string "argument_type"
+    t.text   "description"
+  end
+
+  create_table "coding_frame_examples", :id => false, :force => true do |t|
+    t.integer "example_id"
+    t.integer "verb_id"
+    t.integer "coding_frame_id"
+  end
+
+  add_index "coding_frame_examples", ["coding_frame_id"], :name => "index_coding_frame_examples_on_coding_frame_id"
+  add_index "coding_frame_examples", ["example_id"], :name => "index_coding_frame_examples_on_example_id"
+  add_index "coding_frame_examples", ["verb_id"], :name => "index_coding_frame_examples_on_verb_id"
+
+  create_table "coding_frame_index_numbers", :force => true do |t|
+    t.integer "index_number"
+    t.integer "coding_set_id"
+    t.integer "coding_frame_id"
+    t.integer "argument_type_id"
+  end
+
+  add_index "coding_frame_index_numbers", ["argument_type_id"], :name => "index_coding_frame_index_numbers_on_argument_type_id"
+  add_index "coding_frame_index_numbers", ["coding_frame_id"], :name => "index_coding_frame_index_numbers_on_coding_frame_id"
+  add_index "coding_frame_index_numbers", ["coding_set_id"], :name => "index_coding_frame_index_numbers_on_coding_set_id"
+
   create_table "coding_frames", :force => true do |t|
     t.integer  "language_id"
     t.string   "coding_frame_schema"
@@ -60,12 +82,18 @@ ActiveRecord::Schema.define(:version => 20120516143050) do
   add_index "coding_frames", ["id"], :name => "index_coding_frames_on_id", :unique => true
   add_index "coding_frames", ["language_id"], :name => "index_coding_frames_on_language_id"
 
+  create_table "coding_sets", :force => true do |t|
+    t.integer "language_id"
+    t.string  "name"
+    t.text    "comment"
+  end
+
+  add_index "coding_sets", ["language_id"], :name => "index_coding_sets_on_language_id"
+
   create_table "contributions", :force => true do |t|
-    t.integer  "language_id"
-    t.integer  "person_id"
-    t.integer  "sort_order_number"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.integer "language_id"
+    t.integer "person_id"
+    t.integer "sort_order_number"
   end
 
   add_index "contributions", ["id"], :name => "index_contributions_on_id", :unique => true
@@ -95,15 +123,23 @@ ActiveRecord::Schema.define(:version => 20120516143050) do
   add_index "examples", ["person_id"], :name => "index_examples_on_person_id"
   add_index "examples", ["reference_id"], :name => "index_examples_on_reference_id"
 
-  create_table "examples_verbs", :force => true do |t|
-    t.integer  "example_id"
-    t.integer  "verb_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "examples_verbs", :id => false, :force => true do |t|
+    t.integer "example_id"
+    t.integer "verb_id"
   end
 
   add_index "examples_verbs", ["example_id"], :name => "index_examples_verbs_on_example_id"
   add_index "examples_verbs", ["verb_id"], :name => "index_examples_verbs_on_verb_id"
+
+  create_table "gloss_meanings", :force => true do |t|
+    t.integer "language_id"
+    t.string  "gloss"
+    t.string  "meaning"
+    t.text    "comment"
+  end
+
+  add_index "gloss_meanings", ["gloss"], :name => "index_gloss_meanings_on_gloss"
+  add_index "gloss_meanings", ["language_id"], :name => "index_gloss_meanings_on_language_id"
 
   create_table "languages", :force => true do |t|
     t.string   "name"
@@ -134,15 +170,22 @@ ActiveRecord::Schema.define(:version => 20120516143050) do
 
   add_index "meanings", ["id"], :name => "index_meanings_on_id", :unique => true
 
-  create_table "meanings_verbs", :force => true do |t|
-    t.integer  "meaning_id"
-    t.integer  "verb_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "meanings_verbs", :id => false, :force => true do |t|
+    t.integer "meaning_id"
+    t.integer "verb_id"
   end
 
   add_index "meanings_verbs", ["meaning_id"], :name => "index_meanings_verbs_on_meaning_id"
   add_index "meanings_verbs", ["verb_id"], :name => "index_meanings_verbs_on_verb_id"
+
+  create_table "microroles", :force => true do |t|
+    t.string  "name"
+    t.integer "meaning_id"
+    t.string  "role_letter"
+    t.string  "original_or_new"
+  end
+
+  add_index "microroles", ["meaning_id"], :name => "index_microroles_on_meaning_id"
 
   create_table "people", :force => true do |t|
     t.string   "name"

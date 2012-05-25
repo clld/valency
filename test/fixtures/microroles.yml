@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  name: MyString
+  meaning: 
+  role_letter: MyString
+  original_or_new: MyString
+
+two:
+  id: 1
+  name: MyString
+  meaning: 
+  role_letter: MyString
+  original_or_new: MyString

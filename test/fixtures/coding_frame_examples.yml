@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 
+  example: 
+  verb: 
+  coding_frame: 
+
+two:
+  id: 
+  example: 
+  verb: 
+  coding_frame: 

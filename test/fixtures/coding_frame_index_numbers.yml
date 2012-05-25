@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  index_number: 1
+  coding_set: 
+  coding_frame: 
+  argument_type: 
+
+two:
+  id: 1
+  index_number: 1
+  coding_set: 
+  coding_frame: 
+  argument_type: 

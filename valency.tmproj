@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>currentDocument</key>
-	<string>db/seeds.rb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -43,20 +41,6 @@
 				<integer>54</integer>
 				<key>line</key>
 				<integer>3</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>app/models/language.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>2</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -147,31 +131,10 @@
 			<key>firstVisibleLine</key>
 			<integer>79</integer>
 		</dict>
-		<key>db/seeds.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>7</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
 	</dict>
-	<key>openDocuments</key>
-	<array>
-		<string>db/seeds.rb</string>
-		<string>app/models/language.rb</string>
-		<string>db/schema.rb</string>
-		<string>db/migrate/20120516143050_add_css_fields_to_languages.rb</string>
-	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{1048, 34}, {849, 1024}}</string>
+	<string>{{1167, 0}, {749, 1058}}</string>
 </dict>
 </plist>
