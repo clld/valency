@@ -1,3 +1,17 @@
+#!/Users/alexanderjahraus/.rvm/bin/rvm-auto-ruby
+puts "# ruby "+ RUBY_VERSION
+########### only needed for testing in TextWrangler:
+ruby_v = `$HOME/.rvm/bin/rvm current`.chomp
+# point ruby to the correct Gem directory...
+ENV['GEM_HOME']       = File.join Dir.home, '.rvm/gems', ruby_v
+ENV['BUNDLE_GEMFILE'] = File.join Dir.home, 'work/valency/Gemfile'
+ENV['GEM_PATH']       = ENV['GEM_HOME'] +':'+ File.join(Dir.home, '.rvm/gems', ruby_v+'@global')
+# Load and initialize the rails application
+require File.join Dir.home, 'work/valency/config/application'
+require 'rfm'
+Valency::Application.initialize!
+###########
+
 # Database connection settings for RFM
 RFM_CONFIG = {
   host:         'brugmann.eva.mpg.de',  # IP address: 194.94.96.174
@@ -10,52 +24,7 @@ RFM_CONFIG = {
   timeout:      20
 }
 
-# nonstandard layout names:
-special_layouts = {
-	Contribution              => "Language_contributors (table)",
-	MeaningsVerb              => "Verb_meanings (table)",
-	ExamplesVerb              => "Verb_examples (table)",
-	AlternationValuesExample  => "Alternation_value_examples (table)",
-	CodingFrameExample	      => "Verb_coding_frame_examples (table)"
-}
-spec_lay = ->(obj){ special_layouts[obj] }
-
-# nonstandard field names:
-special_field_names = {
-	Alternation => {
-		'coding_frames_text' => 'coding_frames_of_alternation'
-	},
-	AlternationValue => {
-		'id' 								 => 'z_calc_Unique_key_decimal'
-	},
-	AlternationValuesExample => {
-		'alternation_value_id' => 'Alternation_values::z_calc_Unique_key_decimal'
-	},
-	GlossMeaning => {
-		'comment' => 'Gloss_meaning_comments::comments'
-	}
-}
-spec_fields = ->(obj){ special_field_names[obj] }
-
-def get_layout(model, spec_lay)
-	def layout_or_nil(layout_name)
-		begin
-			layout = Rfm.layout(layout_name) # raises exc. if layout_name not a string
-			layout.table # raises exc. if layout does not exist
-			layout
-		rescue
-			nil
-		end
-	end
-	special = spec_lay.call(model)
-	unless special.nil?
-		layout = layout_or_nil(special)
-	else
-		layout = layout_or_nil(model.to_s.tableize + ' (table)')
-	end
-		raise "Layout \"#{special}\" does not exist." if layout.nil?
-		return layout
-end
+Logfile = Rails.root.join('db', 'seeds.log') # logfile name
 
 # helper methods: appends prefix and suffix to FM field name
 class String
@@ -67,86 +36,151 @@ class String
 	end
 end
 
-def get_field_names(model, attribute_names, layout, spec_fields)
-  field_names = layout.field_names.map{|name| name.downcase} # existing field names
-  attr_to_field = {} # hash to be returned: field names for the attributes
-  attribute_names.each do |attr_name| # for each of the model's attributes
+class FieldFinder
+ 	attr_reader :model, :layout, :log, :field_names
 
-    # look for special name
-    special_name_exists = false
-    if spec_fields.call(model) && spec_fields.call(model).include?(attr_name)
-      source_field = spec_fields.call(model)[attr_name]
-      special_name_exists = true
-      if not field_names.include? source_field # special name misspelled
-        puts "WARNING: Layout \"#{layout.name}\" does not have a field \"#{source_field}\"."
-        special_name_exists = false
-      end
-    end
+  def initialize(model, logfile)
+  	@model = model
+  	@log = logfile
+		@special_layout = {
+			Contribution              => "Language_contributors (table)",
+			MeaningsVerb              => "Verb_meanings (table)",
+			ExamplesVerb              => "Verb_examples (table)",
+			AlternationValuesExample  => "Alternation_value_examples (table)",
+			CodingFrameExample	      => "Verb_coding_frame_examples (table)"
+		}
+		@special_field_name = { # nonstandard field names (must be in lowercase!):
+			Alternation => {
+				'coding_frames_text' => 'coding_frames_of_alternation'
+			},
+			AlternationValue => {
+				'id' 								 => 'z_calc_unique_key_decimal'
+			},
+			AlternationValuesExample => {
+				'alternation_value_id' => 'alternation_values::z_calc_unique_key_decimal'
+			},
+			GlossMeaning => {
+				'comment' => 'gloss_meaning_comments::comments'
+			},
+			Example => {
+				'person_id' => 'source_person_id'
+			},
+			Meaning => {
+				'meaning_list' => 'z_calc_meaning_list_core_extended_new_or_old'
+			}
+		}
+		@layout = find_layout
+		@field_names = find_field_names		
+	end
+	
+	def name_transformations # expects a block, yields lambdas to it
+		def compose(f,g) # compose 2 lambdas
+			->(x) { f.call(g.call(x)) }
+		end
+		pl  = ->(s) { s.singularize == s ? s.pluralize : s.singularize } # toggle plural
+		css = ->(s) { s.css_field_name } # z_calc_field_name_as_css
+		pre = ->(s) { s.prefixed_field_name(@model) } # model_field_name
+		yield compose(css, compose(pre, pl))
+		yield compose(css, pre)
+		yield compose(css, pl)
+		yield compose(pre, pl)
+		yield css
+		yield pre
+		yield pl
+		yield ->(s){s} # identity: no change
+	end
 
-    unless special_name_exists
-      # try with prefixed model name
-      source_field = attr_name.prefixed_field_name(model) # e.g. name ==> language_name
-      if not field_names.include? source_field
-        # try _as_css version
-        source_field = attr_name.css_field_name
-        if not field_names.include? source_field
-          # try both
-          source_field = attr_name.prefixed_field_name(model).css_field_name
-          if not field_names.include? source_field
-            # assume unchanged
-            source_field = attr_name
-          end
-        end  
-      end
-    end
+	def layout_or_nil(layout_name)
+		begin
+			if (layout = Rfm.layout(layout_name)).table then layout; end
+		rescue nil
+		end
+	end
+
+	def find_layout
+		l_name = @special_layout[@model] || @model.to_s.tableize + ' (table)'
+		if layout = layout_or_nil(l_name)
+			@log << "\n==== Model: #{@model.to_s} <– Layout: #{layout.name} ===="
+			return layout
+		else 
+			@log << "WARNING: Layout \"#{l_name}\" does not exist."
+			return nil
+		end
+	end
+	
+	def find_field_names
+		return nil if @layout.nil?
+		attr_names = @model.attribute_names.map{|name| name.downcase}
+	  fm_fields  = @layout.field_names.map{|name| name.downcase} # layout's fields
+		result = {} # hash to be returned: field names for the attributes
+		
+		attr_names.each do |attr_name| # for each of the model's attributes
+
+			if special = @special_field_name[@model] && f_name = special[attr_name]
+				if fm_fields.include? f_name
+					result[attr_name] = f_name
+				else 
+					@log << "WARNING: Field \"#{f_name}\" not found on layout \"#{@layout.name}\"."				
+					next
+				end
+			else # no special field name: guess regular field name
+				name_transformations do |transf|
+					if fm_fields.include? (transformed = transf.call(attr_name))
+						result[attr_name] = transformed
+						break
+					end
+				end
+			end
+	
+			if result[attr_name].nil?
+				@log << "WARNING: No field found for #{@model.to_s}.#{attr_name}"
+			else
+				@log << "OK: #{attr_name} <-- #{result[attr_name]}"
+			end
+		
+		end
+		return result
+	end
     
-   	# try with plural:
-    unless field_names.include? source_field
-    	attr_name_pl = attr_name.pluralize
-      # try with prefixed model name
-      source_field = attr_name_pl.prefixed_field_name(model) # e.g. name ==> language_name
-      if not field_names.include? source_field
-        # try _as_css version
-        source_field = attr_name_pl.css_field_name
-        if not field_names.include? source_field
-          # try both
-          source_field = attr_name_pl.prefixed_field_name(model).css_field_name
-          if not field_names.include? source_field
-            # assume unchanged
-            source_field = attr_name_pl
-          end
-        end  
-      end
-    end
-    
-    if not field_names.include? source_field 
-      puts "WARNING: Cannot find a source field for #{model.to_s}.#{attr_name}!"
-      next
-    else
-      # store it in the hash
-      puts "#{attr_name} <-- #{source_field}"
-      attr_to_field[attr_name] = source_field
-    end
-  end
-  return attr_to_field
-end
+end # of class
 
+class DataImporter
+	attr_reader :models, :field_names, :log, :ff # FieldFinder instance
 
-# Gather all model classes:
-rails_models = Dir[Rails.root.join 'app','models','*.rb'].map do |file|
-	File.basename(file,'.*').camelize.constantize
-end
+	def initialize
+		# Gather all model classes:
+		@models = Dir[Rails.root.join 'app','models','*.rb'].map do |file|
+			File.basename(file,'.*').camelize.constantize
+		end
+	end
 
-log = Rails.root.join('db', 'seeds.log')
-m.attribute_names.map{|x|"  #{x}"}.join("\n")}
+	def import_data
+	  @log = File.open(Logfile, 'a')# 'a' is for append
+		
+		@models.each do |model|
+			puts '='.center(30,'=')
+	    print "deleting #{model.to_s} records... "; model.delete_all
+		  puts "OK"
 
-File.open(log, 'w+') do |errlog|
+ 			# get the layout and field names
+ 			@ff = FieldFinder.new(model, @log)
+			next if (layout = @ff.layout).nil? or (fields = @ff.field_names).empty?
+ 			puts "Connecting to FileMaker, layout=#{layout.name}..."
+ 			puts "Importing data into #{model.to_s.tableize}"
+			
+			# now loop through the records of the layout
+			layout.all.each do |record|
+				new_obj = {}
+				(model.attribute_names & fields.keys).each do |attr_name|
+					new_obj[attr_name] = fields[attr_name]							
+				end #loop over attribute names
+				model.create new_obj
+				print '.'
+			end #loop over records
 
-
-    print "deleting #{classname} records... "; cls.delete_all
-    puts "OK"
-
-    end # done looping through lines of one file
-    puts "\n#{classname}: #{cls.count} records created. #{errcount > 0 ? 'There were '+errcount.to_s : 'No'} errors."
-  end # done looping through files
-end
+		end #loop over models
+		
+		@log.close
+	end
+	
+end # of class

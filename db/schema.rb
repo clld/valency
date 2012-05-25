@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120525045841) do
+ActiveRecord::Schema.define(:version => 20120525093554) do
 
   create_table "alternation_values", :force => true do |t|
     t.integer "verb_id"
@@ -59,16 +59,16 @@ ActiveRecord::Schema.define(:version => 20120525045841) do
   add_index "coding_frame_examples", ["example_id"], :name => "index_coding_frame_examples_on_example_id"
   add_index "coding_frame_examples", ["verb_id"], :name => "index_coding_frame_examples_on_verb_id"
 
-  create_table "coding_frame_index_numbers", :force => true do |t|
+  create_table "coding_frame_index_numbers", :id => false, :force => true do |t|
     t.integer "index_number"
     t.integer "coding_set_id"
     t.integer "coding_frame_id"
     t.integer "argument_type_id"
   end
 
-  add_index "coding_frame_index_numbers", ["argument_type_id"], :name => "index_coding_frame_index_numbers_on_argument_type_id"
-  add_index "coding_frame_index_numbers", ["coding_frame_id"], :name => "index_coding_frame_index_numbers_on_coding_frame_id"
-  add_index "coding_frame_index_numbers", ["coding_set_id"], :name => "index_coding_frame_index_numbers_on_coding_set_id"
+  add_index "coding_frame_index_numbers", ["argument_type_id"], :name => "index_argtype_id"
+  add_index "coding_frame_index_numbers", ["coding_frame_id"], :name => "index_cf_id"
+  add_index "coding_frame_index_numbers", ["coding_set_id"], :name => "index_cs_id"
 
   create_table "coding_frames", :force => true do |t|
     t.integer  "language_id"
@@ -90,13 +90,12 @@ ActiveRecord::Schema.define(:version => 20120525045841) do
 
   add_index "coding_sets", ["language_id"], :name => "index_coding_sets_on_language_id"
 
-  create_table "contributions", :force => true do |t|
+  create_table "contributions", :id => false, :force => true do |t|
     t.integer "language_id"
     t.integer "person_id"
     t.integer "sort_order_number"
   end
 
-  add_index "contributions", ["id"], :name => "index_contributions_on_id", :unique => true
   add_index "contributions", ["language_id"], :name => "index_contributions_on_language_id"
   add_index "contributions", ["person_id"], :name => "index_contributions_on_person_id"
 
