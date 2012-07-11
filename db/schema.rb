@@ -11,16 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120525093554) do
+ActiveRecord::Schema.define(:version => 20120711172757) do
 
   create_table "alternation_values", :force => true do |t|
     t.integer "verb_id"
     t.integer "alternation_id"
     t.string  "alternation_occurs"
     t.text    "alternation_comment"
+    t.integer "derived_coding_frame_id"
   end
 
   add_index "alternation_values", ["alternation_id"], :name => "index_alternation_values_on_alternation_id"
+  add_index "alternation_values", ["verb_id", "alternation_id"], :name => "uniq_idx_av_on_verb_id_and_altn_id", :unique => true
   add_index "alternation_values", ["verb_id"], :name => "index_alternation_values_on_verb_id"
 
   create_table "alternation_values_examples", :id => false, :force => true do |t|
@@ -59,16 +61,24 @@ ActiveRecord::Schema.define(:version => 20120525093554) do
   add_index "coding_frame_examples", ["example_id"], :name => "index_coding_frame_examples_on_example_id"
   add_index "coding_frame_examples", ["verb_id"], :name => "index_coding_frame_examples_on_verb_id"
 
-  create_table "coding_frame_index_numbers", :id => false, :force => true do |t|
+  create_table "coding_frame_index_numbers", :force => true do |t|
     t.integer "index_number"
     t.integer "coding_set_id"
     t.integer "coding_frame_id"
     t.integer "argument_type_id"
   end
 
-  add_index "coding_frame_index_numbers", ["argument_type_id"], :name => "index_argtype_id"
-  add_index "coding_frame_index_numbers", ["coding_frame_id"], :name => "index_cf_id"
-  add_index "coding_frame_index_numbers", ["coding_set_id"], :name => "index_cs_id"
+  add_index "coding_frame_index_numbers", ["argument_type_id"], :name => "index_cfin_on_argtype_id"
+  add_index "coding_frame_index_numbers", ["coding_frame_id", "index_number"], :name => "uniq_idx_cfin_on_cf_id_and_in", :unique => true
+  add_index "coding_frame_index_numbers", ["coding_frame_id"], :name => "index_cfin_on_cf_id"
+  add_index "coding_frame_index_numbers", ["coding_set_id"], :name => "index_cfin_on_cs_id"
+
+  create_table "coding_frame_index_numbers_microroles", :id => false, :force => true do |t|
+    t.integer "coding_frame_index_number_id"
+    t.integer "microrole_id"
+  end
+
+  add_index "coding_frame_index_numbers_microroles", ["coding_frame_index_number_id", "microrole_id"], :name => "uniq_idx_cfinmr_on_cfin_id_and_mr_id"
 
   create_table "coding_frames", :force => true do |t|
     t.integer  "language_id"
@@ -77,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20120525093554) do
     t.text     "comment"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.string   "derived"
   end
 
   add_index "coding_frames", ["id"], :name => "index_coding_frames_on_id", :unique => true
@@ -221,6 +232,16 @@ ActiveRecord::Schema.define(:version => 20120525093554) do
   end
 
   add_index "references", ["id"], :name => "index_references_on_id", :unique => true
+
+  create_table "verb_coding_frame_microroles", :id => false, :force => true do |t|
+    t.integer "microrole_id"
+    t.integer "verb_id"
+    t.integer "coding_frame_id"
+  end
+
+  add_index "verb_coding_frame_microroles", ["coding_frame_id"], :name => "index_vcfmr_cf_id"
+  add_index "verb_coding_frame_microroles", ["microrole_id"], :name => "index_vcfmr_mr_id"
+  add_index "verb_coding_frame_microroles", ["verb_id"], :name => "index_vcfmr_verb_id"
 
   create_table "verbs", :force => true do |t|
     t.integer  "language_id"

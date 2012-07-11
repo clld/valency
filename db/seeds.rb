@@ -24,17 +24,6 @@ RFM_CONFIG = {
   timeout:      20
 }
 
-Logfile = Rails.root.join('db', 'seeds.log') # logfile name
-
-# helper methods: appends prefix and suffix to FM field name
-class String
-	def css_field_name
-		"z_calc_#{self.to_s}_as_css"
-	end
-	def prefixed_field_name(model)
-		"#{model.to_s.underscore}_#{self}"
-	end
-end
 
 class FieldFinder
  	attr_reader :model, :layout, :log, :field_names
