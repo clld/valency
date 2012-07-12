@@ -7,6 +7,6 @@ class AlternationValue < ActiveRecord::Base
   
   validates_uniqueness_of :verb_id, scope: :alternation_id
   
-  attr_accessible :alternation_comment, :alternation_occurs, :verb_id, :alternation_id
+  attr_accessible :alternation_comment, :alternation_occurs, :verb_id, :alternation_id, :id, :derived_coding_frame_id
   
 end

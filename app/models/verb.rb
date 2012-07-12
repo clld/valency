@@ -16,5 +16,5 @@ class Verb < ActiveRecord::Base
   has_many :verb_coding_frame_microroles
   has_many :microroles,         :through => :verb_coding_frame_microroles
     
-  attr_accessible :comment, :id, :original_script, :verb_form, :language_id, :coding_frame_id
+attr_accessible :comment, :id, :original_script, :verb_form, :language_id, :coding_frame_id
 end

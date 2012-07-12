@@ -16,5 +16,5 @@ class CodingFrame < ActiveRecord::Base
   has_many :microrole_index_numbers
   has_many :indexed_microroles, through: :microrole_index_numbers, source: :microrole_id
 
-  attr_accessible :coding_frame_schema, :comment, :description, :id, :language_id
+  attr_accessible :coding_frame_schema, :comment, :description, :id, :language_id, :derived
 end

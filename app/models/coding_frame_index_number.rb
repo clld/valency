@@ -7,5 +7,5 @@ class CodingFrameIndexNumber < ActiveRecord::Base
   
   validates_uniqueness_of :coding_frame_id, scope: :index_number
       
-  attr_accessible :index_number, :coding_set_id, :coding_frame_id, :argument_type_id
+  attr_accessible :id, :index_number, :coding_set_id, :coding_frame_id, :argument_type_id
 end
