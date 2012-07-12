@@ -17,8 +17,8 @@ RFM_CONFIG = {
   timeout:      20
 }
 
-# initialize logger
-LOG       = Logger.new Rails.root.join('log', 'seeds.log')
+# initialize logger - changed to stdout for Heroku
+LOG       = Logger.new($stdout) # Logger.new Rails.root.join('log', 'seeds.log')
 LOG.level = Logger::DEBUG
 
 # helper method: appends prefix and suffix to FM field name
@@ -187,11 +187,12 @@ class DataImporter
 			total = layout.total_count
  			LOG.info "Connected to FileMaker, layout = #{layout.name}."
 			msg = "Importing data from #{total} records into #{model.to_s.tableize}..."
- 			LOG.info msg;	puts msg
+ 			LOG.info msg;
  			
 			# now loop through all the records of the layout, but page them by 1000
  			(total / 1000 + 1).times do |page|
 			  found_set = layout.find({}, max_records:1000, skip_records:1000*page)
+			  LOG.info("reading records #{1000*page+1} to #{1000*page+1001 <= total? 1000*page+1001 : total}...")
   			found_set.each do |fm_record|
   				new_obj.clear
   				available_attributes.each do |attr_name|
@@ -199,9 +200,9 @@ class DataImporter
   				end
   				begin
             model.create!(new_obj) # throws Exception if Rails validation fails
-  			    print ok
+  			    # print ok
   			  rescue Exception => e
-  			    print err
+  			    # print err
   			    err_stats[e.class.to_s] += 1
   		    end
 
@@ -213,7 +214,7 @@ class DataImporter
 	    err_count = err_stats.values.sum
 	    report = "Done! Created #{model.count} records."+
 	      " There were #{err_count > 0 ? err_count : 'no'} errors" 
-	    puts "\n" + report + "\n\n"
+	    # puts "\n" + report + "\n\n"
 			LOG.info report
 			err_stats.each do |klass, number| 
 			  LOG.info '  '+ number.to_s + ' errors of type ' + klass
