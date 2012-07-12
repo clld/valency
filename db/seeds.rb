@@ -185,14 +185,12 @@ class DataImporter
 			available_attributes = model.attribute_names & fields.keys
 			
 			total = layout.total_count
- 			LOG.info "Connected to FileMaker, layout = #{layout.name}."
-			msg = "Importing data from #{total} records into #{model.to_s.tableize}..."
- 			LOG.info msg;
+ 			LOG.info "Connected to FileMaker, layout = #{layout.name}. Importing..."
  			
 			# now loop through all the records of the layout, but page them by 1000
  			(total / 1000 + 1).times do |page|
 			  found_set = layout.find({}, max_records:1000, skip_records:1000*page)
-			  LOG.info("reading records #{1000*page+1} to #{1000*page+1001 <= total ? 1000*page+1001 : total}...")
+			  LOG.info("reading records #{1000*page+1} to #{1000*(page+1) <= total ? 1000*(page+1) : total}...")
   			found_set.each do |fm_record|
   				new_obj.clear
   				available_attributes.each do |attr_name|
@@ -204,6 +202,7 @@ class DataImporter
   			  rescue Exception => e
   			    # print err
   			    err_stats[e.class.to_s] += 1
+  			    LOG.error (e.message)
   		    end
 
   			end #loop over records
