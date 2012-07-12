@@ -6,6 +6,6 @@ class Example < ActiveRecord::Base
   has_and_belongs_to_many :alternation_values
   has_and_belongs_to_many :verbs
   
-  attr_accessible :analyzed_text, :comment, :gloss, :id, :media_file_name, :media_file_timecode, :original_orthography, :primary_text, :reference_pages, :translation, :translation_other, :language_id, :reference_id, :person_id
+  attr_accessible :analyzed_text, :comment, :type, :number, :gloss, :id, :media_file_name, :media_file_timecode, :original_orthography, :primary_text, :reference_pages, :translation, :translation_other, :language_id, :reference_id, :person_id
 
 end

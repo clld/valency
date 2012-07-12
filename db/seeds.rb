@@ -1,52 +1,53 @@
-#!/Users/alexanderjahraus/.rvm/bin/rvm-auto-ruby
-puts "# ruby "+ RUBY_VERSION
-########### only needed for testing in TextWrangler:
-ruby_v = `$HOME/.rvm/bin/rvm current`.chomp
-# point ruby to the correct Gem directory...
-ENV['GEM_HOME']       = File.join Dir.home, '.rvm/gems', ruby_v
-ENV['BUNDLE_GEMFILE'] = File.join Dir.home, 'work/valency/Gemfile'
-ENV['GEM_PATH']       = ENV['GEM_HOME'] +':'+ File.join(Dir.home, '.rvm/gems', ruby_v+'@global')
-# Load and initialize the rails application
-require File.join Dir.home, 'work/valency/config/application'
+# uses the RFM gem (ginjo-rfm) to access FileMaker Server XML API
+# uses heuristics and custom mapping rules to find FM database column names
+# for all the Rails models' attributes
+# CAUTION: this will delete all data from the database first!
 require 'rfm'
-Valency::Application.initialize!
-###########
 
 # Database connection settings for RFM
+# RFM_ACCOUNT_NAME and RFM_PASSWORD need to be specified in the environment
 RFM_CONFIG = {
   host:         'brugmann.eva.mpg.de',  # IP address: 194.94.96.174
   database:     'Valency',              # database name
-  account_name: 'script',               # the user is read-only, has XML access
-  password:     'ruby-rfm',
+  account_name: ENV['RFM_ACCOUNT_NAME'],# user is read-only, has XML access
+  password:     ENV['RFM_PASSWORD'],
   ssl:          false,
   root_cert:    false,
   port:         80,                     # 443 with SSL doesn't seem to work
   timeout:      20
 }
 
+# initialize logger
+LOG       = Logger.new Rails.root.join('log', 'seeds.log')
+LOG.level = Logger::DEBUG
 
+# helper method: appends prefix and suffix to FM field name
+class String
+	def css_field_name
+		'z_calc_' + self + '_as_css'
+	end
+end
+
+# contains methods to find the layout and field names for a model
 class FieldFinder
- 	attr_reader :model, :layout, :log, :field_names
+ 	attr_accessor :model # needs to be set before using the methods!
 
-  def initialize(model, logfile)
-  	@model = model
-  	@log = logfile
+  # creates hashes for the non-standard names:
+  def initialize
+  	# this hash maps models to layout names 
 		@special_layout = {
 			Contribution              => "Language_contributors (table)",
 			MeaningsVerb              => "Verb_meanings (table)",
 			ExamplesVerb              => "Verb_examples (table)",
 			AlternationValuesExample  => "Alternation_value_examples (table)",
-			CodingFrameExample	      => "Verb_coding_frame_examples (table)"
+			CodingFrameExample	      => "Verb_coding_frame_examples (table)",
+			CodingFrameIndexNumbersMicrorole => "Coding_frame_Microrole_index_numbers (table)"
 		}
-		@special_field_name = { # nonstandard field names (must be in lowercase!):
+		# this hash maps a model to a hash from property name to field name
+		@special_field_name = { # field names must be in lowercase!
 			Alternation => {
-				'coding_frames_text' => 'coding_frames_of_alternation'
-			},
-			AlternationValue => {
-				'id' 								 => 'z_calc_unique_key_decimal'
-			},
-			AlternationValuesExample => {
-				'alternation_value_id' => 'alternation_values::z_calc_unique_key_decimal'
+				'coding_frames_text' => 'coding_frames_of_alternation',
+				'complexity'         => 'simplex_or_complex'
 			},
 			GlossMeaning => {
 				'comment' => 'gloss_meaning_comments::comments'
@@ -56,29 +57,39 @@ class FieldFinder
 			},
 			Meaning => {
 				'meaning_list' => 'z_calc_meaning_list_core_extended_new_or_old'
+			},
+			CodingFrame => {
+			  'derived' => 'z_calc_Basic_or_derived'
 			}
 		}
-		@layout = find_layout
-		@field_names = find_field_names		
-	end
-	
-	def name_transformations # expects a block, yields lambdas to it
+  end
+
+ # expects a block, yields lambdas to it
+	def name_transformations
 		def compose(f,g) # compose 2 lambdas
 			->(x) { f.call(g.call(x)) }
 		end
-		pl  = ->(s) { s.singularize == s ? s.pluralize : s.singularize } # toggle plural
-		css = ->(s) { s.css_field_name } # z_calc_field_name_as_css
-		pre = ->(s) { s.prefixed_field_name(@model) } # model_field_name
-		yield compose(css, compose(pre, pl))
-		yield compose(css, pre)
-		yield compose(css, pl)
-		yield compose(pre, pl)
-		yield css
-		yield pre
-		yield pl
-		yield ->(s){s} # identity: no change
+		model_name = @model.to_s.underscore + '_' #=> "model_"
+		pl   = ->(s) { s.singularize == s ? s.pluralize : s.singularize } # toggle plural
+		css  = ->(s) { s.css_field_name }      # z_calc_field_name_as_css
+		pre  = ->(s) { model_name + s }  # model_field_name
+		calc = ->(s) { 'z_calc_' + s  }  # z_calc_field_name
+
+		yield compose(css, compose(pre, pl))      # z_calc_model_field_names_as_css
+		yield compose(css, pre)                   # z_calc_model_field_name_as_css
+		yield compose(calc, compose(pre, pl))     # z_calc_model_field_names
+		yield compose(calc, pre)                  # z_calc_model_field_name
+		yield compose(css, pl)                    # z_calc_field_names_as_css
+		yield css                                 # z_calc_field_name_as_css
+		yield compose(calc, pl)                   # z_calc_field_names
+		yield calc                                # z_calc_field_name
+		yield compose(pre, pl)                    # model_field_names
+		yield pre                                 # model_field_name
+		yield pl                                  # field_names
+		yield ->(s){s} # identity: no change      # field_name
 	end
 
+	# returns an RFM Layout object or nil if no layout with that name exists
 	def layout_or_nil(layout_name)
 		begin
 			if (layout = Rfm.layout(layout_name)).table then layout; end
@@ -86,90 +97,134 @@ class FieldFinder
 		end
 	end
 
+	# calculates the layout name, returns the RFM Layout object
 	def find_layout
-		l_name = @special_layout[@model] || @model.to_s.tableize + ' (table)'
-		if layout = layout_or_nil(l_name)
-			@log << "\n==== Model: #{@model.to_s} <– Layout: #{layout.name} ===="
+	  return nil if @model.nil?
+		layout_name = @special_layout[@model] || @model.to_s.tableize + ' (table)'
+		if (layout = layout_or_nil(layout_name))
+			LOG.info("\n==== Model: #{@model.to_s} <- Layout: #{layout.name} ====")
 			return layout
 		else 
-			@log << "WARNING: Layout \"#{l_name}\" does not exist."
+			LOG.warn "WARNING: Layout \"#{layout_name}\" does not exist."
 			return nil
 		end
 	end
 	
-	def find_field_names
-		return nil if @layout.nil?
-		attr_names = @model.attribute_names.map{|name| name.downcase}
-	  fm_fields  = @layout.field_names.map{|name| name.downcase} # layout's fields
+  # returns a hash mapping the Rails model's attribute names to field names
+	def find_field_names(layout)
 		result = {} # hash to be returned: field names for the attributes
+		return result if layout.nil? or @model.nil?
+		attr_names = @model.attribute_names.map{|name| name.downcase} # model attributes
+	  fm_fields  = layout.field_names.map{|name| name.downcase} # layout's fields
 		
 		attr_names.each do |attr_name| # for each of the model's attributes
+      
+      special = @special_field_name[@model] # possibly nil
+      f_name = special.nil? ? nil : special[attr_name] # possibly nil
 
-			if special = @special_field_name[@model] && f_name = special[attr_name]
-				if fm_fields.include? f_name
+		  if f_name then
+		    if fm_fields.include?(f_name)
 					result[attr_name] = f_name
 				else 
-					@log << "WARNING: Field \"#{f_name}\" not found on layout \"#{@layout.name}\"."				
+					LOG.warn "WARNING: Field \"#{f_name}\" not found on layout \"#{layout.name}\"."
 					next
 				end
+
 			else # no special field name: guess regular field name
 				name_transformations do |transf|
 					if fm_fields.include? (transformed = transf.call(attr_name))
 						result[attr_name] = transformed
-						break
+						break # found a match! exit the block
 					end
 				end
 			end
 	
 			if result[attr_name].nil?
-				@log << "WARNING: No field found for #{@model.to_s}.#{attr_name}"
+				LOG.warn "WARNING: No field found for #{@model.to_s}.#{attr_name}"
 			else
-				@log << "OK: #{attr_name} <-- #{result[attr_name]}"
+				LOG.info "  mapping: #{attr_name} <-- #{result[attr_name]}"
 			end
 		
 		end
 		return result
 	end
     
-end # of class
+end # of class FieldFinder
 
+# handles data import into Rails database
 class DataImporter
-	attr_reader :models, :field_names, :log, :ff # FieldFinder instance
 
 	def initialize
+	  @ff = FieldFinder.new
 		# Gather all model classes:
 		@models = Dir[Rails.root.join 'app','models','*.rb'].map do |file|
 			File.basename(file,'.*').camelize.constantize
 		end
 	end
 
+  # performs the actual import
+  # it loops over the models, uses the FieldFinder instance to
+  # get the RFM layout and the corresponding field names
+  # then reads data from the FileMaker connection using RFM 
+  # and creates records in Rails' database
 	def import_data
-	  @log = File.open(Logfile, 'a')# 'a' is for append
+		ok, err = '.', 'x' # for visual stdout feedback
 		
 		@models.each do |model|
-			puts '='.center(30,'=')
-	    print "deleting #{model.to_s} records... "; model.delete_all
-		  puts "OK"
+			LOG.info (' '<<model.to_s<<' ').center(40, '=')
+	    LOG.info "Deleting all #{model.to_s} records... "
+	    model.delete_all
 
  			# get the layout and field names
- 			@ff = FieldFinder.new(model, @log)
-			next if (layout = @ff.layout).nil? or (fields = @ff.field_names).empty?
- 			puts "Connecting to FileMaker, layout=#{layout.name}..."
- 			puts "Importing data into #{model.to_s.tableize}"
+ 			@ff.model = model
+			next if (layout = @ff.find_layout).nil? or
+			        (fields = @ff.find_field_names(layout)).empty?
 			
-			# now loop through the records of the layout
-			layout.all.each do |record|
-				new_obj = {}
-				(model.attribute_names & fields.keys).each do |attr_name|
-					new_obj[attr_name] = fields[attr_name]							
-				end #loop over attribute names
-				model.create new_obj
-				print '.'
-			end #loop over records
+			err_stats = Hash.new(0); # count errors by type
+			new_obj = {};
+			available_attributes = model.attribute_names & fields.keys
+			
+			total = layout.total_count
+ 			LOG.info "Connected to FileMaker, layout = #{layout.name}."
+			msg = "Importing data from #{total} records into #{model.to_s.tableize}..."
+ 			LOG.info msg;	puts msg
+ 			
+			# now loop through all the records of the layout, but page them by 1000
+ 			(total / 1000 + 1).times do |page|
+			  found_set = layout.find({}, max_records:1000, skip_records:1000*page)
+  			found_set.each do |fm_record|
+  				new_obj.clear
+  				available_attributes.each do |attr_name|
+  					new_obj[attr_name] = fm_record[fields[attr_name]] # fields' values are FileMaker field names
+  				end
+  				begin
+            model.create!(new_obj) # throws Exception if Rails validation fails
+  			    print ok
+  			  rescue Exception => e
+  			    print err
+  			    err_stats[e.class.to_s] += 1
+  		    end
+
+  			end #loop over records
+
+      end
+
+	    # show summary and error info
+	    err_count = err_stats.values.sum
+	    report = "Done! Created #{model.count} records."+
+	      " There were #{err_count > 0 ? err_count : 'no'} errors" 
+	    puts "\n" + report + "\n\n"
+			LOG.info report
+			err_stats.each do |klass, number| 
+			  LOG.info '  '+ number.to_s + ' errors of type ' + klass
+		  end
+		  LOG.info "\n"
 
 		end #loop over models
 		
-		@log.close
-	end
+	end # method import_data
 	
 end # of class
+
+di = DataImporter.new
+di.import_data

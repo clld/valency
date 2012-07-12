@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120711172757) do
+ActiveRecord::Schema.define(:version => 20120712171721) do
 
   create_table "alternation_values", :force => true do |t|
     t.integer "verb_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20120711172757) do
     t.text     "description"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.string   "complexity"
   end
 
   add_index "alternations", ["id"], :name => "index_alternations_on_id", :unique => true
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20120711172757) do
   create_table "argument_types", :force => true do |t|
     t.string "argument_type"
     t.text   "description"
+    t.text   "comment"
   end
 
   create_table "coding_frame_examples", :id => false, :force => true do |t|
@@ -126,6 +128,8 @@ ActiveRecord::Schema.define(:version => 20120711172757) do
     t.string   "reference_pages"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.string   "type"
+    t.integer  "number"
   end
 
   add_index "examples", ["id"], :name => "index_examples_on_id", :unique => true
