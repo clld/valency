@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.3'
 
 gem 'ginjo-rfm' # up-to-date fork of Ruby FileMaker API
-gem 'highline' # for reading the password from stdin
 
 # Gems for development
 group :development do
@@ -26,6 +25,8 @@ group :assets do
   # gem 'therubyracer', :platform => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'bootstrap-sass', '~> 2.0.4.0' # use Twitter Bootstrap 2.0 with SASS
+  gem 'jquery-datatables-rails'
 end
 
 gem 'jquery-rails'
