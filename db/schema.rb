@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20120713031209) do
 
-  create_table "alternation_values", :force => true do |t|
+  create_table "alternation_values", :force => true, primary_key: :id do |t|
     t.column "verb_id", 'BIGINT'
     t.column "id", 'BIGINT'
     t.column "alternation_id", 'BIGINT'
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20120713031209) do
   add_index "alternation_values_examples", ["alternation_value_id"], :name => "index_alternation_values_examples_on_alternation_value_id"
   add_index "alternation_values_examples", ["example_id"], :name => "index_alternation_values_examples_on_example_id"
 
-  create_table "alternations", :force => true do |t|
+  create_table "alternations", :force => true, primary_key: :id do |t|
     t.column "id", 'BIGINT'
     t.column "language_id", 'BIGINT'
     t.string   "name"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20120713031209) do
   add_index "alternations", ["id"], :name => "index_alternations_on_id", :unique => true
   add_index "alternations", ["language_id"], :name => "index_alternations_on_language_id"
 
-  create_table "argument_types", :force => true do |t|
+  create_table "argument_types", :force => true, primary_key: :id do |t|
     t.column "id", 'BIGINT'
     t.string "argument_type"
     t.text   "description"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(:version => 20120713031209) do
   add_index "coding_frame_examples", ["example_id"], :name => "index_coding_frame_examples_on_example_id"
   add_index "coding_frame_examples", ["verb_id"], :name => "index_coding_frame_examples_on_verb_id"
 
-  create_table "coding_frame_index_numbers", :force => true do |t|
+  create_table "coding_frame_index_numbers", :force => true, primary_key: :id do |t|
     t.column "id", 'BIGINT'
     t.integer "index_number"
     t.column "coding_set_id", 'BIGINT'
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(:version => 20120713031209) do
 
   add_index "coding_frame_index_numbers_microroles", ["coding_frame_index_number_id", "microrole_id"], :name => "uniq_idx_cfinmr_on_cfin_id_and_mr_id"
 
-  create_table "coding_frames", :force => true do |t|
+  create_table "coding_frames", :force => true, primary_key: :id do |t|
     t.column "id", 'BIGINT'
     t.column "language_id", 'BIGINT'
     t.string   "coding_frame_schema"
@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(:version => 20120713031209) do
   add_index "coding_frames", ["id"], :name => "index_coding_frames_on_id", :unique => true
   add_index "coding_frames", ["language_id"], :name => "index_coding_frames_on_language_id"
 
-  create_table "coding_sets", :force => true do |t|
+  create_table "coding_sets", :force => true, primary_key: :id do |t|
     t.column "id", 'BIGINT'
     t.column "language_id", 'BIGINT'
     t.string  "name"
@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(:version => 20120713031209) do
   add_index "contributions", ["language_id"], :name => "index_contributions_on_language_id"
   add_index "contributions", ["person_id"], :name => "index_contributions_on_person_id"
 
-  create_table "examples", :force => true do |t|
+  create_table "examples", :force => true, primary_key: :id do |t|
     t.column "id", 'BIGINT'
     t.column "language_id", 'BIGINT'
     t.column "reference_id", 'BIGINT'
@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(:version => 20120713031209) do
   add_index "examples_verbs", ["example_id"], :name => "index_examples_verbs_on_example_id"
   add_index "examples_verbs", ["verb_id"], :name => "index_examples_verbs_on_verb_id"
 
-  create_table "gloss_meanings", :force => true do |t|
+  create_table "gloss_meanings", :force => true, primary_key: :id do |t|
     t.column "id", 'BIGINT'
     t.column "language_id", 'BIGINT'
     t.string  "gloss"
@@ -163,7 +163,7 @@ ActiveRecord::Schema.define(:version => 20120713031209) do
   add_index "gloss_meanings", ["gloss"], :name => "index_gloss_meanings_on_gloss"
   add_index "gloss_meanings", ["language_id"], :name => "index_gloss_meanings_on_language_id"
 
-  create_table "languages", :force => true do |t|
+  create_table "languages", :force => true, primary_key: :id do |t|
     t.column "id", 'BIGINT'
     t.string   "name"
     t.string   "iso_code"
@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(:version => 20120713031209) do
 
   add_index "languages", ["id"], :name => "index_languages_on_id", :unique => true
 
-  create_table "meanings", :force => true do |t|
+  create_table "meanings", :force => true, primary_key: :id do |t|
     t.column "id", 'BIGINT'
     t.integer  "number"
     t.string   "label"
@@ -202,7 +202,7 @@ ActiveRecord::Schema.define(:version => 20120713031209) do
   add_index "meanings_verbs", ["meaning_id"], :name => "index_meanings_verbs_on_meaning_id"
   add_index "meanings_verbs", ["verb_id"], :name => "index_meanings_verbs_on_verb_id"
 
-  create_table "microroles", :force => true do |t|
+  create_table "microroles", :force => true, primary_key: :id do |t|
     t.column "id", 'BIGINT'
     t.string  "name"
     t.column "meaning_id", 'BIGINT'
@@ -212,7 +212,7 @@ ActiveRecord::Schema.define(:version => 20120713031209) do
 
   add_index "microroles", ["meaning_id"], :name => "index_microroles_on_meaning_id"
 
-  create_table "people", :force => true do |t|
+  create_table "people", :force => true, primary_key: :id do |t|
     t.column "id", 'BIGINT'
     t.string   "name"
     t.string   "contributor"
@@ -224,7 +224,7 @@ ActiveRecord::Schema.define(:version => 20120713031209) do
 
   add_index "people", ["id"], :name => "index_people_on_id", :unique => true
 
-  create_table "references", :force => true do |t|
+  create_table "references", :force => true, primary_key: :id do |t|
     t.column "id", 'BIGINT'
     t.string   "authors"
     t.string   "year"
@@ -260,7 +260,7 @@ ActiveRecord::Schema.define(:version => 20120713031209) do
   add_index "verb_coding_frame_microroles", ["microrole_id"], :name => "index_vcfmr_mr_id"
   add_index "verb_coding_frame_microroles", ["verb_id"], :name => "index_vcfmr_verb_id"
 
-  create_table "verbs", :force => true do |t|
+  create_table "verbs", :force => true, primary_key: :id do |t|
     t.column "language_id", 'BIGINT'
     t.column "coding_frame_id", 'BIGINT'
     t.string   "verb_form"
