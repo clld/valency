@@ -1,4 +1,4 @@
-<h1>Listing people</h1>
+<h1>Contributors</h1>
 
 <table>
   <tr>
@@ -7,9 +7,6 @@
     <th>Contributor</th>
     <th>Native speaker</th>
     <th>Url</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @people.each do |person| %>
@@ -19,9 +16,6 @@
     <td><%= person.contributor %></td>
     <td><%= person.native_speaker %></td>
     <td><%= person.url %></td>
-    <td><%= link_to 'Show', person %></td>
-    <td><%= link_to 'Edit', edit_person_path(person) %></td>
-    <td><%= link_to 'Destroy', person, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

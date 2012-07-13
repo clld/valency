@@ -1,4 +1,4 @@
-<h1>Listing coding_frames</h1>
+<h1>Coding Frames</h1>
 
 <table>
   <tr>
@@ -7,9 +7,6 @@
     <th>Coding frame schema</th>
     <th>Description</th>
     <th>Comment</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @coding_frames.each do |coding_frame| %>
@@ -19,9 +16,6 @@
     <td><%= coding_frame.coding_frame_schema %></td>
     <td><%= coding_frame.description %></td>
     <td><%= coding_frame.comment %></td>
-    <td><%= link_to 'Show', coding_frame %></td>
-    <td><%= link_to 'Edit', edit_coding_frame_path(coding_frame) %></td>
-    <td><%= link_to 'Destroy', coding_frame, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

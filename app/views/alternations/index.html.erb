@@ -1,29 +1,21 @@
-<h1>Listing alternations</h1>
+<h1>Alternations</h1>
 
 <table>
   <tr>
-    <th>Id</th>
-    <th>Language</th>
     <th>Alternation name</th>
+    <th>Language</th>
     <th>Alternation type</th>
     <th>Coding frames of alternation</th>
     <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @alternations.each do |alternation| %>
   <tr>
-    <td><%= alternation.id %></td>
+    <td><%= link_to alternation.name, alternation %></td>
     <td><%= alternation.language %></td>
-    <td><%= alternation.name %></td>
     <td><%= alternation.type %></td>
     <td><%= alternation.coding_frames_text %></td>
     <td><%= alternation.description %></td>
-    <td><%= link_to 'Show', alternation %></td>
-    <td><%= link_to 'Edit', edit_alternation_path(alternation) %></td>
-    <td><%= link_to 'Destroy', alternation, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

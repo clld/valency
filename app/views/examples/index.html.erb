@@ -1,4 +1,4 @@
-<h1>Listing examples</h1>
+<h1>Examples</h1>
 
 <table>
   <tr>
@@ -16,9 +16,6 @@
     <th>Media file name</th>
     <th>Media file timecode</th>
     <th>Reference pages</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @examples.each do |example| %>
@@ -37,9 +34,6 @@
     <td><%= example.media_file_name %></td>
     <td><%= example.media_file_timecode %></td>
     <td><%= example.reference_pages %></td>
-    <td><%= link_to 'Show', example %></td>
-    <td><%= link_to 'Edit', edit_example_path(example) %></td>
-    <td><%= link_to 'Destroy', example, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

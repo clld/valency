@@ -1,4 +1,4 @@
-<h1>Listing verbs</h1>
+<h1>Verbs</h1>
 
 <table>
   <tr>
@@ -8,9 +8,6 @@
     <th>Verb form</th>
     <th>Original script</th>
     <th>Comment</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @verbs.each do |verb| %>
@@ -21,9 +18,6 @@
     <td><%= verb.verb_form %></td>
     <td><%= verb.original_script %></td>
     <td><%= verb.comment %></td>
-    <td><%= link_to 'Show', verb %></td>
-    <td><%= link_to 'Edit', edit_verb_path(verb) %></td>
-    <td><%= link_to 'Destroy', verb, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -1,4 +1,4 @@
-<h1>Listing references</h1>
+<h1>References</h1>
 
 <table>
   <tr>
@@ -21,9 +21,6 @@
     <th>Latex cite key</th>
     <th>Additional information</th>
     <th>Full reference</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @references.each do |reference| %>
@@ -47,9 +44,6 @@
     <td><%= reference.latex_cite_key %></td>
     <td><%= reference.additional_information %></td>
     <td><%= reference.full_reference %></td>
-    <td><%= link_to 'Show', reference %></td>
-    <td><%= link_to 'Edit', edit_reference_path(reference) %></td>
-    <td><%= link_to 'Destroy', reference, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
