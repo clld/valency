@@ -59,7 +59,7 @@ class FieldFinder
 				'meaning_list' => 'z_calc_meaning_list_core_extended_new_or_old'
 			},
 			CodingFrame => {
-			  'derived' => 'z_calc_Basic_or_derived'
+			  'derived' => 'z_calc_basic_or_derived'
 			}
 		}
   end
