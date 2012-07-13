@@ -66,6 +66,7 @@ Valency::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   # Secure Heroku environment with password:
+  # Thanks to this excellent blog post: http://is.gd/Geqpco
   config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "Production") do |u, p|
       [u, p] == [ENV['PREVIEW_USERNAME'], ENV['PREVIEW_PASSWORD']]
     end

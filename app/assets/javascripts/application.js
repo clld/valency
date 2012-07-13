@@ -10,7 +10,7 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+// removed "require bootstrap", since it's currently missing
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
 //= require_tree .
