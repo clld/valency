@@ -261,6 +261,7 @@ ActiveRecord::Schema.define(:version => 20120713031209) do
   add_index "verb_coding_frame_microroles", ["verb_id"], :name => "index_vcfmr_verb_id"
 
   create_table "verbs", :force => true, :id => false do |t|
+    t.column "id", 'BIGINT'
     t.column "language_id", 'BIGINT'
     t.column "coding_frame_id", 'BIGINT'
     t.string   "verb_form"
