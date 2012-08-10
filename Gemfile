@@ -8,6 +8,7 @@ gem 'ginjo-rfm' # up-to-date fork of Ruby FileMaker API
 group :development do
   gem 'sqlite3'
   gem 'pry-rails'
+  gem 'hirb'      # print formatted result tables to console
 end
 
 # Gems for production only: PostgreSQL required by Heroku
