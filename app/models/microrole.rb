@@ -1,4 +1,6 @@
 class Microrole < ActiveRecord::Base
+  self.primary_key = :id
+
   belongs_to :meaning
 
   has_many :verb_coding_frame_microroles

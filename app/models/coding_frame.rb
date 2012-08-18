@@ -1,5 +1,8 @@
 class CodingFrame < ActiveRecord::Base
+  self.primary_key = :id
+
   belongs_to :language
+
   has_many :verbs
   has_many :alternation_values, inverse_of: :derived_coding_frame
 

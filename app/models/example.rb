@@ -1,4 +1,6 @@
 class Example < ActiveRecord::Base
+  self.primary_key = :id
+
   belongs_to :language
   belongs_to :reference
   belongs_to :person

@@ -1,4 +1,6 @@
 class AlternationValue < ActiveRecord::Base
+  self.primary_key = :id
+
   belongs_to :verb
   belongs_to :alternation
   belongs_to :derived_coding_frame, class_name: 'CodingFrame', inverse_of: :alternation_values

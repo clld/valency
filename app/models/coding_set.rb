@@ -1,4 +1,6 @@
 class CodingSet < ActiveRecord::Base
+  self.primary_key = :id
+
   belongs_to :language
   has_many :coding_frame_index_numbers
   has_many :coding_frames, :through => :coding_frame_index_numbers

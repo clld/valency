@@ -58,6 +58,9 @@ class FieldFinder
 			Meaning => {
 				'meaning_list' => 'z_calc_meaning_list_core_extended_new_or_old'
 			},
+			Language    => {
+			  'name_for_url' => 'z_calc_language_name_for_url'
+			},
 			CodingFrame => {
 			  'derived' => 'z_calc_basic_or_derived'
 			}
