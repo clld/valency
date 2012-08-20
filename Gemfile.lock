@@ -48,6 +48,8 @@ GEM
     hirb (0.7.0)
     i18n (0.6.0)
     journey (1.0.3)
+    jquery-datatables-rails (1.10.0)
+      jquery-rails
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
@@ -121,6 +123,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   ginjo-rfm
   hirb
+  jquery-datatables-rails
   jquery-rails
   pg
   pry-rails

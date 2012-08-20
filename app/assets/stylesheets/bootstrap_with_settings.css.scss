@@ -1,0 +1,26 @@
+/* settings for the Twitter Bootstrap CSS, installed as a SASS version 
+*  by the bootstrap-sass gem (the bootstrap files live in that gem)
+*/
+
+/* Override defaults for Bootstrap variables. For documentation, visit
+*  http://twitter.github.com/bootstrap/less.html#variables
+*/
+
+/* vt is for "valency turquoise" */
+$vt: #5299A3; 
+
+/* navbar settings */
+$navbarBackground: darken($vt, 10%);
+$navbarBackgroundHighlight: lighten($vt, 10%);
+$navbarLinkColor: #efefef;
+
+/* link colors */
+$linkColor:      #333; /* equals $grayDark */
+$linkColorHover: darken($vt, 10%);
+
+
+@import "bootstrap";
+
+body { padding-top: $navbarHeight; } /* leave room for the top nav bar */
+
+@import "bootstrap-responsive"; /* react to smaller screen sizes */

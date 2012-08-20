@@ -1,27 +1,32 @@
-<h1>Verbs</h1>
+<!-- Verbs index -->
+<h1>
+  Verb forms <small>– <%= link_to @language.name, @language %></small>
+</h1>
+<% orig_script = @verbs.any?{|v|v.original_script} %>
 
-<table>
-  <tr>
-    <th>Language</th>
-    <th>Id</th>
-    <th>Coding frame</th>
-    <th>Verb form</th>
-    <th>Original script</th>
-    <th>Comment</th>
-  </tr>
-
+<table class="table datatable table-striped table-bordered">
+  <thead>
+  	<tr>
+	    <th>Verb form</th>
+		<% if orig_script %>
+	    	<th>Original script</th>
+		<% end %>
+		<th>Meanings</th>
+	    <th>Coding frame</th>
+  	</tr>
+  </thead>
+<tbody>
 <% @verbs.each do |verb| %>
   <tr>
-    <td><%= verb.language %></td>
-    <td><%= verb.id %></td>
-    <td><%= verb.coding_frame %></td>
-    <td><%= verb.verb_form %></td>
-    <td><%= verb.original_script %></td>
-    <td><%= verb.comment %></td>
+    <td><%= link_to verb.verb_form, [@language, verb] %></td>
+	<% if orig_script %>
+    	<td><%= verb.original_script %></td>
+	<% end %>
+    <td><%= raw verb.meanings.map{|m| link_to(m.label,m)}.join(', ') %></td>
+    	<td><%= link_to(verb.coding_frame.coding_frame_schema,
+					[@language, verb.coding_frame]) if verb.coding_frame %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Verb', new_verb_path %>
