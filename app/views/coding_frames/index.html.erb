@@ -2,7 +2,6 @@
 
 <table>
   <tr>
-    <th>Id</th>
     <th>Language</th>
     <th>Coding frame schema</th>
     <th>Description</th>
@@ -11,7 +10,6 @@
 
 <% @coding_frames.each do |coding_frame| %>
   <tr>
-    <td><%= coding_frame.id %></td>
     <td><%= coding_frame.language %></td>
     <td><%= coding_frame.coding_frame_schema %></td>
     <td><%= coding_frame.description %></td>
@@ -21,5 +19,3 @@
 </table>
 
 <br />
-
-<%= link_to 'New Coding frame', new_coding_frame_path %>

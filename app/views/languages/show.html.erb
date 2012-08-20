@@ -1,19 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
+<h1>
   <%= @language.name %>
-</p>
-
-<p>
-  <b>Id:</b>
-  <%= @language.id %>
-</p>
-
-<p>
-  <b>Iso code:</b>
-  <%= @language.iso_code %>
-</p>
+	<small>
+		<strong>ISO code:</strong>
+		<%= @language.iso_code %>
+	</small>
+</h1>
 
 <p>
   <b>Family:</b>
@@ -25,6 +18,4 @@
   <%= @language.variety %>
 </p>
 
-
-<%= link_to 'Edit', edit_language_path(@language) %> |
-<%= link_to 'Back', languages_path %>
+<%= link_to 'Show All', languages_path %>

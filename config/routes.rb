@@ -1,19 +1,23 @@
 Valency::Application.routes.draw do
-  resources :examples
 
-  resources :references
+  # routes for language-specific resources
+  resources :languages, :only => [:show, :index] do
+    
+    resources :verbs, :only => [:show, :index]
+    resources :coding_frames, :only => [:show, :index]
+    resources :alternations, :only => [:show, :index]
+    resources :examples, :only => [:show, :index]
+    
+  end
 
-  resources :alternations
+  resources :meanings, :only => [:show, :index]
+  
+  resources :microroles, :only => [:show, :index]
 
-  resources :coding_frames
+  resources :references, :only => [:show, :index]
 
-  resources :people
+  resources :people, :only => [:show, :index]
 
-  resources :meanings
-
-  resources :verbs
-
-  resources :languages
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -6,18 +6,13 @@
 </p>
 
 <p>
-  <b>Id:</b>
-  <%= @alternation.id %>
-</p>
-
-<p>
   <b>Language:</b>
   <%= @alternation.language %>
 </p>
 
 <p>
   <b>Alternation type:</b>
-  <%= @alternation.type %>
+  <%= @alternation.alternation_type %>
 </p>
 
 <p>
@@ -30,6 +25,4 @@
   <%= @alternation.description %>
 </p>
 
-
-<%= link_to 'Edit', edit_alternation_path(@alternation) %> |
-<%= link_to 'Back', alternations_path %>
+<%= link_to 'Show All', language_alternations_path(@language) %>

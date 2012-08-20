@@ -1,11 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Id:</b>
-  <%= @coding_frame.id %>
-</p>
-
-<p>
   <b>Language:</b>
   <%= @coding_frame.language %>
 </p>
@@ -25,6 +20,4 @@
   <%= @coding_frame.comment %>
 </p>
 
-
-<%= link_to 'Edit', edit_coding_frame_path(@coding_frame) %> |
-<%= link_to 'Back', coding_frames_path %>
+<%= link_to 'Show All', language_coding_frames_path(@language) %>

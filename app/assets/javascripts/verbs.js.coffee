@@ -1,3 +1,12 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+# activate jquery.dataTable for fixed-width containers, see http://is.gd/MWVT9G
+
+$(document).ready ->
+	$('.datatable').dataTable
+		"iDisplayLength": 25
+		"oLanguage":
+			"sInfoFiltered": " (filtered)"
+			"sSearch": "Filter:"
+		"sDom": "<'row'<'span3'i><'span5'p><'span3'f>r>t"
+		"sPaginationType": "bootstrap"
+
+
