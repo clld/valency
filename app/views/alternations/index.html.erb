@@ -3,19 +3,15 @@
 <table>
   <tr>
     <th>Alternation name</th>
-    <th>Language</th>
     <th>Alternation type</th>
     <th>Coding frames of alternation</th>
-    <th>Description</th>
   </tr>
 
 <% @alternations.each do |alternation| %>
   <tr>
-    <td><%= link_to alternation.name, alternation %></td>
-    <td><%= alternation.language %></td>
+    <td><%= link_to alternation.name, [@language, alternation] %></td>
     <td><%= alternation.alternation_type %></td>
     <td><%= alternation.coding_frames_text %></td>
-    <td><%= alternation.description %></td>
   </tr>
 <% end %>
 </table>

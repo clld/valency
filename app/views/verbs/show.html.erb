@@ -1,33 +1,21 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Language:</b>
-  <%= @verb.language %>
-</p>
-
-<p>
-  <b>Id:</b>
-  <%= @verb.id %>
-</p>
-
+<h1>
+	<small>
+		<%= link_to @language.name, @language %> ›
+		<%= link_to "Verb forms", language_verbs_path(@language) %> ›
+	</small>
+	<%= @verb.verb_form %>
+	<% if @verb.original_script %>
+		<small>&nbsp;&nbsp;Original script: <%= @verb.original_script %></small>
+	<% end %>
+</h1>
 <p>
   <b>Coding frame:</b>
-  <%= @verb.coding_frame %>
-</p>
-
-<p>
-  <b>Verb form:</b>
-  <%= @verb.verb_form %>
-</p>
-
-<p>
-  <b>Original script:</b>
-  <%= @verb.original_script %>
+  <%= @verb.coding_frame.coding_frame_schema %>
 </p>
 
 <p>
   <b>Comment:</b>
-  <%= @verb.comment %>
+  <%= raw @verb.comment %>
 </p>
 
-<%= link_to 'Back', language_verbs_path(@language) %>
+<!--<%= link_to 'Back', language_verbs_path(@language) %>-->

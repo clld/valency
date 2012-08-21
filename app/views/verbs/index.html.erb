@@ -1,10 +1,11 @@
 <!-- Verbs index -->
 <h1>
-  Verb forms <small>– <%= link_to @language.name, @language %></small>
+  Verb forms
+  <small>of <%= link_to @language.name, @language %></small>
 </h1>
 <% orig_script = @verbs.any?{|v|v.original_script} %>
 
-<table class="table datatable table-striped table-bordered">
+<table class="datatable table-striped table-bordered">
   <thead>
   	<tr>
 	    <th>Verb form</th>

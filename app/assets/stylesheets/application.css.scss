@@ -16,6 +16,10 @@
 @import "bootstrap_with_settings";
 @import "dataTables/jquery.dataTables.bootstrap";
 
+h1 {
+	line-height:48px;
+}
+
 div.dataTables_paginate {
 	float: left;
 	margin: 2px 0;
