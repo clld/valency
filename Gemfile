@@ -11,6 +11,11 @@ group :development do
   gem 'hirb'      # print formatted result tables to console
 end
 
+# Gems for both development and production
+group :development, :production do
+  gem 'newrelic_rpm'
+end
+
 # Gems for production only: PostgreSQL required by Heroku
 group :production do
   gem 'pg'
