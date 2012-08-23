@@ -1,8 +1,7 @@
 # activate jquery.dataTable for fixed-width containers, see http://is.gd/MWVT9G
 
 $(document).ready ->
-	$('table').addClass('table');
-	$('.datatable').dataTable
+	$('.dataTable').dataTable
 		"iDisplayLength": 20
 		"oLanguage":
 			"sInfoFiltered": " (filtered)"

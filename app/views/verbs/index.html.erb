@@ -5,7 +5,7 @@
 </h1>
 <% orig_script = @verbs.any?{|v|v.original_script} %>
 
-<table class="datatable table-striped table-bordered">
+<table class="table dataTable table-striped table-bordered">
   <thead>
   	<tr>
 	    <th>Verb form</th>
@@ -19,13 +19,18 @@
 <tbody>
 <% @verbs.each do |verb| %>
   <tr>
+
     <td><%= link_to verb.verb_form, [@language, verb] %></td>
+
 	<% if orig_script %>
     	<td><%= verb.original_script %></td>
 	<% end %>
+
     <td><%= raw verb.meanings.map{|m| link_to(m.label,m)}.join(', ') %></td>
-    	<td><%= link_to(verb.coding_frame.coding_frame_schema,
+
+	<td><%= link_to(verb.coding_frame.coding_frame_schema,
 					[@language, verb.coding_frame]) if verb.coding_frame %></td>
+
   </tr>
 <% end %>
 </table>

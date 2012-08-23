@@ -174,6 +174,7 @@ class DataImporter
 		ok, err = '.', 'x' # for visual stdout feedback
 		
 		@models.each do |model|
+		  # next unless model == Verb # re-seed selected models only!
 			LOG.info (' '<<model.to_s<<' ').center(40, '=')
 	    LOG.info "Deleting all #{model.to_s} records... "
 	    model.delete_all

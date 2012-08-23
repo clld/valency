@@ -1,21 +1,82 @@
-<h1>
+<style type="text/css">
+	.span1, .span2, .span3, .span4, .span6, .span11 { background-color:#eee; }
+	/* h3 {border-bottom:2px solid gray;} */
+	#verb_form { font-style:italic; }
+	/* h1.verb { float:left } */
+</style>
+
+
+<h1 class="verb">
 	<small>
-		<%= link_to @language.name, @language %> ›
+		<%= link_to @language, @language %> ›
 		<%= link_to "Verb forms", language_verbs_path(@language) %> ›
 	</small>
-	<%= @verb.verb_form %>
+
+	<span id="verb_form"><%= @verb %></span>
 	<% if @verb.original_script %>
-		<small>&nbsp;&nbsp;Original script: <%= @verb.original_script %></small>
+		<small>&nbsp;&nbsp;(<span class="verb_form"><%= @verb.original_script %></span>)
+		</small>
 	<% end %>
 </h1>
-<p>
-  <b>Coding frame:</b>
-  <%= @verb.coding_frame.coding_frame_schema %>
-</p>
+<% if @verb.comment %>
+<div class="row">
+	<div class="span1"  id="comment-label"><strong>Comment:</strong></div>
+	<div class="span6" id="comment-text"><%= raw @verb.comment %></div>
+</div>
+<% end %>
 
-<p>
-  <b>Comment:</b>
-  <%= raw @verb.comment %>
-</p>
+<div class="row">
+	<div class="span4">
+		<h3>Coding frame</h3>
+		<%= div_for @verb.coding_frame, :class => 'well' do |cf| %>
+			<big><%= cf %></big>
+		<% end %>
+	</div>
 
-<!--<%= link_to 'Back', language_verbs_path(@language) %>-->
+	<div class="span5">
+		<h3>
+			<%= 'Meaning'.pluralize @verb.meanings.size  %>
+		</h3>
+
+		<%= div_for @verb.meanings, :class => "row" do |meaning| %>
+			<div class="span2">
+				<%= link_to meaning, meaning %>
+			</div>
+		<% end %>
+
+		&nbsp;				
+  	</div>
+
+</div>
+
+<div class="row">
+		<h3><!-- Examples -->
+		<%= 'Example'.pluralize @verb.examples_of_coding_frame.size  %>
+		<small>for the coding frame</small>
+	</h3>
+	<% @verb.examples_of_coding_frame.each do |example| %>
+		<%= div_for example, :class=>"row" do %>
+		<div class="span1">
+			<%= link_to "(#{example.number})", [@language, example],
+			:title=>"Show example #{example.number} on its own page" %>
+		</div>
+		<div class="span6">
+			<div class="row">
+				<%= example.analyzed_text %>
+			</div>
+			<div class="row">
+				<%= example.gloss %>
+			</div>
+		</div>
+		<% end %>
+	<% end %>
+</div>
+
+<div class="row">
+	<div class="span12">
+		<h3>Alternations</h3>
+		
+		
+	</div>
+</div>
+
