@@ -1,3 +1,7 @@
+<% content_for :head do %>
+  <%= javascript_include_tag params[:controller] %>
+<% end %>
+
 <!-- Verbs index -->
 <h1>
   Verb forms
@@ -5,7 +9,7 @@
 </h1>
 <% orig_script = @verbs.any?{|v|v.original_script} %>
 
-<table class="table dataTable table-striped table-bordered">
+<table id="verbs_list" class="table dataTable table-striped table-bordered">
   <thead>
   	<tr>
 	    <th>Verb form</th>
@@ -33,6 +37,7 @@
 
   </tr>
 <% end %>
+</tbody>
 </table>
 
 <br />

@@ -1,82 +1,152 @@
+<% content_for :head do %>
+  <%= javascript_include_tag params[:controller] %>
+<% end %>
+
 <style type="text/css">
-	.span1, .span2, .span3, .span4, .span6, .span11 { background-color:#eee; }
-	/* h3 {border-bottom:2px solid gray;} */
-	#verb_form { font-style:italic; }
-	/* h1.verb { float:left } */
+
 </style>
 
-
-<h1 class="verb">
-	<small>
-		<%= link_to @language, @language %> ›
-		<%= link_to "Verb forms", language_verbs_path(@language) %> ›
-	</small>
-
-	<span id="verb_form"><%= @verb %></span>
+<h1>
+	<span class="object-language" id="<%= dom_id(@verb) %>"><%= @verb %></span>
 	<% if @verb.original_script %>
-		<small>&nbsp;&nbsp;(<span class="verb_form"><%= @verb.original_script %></span>)
+		<small>(<span class="verb"><%= @verb.original_script %></span>)
 		</small>
 	<% end %>
 </h1>
+
 <% if @verb.comment %>
-<div class="row">
-	<div class="span1"  id="comment-label"><strong>Comment:</strong></div>
-	<div class="span6" id="comment-text"><%= raw @verb.comment %></div>
-</div>
+	<div class="row">
+		<div class="span1"  id="comment-label"><strong>Comment:</strong></div>
+		<div class="span6" id="comment-text"><%= raw @verb.comment %></div>
+	</div>
 <% end %>
 
-<div class="row">
-	<div class="span4">
+<div class="new row">
+	<div class="span3">
 		<h3>Coding frame</h3>
-		<%= div_for @verb.coding_frame, :class => 'well' do |cf| %>
+		<%= div_for @verb.coding_frame, :class => 'well center bg-cf' do |cf| %>
 			<big><%= cf %></big>
 		<% end %>
 	</div>
 
-	<div class="span5">
+	<div class="span4">
 		<h3>
 			<%= 'Meaning'.pluralize @verb.meanings.size  %>
+			and Microroles
 		</h3>
-
 		<%= div_for @verb.meanings, :class => "row" do |meaning| %>
-			<div class="span2">
+			<div class="span1">
 				<%= link_to meaning, meaning %>
 			</div>
+			<div class="span3">
+				<% @verb.coding_frame.microroles.joins(:meaning).where(microroles: {meaning_id: @verb.meanings.pluck(:id)}).uniq.each do |mrole| %>
+					<%= div_for mrole do %>
+					  <% idx_no = @verb.coding_frame.coding_frame_index_numbers.joins(:microroles).where(microroles:{id:mrole.id}).first.index_number %>
+					  <%= raw "#{idx_no}&nbsp; &nbsp;#{mrole}" %>
+					<% end %>
+				<% end %>
+			</div>
+			
 		<% end %>
-
-		&nbsp;				
+			<% all_mrs = @verb.microroles.uniq %>
+			<% basic_mrs = @verb.coding_frame.microroles.joins(:meaning).where(microroles: {meaning_id: @verb.meanings.pluck(:id)}) %>
+			<% new_mrs = all_mrs - basic_mrs %>
+			<% if new_mrs.size > 0 %>
+				<div class="row new"><div class="span4">
+					<strong>MR of arguments introduced via alternations:</strong>
+					<%= new_mrs.map{|x|x.name}.join(', ') %>
+				</div></div>			
+			<% end %>
+		
+	</div>
+	
+	<div class="span5">
+		<h3>
+			Coding sets and Argument types
+		</h3>
+<% cf = @verb.coding_frame %>
+<% rs = cf.coding_frame_index_numbers.joins("LEFT OUTER JOIN argument_types ON coding_frame_index_numbers.argument_type_id = argument_types.id").joins("LEFT OUTER JOIN coding_sets ON coding_frame_index_numbers.coding_set_id = coding_sets.id").joins(:microroles => :meaning).where(microroles:{meaning_id: @verb.meanings.pluck(:id)}).select("microroles.name as microrole, microroles.id as microrole_id, microroles.meaning_id, coding_frame_index_numbers.index_number, argument_types.argument_type as argument_type_name, coding_sets.name as coding_set_name").order("index_number") %>
+		<table class="table table-striped table-condensed">
+			<thead>
+				<tr>
+					<th>#</th> <th>Coding set</th> <th>Argument type</th> 
+				</tr>
+			</thead><tbody>
+			<% rs.each do |r| %>
+			<tr>
+				<td><%= r.index_number %></td> <td><%= r.coding_set_name %></td> <td><%= r.argument_type_name %></td>
+  			</tr>
+			<% end %>
+		</tbody></table>
   	</div>
 
 </div>
 
-<div class="row">
-		<h3><!-- Examples -->
+<div class="row new">
+<div class="span12">
+	<h3><!-- Examples -->
 		<%= 'Example'.pluralize @verb.examples_of_coding_frame.size  %>
 		<small>for the coding frame</small>
 	</h3>
 	<% @verb.examples_of_coding_frame.each do |example| %>
-		<%= div_for example, :class=>"row" do %>
+		<%= div_for example, :class=>"row new" do %>
 		<div class="span1">
 			<%= link_to "(#{example.number})", [@language, example],
-			:title=>"Show example #{example.number} on its own page" %>
+			:title=>"View details for example #{example.number}" %>
 		</div>
-		<div class="span6">
-			<div class="row">
-				<%= example.analyzed_text %>
+		<div class="span9">
+			<div class="row object-language">
+				<%= example.primary_text %>
 			</div>
 			<div class="row">
-				<%= example.gloss %>
+				<% at = example.analyzed_text.split() %>
+				<% gl = example.gloss.split().map{|s|s.gsub(/[A-Z]+/){|caps|'<span class="sc">'<<caps<<'</span>'}} %>
+				<% glosses = at.zip(gl).map{|pair| pair.join('<br/>')} %>
+				<% glosses.each do |gloss| %>
+				<div class="gloss-unit"><%= raw gloss %></div>
+				<% end %>
+			</div>
+			<div class="row">
+				<%= "‘#{example.translation}’" %>
 			</div>
 		</div>
 		<% end %>
 	<% end %>
 </div>
+</div>
 
-<div class="row">
+<div class="row new">
 	<div class="span12">
 		<h3>Alternations</h3>
 		
-		
+		<table id="alternation_values_list" class="table dataTable table-striped">
+		  <thead>
+		  	<tr>
+			    <th>Alternation name</th>
+				<th>Coded?</th>
+				<th>Occurrence</th>
+			    <th>Derived Coding frame</th>
+			    <th>Example</th>
+		  	</tr>
+		  </thead>
+		<tbody>
+		<% @verb.alternation_values.each do |av| %>
+		<% altn = av.alternation %>
+		<tr>
+			<td><%= link_to altn.name, [@language, altn] %></td>
+			<td><%= altn.alternation_type == "Coded" ? "Yes" : "No" %></td>
+			<td><%= av.alternation_occurs.sub('ly','') %></td>
+			<td><%= link_to(av.derived_coding_frame,[@language, av.derived_coding_frame]) unless av.derived_coding_frame.nil? %></td>
+		    <td><% if av.examples.first %>
+				<% ex = av.examples.first %>
+					<div><%= link_to(raw(ex.analyzed_text.truncate(50,separator:" ")), [@language,ex]) %><br/>
+					 	 <%= raw ex.translation.truncate(50,separator:" ") %>
+					</div>
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+		</tbody>
 	</div>
 </div>
 

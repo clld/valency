@@ -4,18 +4,11 @@
 # "sPaginationType": "bootstrap" -- use bootstrap plugin to style pagination links
 
 $(document).ready ->
-	$('#verbs_list.dataTable').dataTable
-		"sDom": "<'row'<'span4'i><'span8'f>>tS"
+	$('.thetable').dataTable
+		"sDom": "<'row'<'span4'i><'span8'f>>t"
 		"bPaginate": false
-		"sScrollY": "600px"
-		"bDeferRender": true
+		"bFilter": true
 		"oLanguage":
 			"sInfoFiltered": " (filtered)"
 			"sSearch": "Filter:"
 
-	$('#alternation_values_list').dataTable
-		"sDom": "<'row'<'span4'i><'span8'f>>t"
-		"bPaginate": false
-		"oLanguage":
-			"sInfoFiltered": " (filtered)"
-			"sSearch": "Filter:"

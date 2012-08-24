@@ -62,7 +62,7 @@ class FieldFinder
 			  'name_for_url' => 'z_calc_language_name_for_url'
 			},
 			CodingFrame => {
-			  'derived' => 'z_calc_basic_or_derived'
+			  'derived'    => 'z_calc_basic_or_derived'
 			}
 		}
   end
@@ -174,7 +174,7 @@ class DataImporter
 		ok, err = '.', 'x' # for visual stdout feedback
 		
 		@models.each do |model|
-		  # next unless model == Verb # re-seed selected models only!
+		  next unless model == Verb # re-seed selected models only!
 			LOG.info (' '<<model.to_s<<' ').center(40, '=')
 	    LOG.info "Deleting all #{model.to_s} records... "
 	    model.delete_all

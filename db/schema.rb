@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120821150327) do
+ActiveRecord::Schema.define(:version => 20120823175226) do
 
   create_table "alternation_values", :id => false, :force => true do |t|
     t.integer "verb_id"
@@ -22,9 +22,10 @@ ActiveRecord::Schema.define(:version => 20120821150327) do
     t.integer "derived_coding_frame_id"
   end
 
-  add_index "alternation_values", ["alternation_id"], :name => "index_alternation_values_on_alternation_id"
-  add_index "alternation_values", ["verb_id", "alternation_id"], :name => "uniq_idx_av_on_verb_id_and_altn_id", :unique => true
-  add_index "alternation_values", ["verb_id"], :name => "index_alternation_values_on_verb_id"
+  add_index "alternation_values", ["alternation_id"], :name => "index_altn_values_on_altn_id"
+  add_index "alternation_values", ["derived_coding_frame_id"], :name => "index_altn_values_on_derived_cf_id"
+  add_index "alternation_values", ["verb_id", "alternation_id"], :name => "uniq_idx_altn_values_on_verb_id_and_altn_id", :unique => true
+  add_index "alternation_values", ["verb_id"], :name => "index_altn_values_on_verb_id"
 
   create_table "alternation_values_examples", :id => false, :force => true do |t|
     t.integer "alternation_value_id"
@@ -78,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20120821150327) do
   add_index "coding_frame_index_numbers", ["coding_frame_id", "index_number"], :name => "uniq_idx_cfin_on_cf_id_and_in", :unique => true
   add_index "coding_frame_index_numbers", ["coding_frame_id"], :name => "index_cfin_on_cf_id"
   add_index "coding_frame_index_numbers", ["coding_set_id"], :name => "index_cfin_on_cs_id"
+  add_index "coding_frame_index_numbers", ["id"], :name => "index_cfin_on_id", :unique => true
 
   create_table "coding_frame_index_numbers_microroles", :id => false, :force => true do |t|
     t.integer "coding_frame_index_number_id"
@@ -107,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20120821150327) do
     t.text    "comment"
   end
 
+  add_index "coding_sets", ["id"], :name => "index_coding_sets_on_id", :unique => true
   add_index "coding_sets", ["language_id"], :name => "index_coding_sets_on_language_id"
 
   create_table "contributions", :id => false, :force => true do |t|
@@ -182,6 +185,7 @@ ActiveRecord::Schema.define(:version => 20120821150327) do
   end
 
   add_index "languages", ["id"], :name => "index_languages_on_id", :unique => true
+  add_index "languages", ["name_for_url"], :name => "index_languages_on_name_for_url", :unique => true
 
   create_table "meanings", :id => false, :force => true do |t|
     t.integer  "id"
@@ -212,6 +216,7 @@ ActiveRecord::Schema.define(:version => 20120821150327) do
     t.string  "original_or_new"
   end
 
+  add_index "microroles", ["id"], :name => "index_microroles_on_id", :unique => true
   add_index "microroles", ["meaning_id"], :name => "index_microroles_on_meaning_id"
 
   create_table "people", :id => false, :force => true do |t|

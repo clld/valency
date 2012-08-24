@@ -1,5 +1,6 @@
 class Microrole < ActiveRecord::Base
   self.primary_key = :id
+  attr_accessible :id, :name, :original_or_new, :role_letter, :meaning_id
 
   belongs_to :meaning
 
@@ -11,5 +12,7 @@ class Microrole < ActiveRecord::Base
 
   has_and_belongs_to_many :coding_frame_index_numbers
   
-  attr_accessible :id, :name, :original_or_new, :role_letter, :meaning_id
+  def to_s
+    self.name
+  end
 end

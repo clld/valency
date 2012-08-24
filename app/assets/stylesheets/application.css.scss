@@ -1,26 +1,50 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
+ * This is a manifest file that'll be compiled into application.css,
+ * which will include all the files listed below.
  *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets,
+ * vendor/assets/stylesheets, or vendor/assets/stylesheets of plugins,
+ * if any, can be referenced here using a relative path.
  *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- * <asterisk><equals> require_tree .    will require all files in this directory in alphabetical order
+ * You're free to add application-wide styles to this file and they'll
+ * appear at the top of the compiled file, but it's generally better
+ * to create a new file per style scope.
+ * 
+ * <asterisk><equals> require_tree . 
+ * will require all files in this directory in alphabetical order
  *
  *= require_self
- * *** commented out *** = require bootstrap_with_settings
- * *** commented out *** = require dataTables/jquery.dataTables.bootstrap
 */
 @import "bootstrap_with_settings";
-@import "dataTables/jquery.dataTables.bootstrap";
+@import "datatables_with_style";
 
 h1 {
 	line-height:48px;
 }
-
-div.dataTables_paginate {
-	float: left;
-	margin: 2px 0;
+h3 {
+	color:$vt;
 }
+
+/* .span1, .span2, .span3, .span4, .span6, .span11 { background-color:#eee; } */
+.object-language { font-style:italic; }
+.new.row {
+	margin-top:14px;
+}
+.well.center {
+	text-align:center;
+}
+.bg-cf {
+	background-color:#fee4c3;
+}
+.todo {
+	border:1px dashed $grayLight;
+}
+span.sc {
+	text-transform:lowercase;
+	font-variant:small-caps;
+}
+div.gloss-unit {
+	display:inline-block;
+	margin-right:0.5em;
+}
+

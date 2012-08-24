@@ -10,8 +10,6 @@ class Verb < ActiveRecord::Base
 
   has_many :alternation_values
   has_many :alternations,                   :through => :alternation_values
-  has_many :alternation_values_examples,    :through => :alternation_values
-  has_many :examples_of_alternation_values, :through => :alternation_values_examples, :source => :example_id
 
   has_many :coding_frame_examples
   has_many :examples_of_coding_frame, :through => :coding_frame_examples, :source => :example

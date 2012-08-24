@@ -1,21 +1,32 @@
+<% content_for :head do %>
+  <%= javascript_include_tag params[:controller] %>
+<% end %>
+<div class="alert">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>Under construction</strong> This table will soon be replaced with a world map...
+</div>
 <h1>Languages</h1>
 
-<table>
+<table class="table thetable table-striped table-bordered">
+	<thead>
   <tr>
     <th>Name</th>
     <th>Iso code</th>
     <th>Family</th>
     <th>Variety</th>
+    <th>Region</th>
   </tr>
-
-<% @languages.each do |language| %>
+</thead><tbody>
+<% @languages.each do |l| %>
   <tr>
-    <td><%= link_to language.name, language %></td>
-    <td><%= language.iso_code %></td>
-    <td><%= language.family %></td>
-    <td><%= language.variety %></td>
+    <td><%= link_to l, l %></td>
+    <td><%= l.iso_code %></td>
+    <td><%= l.family %></td>
+    <td><%= l.variety %></td>
+    <td><%= l.continent %></td>
   </tr>
 <% end %>
+</tbody>
 </table>
 
 <br />

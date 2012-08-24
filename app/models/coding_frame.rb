@@ -5,7 +5,7 @@ class CodingFrame < ActiveRecord::Base
   belongs_to :language
 
   has_many :verbs
-  has_many :alternation_values, inverse_of: :derived_coding_frame
+  has_many :alternation_values, foreign_key: "derived_coding_frame_id", inverse_of: :derived_coding_frame
 
   has_many :coding_frame_index_numbers
   has_many :coding_sets,    :through => :coding_frame_index_numbers

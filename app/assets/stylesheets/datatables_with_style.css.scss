@@ -1,0 +1,10 @@
+@import "dataTables/jquery.dataTables.bootstrap";
+
+div.dataTables_paginate {
+	float: left;
+	margin: 0 0 2px 0;
+}
+
+.dataTable th {
+	color:$vt;
+}

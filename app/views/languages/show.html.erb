@@ -1,21 +1,67 @@
+<% content_for :head do %>
+  <%= javascript_include_tag params[:controller] %>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <h1>
-  <%= @language.name %>
+	<%= @language %>
+	<%= "(#{@language.variety})" unless @language.variety.nil? %>
 	<small>
 		<strong>ISO code:</strong>
 		<%= @language.iso_code %>
 	</small>
 </h1>
+<div class="row">
+	<div class="span6">
+		<% if @language.family %>
+			<p>
+			  <b>Family:</b>
+			  <%= @language.family %>
+			</p>
+		<% end %>
 
-<p>
-  <b>Family:</b>
-  <%= @language.family %>
-</p>
+		<% if @language.continent %>
+			<p>
+			  <b>Geographical region:</b>
+			  <%= @language.continent %>
+			</p>
+		<% end %>
+	</div>
+	<div class="span6"><div class="todo">
+		<strong>To Do:</strong> display Contributor information
+	</div></div>
+</div>
 
-<p>
-  <b>Variety:</b>
-  <%= @language.variety %>
-</p>
+<div class="row new">
+	<div class="span12">
+		<h3 id="data-list">Data</h3>
+			<%= link_to "#{@language.verbs.count} Verbs", language_verbs_path(@language), :class =>"btn btn-large btn-info" %>
+			<%= link_to "#{@language.coding_frames.count} Coding Frames", language_coding_frames_path(@language), :class =>"btn btn-large" %>
+			<%= link_to "#{@language.alternations.count} Alternations", language_alternations_path(@language), :class =>"btn btn-large" %>
+			<%= link_to "#{@language.examples.count} Glossed Examples", language_examples_path(@language), :class =>"btn btn-large" %>
+	</div>
+</div>
 
-<%= link_to 'Show All', languages_path %>
+<div class="row new">
+	<div class="span6"><div class="todo">
+		<strong>To Do:</strong> display <em>"Contributors' Notes"</em>, which include:
+		<ul>
+		<li>General comments</li>
+		<li>Source of data generalizations / contributors' background</li>
+		<li>Criteria used for judging if an alternation occurs with a verb</li>
+		<li>Characterization of flagging, indexing, and ordering resources</li>
+		</ul>
+	</div></div>
+	<div class="span6">
+
+	</div>
+</div>
+<div class="row new">
+	<div class="span6">
+
+	</div>
+	<div class="span6">
+
+	</div>
+</div>
