@@ -20,6 +20,9 @@
 
 h1 {
 	line-height:48px;
+	.inline {
+		display:inline-block;
+	}
 }
 h3 {
 	color:$vt;
@@ -27,7 +30,7 @@ h3 {
 
 /* .span1, .span2, .span3, .span4, .span6, .span11 { background-color:#eee; } */
 .object-language { font-style:italic; }
-.new.row {
+div.new.row {
 	margin-top:14px;
 }
 .well.center {
@@ -47,4 +50,7 @@ div.gloss-unit {
 	display:inline-block;
 	margin-right:0.5em;
 }
-
+#verb_toggle_commment { /* is a button */
+	vertical-align:middle;
+	display:inline;
+}

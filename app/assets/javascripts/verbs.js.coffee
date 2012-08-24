@@ -19,3 +19,8 @@ $(document).ready ->
 		"oLanguage":
 			"sInfoFiltered": " (filtered)"
 			"sSearch": "Filter:"
+			
+	$btn_vtc = $('#verb_toggle_commment')   # vtc is for verb_toggle_comment
+	$('#verb_toggle_commment').click ->
+		null
+	

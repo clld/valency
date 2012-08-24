@@ -2,22 +2,21 @@
   <%= javascript_include_tag params[:controller] %>
 <% end %>
 
-<style type="text/css">
-
-</style>
-
-<h1>
+<h1 class="inline">
 	<span class="object-language" id="<%= dom_id(@verb) %>"><%= @verb %></span>
 	<% if @verb.original_script %>
 		<small>(<span class="verb"><%= @verb.original_script %></span>)
 		</small>
 	<% end %>
+	<% if @verb.comment %>
+		<button id="verb_toggle_commment" class="btn btn-mini" type="button">show comment</button>	
+	<% end %>
 </h1>
 
 <% if @verb.comment %>
-	<div class="row">
+	<div id="verb_comment" class="row">
 		<div class="span1"  id="comment-label"><strong>Comment:</strong></div>
-		<div class="span6" id="comment-text"><%= raw @verb.comment %></div>
+		<div class="span8" id="comment-text"><%= raw @verb.comment %></div>
 	</div>
 <% end %>
 
@@ -54,7 +53,7 @@
 			<% if new_mrs.size > 0 %>
 				<div class="row new"><div class="span4">
 					<strong>MR of arguments introduced via alternations:</strong>
-					<%= new_mrs.map{|x|x.name}.join(', ') %>
+					<br><%= new_mrs.map{|x|x.name}.join(', ') %>
 				</div></div>			
 			<% end %>
 		

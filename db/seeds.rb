@@ -174,56 +174,59 @@ class DataImporter
 		ok, err = '.', 'x' # for visual stdout feedback
 		
 		@models.each do |model|
-		  next unless model == Verb # re-seed selected models only!
+		  next unless model == Alternation
 			LOG.info (' '<<model.to_s<<' ').center(40, '=')
 	    LOG.info "Deleting all #{model.to_s} records... "
-	    model.delete_all
+	      timestamp_begin = Time.now
+  	    model.delete_all
 
- 			# get the layout and field names
- 			@ff.model = model
-			next if (layout = @ff.find_layout).nil? or
-			        (fields = @ff.find_field_names(layout)).empty?
+   			# get the layout and field names
+   			@ff.model = model
+  			next if (layout = @ff.find_layout).nil? or
+  			        (fields = @ff.find_field_names(layout)).empty?
 			
-			err_stats = Hash.new(0); # count errors by type
-			new_obj = {};
-			available_attributes = model.attribute_names & fields.keys
+  			err_stats = Hash.new(0); # count errors by type
+  			new_obj = {};
+  			available_attributes = model.attribute_names & fields.keys
 			
-			total = layout.total_count
- 			LOG.info "Connected to FileMaker, layout = #{layout.name}. Importing..."
+  			total = layout.total_count
+   			LOG.info "Connected to FileMaker, layout = #{layout.name}. Importing..."
  			
-			# now loop through all the records of the layout, but page them by 1000
- 			(total / 1000 + 1).times do |page|
-			  found_set = layout.find({}, max_records:1000, skip_records:1000*page)
-			  LOG.info("reading records #{1000*page+1} to #{1000*(page+1) <= total ? 1000*(page+1) : total}...")
-  			found_set.each do |fm_record|
-  				new_obj.clear
-  				available_attributes.each do |attr_name|
-  					new_obj[attr_name] = fm_record[fields[attr_name]] # fields' values are FileMaker field names
-  				end
-  				begin
-            model.create!(new_obj) # throws Exception if Rails validation fails
-  			    # print ok
-  			  rescue Exception => e
-  			    # print err
-  			    err_stats[e.class.to_s] += 1
-  			    LOG.error (e.message)
-  		    end
+  			# now loop through all the records of the layout, but page them by 1000
+   			(total / 1000 + 1).times do |page|
+  			  found_set = layout.find({}, max_records:1000, skip_records:1000*page)
+  			  LOG.info("reading records #{1000*page+1} to #{1000*(page+1) <= total ? 1000*(page+1) : total}...")
+    			found_set.each do |fm_record|
+    				new_obj.clear
+    				available_attributes.each do |attr_name|
+    					new_obj[attr_name] = fm_record[fields[attr_name]] # fields' values are FileMaker field names
+    				end
+    				begin
+              model.create!(new_obj) # throws Exception if Rails validation fails
+    			    # print ok
+    			  rescue Exception => e
+    			    # print err
+    			    err_stats[e.class.to_s] += 1
+    			    LOG.error (e.message)
+    		    end
 
-  			end #loop over records
+    			end #loop over records
 
-      end
+        end
 
-	    # show summary and error info
-	    err_count = err_stats.values.sum
-	    report = "Done! Created #{model.count} records."+
-	      " There were #{err_count > 0 ? err_count : 'no'} errors" 
-	    # puts "\n" + report + "\n\n"
-			LOG.info report
-			err_stats.each do |klass, number| 
-			  LOG.info '  '+ number.to_s + ' errors of type ' + klass
-		  end
-		  LOG.info "\n"
+  	    # show summary and error info
+  	    err_count = err_stats.values.sum
+  	    time = Time.now - timestamp_begin
+  	    report = "Done! Created #{model.count} records in "+
+  	      "#{(time/60).to_s+' min ' if time > 60}#{time % 60} sec."+
+  	      " There were #{err_count > 0 ? err_count : 'no'} errors" 
 
+  			LOG.info report
+  			err_stats.each do |klass, number| 
+  			  LOG.info '  '+ number.to_s + ' errors of type ' + klass
+  		  end
+  		  LOG.info "\n"
+		  
 		end #loop over models
 		
 	end # method import_data
