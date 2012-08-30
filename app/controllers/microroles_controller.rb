@@ -13,7 +13,7 @@ class MicrorolesController < ApplicationController
   # GET /microroles/1
   # GET /microroles/1.json
   def show
-    @microrole = Microrole.find(params[:id])
+    @microrole = Microrole.find_by_name_for_url(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

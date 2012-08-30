@@ -2,7 +2,8 @@ class AlternationsController < ApplicationController
   before_filter :get_language
   
   def get_language
-    @language = Language.includes(:alternations).find(params[:language_id])
+    
+    @language = Language.includes(:alternations).find_by_name_for_url(params[:language_id])
   end
   
   # GET /languages/1/alternations

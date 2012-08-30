@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120823175226) do
+ActiveRecord::Schema.define(:version => 20120830103127) do
 
   create_table "alternation_values", :id => false, :force => true do |t|
     t.integer "verb_id"
@@ -196,6 +196,7 @@ ActiveRecord::Schema.define(:version => 20120823175226) do
     t.string   "meaning_list"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "label_for_url"
   end
 
   add_index "meanings", ["id"], :name => "index_meanings_on_id", :unique => true
@@ -214,6 +215,7 @@ ActiveRecord::Schema.define(:version => 20120823175226) do
     t.integer "meaning_id"
     t.string  "role_letter"
     t.string  "original_or_new"
+    t.string  "name_for_url"
   end
 
   add_index "microroles", ["id"], :name => "index_microroles_on_id", :unique => true

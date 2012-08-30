@@ -2,7 +2,7 @@ class CodingFramesController < ApplicationController
   before_filter :get_language
   
   def get_language
-    @language = Language.includes(:coding_frames).find(params[:language_id])
+    @language = Language.includes(:coding_frames).find_by_name_for_url(params[:language_id])
   end
   
   # GET /languages/1/coding_frames

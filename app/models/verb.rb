@@ -19,7 +19,12 @@ class Verb < ActiveRecord::Base
     
   # allows using just @verb instead of @verb.verb_form in views
   def to_s
-    self.verb_form
+    verb_form
+  end
+  
+  # readable URL parameter: id-verb-form
+  def to_param
+    id.to_s + '-' + verb_form.parameterize
   end
   
 end

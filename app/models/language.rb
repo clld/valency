@@ -12,7 +12,13 @@ class Language < ActiveRecord::Base
   
   # allows using just @language instead of @language.name in views
   def to_s
-    self.name
+    name
   end
+  
+  # readable URL parameter: language name
+  def to_param
+    name_for_url
+  end
+  
   
 end

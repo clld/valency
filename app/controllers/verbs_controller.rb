@@ -2,7 +2,7 @@ class VerbsController < ApplicationController
   before_filter :get_language
   
   def get_language
-    @language = Language.includes(:verbs).find(params[:language_id])
+    @language = Language.includes(:verbs).find_by_name_for_url(params[:language_id])
   end
   
   # GET /languages/1/verbs
