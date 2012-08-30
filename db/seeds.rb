@@ -2,6 +2,8 @@
 # uses heuristics and custom mapping rules to find FM database column names
 # for all the Rails models' attributes
 # CAUTION: this will delete all data from the database first!
+# to import data for selected models, use environment variable "only", like this:
+# rake db:seed only="languages coding_frames"
 require 'rfm'
 
 # Database connection settings for RFM
@@ -163,18 +165,26 @@ class DataImporter
 		@models = Dir[Rails.root.join 'app','models','*.rb'].map do |file|
 			File.basename(file,'.*').camelize.constantize
 		end
-	end
 
+		# filter models to only include those listed in environment variable "only"
+    only = ENV['only']
+    unless only.nil?
+      only = only.split.map!{|s| s.singularize.camelize}
+      @models.keep_if {|model| only.include? model.to_s}
+    end  	
+	end
+	
   # performs the actual import
   # it loops over the models, uses the FieldFinder instance to
   # get the RFM layout and the corresponding field names
   # then reads data from the FileMaker connection using RFM 
   # and creates records in Rails' database
-	def import_data
-		ok, err = '.', 'x' # for visual stdout feedback
-		
+	def import_data		
+		models_with_test_records = [Alternation, CodingFrame, Language, Verb]
+		fields_with_test_records = ["name", "coding_frame_schema", "verb_form"]
+
+		LOG.info ("Will import data for:\n#{@models.empty? ? "(no models)" : @models.map{|m|m.to_s}.join(', ')}\n")
 		@models.each do |model|
-		  next unless model == Alternation
 			LOG.info (' '<<model.to_s<<' ').center(40, '=')
 	    LOG.info "Deleting all #{model.to_s} records... "
 	      timestamp_begin = Time.now
@@ -184,10 +194,11 @@ class DataImporter
    			@ff.model = model
   			next if (layout = @ff.find_layout).nil? or
   			        (fields = @ff.find_field_names(layout)).empty?
-			
+  			        
   			err_stats = Hash.new(0); # count errors by type
   			new_obj = {};
   			available_attributes = model.attribute_names & fields.keys
+  			filter_test_records  = models_with_test_records.include? model
 			
   			total = layout.total_count
    			LOG.info "Connected to FileMaker, layout = #{layout.name}. Importing..."
@@ -201,9 +212,20 @@ class DataImporter
     				available_attributes.each do |attr_name|
     					new_obj[attr_name] = fm_record[fields[attr_name]] # fields' values are FileMaker field names
     				end
-    				begin
+
+    				if filter_test_records # skip this record if it's a test record
+    				  attr_value = nil
+    				  if fields_with_test_records.any? do |attr_name|
+    				      attr_value = new_obj[attr_name]
+      				    attr_value.respond_to?(:match) && attr_value.match(/test.*brad/i)
+      				  end then
+    				      LOG.info(%(Skipping "#{attr_value.gsub(/<.+?>/,'')}"...))
+    				      next
+  				    end
+  				  end
+    				  
+      			begin
               model.create!(new_obj) # throws Exception if Rails validation fails
-    			    # print ok
     			  rescue Exception => e
     			    # print err
     			    err_stats[e.class.to_s] += 1

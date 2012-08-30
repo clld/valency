@@ -2,6 +2,8 @@ class Verb < ActiveRecord::Base
   self.primary_key = :id
   attr_accessible :comment, :id, :original_script, :verb_form, :language_id, :coding_frame_id
 
+  validates_presence_of :verb_form, :on => :create, :message => "can't be blank"
+
   belongs_to :language
   belongs_to :coding_frame
   
