@@ -2,9 +2,17 @@ Title: CHANGELOG
 
 # CHANGELOG
 
-## August 30, 2012
+## August 31, 2012
 **minor improvements**
+- switched to human-readable [URL parameters](https://github.com/fanaugen/valency/issues/1)
+- improved data import script: skips Brad's dummy records
+- added dropdown menu for Languages in the top navigation bar:
+  - if you're viewing the page of a language-specific resource such as a Verb form or Coding frame,
+    selecting a different language leads you to the same resource (in list view) of that language
+  - otherwise it just points you to the language info page
 
+    
+  
 
 ## Version 0.1.0 (August 24, 2012)
 **first usable prototype**

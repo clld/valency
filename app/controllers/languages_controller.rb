@@ -2,8 +2,6 @@ class LanguagesController < ApplicationController
   # GET /languages
   # GET /languages.json
   def index
-    @languages = Language.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @languages }

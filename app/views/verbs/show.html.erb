@@ -9,7 +9,7 @@
 		</small>
 	<% end %>
 	<% if @verb.comment %>
-		<button id="verb_toggle_commment" class="btn btn-mini" type="button">show comment</button>	
+		<button id="verb-toggle-commment" class="btn btn-mini" type="button">show comment</button>
 	<% end %>
 </h1>
 
@@ -132,7 +132,7 @@
 		<% @verb.alternation_values.each do |av| %>
 		<% altn = av.alternation %>
 		<tr>
-			<td><%= link_to altn.name, [@language, altn] %></td>
+			<td><%= link_to raw(altn.name), [@language, altn] %></td>
 			<td><%= altn.alternation_type == "Coded" ? "Yes" : "No" %></td>
 			<td><%= av.alternation_occurs.sub('ly','') %></td>
 			<td><%= link_to(av.derived_coding_frame,[@language, av.derived_coding_frame]) unless av.derived_coding_frame.nil? %></td>

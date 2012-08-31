@@ -12,15 +12,15 @@ $vt: #5299A3;
 /* navbar settings */
 $navbarBackground: darken($vt, 10%);
 $navbarBackgroundHighlight: lighten($vt, 10%);
-$navbarLinkColor: #efefef;
+$navbarLinkColor:             #efefef;
+$navbarLinkBackgroundHover:   $vt;
 
 /* link colors */
 $linkColor:      #333; /* equals $grayDark */
 $linkColorHover: darken($vt, 10%);
-
+$dropdownLinkBackgroundHover: $vt;
 
 @import "bootstrap";
+@import "bootstrap-responsive"; /* react to smaller screen sizes */
 
 body { padding-top: $navbarHeight; } /* leave room for the top nav bar */
-
-@import "bootstrap-responsive"; /* react to smaller screen sizes */

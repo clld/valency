@@ -1,11 +1,31 @@
 <!-- navigation partial -->
-<!-- in particular, this will get rendered in the top bar of a Bootstrap layout -->
-<%= link_to "The Leipzig Valency Classes Database", root_path, :class => 'brand' %>
-<ul class="nav">
-    <li>
-	  <%= link_to "Languages", languages_path %>
-    </li>
-    <li>
-	  <%= link_to "Verbs", language_verbs_path(4) %>
-    </li>
+<!-- this will get rendered in the top bar of a Bootstrap layout -->
+<%= link_to "Valency", root_path, :class => 'brand' %>
+<ul class="nav nav-pills">
+
+  <!-- Language dropdown -->
+  <li class="dropdown" id="language_dropdown">
+      <a class="dropdown-toggle" title="select a language" data-toggle="dropdown">
+        <%= @language ? @language.to_s : "Languages" %>
+        <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu">
+        <% if @language %>
+          <li><%= link_to "Show all", languages_path %></li>
+          <li class="divider"></li>
+        <% end %>
+  	    <!-- <li><a> for every Language here. @languages are sorted by name -->
+        <% @languages.sort_by{|l|l.name}.each do |lang| %>
+          <li><%= link_to_same_controller_with_language lang %></li>
+        <% end %>
+      </ul>
+  </li>
+
+  <% if @language %>
+    <li><%= link_to "Verbs",         language_verbs_path(@language) %></li>
+    <li><%= link_to "Coding Frames", language_coding_frames_path(@language) %></li>
+    <li><%= link_to "Alternations",  language_alternations_path(@language) %></li>
+    <li><%= link_to "Examples",      language_examples_path(@language) %></li>
+    
+  <% end %>
 </ul>
