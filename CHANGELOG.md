@@ -1,5 +1,3 @@
-Title: CHANGELOG
-
 # CHANGELOG
 
 ## August 31, 2012
