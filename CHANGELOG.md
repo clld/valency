@@ -4,7 +4,7 @@
 **minor improvements**
 - switched to human-readable [URL parameters](https://github.com/fanaugen/valency/issues/1)
 - improved data import script: skips Brad's dummy records
-- added dropdown menu for Languages in the top navigation bar:
+- added [dropdown menu for Languages](https://github.com/fanaugen/valency/wiki/Nav-bar:-language-specific-info) in the top navigation bar:
   - if you're viewing the page of a language-specific resource such as a Verb form or Coding frame,
     selecting a different language leads you to the same resource (in list view) of that language
   - otherwise it just points you to the language info page
