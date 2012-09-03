@@ -15,8 +15,8 @@
           <li class="divider"></li>
         <% end %>
   	    <!-- <li><a> for every Language here. @languages are sorted by name -->
-        <% @languages.sort_by{|l|l.name}.each do |lang| %>
-          <li><%= link_to_same_controller_with_language lang %></li>
+        <% @languages.sort_by{|l| l.name}.each do |lang| %>
+          <li><%= link_to_same_controller_with_language(lang) %></li>
         <% end %>
       </ul>
   </li>

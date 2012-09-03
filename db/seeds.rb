@@ -240,7 +240,7 @@ class DataImporter
   	    err_count = err_stats.values.sum
   	    time = Time.now - timestamp_begin
   	    report = "Done! Created #{model.count} records in "+
-  	      "#{(time/60).to_s+' min ' if time > 60}#{time % 60} sec."+
+          "#{(time/60).floor.to_s + ' min ' if time > 60}#{time.floor % 60} sec."+
   	      " There were #{err_count > 0 ? err_count : 'no'} errors" 
 
   			LOG.info report

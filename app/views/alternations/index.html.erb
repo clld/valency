@@ -1,4 +1,6 @@
-<h1>Alternations</h1>
+<h1>Alternations
+  <small>of <%= link_to @language, @language %></small>
+</h1> 
 
 <table>
   <tr>
@@ -9,7 +11,7 @@
 
 <% @alternations.each do |alternation| %>
   <tr>
-    <td><%= link_to alternation.name, [@language, alternation] %></td>
+    <td><%= link_to raw(alternation.name), [@language, alternation] %></td>
     <td><%= alternation.alternation_type %></td>
     <td><%= alternation.coding_frames_text %></td>
   </tr>

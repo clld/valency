@@ -14,5 +14,13 @@ module ApplicationHelper
 
   end
   
+  # just a method to test what helpers can do
+  def helper_tester
+    html_escape("<div>This is not a love song</div>");
+  end
+  
+  
+  
+  
 end
 

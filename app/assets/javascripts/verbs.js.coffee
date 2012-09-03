@@ -4,11 +4,9 @@
 # "sPaginationType": "bootstrap" -- use bootstrap plugin to style pagination links
 
 $(document).ready ->
-	$('#verbs_list.dataTable').dataTable
+	$('#verbs_list').dataTable
 		"sDom": "<'row'<'span4'i><'span8'f>>tS"
-		"bPaginate": false
-		"sScrollY": "600px"
-		"bDeferRender": true
+		"sScrollY": "700px"
 		"oLanguage":
 			"sInfoFiltered": " (filtered)"
 			"sSearch": "Filter:"
@@ -19,8 +17,24 @@ $(document).ready ->
 		"oLanguage":
 			"sInfoFiltered": " (filtered)"
 			"sSearch": "Filter:"
-			
-	$btn_vtc = $('#verb_toggle_commment')   # vtc is for verb_toggle_comment
-	$('#verb_toggle_commment').click ->
-		null
 	
+	$btn_toggle_comment = $('#verb_toggle_commment')
+	$verb_comment = $('#verb_comment')
+
+	offset = $btn_toggle_comment.offset()
+	parent = $verb_comment.parent()
+	$verb_comment.offset
+		'left': offset.left
+		'top' : offset.top + $btn_toggle_comment.outerHeight()
+	.css 'width',
+			 parent.width() - (offset.left - parent.offset().left)
+	.hide()
+	
+	$btn_toggle_comment.click ->
+		$this = $(this)
+		$verb_comment.slideToggle ->
+			$this.text(
+				if $this.text().match(/show.*/)
+				then "hide comment" else "show comment"
+			)
+

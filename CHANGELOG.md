@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## September 3, 2012
+**minor improvements**
+- "replace me!" Coding frames now show as empty in lists
+- Verb details page:
+  - table sorting arrows now to the left of column header
+  - comment on verb form hidden; can be toggled with button click
+
+
 ## August 31, 2012
 **minor improvements**
 - switched to human-readable [URL parameters](https://github.com/fanaugen/valency/issues/1)

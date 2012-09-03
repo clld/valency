@@ -1,24 +1,21 @@
-<% content_for :head do %>
-  <%= javascript_include_tag params[:controller] %>
-<% end %>
+<!-- Verb detail -->
+<div class="row">
+    <div class="span12">
+    <h1 class="pull-left clearfix">
+    	<span class="object-language" id="<%= dom_id(@verb) %>"><%= @verb %></span>
+    	<% if @verb.original_script %>
+    		<small>(<span class="verb"><%= @verb.original_script %></span>)
+    		</small>
+    	<% end %>
+    </h1>
 
-<h1 class="inline">
-	<span class="object-language" id="<%= dom_id(@verb) %>"><%= @verb %></span>
-	<% if @verb.original_script %>
-		<small>(<span class="verb"><%= @verb.original_script %></span>)
-		</small>
-	<% end %>
-	<% if @verb.comment %>
-		<button id="verb-toggle-commment" class="btn btn-mini" type="button">show comment</button>
-	<% end %>
-</h1>
+    <% if @verb.comment %>
+    	<button id="verb_toggle_commment" class="btn btn-mini" type="button">show comment</button>
+    	<div id="verb_comment"><p class="box"><%= raw @verb.comment %></p></div>
+    <% end %>
 
-<% if @verb.comment %>
-	<div id="verb_comment" class="row">
-		<div class="span1"  id="comment-label"><strong>Comment:</strong></div>
-		<div class="span8" id="comment-text"><%= raw @verb.comment %></div>
-	</div>
-<% end %>
+  </div>
+</div>
 
 <div class="new row">
 	<div class="span3">
@@ -82,48 +79,48 @@
 </div>
 
 <div class="row new">
-<div class="span12">
-	<h3><!-- Examples -->
-		<%= 'Example'.pluralize @verb.examples_of_coding_frame.size  %>
-		<small>for the coding frame</small>
-	</h3>
-	<% @verb.examples_of_coding_frame.each do |example| %>
-		<%= div_for example, :class=>"row new" do %>
-		<div class="span1">
-			<%= link_to "(#{example.number})", [@language, example],
-			:title=>"View details for example #{example.number}" %>
-		</div>
-		<div class="span9">
-			<div class="row object-language">
-				<%= example.primary_text %>
-			</div>
-			<div class="row">
-				<% at = example.analyzed_text.split() %>
-				<% gl = example.gloss.split().map{|s|s.gsub(/[A-Z]+/){|caps|'<span class="sc">'<<caps<<'</span>'}} %>
-				<% glosses = at.zip(gl).map{|pair| pair.join('<br/>')} %>
-				<% glosses.each do |gloss| %>
-				<div class="gloss-unit"><%= raw gloss %></div>
-				<% end %>
-			</div>
-			<div class="row">
-				<%= "‘#{example.translation}’" %>
-			</div>
-		</div>
-		<% end %>
-	<% end %>
-</div>
+  <div class="span12">
+  	<h3><!-- Examples -->
+  		<%= 'Example'.pluralize @verb.examples_of_coding_frame.size  %>
+  		<small>for the coding frame</small>
+  	</h3>
+  	<% @verb.examples_of_coding_frame.each do |example| %>
+  		<%= div_for example, :class=>"row new" do %>
+  		<div class="span1">
+  			<%= link_to "(#{example.number})", [@language, example],
+  			:title=>"View details for example #{example.number}" %>
+  		</div>
+  		<div class="span9">
+  			<div class="row object-language">
+  				<%= example.primary_text %>
+  			</div>
+  			<div class="row">
+  				<% at_pieces = example.analyzed_text.split().map!{|s| html_escape(s)} %>
+  				<% gl_pieces = example.gloss.split().map!{|s| html_escape(s).gsub(/[A-Z]+/){|caps| '<span class="sc">'<<caps<<'</span>'} } %>
+  				<% glosses = at_pieces.zip(gl_pieces).map!{|pair| pair.join('<br/>')} %>
+  				<% glosses.each do |gloss| %>
+  				  <div class="gloss-unit"><%= raw gloss %></div>
+  				<% end %>
+  			</div>
+  			<div class="row">
+  				<%= "‘#{example.translation}’" %>
+  			</div>
+  		</div>
+  		<% end %>
+  	<% end %>
+  </div>
 </div>
 
 <div class="row new">
 	<div class="span12">
 		<h3>Alternations</h3>
 		
-		<table id="alternation_values_list" class="table dataTable table-striped">
+		<table id="alternation_values_list" class="table dataTable table-striped table-bordered">
 		  <thead>
 		  	<tr>
 			    <th>Alternation name</th>
-				<th>Coded?</th>
-				<th>Occurrence</th>
+  				<th>Coded?</th>
+  				<th>Occurrence</th>
 			    <th>Derived Coding frame</th>
 			    <th>Example</th>
 		  	</tr>
@@ -133,19 +130,21 @@
 		<% altn = av.alternation %>
 		<tr>
 			<td><%= link_to raw(altn.name), [@language, altn] %></td>
-			<td><%= altn.alternation_type == "Coded" ? "Yes" : "No" %></td>
+			<td><%= altn.coded_yes_no %></td>
 			<td><%= av.alternation_occurs.sub('ly','') %></td>
 			<td><%= link_to(av.derived_coding_frame,[@language, av.derived_coding_frame]) unless av.derived_coding_frame.nil? %></td>
-		    <td><% if av.examples.first %>
-				<% ex = av.examples.first %>
-					<div><%= link_to(raw(ex.analyzed_text.truncate(50,separator:" ")), [@language,ex]) %><br/>
-					 	 <%= raw ex.translation.truncate(50,separator:" ") %>
-					</div>
-				<% end %>
-			</td>
+		  <td><% if av.examples.first %>
+    				<% ex = av.examples.first %>
+    					<div><%= link_to(raw(ex.analyzed_text), [@language,ex]) %><br/>
+    					 	 <%= raw ex.translation %>
+    					</div>
+    				<% end %>
+  		</td>
 		</tr>
 		<% end %>
 		</tbody>
 	</div>
 </div>
+
+<!-- TESTING AREA -->
 
