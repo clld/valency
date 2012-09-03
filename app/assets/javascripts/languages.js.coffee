@@ -7,7 +7,6 @@ $(document).ready ->
 	$('.thetable').dataTable
 		"sDom": "<'row'<'span4'i><'span8'f>>t"
 		"bPaginate": false
-		"bFilter": true
 		"oLanguage":
 			"sInfoFiltered": " (filtered)"
 			"sSearch": "Filter:"

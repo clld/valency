@@ -1,39 +1,42 @@
-<% content_for :head do %>
-  <%= javascript_include_tag params[:controller] %>
-<% end %>
-
 <!-- Verbs index -->
 <h1>
   Verb forms
   <small>of <%= link_to @language.name, @language %></small>
 </h1>
-<% orig_script = @verbs.any?{|v|v.original_script} %>
 
-<table id="verbs_list" class="table dataTable table-striped table-bordered">
+<table id="verbs_list" class="table table-striped table-bordered dataTable">
   <thead>
   	<tr>
+
 	    <th>Verb form</th>
-		<% if orig_script %>
-	    	<th>Original script</th>
-		<% end %>
-		<th>Meanings</th>
+
+      <% if @orig_script %>
+        <th>Original script</th>
+      <% end %>
+
+  		<th>Meanings</th>
+
 	    <th>Coding frame</th>
+
   	</tr>
   </thead>
 <tbody>
 <% @verbs.each do |verb| %>
   <tr>
 
-    <td><%= link_to verb.verb_form, [@language, verb] %></td>
+    <td class="object-language">
+      <%= link_to verb, [@language, verb] %>
+    </td>
 
-	<% if orig_script %>
+	  <% if @orig_script %>
     	<td><%= verb.original_script %></td>
-	<% end %>
+	  <% end %>
 
-    <td><%= raw verb.meanings.map{|m| link_to(m.label,m)}.join(', ') %></td>
+    <td><%= meaning_list(verb) %></td>
 
-	<td><%= link_to(verb.coding_frame.coding_frame_schema,
-					[@language, verb.coding_frame]) if verb.coding_frame %></td>
+	  <td><%= link_to(verb.coding_frame.coding_frame_schema,
+					[@language, verb.coding_frame]) if verb.coding_frame? %>
+		</td>
 
   </tr>
 <% end %>

@@ -7,4 +7,8 @@ class Alternation < ActiveRecord::Base
   has_many :verbs,    :through => :alternation_values
   has_many :examples, :through => :alternation_values # I wonder if this will work
 
+  def coded_yes_no
+    alternation_type == "Coded" ? "Yes" : "No"
+  end
+
 end

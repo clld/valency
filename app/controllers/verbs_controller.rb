@@ -8,14 +8,15 @@ class VerbsController < ApplicationController
   # GET /languages/1/verbs
   # GET /languages/1/verbs.json
   def index
-    @verbs = @language.verbs.includes(:coding_frame, :meanings).all
+    @verbs       = @language.verbs.includes(:coding_frame, :meanings).all
+    @orig_script = @verbs.any?{|v| v.original_script}
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @verbs }
     end
   end
-
+    
   # GET /languages/1/verbs/1
   # GET /languages/1/verbs/1.json
   def show

@@ -1,24 +1,21 @@
-<% content_for :head do %>
-  <%= javascript_include_tag params[:controller] %>
-<% end %>
+<!-- Verb detail -->
+<div class="row">
+    <div class="span12">
+    <h1 class="pull-left clearfix">
+    	<span class="object-language" id="<%= dom_id(@verb) %>"><%= @verb %></span>
+    	<% if @verb.original_script %>
+    		<small>(<span class="verb"><%= @verb.original_script %></span>)
+    		</small>
+    	<% end %>
+    </h1>
 
-<h1 class="inline">
-	<span class="object-language" id="<%= dom_id(@verb) %>"><%= @verb %></span>
-	<% if @verb.original_script %>
-		<small>(<span class="verb"><%= @verb.original_script %></span>)
-		</small>
-	<% end %>
-	<% if @verb.comment %>
-		<button id="verb-toggle-commment" class="btn btn-mini" type="button">show comment</button>
-	<% end %>
-</h1>
+    <% if @verb.comment %>
+    	<button id="verb_toggle_commment" class="btn btn-mini" type="button">show comment</button>
+    	<div id="verb_comment"><p class="box"><%= raw @verb.comment %></p></div>
+    <% end %>
 
-<% if @verb.comment %>
-	<div id="verb_comment" class="row">
-		<div class="span1"  id="comment-label"><strong>Comment:</strong></div>
-		<div class="span8" id="comment-text"><%= raw @verb.comment %></div>
-	</div>
-<% end %>
+  </div>
+</div>
 
 <div class="new row">
 	<div class="span3">
@@ -133,16 +130,16 @@
 		<% altn = av.alternation %>
 		<tr>
 			<td><%= link_to raw(altn.name), [@language, altn] %></td>
-			<td><%= altn.alternation_type == "Coded" ? "Yes" : "No" %></td>
+			<td><%= altn.coded_yes_no %></td>
 			<td><%= av.alternation_occurs.sub('ly','') %></td>
 			<td><%= link_to(av.derived_coding_frame,[@language, av.derived_coding_frame]) unless av.derived_coding_frame.nil? %></td>
-		    <td><% if av.examples.first %>
-				<% ex = av.examples.first %>
-					<div><%= link_to(raw(ex.analyzed_text.truncate(50,separator:" ")), [@language,ex]) %><br/>
-					 	 <%= raw ex.translation.truncate(50,separator:" ") %>
-					</div>
-				<% end %>
-			</td>
+		  <td><% if av.examples.first %>
+    				<% ex = av.examples.first %>
+    					<div><%= link_to(raw(ex.analyzed_text), [@language,ex]) %><br/>
+    					 	 <%= raw ex.translation %>
+    					</div>
+    				<% end %>
+  		</td>
 		</tr>
 		<% end %>
 		</tbody>

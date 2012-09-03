@@ -22,4 +22,10 @@ class CodingFrame < ActiveRecord::Base
   def to_s
     self.coding_frame_schema
   end
+  
+  # treat "replace me!" as empty
+  def coding_frame_schema
+    cfs = self[:coding_frame_schema]
+    cfs unless (cfs && cfs.match(/replace me/i))
+  end
 end

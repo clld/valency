@@ -29,4 +29,8 @@ class Verb < ActiveRecord::Base
     id.to_s + '-' + verb_form.parameterize
   end
   
+  def coding_frame?
+    self.coding_frame && !self.coding_frame.coding_frame_schema.blank?
+  end
+  
 end
