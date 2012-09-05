@@ -1,11 +1,13 @@
 # CHANGELOG
 
-## September 3, 2012
+## September 5, 2012
 **minor improvements**
 - "replace me!" Coding frames now show as empty in lists
+- table sorting arrows now to the left of column header
 - Verb details page:
-  - table sorting arrows now to the left of column header
   - comment on verb form hidden; can be toggled with button click
+  - improved sorting of alternation values: Regular first
+  
 
 
 ## August 31, 2012

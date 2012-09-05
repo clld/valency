@@ -114,13 +114,16 @@
 <div class="row new">
 	<div class="span12">
 		<h3>Alternations</h3>
+		<% avs = @verb.alternation_values %>
+		<% comments = avs.any?{|av|av.alternation_comment}%>
 		
 		<table id="alternation_values_list" class="table dataTable table-striped table-bordered">
 		  <thead>
 		  	<tr>
+  				<th>Occurs</th>
 			    <th>Alternation name</th>
+			    <%= raw "<th>Comment</th>" if comments %>
   				<th>Coded?</th>
-  				<th>Occurrence</th>
 			    <th>Derived Coding frame</th>
 			    <th>Example</th>
 		  	</tr>
@@ -129,16 +132,17 @@
 		<% @verb.alternation_values.each do |av| %>
 		<% altn = av.alternation %>
 		<tr>
-			<td><%= link_to raw(altn.name), [@language, altn] %></td>
-			<td><%= altn.coded_yes_no %></td>
-			<td><%= av.alternation_occurs.sub('ly','') %></td>
+			<td><%= av.alternation_occurs %></td>
+			<td><%= link_to raw(altn), [@language, altn] %></td>
+	    <% if comments %>
+	      <td><%= av.alternation_comment %></td>
+      <% end %>
+			<td><%= coded_uncoded(altn) %></td>
 			<td><%= link_to(av.derived_coding_frame,[@language, av.derived_coding_frame]) unless av.derived_coding_frame.nil? %></td>
 		  <td><% if av.examples.first %>
     				<% ex = av.examples.first %>
-    					<div><%= link_to(raw(ex.analyzed_text), [@language,ex]) %><br/>
-    					 	 <%= raw ex.translation %>
-    					</div>
-    				<% end %>
+    				<%= link_to raw("<div>(#{ex.number}) #{ex.primary_text}<br/>#{ex.translation}</div>"), [@language, ex], :class=>"whole-ex" %>
+  				<% end %>
   		</td>
 		</tr>
 		<% end %>
