@@ -24,7 +24,10 @@ h1 {
 h3 {
 	color:$vt;
 }
-
+a.whole-ex{ /* whole example div in a link */
+	text-decoration:none;
+	color:inherit;
+}
 /* .span1, .span2, .span3, .span4, .span6, .span11 { background-color:#eee; } */
 .object-language { font-style:italic; }
 div.new.row {
