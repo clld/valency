@@ -20,7 +20,7 @@ class VerbsController < ApplicationController
   # GET /languages/1/verbs/1
   # GET /languages/1/verbs/1.json
   def show
-    @verb = @language.verbs.find(params[:id])
+    @verb = @language.verbs.includes(:alternation_values).find(params[:id])
 
     # flash[:notice] ="Hello World!"
     respond_to do |format|

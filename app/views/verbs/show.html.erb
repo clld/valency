@@ -18,130 +18,224 @@
 </div>
 
 <div class="new row">
-	<div class="span3">
+	<div class="span4">
+	  <% cframe = @verb.coding_frame %>
 		<h3>Coding frame</h3>
-		<%= div_for @verb.coding_frame, :class => 'well center bg-cf' do |cf| %>
-			<big><%= cf %></big>
+		<%= div_for cframe, :class => 'well bg-cf' do |cf| %>
+			<big><%= link_to cf, [@language, cf] %></big>
 		<% end %>
+		
+    <!-- <% j_av_altn = cframe.verbs.joins(:alternation_values).joins(:alternations) %>
+    <% j_derived_cfs = j_av_altn.joins('INNER JOIN coding_frames ON coding_frames.id = alternation_values.derived_coding_frame_id') %>
+    <% derived_cfs = j_derived_cfs.select('coding_frames.coding_frame_schema as derived_cf').uniq %>
+    <div class="row">
+      <div class="span4">
+        <p><strong>Derived coding frames:</strong></p>
+        <% derived_cfs.each do |dcf| %>
+          <p><%= dcf.derived_cf %></p>
+        <% end %>
+      </div>
+    </div> -->
+
 	</div>
 
 	<div class="span4">
+	  <% meanings = @verb.meanings  %>
+	  <% basic_mroles = cframe.microroles.joins(:meaning).where(microroles: {meaning_id: meanings.pluck(:id)}).uniq %>
 		<h3>
-			<%= 'Meaning'.pluralize @verb.meanings.size  %>
+			<%= 'Meaning'.pluralize meanings.size  %>
 			and Microroles
 		</h3>
-		<%= div_for @verb.meanings, :class => "row" do |meaning| %>
-			<div class="span1">
-				<%= link_to meaning, meaning %>
-			</div>
-			<div class="span3">
-				<% @verb.coding_frame.microroles.joins(:meaning).where(microroles: {meaning_id: @verb.meanings.pluck(:id)}).uniq.each do |mrole| %>
-					<%= div_for mrole do %>
-					  <% idx_no = @verb.coding_frame.coding_frame_index_numbers.joins(:microroles).where(microroles:{id:mrole.id}).first.index_number %>
-					  <%= raw "#{idx_no}&nbsp; &nbsp;#{mrole}" %>
-					<% end %>
-				<% end %>
-			</div>
-			
+		<table class="table table-bordered"><tbody>
+		  <% meanings.each do |meaning| %>
+		    <% basic_mroles_of_meaning = basic_mroles.where(meaning_id: meaning.id) %>
+		    <tr>
+    			<td class="bg-me"><%= link_to meaning, meaning %></td>
+          <td class="bg-mr">
+          
+  				<% basic_mroles_of_meaning.each do |mrole| %>
+  				  <% begin %>
+				      <% idx_no = cframe.coding_frame_index_numbers.joins(:microroles).where(microroles:{id:mrole.id}).first.index_number %>
+				    <% rescue idx_no = nil; end %>
+  					<%= div_for mrole do %>
+  					  <%= raw "#{idx_no}&nbsp; &nbsp;#{mrole}" %>
+  					<% end %>
+  				<% end %>
+			    </td>
+			  </tr>
+		  <% end %>
+		</tbody></table>
+		
+		<% all_mrs = @verb.microroles.uniq %>
+		<% basic_mrs = cframe.microroles.joins(:meaning).where(microroles: {meaning_id: @verb.meanings.pluck(:id)}) %>
+		<% new_mrs = all_mrs - basic_mrs %>
+		<% if new_mrs.size > 0 %>
+			<div class="row new"><div class="span4">
+				<strong>MR of arguments introduced via alternations:</strong>
+				<br><%= new_mrs.map{|x|x.name}.join(', ') %>
+			</div></div>			
 		<% end %>
-			<% all_mrs = @verb.microroles.uniq %>
-			<% basic_mrs = @verb.coding_frame.microroles.joins(:meaning).where(microroles: {meaning_id: @verb.meanings.pluck(:id)}) %>
-			<% new_mrs = all_mrs - basic_mrs %>
-			<% if new_mrs.size > 0 %>
-				<div class="row new"><div class="span4">
-					<strong>MR of arguments introduced via alternations:</strong>
-					<br><%= new_mrs.map{|x|x.name}.join(', ') %>
-				</div></div>			
-			<% end %>
 		
 	</div>
 	
-	<div class="span5">
+	<div class="span4">
 		<h3>
 			Coding sets and Argument types
 		</h3>
-<% cf = @verb.coding_frame %>
-<% rs = cf.coding_frame_index_numbers.joins("LEFT OUTER JOIN argument_types ON coding_frame_index_numbers.argument_type_id = argument_types.id").joins("LEFT OUTER JOIN coding_sets ON coding_frame_index_numbers.coding_set_id = coding_sets.id").joins(:microroles => :meaning).where(microroles:{meaning_id: @verb.meanings.pluck(:id)}).select("microroles.name as microrole, microroles.id as microrole_id, microroles.meaning_id, coding_frame_index_numbers.index_number, argument_types.argument_type as argument_type_name, coding_sets.name as coding_set_name").order("index_number") %>
-		<table class="table table-striped table-condensed">
+		<% j_argtypes = cframe.coding_frame_index_numbers.joins("LEFT OUTER JOIN argument_types ON coding_frame_index_numbers.argument_type_id = argument_types.id") %>
+		<% j_codsets  = j_argtypes.joins("LEFT OUTER JOIN coding_sets ON coding_frame_index_numbers.coding_set_id = coding_sets.id") %>
+    <% result_set = j_codsets.where(coding_frame_id: cframe.id).select("coding_frame_index_numbers.index_number as i, argument_types.argument_type as at, coding_sets.name as cs").order("index_number") %>
+		<table class="table">
 			<thead>
-				<tr>
+				<tr class="bg-cs-darker">
 					<th>#</th> <th>Coding set</th> <th>Argument type</th> 
 				</tr>
 			</thead><tbody>
-			<% rs.each do |r| %>
-			<tr>
-				<td><%= r.index_number %></td> <td><%= r.coding_set_name %></td> <td><%= r.argument_type_name %></td>
-  			</tr>
+			<% result_set.each do |row| %>
+  			<tr class="bg-cs">
+  				<td><%= row.i %></td>
+  				<td><%= row.cs %></td>
+  				<td><%= row.at %></td>
+        </tr>
 			<% end %>
-		</tbody></table>
-  	</div>
+		  </tbody>
+		</table>
+  </div>
 
 </div>
 
 <div class="row new">
   <div class="span12">
+  	<% examples = @verb.examples_of_coding_frame %>
+  	<% excount  = examples.size %>
   	<h3><!-- Examples -->
-  		<%= 'Example'.pluralize @verb.examples_of_coding_frame.size  %>
+  		<%= if excount == 0 then raw("<small>no example given</small>") else 'Example'.pluralize(excount) end  %>
   		<small>for the coding frame</small>
   	</h3>
-  	<% @verb.examples_of_coding_frame.each do |example| %>
+  	<% if example = examples.first %>
   		<%= div_for example, :class=>"row new" do %>
-  		<div class="span1">
-  			<%= link_to "(#{example.number})", [@language, example],
-  			:title=>"View details for example #{example.number}" %>
-  		</div>
-  		<div class="span9">
-  			<div class="row object-language">
-  				<%= example.primary_text %>
-  			</div>
-  			<div class="row">
-  				<% at_pieces = example.analyzed_text.split().map!{|s| html_escape(s)} %>
-  				<% gl_pieces = example.gloss.split().map!{|s| html_escape(s).gsub(/[A-Z]+/){|caps| '<span class="sc">'<<caps<<'</span>'} } %>
-  				<% glosses = at_pieces.zip(gl_pieces).map!{|pair| pair.join('<br/>')} %>
-  				<% glosses.each do |gloss| %>
-  				  <div class="gloss-unit"><%= raw gloss %></div>
-  				<% end %>
-  			</div>
-  			<div class="row">
-  				<%= "‘#{example.translation}’" %>
-  			</div>
-  		</div>
+    		<div class="span1">
+    			<%= link_to "(#{example.number})", [@language, example],
+    			:title=>"View details for example #{example.number}" %>
+    		</div>
+    		<div class="span9">
+    			<div class="row object-language"><%= example.primary_text %></div>
+    			<div class="row">
+    				<% at_pieces = example.analyzed_text.split().map!{|s| html_escape(s)} %>
+    				<% gl_pieces = example.gloss.split().map!{|s| html_escape(s).gsub(/[A-Z]+/){|caps| '<span class="sc">'<<caps<<'</span>'} } %>
+    				<% glosses = at_pieces.zip(gl_pieces).map!{|pair| pair.join('<br/>')} %>
+    				<% glosses.each do |gloss| %>
+    				  <div class="gloss-unit"><%= raw gloss %></div>
+    				<% end %>
+    			</div>
+    			<div class="row"><%= "‘#{example.translation}’" %></div>
+    		</div>
   		<% end %>
   	<% end %>
+  	
+  	<% if excount > 1 %>
+
+  	  <% examples.shift %>
+			<div class="row offset1">
+		    <a class="btn btn-mini reveal-below">show <%= examples.size %> more…</a>
+		  </div>
+      <div class="reveal-me">
+        <% examples.each do |example| %>
+      		<%= div_for example, :class=>"row new" do %>
+        		<div class="span1">
+        			<%= link_to "(#{example.number})", [@language, example],
+        			:title=>"View details for example #{example.number}" %>
+        		</div>
+        		<div class="span9">
+        			<div class="row object-language"><%= example.primary_text %></div>
+        			<div class="row">
+        				<% at_pieces = example.analyzed_text.split().map!{|s| html_escape(s)} %>
+        				<% gl_pieces = example.gloss.split().map!{|s| html_escape(s).gsub(/[A-Z]+/){|caps| '<span class="sc">'<<caps<<'</span>'} } %>
+        				<% glosses = at_pieces.zip(gl_pieces).map!{|pair| pair.join('<br/>')} %>
+        				<% glosses.each do |gloss| %>
+        				  <div class="gloss-unit"><%= raw gloss %></div>
+        				<% end %>
+        			</div>
+        			<div class="row"><%= "‘#{example.translation}’" %></div>
+        		</div>
+      		<% end %>          
+        <% end %>
+      </div>
+  	  
+  	<% end %>
+  	
+
   </div>
 </div>
 
 <div class="row new">
 	<div class="span12">
-		<h3>Alternations</h3>
 		<% avs = @verb.alternation_values %>
-		<% comments = avs.any?{|av|av.alternation_comment}%>
-		
+		<% comments = @verb.av_comments? %>
+		<h3 class="pull-left">
+		  Alternations
+		</h3>
+		<div class="inline" style="position:relative;left:2em;top:4px">
+      <form class="form-inline" style="color:#777">
+        <% if comments %>
+          <label class="checkbox">
+            <input type="checkbox" class="toggle_dt_column" data-index="2" checked="true">
+            Comment
+          </label>
+        <% end %>
+          &nbsp; &nbsp;
+          <label class="checkbox">
+            <input type="checkbox" class="toggle_dt_column" data-index="3" checked="true">
+            Coded/Uncoded
+          </label>
+      </form>
+    </div>
 		<table id="alternation_values_list" class="table dataTable table-striped table-bordered">
 		  <thead>
 		  	<tr>
+          <th>Alternation name</th>
   				<th>Occurs</th>
-			    <th>Alternation name</th>
-			    <%= raw "<th>Comment</th>" if comments %>
+			    <th class="<%= 'empty' unless comments %>">Comment</th>
   				<th>Coded?</th>
 			    <th>Derived Coding frame</th>
-			    <th>Example</th>
+			    <th>Examples</th>
 		  	</tr>
 		  </thead>
 		<tbody>
-		<% @verb.alternation_values.each do |av| %>
-		<% altn = av.alternation %>
+		<% avs.each do |av| %>
+		<% altn, dcf, exs = av.alternation, av.derived_coding_frame, av.examples %>
 		<tr>
-			<td><%= av.alternation_occurs %></td>
 			<td><%= link_to raw(altn), [@language, altn] %></td>
-	    <% if comments %>
-	      <td><%= av.alternation_comment %></td>
-      <% end %>
+			<td><%= av.alternation_occurs %></td>
+	    <td><%= raw av.comment %></td>
 			<td><%= coded_uncoded(altn) %></td>
-			<td><%= link_to(av.derived_coding_frame,[@language, av.derived_coding_frame]) unless av.derived_coding_frame.nil? %></td>
-		  <td><% if av.examples.first %>
-    				<% ex = av.examples.first %>
-    				<%= link_to raw("<div>(#{ex.number}) #{ex.primary_text}<br/>#{ex.translation}</div>"), [@language, ex], :class=>"whole-ex" %>
+			<td><%= link_to(dcf, [@language, dcf]) unless dcf.nil? %></td>
+		  <td><% if exs.first %>
+    				<% ex = exs.first %>
+    				<a class="whole-ex block" href="<%= language_example_path(@language, ex) %>">
+    				<div class="pull-left"><%= raw "(#{ex.number})&nbsp;" %></div>
+    				<div class="inline">
+    				  <div class="object-language"><%= ex.primary_text %></div>
+    				  <div><%= "‘#{ex.translation}’" %></div>
+    				</div>
+    				</a>
+  				<% end %>
+  				
+  				<% if exs.size > 1 %>
+  				<% exs.shift %>
+  				<div><a class="btn btn-mini reveal-below">and <%= exs.size %> more…</a></div>
+          <div class="reveal-me">
+  				  <% exs.each do |ex| %>
+    				<a class="whole-ex block" href="<%= language_example_path(@language, ex) %>">
+    				<div class="pull-left"><%= raw "(#{ex.number})&nbsp;" %></div>
+    				<div class="inline">
+    				  <div class="object-language"><%= ex.primary_text %></div>
+    				  <div><%= "‘#{ex.translation}’" %></div>
+    				</div>
+    				</a>
+  				  <% end %>
+          </div>
+
   				<% end %>
   		</td>
 		</tr>
@@ -151,4 +245,3 @@
 </div>
 
 <!-- TESTING AREA -->
-

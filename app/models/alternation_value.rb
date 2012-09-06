@@ -1,6 +1,6 @@
 class AlternationValue < ActiveRecord::Base
   self.primary_key = :id
-  attr_accessible :alternation_comment, :alternation_occurs, :verb_id, :alternation_id, :id, :derived_coding_frame_id
+  attr_accessible :comment, :alternation_occurs, :verb_id, :alternation_id, :id, :derived_coding_frame_id
 
   belongs_to :verb
   belongs_to :alternation

@@ -33,4 +33,8 @@ class Verb < ActiveRecord::Base
     self.coding_frame && !self.coding_frame.coding_frame_schema.blank?
   end
   
+  def av_comments?
+    self.alternation_values.any?{|av| av.comment}
+  end
+  
 end

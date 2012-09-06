@@ -17,12 +17,15 @@
 */
 @import "bootstrap_with_settings";
 @import "datatables_with_style";
+$bg-me:#cff;    /* background for meanings */	
+$bg-cs:#ffffb3; /* background for coding sets */
 
 h1 {
 	line-height:48px;
 }
 h3 {
 	color:$vt;
+	margin-bottom:0.5em;
 }
 a.whole-ex{ /* whole example div in a link */
 	text-decoration:none;
@@ -39,12 +42,30 @@ div.new.row {
 .bg-cf {
 	background-color:#fee4c3;
 }
+.bg-me{
+	background-color:$bg-me;
+}
+.bg-mr{
+	background-color:lighten($bg-me,6%);
+}
+.bg-cs{
+	background-color:lighten($bg-cs,6%);
+}
+.bg-cs-darker{
+	background-color:darken($bg-cs,10%);
+}
 .todo {
 	border:1px dashed $grayLight;
 }
 span.sc {
 	text-transform:lowercase;
 	font-variant:small-caps;
+}
+div.inline{
+	display:inline-block;
+}
+a.block{
+	display:block;
 }
 div.gloss-unit {
 	display:inline-block;
