@@ -2,11 +2,14 @@
 
 ## September 5, 2012
 **minor improvements**
-- "replace me!" Coding frames now show as empty in lists
+- "replace me!" Coding frames are now displayed as empty
 - table sorting arrows now to the left of column header
 - Verb details page:
-  - comment on verb form hidden; can be toggled with button click
-  - improved sorting of alternation values: Regular first
+  - comment on verb form hidden; can be toggled with button
+  - improved sorting of alternation values: Regular first, those with examples first
+  - Alternation values' examples now displayed as Primary text + Translation
+  - only the first example shown, the others can be revealed optionally
+  
   
 
 

@@ -217,7 +217,8 @@ class DataImporter
     				  attr_value = nil
     				  if fields_with_test_records.any? do |attr_name|
     				      attr_value = new_obj[attr_name]
-      				    attr_value.respond_to?(:match) && attr_value.match(/test.*brad/i)
+      				    attr_value.respond_to?(:match) and attr_value.match(/test.*brad/i) ||
+      				    model == Language && attr_value.match(/(french|spanish)/i)
       				  end then
     				      LOG.info(%(Skipping "#{attr_value.gsub(/<.+?>/,'')}"...))
     				      next

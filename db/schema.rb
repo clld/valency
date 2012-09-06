@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120830103127) do
+ActiveRecord::Schema.define(:version => 20120905162708) do
 
   create_table "alternation_values", :id => false, :force => true do |t|
     t.integer "verb_id"
     t.integer "id"
     t.integer "alternation_id"
     t.string  "alternation_occurs"
-    t.text    "alternation_comment"
+    t.text    "comment"
     t.integer "derived_coding_frame_id"
   end
 
@@ -182,6 +182,8 @@ ActiveRecord::Schema.define(:version => 20120830103127) do
     t.text     "data_sources_generalizations_contributor_backgrounds"
     t.string   "continent"
     t.string   "name_for_url"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "languages", ["id"], :name => "index_languages_on_id", :unique => true
