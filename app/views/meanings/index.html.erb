@@ -1,26 +1,33 @@
 <!-- Meanings index -->
 <h1>Meanings</h1>
 
-<table>
+<table id="meanings_table" class="table table-striped table-bordered">
+  <thead>
   <tr>
-    <th>Id</th>
-    <th>Number</th>
-    <th>Label</th>
+    <th>#</th>
+    <th>List</th>
+    <th>Meaning Label</th>
     <th>Role frame</th>
-    <th>Typical context</th>
-    <th>Meaning list</th>
+    <th>Verb count</th>    
+    <th>Microroles</th>
+    <!-- <th>Typical context</th> -->
   </tr>
+  </thead>
+  <tbody>
 
-<% @meanings.each do |meaning| %>
+<% @meanings.each do |m| %>
   <tr>
-    <td><%= meaning.id %></td>
-    <td><%= meaning.number %></td>
-    <td><%= meaning.label %></td>
-    <td><%= meaning.role_frame %></td>
-    <td><%= meaning.typical_context %></td>
-    <td><%= meaning.meaning_list %></td>
+    <td><%= m.number %></td>
+    <td><%= m.meaning_list.gsub(/ (list|meaning)/,'').downcase %></td>
+    <td><strong><%= link_to m, m %></strong></td>
+    <td><%= m.role_frame %></td>
+    <!-- <td><%= m.typical_context %></td> -->
+    <td><%= m.verbs.size %></td>
+    <td><%= m.microroles_commalist %></td>
+    
   </tr>
 <% end %>
+</tbody>
 </table>
 
 <br />

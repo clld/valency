@@ -14,4 +14,8 @@ class Meaning < ActiveRecord::Base
     label_for_url
   end
 
+  def microroles_commalist
+    self.microroles.all.map{|mr| mr.to_s}.join(', ')
+  end
+  
 end

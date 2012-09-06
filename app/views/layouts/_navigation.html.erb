@@ -21,6 +21,8 @@
       </ul>
   </li>
 
+  <li><%= link_to "Meanings", meanings_path %></li>
+
   <% if @language %>
     <li><%= link_to "Verbs",         language_verbs_path(@language) %></li>
     <li><%= link_to "Coding Frames", language_coding_frames_path(@language) %></li>

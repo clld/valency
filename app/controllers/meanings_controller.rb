@@ -2,7 +2,7 @@ class MeaningsController < ApplicationController
   # GET /meanings
   # GET /meanings.json
   def index
-    @meanings = Meaning.all
+    @meanings = Meaning.includes(:verbs, :microroles).all
 
     respond_to do |format|
       format.html # index.html.erb
