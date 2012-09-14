@@ -18,7 +18,7 @@
 </div>
 
 <div class="new row">
-	<div class="span4">
+	<!--   CODING FRAME   --><div class="span4">
 	  <% cframe = @verb.coding_frame %>
 		<h3>Coding frame</h3>
 		<%= div_for cframe, :class => 'well bg-cf' do |cf| %>
@@ -39,7 +39,73 @@
 
 	</div>
 
-	<div class="span4">
+  <!-- EXAMPLES --><div class="span8">
+  	<% examples = @verb.examples_of_coding_frame %>
+  	<% excount  = examples.size %>
+  	<h3><!-- Examples -->
+  		<%= if excount == 0 then raw("<small>no example given</small>") else 'Example'.pluralize(excount) end  %>
+  		<small>for the coding frame</small>
+  	</h3>
+  	<% if example = examples.first %>
+  		<%= div_for example, :class=>"row new" do %>
+    		<div class="span1">
+    			<%= link_to "(#{example.number})", [@language, example],
+    			:title=>"View details for example #{example.number}" %>
+    		</div>
+    		<div class="span7">
+    			<div class="row object-language"><%= example.primary_text %></div>
+    			<div class="row">
+    				<% at_pieces = example.analyzed_text.split().map!{|s| html_escape(s)} %>
+    				<% gl_pieces = example.gloss.split().map!{|s| html_escape(s).gsub(/[A-Z]+/){|caps| '<span class="sc">'<<caps<<'</span>'} } %>
+    				<% glosses = at_pieces.zip(gl_pieces).map!{|pair| pair.join('<br/>')} %>
+    				<% glosses.each do |gloss| %>
+    				  <div class="gloss-unit"><%= raw gloss %></div>
+    				<% end %>
+    			</div>
+    			<div class="row"><%= "‘#{example.translation}’" %></div>
+    		</div>
+  		<% end %>
+  	<% end %>
+  	
+  	<% if excount > 1 %>
+
+  	  <% examples.shift %>
+			<div class="row offset1">
+		    <a class="btn btn-mini reveal-below">show <%= examples.size %> more…</a>
+		  </div>
+      <div class="reveal-me">
+        <% examples.each do |example| %>
+      		<%= div_for example, :class=>"row new" do %>
+        		<div class="span1">
+        			<%= link_to "(#{example.number})", [@language, example],
+        			:title=>"View details for example #{example.number}" %>
+        		</div>
+        		<div class="span7">
+        			<div class="row object-language"><%= example.primary_text %></div>
+        			<div class="row">
+        				<% at_pieces = example.analyzed_text.split().map!{|s| html_escape(s)} %>
+        				<% gl_pieces = example.gloss.split().map!{|s| html_escape(s).gsub(/[A-Z]+/){|caps| '<span class="sc">'<<caps<<'</span>'} } %>
+        				<% glosses = at_pieces.zip(gl_pieces).map!{|pair| pair.join('<br/>')} %>
+        				<% glosses.each do |gloss| %>
+        				  <div class="gloss-unit"><%= raw gloss %></div>
+        				<% end %>
+        			</div>
+        			<div class="row"><%= "‘#{example.translation}’" %></div>
+        		</div>
+      		<% end %>          
+        <% end %>
+      </div>
+  	  
+  	<% end %>
+  	
+
+  </div>
+
+</div>
+
+<div class="new row">
+
+	<!--  MEANINGS & MRs  --><div class="span4">
 	  <% meanings = @verb.meanings  %>
 	  <% basic_mroles = cframe.microroles.joins(:meaning).where(microroles: {meaning_id: meanings.pluck(:id)}).uniq %>
 		<h3>
@@ -78,7 +144,7 @@
 		
 	</div>
 	
-	<div class="span4">
+	<!-- INDEX# CS ArgTyp --><div class="span4">
 		<h3>
 			Coding sets and Argument types
 		</h3>
@@ -102,70 +168,6 @@
 		</table>
   </div>
 
-</div>
-
-<div class="row new">
-  <div class="span12">
-  	<% examples = @verb.examples_of_coding_frame %>
-  	<% excount  = examples.size %>
-  	<h3><!-- Examples -->
-  		<%= if excount == 0 then raw("<small>no example given</small>") else 'Example'.pluralize(excount) end  %>
-  		<small>for the coding frame</small>
-  	</h3>
-  	<% if example = examples.first %>
-  		<%= div_for example, :class=>"row new" do %>
-    		<div class="span1">
-    			<%= link_to "(#{example.number})", [@language, example],
-    			:title=>"View details for example #{example.number}" %>
-    		</div>
-    		<div class="span9">
-    			<div class="row object-language"><%= example.primary_text %></div>
-    			<div class="row">
-    				<% at_pieces = example.analyzed_text.split().map!{|s| html_escape(s)} %>
-    				<% gl_pieces = example.gloss.split().map!{|s| html_escape(s).gsub(/[A-Z]+/){|caps| '<span class="sc">'<<caps<<'</span>'} } %>
-    				<% glosses = at_pieces.zip(gl_pieces).map!{|pair| pair.join('<br/>')} %>
-    				<% glosses.each do |gloss| %>
-    				  <div class="gloss-unit"><%= raw gloss %></div>
-    				<% end %>
-    			</div>
-    			<div class="row"><%= "‘#{example.translation}’" %></div>
-    		</div>
-  		<% end %>
-  	<% end %>
-  	
-  	<% if excount > 1 %>
-
-  	  <% examples.shift %>
-			<div class="row offset1">
-		    <a class="btn btn-mini reveal-below">show <%= examples.size %> more…</a>
-		  </div>
-      <div class="reveal-me">
-        <% examples.each do |example| %>
-      		<%= div_for example, :class=>"row new" do %>
-        		<div class="span1">
-        			<%= link_to "(#{example.number})", [@language, example],
-        			:title=>"View details for example #{example.number}" %>
-        		</div>
-        		<div class="span9">
-        			<div class="row object-language"><%= example.primary_text %></div>
-        			<div class="row">
-        				<% at_pieces = example.analyzed_text.split().map!{|s| html_escape(s)} %>
-        				<% gl_pieces = example.gloss.split().map!{|s| html_escape(s).gsub(/[A-Z]+/){|caps| '<span class="sc">'<<caps<<'</span>'} } %>
-        				<% glosses = at_pieces.zip(gl_pieces).map!{|pair| pair.join('<br/>')} %>
-        				<% glosses.each do |gloss| %>
-        				  <div class="gloss-unit"><%= raw gloss %></div>
-        				<% end %>
-        			</div>
-        			<div class="row"><%= "‘#{example.translation}’" %></div>
-        		</div>
-      		<% end %>          
-        <% end %>
-      </div>
-  	  
-  	<% end %>
-  	
-
-  </div>
 </div>
 
 <div class="row new">
