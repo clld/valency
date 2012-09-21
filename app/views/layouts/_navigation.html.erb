@@ -10,14 +10,19 @@
         <b class="caret"></b>
       </a>
       <ul class="dropdown-menu">
-        <% if @language %>
-          <li><%= link_to "Show all", languages_path %></li>
+        <div><%# for the left column %>
+        <%# if @language %>
+          <li><em><%= link_to "Show all", languages_path %></em></li>
           <li class="divider"></li>
-        <% end %>
+        <%# end %>
   	    <!-- <li><a> for every Language here. @languages are sorted by name -->
+  	    <% counter = 0 %>
+  	    <% column_size = @languages.size/3 %>
         <% @languages.sort_by{|l| l.name}.each do |lang| %>
           <li><%= link_to_same_controller_with_language(lang) %></li>
-        <% end %>
+          <%= raw("</div><div>") if (counter += 1) % column_size == 0 %>
+        <% end %>  
+        </div><%# for the right column %>
       </ul>
   </li>
 

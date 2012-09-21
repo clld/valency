@@ -1,23 +1,39 @@
+<!-- Coding frame -->
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Language:</b>
-  <%= @coding_frame.language %>
-</p>
-
-<p>
-  <b>Coding frame schema:</b>
+<h1>
+  <small>Coding Frame Schema:&nbsp; &nbsp; </small>
   <%= @coding_frame.coding_frame_schema %>
-</p>
+  <!-- <small>of <%= link_to @language, @language %></small> -->
+</h1>
 
+<% if @coding_frame.description %>
 <p>
   <b>Description:</b>
   <%= @coding_frame.description %>
 </p>
-
+<% end %>
+<% if @coding_frame.comment %>
 <p>
   <b>Comment:</b>
   <%= @coding_frame.comment %>
 </p>
+<% end %>
 
-<%= link_to 'Show All', language_coding_frames_path(@language) %>
+<div class="new row"><div class="span8"><table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Verb form</th>
+      <th>Meanings</th>
+    </tr>
+  </thead>
+  <tbody>
+<%      @coding_frame.verbs.each do |v| %>
+    <tr>
+      <td><%= link_to v.verb_form, [@language, v] %></td>
+      <td><%# link_to v.meaning.label, v.meanings %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table></div>
+</div>

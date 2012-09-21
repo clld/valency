@@ -24,3 +24,13 @@ $dropdownLinkBackgroundHover: $vt;
 @import "bootstrap-responsive"; /* react to smaller screen sizes */
 
 body { padding-top: $navbarHeight; } /* leave room for the top nav bar */
+
+.dropdown-menu { /* hack to allow three columns */
+  min-width:480px;
+  div {          /* the divs for the columns */
+	  display:inline-block;
+	  min-width:160px;
+	  float:left;
+  }
+  a {clear:none;}  
+}

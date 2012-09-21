@@ -1,19 +1,33 @@
-<h1>Coding Frames</h1>
+<!-- Coding frames index -->
+<h1>
+  Coding frames
+  <small>of <%= link_to @language.name, @language %></small>
+</h1>
 
-<table>
-  <tr>
-    <th>Coding frame schema</th>
-    <th>Description</th>
-    <th>Comment</th>
-  </tr>
+<table id="coding_frames_list" class="table table-striped table-bordered dataTable">
+  <thead>
+    <tr>
+      <th>Coding frame schema</th>
+      <th>Description</th>
+      <!-- <th>Comment</th> -->
+      <th>Verb forms</th>
+      <th>Meanings</th>
+    </tr>
+  </thead>
+    
+  <tbody>
+    <% @coding_frames.each do |cf| %>
+    <% verbs = cf.verbs %>
+      <tr>
+        <td><%= link_to(cf, [@language, cf]) unless cf.blank? %></td>
+        <td><%= cf.description if cf %></td>
+        <!-- <td><%# cf.comment %></td> -->
+        <td><%= verb_list(verbs) if verbs %></td>
+        <td><%# meanings %></td>
+      </tr>
+    <% end %>
+  </tbody>
 
-<% @coding_frames.each do |coding_frame| %>
-  <tr>
-    <td><%= coding_frame.coding_frame_schema %></td>
-    <td><%= coding_frame.description %></td>
-    <td><%= coding_frame.comment %></td>
-  </tr>
-<% end %>
 </table>
 
 <br />

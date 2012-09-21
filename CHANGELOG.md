@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## September 21, 2012
+**minor improvements**
+- languages dropdown menu now more compact (in columns)
+- rearranged layout of [Verb detail](http://192.168.4.58:3000/languages/hoocak/verbs/4522363293-hiroji) page
+- **Coding frames**: created basic [list view](http://192.168.4.58:3000/languages/even/coding_frames)
+- **Meanings**: created [list view](http://192.168.4.58:3000/meanings/)
+  and preliminary [detail page](http://192.168.4.58:3000/meanings/talk)
+
+
 ## September 5, 2012
 **minor improvements**
 - "replace me!" Coding frames are now displayed as empty

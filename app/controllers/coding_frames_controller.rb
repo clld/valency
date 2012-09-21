@@ -8,7 +8,7 @@ class CodingFramesController < ApplicationController
   # GET /languages/1/coding_frames
   # GET /languages/1/coding_frames.json
   def index
-    @coding_frames = @language.coding_frames
+    @coding_frames = @language.coding_frames.includes(:verbs)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,7 +19,7 @@ class CodingFramesController < ApplicationController
   # GET /languages/1/coding_frames/1
   # GET /languages/1/coding_frames/1.json
   def show
-    @coding_frame = @language.coding_frames.find(params[:id])
+    @coding_frame = @language.coding_frames.includes(:verbs).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
