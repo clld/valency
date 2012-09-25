@@ -1,6 +1,6 @@
 class Alternation < ActiveRecord::Base
   self.primary_key = :id
-  attr_accessible :name, :alternation_type, :coding_frames_text, :description, :id, :language_id, :complexity
+  # attr_accessible :name, :alternation_type, :coding_frames_text, :description, :id, :language_id, :complexity
 
   belongs_to :language
   has_many :alternation_values

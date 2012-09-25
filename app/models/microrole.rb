@@ -1,6 +1,6 @@
 class Microrole < ActiveRecord::Base
   self.primary_key = :id
-  attr_accessible :id, :name, :name_for_url, :original_or_new, :role_letter, :meaning_id
+  # attr_accessible :id, :name, :name_for_url, :original_or_new, :role_letter, :meaning_id
 
   belongs_to :meaning
 

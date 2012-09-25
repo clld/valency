@@ -1,6 +1,6 @@
 class CodingFrame < ActiveRecord::Base
   self.primary_key = :id
-  attr_accessible :coding_frame_schema, :comment, :description, :id, :language_id, :derived
+  # attr_accessible :coding_frame_schema, :comment, :description, :id, :language_id, :derived
 
   belongs_to :language
 
