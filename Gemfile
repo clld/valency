@@ -31,7 +31,7 @@ group :assets do
   # gem 'therubyracer', :platform => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-  gem 'bootstrap-sass', '~> 2.0.4.0' # use Twitter Bootstrap 2.0 with SASS
+  gem 'bootstrap-sass', '~> 2.1.0.0' # use Twitter Bootstrap 2.1 with SASS
   gem 'jquery-datatables-rails'      # use jQuery Datatables 
 end
 
