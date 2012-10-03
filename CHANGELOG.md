@@ -1,5 +1,7 @@
 # CHANGELOG
 
+
+
 ## September 21, 2012
 **minor improvements**
 - languages dropdown menu now more compact (in columns)
@@ -7,7 +9,6 @@
 - **Coding frames**: created basic [list view](http://192.168.4.58:3000/languages/even/coding_frames)
 - **Meanings**: created [list view](http://192.168.4.58:3000/meanings/)
   and preliminary [detail page](http://192.168.4.58:3000/meanings/talk)
-
 
 ## September 5, 2012
 **minor improvements**
@@ -18,9 +19,6 @@
   - improved sorting of alternation values: Regular first, those with examples first
   - Alternation values' examples now displayed as Primary text + Translation
   - only the first example shown, the others can be revealed optionally
-  
-  
-
 
 ## August 31, 2012
 **minor improvements**
@@ -30,9 +28,6 @@
   - if you're viewing the page of a language-specific resource such as a Verb form or Coding frame,
     selecting a different language leads you to the same resource (in list view) of that language
   - otherwise it just points you to the language info page
-
-    
-  
 
 ## Version 0.1.0 (August 24, 2012)
 **first usable prototype**

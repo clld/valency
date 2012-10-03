@@ -21,9 +21,9 @@ $linkColorHover: darken($vt, 10%);
 $dropdownLinkBackgroundHover: $vt;
 
 @import "bootstrap";
+body { padding-top: $navbarHeight;  } /* leave room for the top nav bar */
 @import "bootstrap-responsive"; /* react to smaller screen sizes */
 
-body { padding-top: $navbarHeight; } /* leave room for the top nav bar */
 
 .dropdown-menu { /* hack to allow three columns */
   min-width:480px;

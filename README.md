@@ -2,7 +2,7 @@
 
 This is the code repository for the Rails app that will present the Leipzig Valency Classes Project's data as an searchable interactive online resource.
 
-[Changelog](https://github.com/fanaugen/valency/blob/master/CHANGELOG.md)
+[Changelog](https://github.com/fanaugen/valency/blob/master/CHANGELOG.md#changelog)
 
 ### Description of Contents
 

@@ -1,8 +1,15 @@
 <!-- navigation partial -->
 <!-- this will get rendered in the top bar of a Bootstrap layout -->
 <%= link_to "Valency", root_path, :class => 'brand' %>
-<ul class="nav nav-pills">
 
+<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+  <!-- <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> -->
+  Menu
+</a>
+
+<!-- Everything in here is collapsed at 940px or less -->
+<ul class="nav nav-pills">
   <!-- Language dropdown -->
   <li class="dropdown" id="language_dropdown">
       <a class="dropdown-toggle" title="select a language" data-toggle="dropdown">
@@ -26,13 +33,23 @@
       </ul>
   </li>
 
+  <!-- Meanings dropdown -->
   <li><%= link_to "Meanings", meanings_path %></li>
-
-  <% if @language %>
-    <li><%= link_to "Verbs",         language_verbs_path(@language) %></li>
-    <li><%= link_to "Coding Frames", language_coding_frames_path(@language) %></li>
-    <li><%= link_to "Alternations",  language_alternations_path(@language) %></li>
-    <li><%= link_to "Examples",      language_examples_path(@language) %></li>
-    
-  <% end %>
 </ul>
+
+<div class="nav-collapse">
+  <ul class="nav nav-pills">
+
+    <% if @language %>
+      <li><%= link_to "Verbs",         language_verbs_path(@language) %></li>
+      <li><%= link_to "Coding Frames", language_coding_frames_path(@language) %></li>
+      <li><%= link_to "Alternations",  language_alternations_path(@language) %></li>
+      <li><%= link_to "Examples",      language_examples_path(@language) %></li>
+
+    <% end %>
+  </ul>
+</div>
+
+
+
+
