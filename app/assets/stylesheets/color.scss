@@ -1,0 +1,25 @@
+/* color.scss – color specific classes */
+
+/* color variables */
+$bg-me:#cff;    /* background for meanings */	
+$bg-cs:#ffffb3; /* background for coding sets */
+
+/* color classes */
+.bg-cf {
+	background-color:#fee4c3;
+}
+.bg-me{
+	background-color:$bg-me;
+}
+.bg-mr{
+	background-color:lighten($bg-me,6%);
+}
+.bg-cs{
+	background-color:lighten($bg-cs,6%);
+}
+.bg-cs-darker{
+	background-color:darken($bg-cs,10%);
+}
+.todo {
+	border:1px dashed $grayLight;
+}

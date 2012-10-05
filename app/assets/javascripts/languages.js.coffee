@@ -4,7 +4,7 @@
 # "sPaginationType": "bootstrap" -- use bootstrap plugin to style pagination links
 
 $(document).ready ->
-	$('.thetable').dataTable
+	$('#languages_list').dataTable
 		"sDom": "<'row'<'span4'i><'span8'f>>t"
 		"bPaginate": false
 		"oLanguage":

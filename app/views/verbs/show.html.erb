@@ -1,24 +1,21 @@
 <!-- Verb detail -->
 <div class="row">
-    <div class="span12">
-    <h1 class="pull-left clearfix">
+  <div class="span12">
+    <h1 class="pull-left">
     	<span class="object-language" id="<%= dom_id(@verb) %>"><%= @verb %></span>
     	<% if @verb.original_script %>
-    		<small>(<span class="verb"><%= @verb.original_script %></span>)
-    		</small>
+    		<small><span><%= "(#{@verb.original_script})" %></span></small>
     	<% end %>
     </h1>
-
     <% if @verb.comment %>
-    	<button id="verb_toggle_commment" class="btn btn-mini" type="button">show comment</button>
-    	<div id="verb_comment"><p class="box"><%= raw @verb.comment %></p></div>
+			<a class="btn btn-mini" data-toggle="comment">show comment</a>
+    	<div class="comment"><p class="box"><%= raw @verb.comment %></p></div>
     <% end %>
-
-  </div>
+	</div>
 </div>
 
-<div class="new row">
-	<!--   CODING FRAME   --><div class="span4">
+<div class="row">
+	<!-- CODING FRAME --><div class="span4">
 	  <% cframe = @verb.coding_frame %>
 		<h3>Coding frame</h3>
 		<%= div_for cframe, :class => 'well bg-cf' do |cf| %>

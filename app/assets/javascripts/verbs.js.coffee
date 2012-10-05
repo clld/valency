@@ -2,24 +2,25 @@
 # with Scroller enabled, see http://datatables.net/extras/scroller/
 # "iDisplayLength": 20 -- show 20 entries per page
 # "sPaginationType": "bootstrap" -- use bootstrap plugin to style pagination links
+
 setup_toggle_comment = ->
-	$btn_toggle_comment = $('#verb_toggle_commment')
-	$verb_comment = $('#verb_comment')
-
-	return unless offset = $btn_toggle_comment.offset()
-	parent = $verb_comment.parent()
-	$verb_comment.offset
+	$btn = $('[data-toggle="comment"]') # button to toggle the comment
+	$comment = $btn.next('.comment')
+	parent = $comment.parent() # the parent div (class: spanX)
+	offset = $btn.offset()
+	$comment.offset
 		'left': offset.left
-		'top' : offset.top + $btn_toggle_comment.outerHeight()
-	.css 'width',
-			 parent.width() - (offset.left - parent.offset().left)
+		'top' : offset.top + $btn.outerHeight()
+	.css
+		'right': 0;
+		# 'max-width': parent.width() - offset.left + parent.offset().left
+		# 'min-width': "200px"
 	.hide()
-
-	$btn_toggle_comment.click ->
+	$btn.click ->
 		$this = $(this)
-		$verb_comment.slideToggle ->
+		$comment.slideToggle ->
 			$this.text(
-				if $this.text().match(/show.*/)
+				if $this.text().match(/show/i)
 				then "hide comment" else "show comment"
 			)
 
