@@ -9,6 +9,12 @@ group :development do
   gem 'sqlite3'
   gem 'pry-rails'
   gem 'hirb'      # print formatted result tables to console
+
+  # These gems are for triggering tasks upon file changes with Guard
+  gem 'rb-fsevent', :require => false
+  gem 'guard-bundler'    # run bundle install
+  gem 'guard-livereload' # reload the browser
+  gem 'rack-livereload'  # use livereload as a Rack middleware
 end
 
 # Gems for both development and production

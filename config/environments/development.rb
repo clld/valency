@@ -34,4 +34,16 @@ Valency::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  # Use Guard live-reload with rack-livereload
+  # change some options:
+  #   config.middleware.insert_before(
+  #     Rack::Lock, Rack::LiveReload,
+  #     :min_delay => 500,
+  #     :max_delay => 10000,
+  #     :port => 56789,
+  #     :host => 'myhost.cool.wow',
+  #     :ignore => [ %r{dont/modify\.html$} ]
+  #   )
+  config.middleware.insert_before(Rack::Lock, Rack::LiveReload)
 end
