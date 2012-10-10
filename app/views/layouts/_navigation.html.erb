@@ -1,5 +1,5 @@
 <!-- navigation partial -->
-<!-- this will get rendered in the top bar of a Bootstrap layout -->
+<!-- this will get rendered in the top navbar of the Bootstrap layout -->
 <%= link_to "Valency", root_path, :class => 'brand' %>
 
 <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
@@ -9,7 +9,10 @@
 </a>
 
 <!-- Everything in here is collapsed at 940px or less -->
-<ul class="nav nav-pills">
+<ul class="nav">
+  <!-- TODO Meanings dropdown -->
+  <li><%= link_to "Meanings", meanings_path %></li>
+	<li class="divider-vertical"></li>
   <!-- Language dropdown -->
   <li class="dropdown" id="language_dropdown">
       <a class="dropdown-toggle" title="select a language" data-toggle="dropdown">
@@ -18,31 +21,27 @@
       </a>
       <ul class="dropdown-menu">
         <div><%# for the left column %>
-        <%# if @language %>
-          <li><em><%= link_to "Show all", languages_path %></em></li>
+          <li><%= link_to "Show all", languages_path, :class => "em" %></li>
           <li class="divider"></li>
-        <%# end %>
-  	    <!-- <li><a> for every Language here. @languages are sorted by name -->
-  	    <% counter = 0 %>
-  	    <% column_size = @languages.size/3 %>
-        <% @languages.sort_by{|l| l.name}.each do |lang| %>
-          <li><%= link_to_same_controller_with_language(lang) %></li>
-          <%= raw("</div><div>") if (counter += 1) % column_size == 0 %>
-        <% end %>  
+	  	    <!-- <li><a> for every Language here. @languages are sorted by name -->
+	  	    <% counter = 0 %>
+	  	    <% column_size = @languages.size/3 %>
+	        <% @languages.sort_by{|l| l.name}.each do |lang| %>
+	          <li><%= link_to_same_controller_with_language(lang) %></li>
+	          <%= raw("</div><div>") if (counter += 1) % column_size == 0 %>
+	        <% end %>  
         </div><%# for the right column %>
       </ul>
   </li>
 
-  <!-- Meanings dropdown -->
-  <li><%= link_to "Meanings", meanings_path %></li>
 </ul>
 
 <div class="nav-collapse">
-  <ul class="nav nav-pills">
+  <ul class="nav">
 
     <% if @language %>
       <li><%= link_to "Verbs",         language_verbs_path(@language) %></li>
-      <li><%= link_to "Coding Frames", language_coding_frames_path(@language) %></li>
+      <li><%= link_to "Coding frames", language_coding_frames_path(@language) %></li>
       <li><%= link_to "Alternations",  language_alternations_path(@language) %></li>
       <li><%= link_to "Examples",      language_examples_path(@language) %></li>
 

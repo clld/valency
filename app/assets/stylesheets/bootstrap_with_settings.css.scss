@@ -1,36 +1,13 @@
-/* settings for the Twitter Bootstrap CSS, installed as a SASS version 
-*  by the bootstrap-sass gem (the bootstrap files live in that gem)
-*/
-
-/* Override defaults for Bootstrap variables. For documentation, visit
-*  http://twitter.github.com/bootstrap/less.html#variables
-*/
-
-/* vt is for "valency turquoise" */
-$vt: #5299A3; 
-
-/* navbar settings */
-$navbarBackground: darken($vt, 10%);
-$navbarBackgroundHighlight: lighten($vt, 10%);
-$navbarLinkColor:             #efefef;
-$navbarLinkBackgroundHover:   $vt;
-
-/* link colors */
-$linkColor:      #333; /* equals $grayDark */
-$linkColorHover: darken($vt, 10%);
-$dropdownLinkBackgroundHover: $vt;
-
-@import "bootstrap";
-body { padding-top: $navbarHeight;  } /* leave room for the top nav bar */
+@import "variables"; /* to override Bootstrap defaults */
+@import "bootstrap"; /* other variables are set to defaults */
+body { padding-top: $navbarHeight; } /* leave room for the top nav bar */
 @import "bootstrap-responsive"; /* react to smaller screen sizes */
 
+/* classes for colors */
+.bg-cf { background-color:#fee4c3; }
+.bg-me { background-color:$bg-me; }
+.bg-mr { background-color:lighten($bg-me,6%); }
+.bg-cs { background-color:lighten($bg-cs,6%); }
+.bg-cs-darker{ background-color:darken($bg-cs,10%); }
+.todo  { border:1px dashed $grayLight; }
 
-.dropdown-menu { /* hack to allow three columns */
-  min-width:480px;
-  div {          /* the divs for the columns */
-	  display:inline-block;
-	  min-width:160px;
-	  float:left;
-  }
-  a {clear:none;}  
-}

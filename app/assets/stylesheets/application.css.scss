@@ -17,51 +17,16 @@
 */
 @import "bootstrap_with_settings";
 @import "datatables_with_style";
-@import "color";
 
-/* helper divs for positioning and alignment */
-.h1-height {
-	height:40px;
-	line-height:36px;
-	margin:10px 0;
-}
-
-/* whole example div in a link */
-a.whole-ex{
-	text-decoration:none;
-	color:inherit;
-}
-h3 {
-	color:$vt;
-	margin-bottom:0.5em;
-}
-/* .span1, .span2, .span3, .span4, .span6, .span11 { background-color:#eee; } */
-.object-language { font-style:italic; }
-div.new.row {
-	margin-top:14px;
-}
-
-span.sc {
-	text-transform:lowercase;
-	font-variant:small-caps;
-}
-div.inline{
-	display:inline-block;
-}
-a.block{
-	display:block;
-}
-div.gloss-unit {
-	display:inline-block;
-	margin-right:0.5em;
-}
+@import "global"; /* for all contexts */
 
 [data-toggle="comment"] { /* a button to toggle the comment */
 	position:relative;
-	top:21px;
+	top:22px;
 	margin:0 2em;
 }
-.comment { /* is a <div> containing a content <p class="box"> */
+
+.comment { // a div with a p.box inside
 	position:relative;
 	clear:both;
 	width:auto;

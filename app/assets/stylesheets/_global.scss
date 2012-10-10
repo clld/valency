@@ -1,0 +1,65 @@
+/*** global styles – for layouts, nav bar, templates
+ *   and shared classes. Don't put page-specific CSS here
+ */
+
+// override some Bootstrap defaults
+.navbar {
+	.brand, .nav > li > a {
+		text-shadow:none;
+	}	
+}
+.nav-collapse {
+	.nav > li > a, .dropdown-menu a {
+		font-weight: normal;
+	}
+}
+
+div.new.row {
+	margin-top:14px;
+}
+
+
+// multicolumn dropdown menus with div
+.dropdown-menu { /* hack to allow three columns */
+  min-width:490px;
+  div {          /* the divs for the columns */
+	  display:inline-block;
+	  min-width:160px;
+	  float:left;
+  }
+  a {clear:none;}  
+}
+
+// Headings
+h3 {
+	color:$vt;
+}
+
+// content-specific styles
+// whole example div in a link
+a.whole-ex{
+	text-decoration:none;
+	color:inherit;
+}
+
+.object-language { font-style:italic; }
+
+div.gloss-unit {
+	display:inline-block;
+	margin-right:0.5em;
+}
+
+// utility classes: font styles
+span.sc { // small caps
+	text-transform:lowercase;
+	font-variant:small-caps;
+}
+.em { font-style:italic; }
+
+// utility classes: other properties
+div.inline{
+	display:inline-block;
+}
+a.block{
+	display:block;
+}

@@ -1,0 +1,24 @@
+/* Override defaults for Bootstrap variables. For documentation, visit
+*  http://twitter.github.com/bootstrap/less.html#variables
+*/
+
+/********** color variables **********/
+/* vt is for "valency turquoise" */
+$vt: #5299a3;
+
+/* navbar settings */
+$navbarBackground:				  darken($vt, 10%);
+$navbarBackgroundHighlight: lighten($vt, 10%);
+$navbarLinkColor:						#efefef;
+$navbarLinkColorHover:			lighten($navbarLinkColor, 10%);
+$navbarLinkBackgroundHover:	$vt;
+$navbarLinkColorActive:			$navbarLinkColor;
+$navbarLinkBackgroundActive:$navbarBackground;
+
+/* link colors */
+$linkColor:      #333; /* equals $grayDark */
+$linkColorHover: darken($vt, 10%);
+$dropdownLinkBackgroundHover: $vt;
+
+$bg-me:#cff;    /* background for meanings */	
+$bg-cs:#ffffb3; /* background for coding sets */
