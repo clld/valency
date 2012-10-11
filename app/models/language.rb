@@ -20,5 +20,9 @@ class Language < ActiveRecord::Base
     name_for_url
   end
   
+  # returns a list of all languages in alphabetical order
+  def alphabetical_list
+    
+  end
   
 end

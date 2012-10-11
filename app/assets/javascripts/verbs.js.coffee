@@ -8,6 +8,7 @@ setup_toggle_comment = ->
 	$comment = $btn.next('.comment')
 	parent = $comment.parent() # the parent div (class: spanX)
 	offset = $btn.offset()
+	return unless $comment.length # dirty hack. Unnecessary when JS is modular
 	$comment.offset
 		'left': offset.left
 		'top' : offset.top + $btn.outerHeight()

@@ -24,7 +24,7 @@ class VerbsController < ApplicationController
 
     # flash[:notice] ="Hello World!"
     respond_to do |format|
-      format.html# show.html.erb
+      format.html # show.html.erb
       format.json { render json: @verb }
     end
   end

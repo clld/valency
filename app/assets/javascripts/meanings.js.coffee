@@ -12,7 +12,7 @@ $(document).ready ->
 			"sInfoFiltered": " (filtered)"
 			"sSearch": "Filter:"
 	
-	$('#verbs_list').dataTable
+	$('#meaning_verbs_list').dataTable # the ID is a workaround
 		"sDom": "<'row'<'span4 offset2'f>>tS"
 		"sScrollY": "730px"
 		"bPaginate": true

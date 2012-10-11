@@ -21,13 +21,12 @@ div.new.row {
 
 // multicolumn dropdown menus with div
 .dropdown-menu { /* hack to allow three columns */
-  min-width:490px;
   div {          /* the divs for the columns */
 	  display:inline-block;
-	  min-width:160px;
+	  min-width:160px; /* default min-width of .dropdown-menu */
 	  float:left;
   }
-  a {clear:none;}  
+  a { clear:none; }
 }
 
 // Headings

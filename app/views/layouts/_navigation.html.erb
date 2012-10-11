@@ -13,6 +13,7 @@
   <!-- TODO Meanings dropdown -->
   <li><%= link_to "Meanings", meanings_path %></li>
 	<li class="divider-vertical"></li>
+
   <!-- Language dropdown -->
   <li class="dropdown" id="language_dropdown">
       <a class="dropdown-toggle" title="select a language" data-toggle="dropdown">
@@ -20,17 +21,12 @@
         <b class="caret"></b>
       </a>
       <ul class="dropdown-menu">
-        <div><%# for the left column %>
-          <li><%= link_to "Show all", languages_path, :class => "em" %></li>
-          <li class="divider"></li>
-	  	    <!-- <li><a> for every Language here. @languages are sorted by name -->
-	  	    <% counter = 0 %>
-	  	    <% column_size = @languages.size/3 %>
-	        <% @languages.sort_by{|l| l.name}.each do |lang| %>
-	          <li><%= link_to_same_controller_with_language(lang) %></li>
-	          <%= raw("</div><div>") if (counter += 1) % column_size == 0 %>
-	        <% end %>  
-        </div><%# for the right column %>
+        <li><%= link_to "Show all", languages_path, :class => "em" %></li>
+        <li class="divider"></li>
+  	    <!-- <li><a> for every Language here. @languages are sorted by name -->
+        <% @languages.sort_by{|l| l.name}.each do |lang| %>
+          <li><%= link_to_same_controller_with_language(lang) %></li>
+        <% end %>
       </ul>
   </li>
 
