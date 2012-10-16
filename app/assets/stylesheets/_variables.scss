@@ -18,7 +18,10 @@ $navbarLinkBackgroundActive:$navbarBackground;
 /* link colors */
 $linkColor:      #333; /* equals $grayDark */
 $linkColorHover: darken($vt, 10%);
+
+/* dropdown links */
 $dropdownLinkBackgroundHover: $vt;
+$dropdownLinkBackgroundActive: $dropdownLinkBackgroundHover;
 
 $bg-me:#cff;    /* background for meanings */	
 $bg-cs:#ffffb3; /* background for coding sets */

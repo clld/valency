@@ -23,7 +23,6 @@ div.new.row {
 .dropdown-menu { /* hack to allow three columns */
   div {          /* the divs for the columns */
 	  display:inline-block;
-	  min-width:160px; /* default min-width of .dropdown-menu */
 	  float:left;
   }
   a { clear:none; }

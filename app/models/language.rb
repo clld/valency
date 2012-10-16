@@ -10,6 +10,8 @@ class Language < ActiveRecord::Base
   has_many :verbs
   has_many :examples
   
+  default_scope order(:name_for_url)
+  
   # allows using just @language instead of @language.name in views
   def to_s
     name
@@ -19,10 +21,5 @@ class Language < ActiveRecord::Base
   def to_param
     name_for_url
   end
-  
-  # returns a list of all languages in alphabetical order
-  def alphabetical_list
     
-  end
-  
 end

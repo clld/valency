@@ -1,29 +1,27 @@
-# activate jquery.dataTable for fixed-width containers, see http://is.gd/MWVT9G
-# with Scroller enabled, see http://datatables.net/extras/scroller/
-# "iDisplayLength": 20 -- show 20 entries per page
-# "sPaginationType": "bootstrap" -- use bootstrap plugin to style pagination links
+# JS for Verbs
+@VALENCY or= {}
 
-setup_toggle_comment = ->
-	$btn = $('[data-toggle="comment"]') # button to toggle the comment
-	$comment = $btn.next('.comment')
-	parent = $comment.parent() # the parent div (class: spanX)
-	offset = $btn.offset()
-	return unless $comment.length # dirty hack. Unnecessary when JS is modular
-	$comment.offset
-		'left': offset.left
-		'top' : offset.top + $btn.outerHeight()
-	.css
-		'right': 0;
-		# 'max-width': parent.width() - offset.left + parent.offset().left
-		# 'min-width': "200px"
-	.hide()
-	$btn.click ->
-		$this = $(this)
-		$comment.slideToggle ->
-			$this.text(
-				if $this.text().match(/show/i)
-				then "hide comment" else "show comment"
-			)
+@altn_occurs_sort_order =
+	"Regularly" :"A"
+	"Marginally":"B"
+	"Never"     :"C"
+
+@VALENCY.verbs =
+	init: ->
+		@altn_occurs_sort_order =
+			"Regularly" :"A"
+			"Marginally":"B"
+			"Never"     :"C"
+		
+		# $(document).on 'finalized', ->
+			# do this last
+	
+	index: ->
+		
+	
+	show: ->
+		
+	
 
 setup_reveal_below = ->
 	$('div.reveal-me').hide()
@@ -31,11 +29,6 @@ setup_reveal_below = ->
 		$concealed = $(this).parent().next('.reveal-me')
 		$(this).slideUp 30, ->
 			$concealed.slideToggle()
-
-altn_occurs_sort_order =
-	"Regularly" :"A"
-	"Marginally":"B"
-	"Never"     :"C"
 	
 # hides dataTables column by index
 hideColumn = (datatable, index) ->
@@ -53,7 +46,6 @@ toggleColumn = (datatable, index) ->
 	not visible
 
 $(document).ready ->
-	setup_toggle_comment()
 	setup_reveal_below()
 	
 	$('#verbs_list').dataTable
@@ -83,7 +75,7 @@ $(document).ready ->
 					if type == 'set'
 						src[1] = val
 					else if type == 'sort'
-						altn_occurs_sort_order[src[1]] || "Z"
+						@altn_occurs_sort_order[src[1]] || "Z"
 					else
 						src[1]
 			},
