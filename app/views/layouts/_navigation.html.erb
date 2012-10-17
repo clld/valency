@@ -8,38 +8,31 @@
   Menu
 </a>
 
-<!-- Everything in here is collapsed at 940px or less -->
-<ul class="nav">
+<ul class="nav" style="margin-right:0">
   <!-- TODO Meanings dropdown -->
-  <li><%= link_to "Meanings", meanings_path %></li>
+  <li data-controller="meanings"><%= link_to "Meanings", meanings_path %></li>
 	<li class="divider-vertical"></li>
 
   <!-- Language dropdown -->
-  <li class="dropdown" id="language_dropdown">
-      <a class="dropdown-toggle" title="select a language" data-toggle="dropdown">
-        <%= @language ? @language.to_s : "Languages" %>
-        <b class="caret"></b>
-      </a>
-      <ul class="dropdown-menu">
-        <li><%= link_to "Show all", languages_path, :class => "em" %></li>
-        <li class="divider"></li>
-  	    <!-- <li><a> for every Language here: -->
-        <%= li_wrapped_links_to_same_controller_all_languages %>
-      </ul>
+  <li class="dropdown" id="language_dropdown" data-controller="languages" rel="tooltip">
+	  <a class="dropdown-toggle" data-toggle="dropdown">
+	    <%= @language ? @language.to_s : "Languages" %>
+	    <b class="caret"></b>
+	  </a>
+	  <ul class="dropdown-menu">
+	    <li><%= link_to "Show all", languages_path, :class => "em" %></li>
+	    <li class="divider"></li>
+	   <!-- <li><a> for every Language here: -->
+	    <%= li_wrapped_links_to_same_controller_all_languages %>
+	  </ul>
   </li>
 
 </ul>
 
 <div class="nav-collapse">
+	<!-- Everything in here is collapsed at 940px or less -->
   <ul class="nav">
-
-    <% if @language %>
-      <li><%= link_to "Verbs",         language_verbs_path(@language) %></li>
-      <li><%= link_to "Coding frames", language_coding_frames_path(@language) %></li>
-      <li><%= link_to "Alternations",  language_alternations_path(@language) %></li>
-      <li><%= link_to "Examples",      language_examples_path(@language) %></li>
-
-    <% end %>
+		<%= li_wrapped_nav_links_to_controllers %w|verbs coding_frames alternations examples| %>
   </ul>
 </div>
 

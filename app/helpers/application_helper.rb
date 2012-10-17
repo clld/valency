@@ -14,7 +14,18 @@ module ApplicationHelper
         end
       end
     end.join("\n").html_safe
-    
+  end
+  
+  def li_wrapped_nav_links_to_controllers controller_names
+    css_class = "disabled" if @language.nil?
+    controller_names.map do |c_name|
+      link_href = send('language_' << c_name << '_path', @language) if @language
+      capture do
+        content_tag(:li, :class => css_class, 'data-controller' => c_name) do
+          link_to c_name.humanize, link_href
+        end
+      end
+    end.join("\n").html_safe
   end
   
 end

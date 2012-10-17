@@ -6,7 +6,16 @@
 .navbar {
 	.brand, .nav > li > a {
 		text-shadow:none;
-	}	
+	}
+	.divider-vertical { margin:0; }
+	.nav > .disabled > a {
+		&:hover { // disable hover effects
+			color: $navbarLinkColor;
+		  text-decoration: none;
+		  background-color: transparent;
+		  cursor: default;
+		}
+	}
 }
 .nav-collapse {
 	.nav > li > a, .dropdown-menu a {
@@ -29,7 +38,7 @@ div.new.row {
 }
 
 // Headings
-h3 {
+h1, h2, h3 {
 	color:$vt;
 }
 
