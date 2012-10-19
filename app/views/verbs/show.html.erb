@@ -168,26 +168,26 @@
 </div>
 
 <div class="row new">
-	<div class="span12">
+	<!-- ALTERNATIONS --><div class="span12">
 		<% avs = @verb.alternation_values %>
 		<% comments = @verb.av_comments? %>
 		<h3 class="pull-left">
 		  Alternations
 		</h3>
-		<div class="inline" style="position:relative;left:2em;top:4px">
-      <form class="form-inline" style="color:#777">
-        <% if comments %>
-          <label class="checkbox">
-            <input type="checkbox" class="toggle_dt_column" data-index="2" checked="true">
-            Comment
-          </label>
-        <% end %>
-          &nbsp; &nbsp;
-          <label class="checkbox">
-            <input type="checkbox" class="toggle_dt_column" data-index="3" checked="true">Coded/Uncoded
-          </label>
-      </form>
-    </div>
+
+		<form class="form-inline pull-left">
+		  <% if comments %>
+		    <label class="checkbox">
+		      <input type="checkbox" class="toggle_dt_column" data-index="2" checked="true">
+		      Comment
+		    </label>
+		  <% end %>
+	    &nbsp; &nbsp;
+	    <label class="checkbox">
+	      <input type="checkbox" class="toggle_dt_column" data-index="3" checked="true">Coded/Uncoded
+	    </label>
+		</form>
+		<div class="row"><div class="span12">
 		<table id="alternation_values_list" class="table dataTable table-striped table-bordered">
 		  <thead>
 		  	<tr>
@@ -239,5 +239,7 @@
 		</tr>
 		<% end %>
 		</tbody>
+		</table>
+		</div></div>
 	</div>
 </div>

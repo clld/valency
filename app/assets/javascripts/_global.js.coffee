@@ -26,7 +26,6 @@
 			title:     'Please choose a language'
 			trigger:   'manual'
 		$("header .nav .disabled").click =>
-			console.log("line 29")
 			@language_dropdown.tooltip('show').mouseenter =>
 				@language_dropdown.tooltip('hide')
 			window.setTimeout( =>
