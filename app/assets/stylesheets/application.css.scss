@@ -20,20 +20,3 @@
 
 @import "global"; /* for all contexts */
 
-.toggle-next { /* a button to toggle an optional box such as a comment */
-	position:relative;
-	top:22px;
-	margin:0 2em;
-}
-
-.comment { // a div with a p.box inside
-	position:relative;
-	clear:both;
-	width:auto;
-	.box {
-		background-color:lightyellow;
-		padding:10px;
-		border:1px dotted gray;	
-	}
-}
-

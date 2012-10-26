@@ -2,42 +2,49 @@
 <p id="notice"><%= notice %></p>
 
 <h1>
-	<%= @language %>
-	<%= "(#{@language.variety})" unless @language.variety.nil? %>
-	<small>
-		<strong>ISO code:</strong>
-		<%= @language.iso_code %>
-	</small>
+  <%= @language %>
+  <% if @iso_code %>
+    <a title="ISO code" href="http://www.glottolog.org/glottolog/?iso=<%= @iso_code %>" 
+       class="label"><%= @iso_code %></a>
+  <% end %>
 </h1>
 <div class="row">
 	<div class="span6">
-		<% if @language.family %>
-			<p>
-			  <b>Family:</b>
-			  <%= @language.family %>
-			</p>
-		<% end %>
+    <table class="table table-condensed table-hover" id="language_metadata">
+      <% if @language.variety %>
+        <tr>
+          <th>Variety</th>
+          <td><%= @language.variety %></td>
+        </tr>
+      <% end %>
+      <% if @language.family %>
+        <tr>
+          <th>Family</th>
+          <td><%= @language.family %></td>
+        </tr>
+      <% end %>
+      <% if @language.continent %>
+        <tr>
+          <th>Region</th>
+          <td><%= @language.continent %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 
-		<% if @language.continent %>
-			<p>
-			  <b>Geographical region:</b>
-			  <%= @language.continent %>
-			</p>
-		<% end %>
-	</div>
-	<div class="span6"><div class="todo">
-		<strong>To Do:</strong> display Contributor information
-	</div></div>
+  <div class="span6"><div class="todo">
+    <strong>To Do:</strong> display Contributor information
+  </div></div>
 </div>
 
 <div class="row new">
-	<div class="span12">
-		<h3 id="data-list">Data</h3>
-			<%= link_to "#{@language.verbs.count} Verbs", language_verbs_path(@language), :class =>"btn btn-large btn-info" %>
-			<%= link_to "#{@language.coding_frames.count} Coding Frames", language_coding_frames_path(@language), :class =>"btn btn-large" %>
-			<%= link_to "#{@language.alternations.count} Alternations", language_alternations_path(@language), :class =>"btn btn-large" %>
-			<%= link_to "#{@language.examples.count} Glossed Examples", language_examples_path(@language), :class =>"btn btn-large" %>
-	</div>
+  <div class="span12">
+    <h3 id="data-list">Data</h3>
+    <%= link_to "#{@language.verbs.count} Verbs", language_verbs_path(@language), :class =>"btn btn-large btn-info" %>
+    <%= link_to "#{@language.coding_frames.count} Coding Frames", language_coding_frames_path(@language), :class =>"btn btn-large" %>
+    <%= link_to "#{@language.alternations.count} Alternations", language_alternations_path(@language), :class =>"btn btn-large" %>
+    <%= link_to "#{@language.examples.count} Glossed Examples", language_examples_path(@language), :class =>"btn btn-large" %>
+  </div>
 </div>
 
 <div class="row new">

@@ -1,6 +1,6 @@
 <!-- Verbs index -->
 <h1>
-  Verb forms
+  Verbs
   <small>of <%= link_to @language.name, @language %></small>
 </h1>
 
@@ -8,7 +8,7 @@
   <thead>
   	<tr>
 
-	    <th>Verb form</th>
+	    <th>Verb</th>
 
       <% if @orig_script %>
         <th>Original script</th>
@@ -35,7 +35,7 @@
     <td><%= meaning_list(verb) %></td>
 
 	  <td><%= link_to(verb.coding_frame.coding_frame_schema,
-					[@language, verb.coding_frame]) if verb.coding_frame? %>
+            [@language, verb.coding_frame]) if verb.coding_frame? %>
 		</td>
 
   </tr>

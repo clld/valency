@@ -23,22 +23,43 @@
 	}
 }
 
-div.new.row {
+// button to toggle the comment below it
+.toggle-next { /* a button to toggle an optional box such as a comment */
+	position:relative;
+	top:22px;
+	margin:0 2em;
+}
+.comment { // a div with a p.box inside
+	position:relative;
+	clear:both;
+	width:auto;
+	.box {
+		background-color:lightyellow;
+		padding:10px;
+		border:1px dotted gray;	
+	}
+}
+
+h1 {
+	.label, .badge, .btn {
+		vertical-align:middle;
+	}
+}
+.new.row {
 	margin-top:14px;
 }
 
-
 // multicolumn dropdown menus with div
-.dropdown-menu { /* hack to allow three columns */
-  div {          /* the divs for the columns */
-	  display:inline-block;
-	  float:left;
+.dropdown-menu {
+  .column { /* the columns are divs */
+		display:inline-block;
+		float:left;
   }
   a { clear:none; }
 }
 
 // Headings
-h1, h2, h3 {
+h2, h3 {
 	color:$vt;
 }
 

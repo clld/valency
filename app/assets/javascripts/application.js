@@ -21,4 +21,5 @@
 //= require dataTables/jquery.dataTables.bootstrap
 //= require dataTables/extras/Scroller
 //= require custom_jquery_plugins
+//= require custom_dataTables_plugins.js
 //= require_tree .

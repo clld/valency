@@ -6,34 +6,39 @@
 
 @VALENCY.global =
 	init: ->
+		# object caching
 		@language_dropdown = $('#language_dropdown')
-		# show language dropdown menu in columns
-		@language_dropdown.find('.dropdown-menu .divider').nextAll().inColumns(3)
-		# setup button to toggle the comment box below it
+		
+		# show language dropdown menu in columns (see custom jQuery plugin)
+		@language_dropdown.find('.dropdown-menu .divider').nextAll().inColumns 3
+		
+		# setup button to toggle the comment box below it – see custom jQuery plugins
 		$('.toggle-next').align_below_and_setup_toggle()
+		
 		# make navbar link for current controller active
-		$("header [data-controller='#{window.VALENCY.controller}']")
-			.addClass "active"
-		# prevent links inside .disabled items from firing; show tooltip instead
-		$('.disabled').add('.disabled a').click (event)->
-			event.preventDefault()
-		@language_dropdown_tooltip() # calls the method of global
+		$("header [data-controller='#{window.VALENCY.controller}']").addClass "active"
+		
+		# prevent .disabled links from firing; show tooltip instead
+		$('.disabled').click (e) -> e.preventDefault()
+		@dropdown_tooltip @language_dropdown # calls the method of global
 	
-	language_dropdown_tooltip: ->
-		@language_dropdown.tooltip
+	# when a .disabled .nav li item is clicked, show a tooltip
+	# on the language dropdown trigger link
+	dropdown_tooltip: ($menu_item) ->
+		$menu_item.tooltip
 			html:      false
 			placement: 'bottom'
 			title:     'Please choose a language'
 			trigger:   'manual'
-		$("header .nav .disabled").click =>
-			@language_dropdown.tooltip('show').mouseenter =>
-				@language_dropdown.tooltip('hide')
+		$menu_item.mouseenter -> $menu_item.tooltip 'hide'
+		$('header .nav .disabled').click =>
+			$menu_item.tooltip 'show'
 			window.setTimeout( =>
-				@language_dropdown.tooltip('hide')
+				$menu_item.tooltip 'hide'
 			, 1200)
 		
-		
 	
+
 
 # @UTIL.init calls these: 
 # @VALENCY.global.init()
