@@ -8,9 +8,11 @@
 	init: ->
 		# object caching
 		@language_dropdown = $('#language_dropdown')
+		@meaning_dropdown  = $('#meaning_dropdown')
 		
-		# show language dropdown menu in columns (see custom jQuery plugin)
+		# show dropdown menus in columns (see custom jQuery plugin)
 		@language_dropdown.find('.dropdown-menu .divider').nextAll().inColumns 3
+		@meaning_dropdown.find( '.dropdown-menu .divider').nextAll().inColumns 5
 		
 		# setup button to toggle the comment box below it – see custom jQuery plugins
 		$('.toggle-next').align_below_and_setup_toggle()

@@ -1,27 +1,50 @@
 <!-- navigation partial -->
-<!-- this will get rendered in the top navbar of the Bootstrap layout -->
+<!-- this is rendered in the top navbar -->
 <%= link_to "Valency", root_path, :class => 'brand' %>
 
 <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-  <!-- <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> -->
   Menu
 </a>
 
 <ul class="nav" style="margin-right:0">
-  <!-- TODO Meanings dropdown -->
-  <li data-controller="meanings"><%= link_to "Meanings", meanings_path %></li>
+  <!-- Meanings dropdown -->
+  <li class="dropdown" id="meaning_dropdown" data-controller="meanings">
+		<a class="dropdown-toggle" data-toggle="dropdown">
+			<%= @meaning ? @meaning.to_s : "Meanings" %>
+			<b class="caret"></b>
+		</a>
+	  <ul class="dropdown-menu clearfix">
+			<div class="pull-left">
+				Showing 70 core meanings
+			</div>
+			<li class="pull-left">
+				<%= link_to "Show all", meanings_path, :class => "em" %>
+			</li>
+			<li class="divider" style="clear:both"></li>
+			<% @meanings_short_list.each do |m| %>
+				<li><%= link_to m, m %></li>
+			<% end %>
+		</ul>
+	</li>
 	<li class="divider-vertical"></li>
 
-  <!-- Language dropdown -->
+  <!-- Languages dropdown -->
   <li class="dropdown" id="language_dropdown" data-controller="languages" rel="tooltip">
 	  <a class="dropdown-toggle" data-toggle="dropdown">
 	    <%= @language ? @language.to_s : "Languages" %>
 	    <b class="caret"></b>
 	  </a>
-	  <ul class="dropdown-menu">
-	    <li><%= link_to "Show all", languages_path, :class => "em" %></li>
-	    <li class="divider"></li>
+	  <ul class="dropdown-menu clearfix">
+			<% if @language && controller_name != "languages" %>
+		    <li class="pull-left">
+					<%= link_to "Overview", @language, :class => "em" %>
+				</li>
+			<% end %>
+	    <li class="pull-left">
+				<%= link_to "All languages", languages_path, :class => "em" %>
+			</li>		
+	    <li class="divider" style="clear:both"></li>
 	    <%= li_wrapped_links_to_same_controller_all_languages %>
 	  </ul>
   </li>

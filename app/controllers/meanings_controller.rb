@@ -13,7 +13,8 @@ class MeaningsController < ApplicationController
   # GET /meanings/1
   # GET /meanings/1.json
   def show
-    @meaning = Meaning.find_by_label_for_url!(params[:id]) # remove the bang in production
+    # TODO remove the bang in production
+    @meaning = Meaning.find_by_label_for_url!(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

@@ -58,7 +58,9 @@ h1 {
 		display:inline-block;
 		float:left;
   }
-  a { clear:none; }
+	li:not(.divider) {
+		display:block;
+	}
 }
 
 // Headings

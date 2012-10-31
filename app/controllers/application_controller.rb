@@ -1,10 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :get_languages
+  before_filter :global_queries
   
-  # necessary for language dropdown as well as others
-  def get_languages
+  # necessary for languages dropdown,
+  # meanings dropdown and more
+  def global_queries
     @languages ||= Language.all
+    @meanings_short_list ||= Meaning.where(meaning_list: "Core list")
   end
+  
+  
 
 end

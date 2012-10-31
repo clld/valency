@@ -5,6 +5,8 @@ class Meaning < ActiveRecord::Base
   has_many :microroles
   has_and_belongs_to_many :verbs
 
+  default_scope order(:label)
+  
   def to_s
     label
   end
