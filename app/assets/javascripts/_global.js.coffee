@@ -7,8 +7,8 @@
 @VALENCY.global =
 	init: ->
 		# object caching
-		@language_dropdown = $('#language_dropdown')
-		@meaning_dropdown  = $('#meaning_dropdown')
+		@language_dropdown or= $('#language_dropdown')
+		@meaning_dropdown  or= $('#meaning_dropdown')
 		
 		# show dropdown menus in columns (see custom jQuery plugin)
 		@language_dropdown.find('.dropdown-menu .divider').nextAll().inColumns 3

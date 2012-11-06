@@ -15,8 +15,8 @@
 			<b class="caret"></b>
 		</a>
 	  <ul class="dropdown-menu clearfix">
-			<div class="pull-left">
-				Showing 70 core meanings
+			<div class="pull-left disabled">
+				<a>Showing 70 core meanings</a>
 			</div>
 			<li class="pull-left">
 				<%= link_to "Show all", meanings_path, :class => "em" %>
@@ -38,7 +38,7 @@
 	  <ul class="dropdown-menu clearfix">
 			<% if @language && controller_name != "languages" %>
 		    <li class="pull-left">
-					<%= link_to "Overview", @language, :class => "em" %>
+					<%= link_to "Overview", @language, :class => "em", :title => @language.name %>
 				</li>
 			<% end %>
 	    <li class="pull-left">
