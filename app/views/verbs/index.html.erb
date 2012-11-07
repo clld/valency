@@ -6,19 +6,14 @@
 
 <table id="verbs_list" class="table table-striped table-bordered dataTable">
   <thead>
-  	<tr>
-
-	    <th>Verb</th>
-
+    <tr>
+      <th>Verb</th>
       <% if @orig_script %>
         <th>Original script</th>
       <% end %>
-
-  		<th>Meanings</th>
-
-	    <th>Coding frame</th>
-
-  	</tr>
+      <th>Meanings</th>
+      <th>Coding frame</th>
+    </tr>
   </thead>
 <tbody>
 <% @verbs.each do |verb| %>

@@ -61,7 +61,6 @@ oDTSettings =
 	show: ->
 		@setup_reveal_below()
 		altn_values_dt = $('#alternation_values_list').dataTable oDTSettings
-		altn_values_dt.mytest();
 	
 	setup_reveal_below: ->
 		$('div.reveal-me').hide()
