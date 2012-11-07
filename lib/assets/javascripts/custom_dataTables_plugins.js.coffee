@@ -3,6 +3,13 @@
 # written in CoffeeScript
 # requires DataTables v 1.9.2
 ###
+
+# this is a necessary closure, used in the sortEmptyLast plugin
+makeDataPropFunctionFor = (iCol) ->
+	(src, type, val) ->
+		if type is 'sort' then (src[iCol] or 'zzz') else
+			if type is 'set' then src[iCol] = val else src[iCol]
+
 (($) ->
 	api = $.fn.dataTableExt.oApi # namespace
 	################## utility methods #################################
@@ -19,6 +26,14 @@
 				return i if col.sTitle.toLowerCase() is mCol
 		undefined
 	
+	api.sortEmptyLast = (oSettings, cols...) ->
+		for col in cols
+			iCol     = @getColumnIndex(col)
+			oColOpts = 
+				mDataProp: makeDataPropFunctionFor iCol
+			# call the internal api method to update column options
+			oSettings.oApi._fnColumnOptions( oSettings, iCol, oColOpts )
+	
 	api.filterColumn = (oSettings, mCol, sTerm, bRegex=true) ->
 		true
 	
@@ -28,21 +43,25 @@
 		mCol = @getColumnIndex(mCol)
 		@fnSetColumnVis mCol, false if mCol?
 	
-	# show a column by index or title
-	api.showColumn = (oS, mCol) ->
-		mCol = @getColumnIndex(mCol)
-		@fnSetColumnVis mCol, true if mCol?
+	# hide several columns
+	api.hideColumns = (oS, cols...) ->
+		@hideColumn @getColumnIndex mCol for mCol in cols
 	
 	# toggle visibility of a column by index or title
 	api.toggleColumn = (oS, mCol) ->
 		mCol = @getColumnIndex(mCol)
 		@fnSetColumnVis(mCol, not oS.aoColumns[mCol].bVisible) if mCol?
 	
+	# show a column by index or title
+	api.showColumn = (oS, mCol) ->
+		mCol = @getColumnIndex(mCol)
+		@fnSetColumnVis mCol, true if mCol?
+	
 	# if amCols is undefined or equals "all": show all columns
 	# @param amCols (optional): array of column indexes or titles (can be mixed)
 	api.showColumns = (oSettings, amCols = "all") ->
 		if amCols is "all"
-			@fnSetColumnVis(mCol, true) for mCol in [0 ... oSettings.aoColumns.length]
+			@fnSetColumnVis(i, true) for mCol, i in oSettings.aoColumns
 		else
 			@showColumn mCol for mCol in amCols
 	
