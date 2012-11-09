@@ -64,10 +64,18 @@ form.with-h3 {
 .dt-filters {
 	background-color:$grayLighter;
 	padding:5px;
-	@include border-radius(3px); 
+	@include border-radius(3px);
+
+	.btn-label {
+		display:inline-block;
+		line-height:22px; // same as outerHeight of .btn-mini
+		vertical-align:middle;
+		margin-right:5px;
+	}
 	.btn-group {
 		display:inline-block;
 	}
+	
 	.dataTables_filter {
 		display:inline-block;
 		float:right;

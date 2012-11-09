@@ -186,23 +186,26 @@
 
     <div class="row">
       <div class="span12 dt-filters"><!-- filters for dataTable -->
-        Filter by alternation type:
-        <div class="btn-group column-filter" data-toggle="buttons-checkbox" data-column="coded?">
-          <button type="button" class="btn btn-mini">Coded</button>
-          <button type="button" class="btn btn-mini">Uncoded</button>
-        </div>
-        &nbsp; Filter by occurrence:
-        <div class="btn-group column-filter" data-toggle="buttons-checkbox" data-column="occurs">
-          <button type="button" class="btn btn-mini">Regularly</button>
-          <button type="button" class="btn btn-mini">Marginally</button>
-          <button type="button" class="btn btn-mini">Never</button>
-        </div>
-        &nbsp;
-        <a class="btn btn-mini dt-filters-clear">
-          <i class="icon-remove"></i> Clear filters
-        </a>
+
+              <div class="btn-label">Filter by type:</div>
+              <div class="btn-group column-filter" data-toggle="buttons-checkbox" data-column="coded?">
+                <button type="button" class="btn btn-mini">Coded</button>
+                <button type="button" class="btn btn-mini">Uncoded</button>
+              </div>
+            
+              <div class="btn-label">Filter by occurrence:</div>
+              <div class="btn-group column-filter inline" data-toggle="buttons-checkbox" data-column="occurs">
+                <button type="button" class="btn btn-mini">Regularly</button>
+                <button type="button" class="btn btn-mini">Marginally</button>
+                <button type="button" class="btn btn-mini">Never</button>
+              </div>
+              <div class="btn-group">
+                <a class="btn btn-mini dt-filters-clear">
+                  <i class="icon-remove"></i> Clear filters
+                </a>
+              </div>
         
-      </div>
+      </div><!-- end span -->
     </div><!-- end row -->
 
 		<div class="row"><div class="span12">
