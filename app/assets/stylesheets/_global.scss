@@ -24,10 +24,10 @@
 }
 
 // button to toggle the comment below it
-.toggle-next { /* a button to toggle an optional box such as a comment */
+.btn-mini.with-h1{ // button to be aligned with h1
 	position:relative;
 	top:22px;
-	margin:0 2em;
+	margin:0 2em;	
 }
 .comment { // a div with a p.box inside
 	position:relative;
@@ -51,6 +51,30 @@ h1 {
 .new.row {
 	margin-top:14px;
 }
+
+
+// alignment
+form.with-h3 {
+	display:inline-block;
+	line-height:40px;
+	margin:8px 0 0 1em;
+}
+
+// dataTable filters: buttons/btn-grouos to toggle column filters
+.dt-filters {
+	background-color:$grayLighter;
+	padding:5px;
+	@include border-radius(3px); 
+	.btn-group {
+		display:inline-block;
+	}
+	.dataTables_filter {
+		display:inline-block;
+		float:right;
+		height:30px;
+	}
+} 
+
 
 // multicolumn dropdown menus with div
 .dropdown-menu {

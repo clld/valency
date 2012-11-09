@@ -10,6 +10,7 @@ table.dataTable thead {
 	th {
 		color:$vt;
 		padding-left:1.8em;
+		@include transition(background-color .3s ease);
 	}
 	
 	.sorting, .sorting_asc, .sorting_desc, .sorting_asc_disabled, .sorting_desc_disabled {

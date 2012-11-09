@@ -34,36 +34,58 @@ makeDataPropFunctionFor = (iCol) ->
 			# call the internal api method to update column options
 			oSettings.oApi._fnColumnOptions( oSettings, iCol, oColOpts )
 	
+	# filter a column by a regex pattern such as "this|that"
+	# @param mCol column index or title
+	# to reset all filters, use API plugin method fnFilterClear
 	api.filterColumn = (oSettings, mCol, sTerm, bRegex=true) ->
-		true
+		mCol = @getColumnIndex(mCol)
+		if mCol?
+			@fnFilter sTerm, mCol, bRegex
+			true
 	
 	################## showing and hiding columns ######################
 	# hide a column by index or title
 	api.hideColumn = (oS, mCol) ->
 		mCol = @getColumnIndex(mCol)
-		@fnSetColumnVis mCol, false if mCol?
+		if mCol?
+			@fnSetColumnVis mCol, false
+			false # return column's new visibility
+	
+	# show a column by index or title
+	api.showColumn = (oSettings, mCol, withflash = true) ->
+		mCol = @getColumnIndex(mCol)
+		if mCol?
+			@fnSetColumnVis mCol, true
+			$(oSettings.aoColumns[mCol].nTh).flash?() if withflash
+			true # return column's new visibility
 	
 	# hide several columns
 	api.hideColumns = (oS, cols...) ->
 		@hideColumn @getColumnIndex mCol for mCol in cols
 	
 	# toggle visibility of a column by index or title
-	api.toggleColumn = (oS, mCol) ->
+	api.toggleColumn = (oSettings, mCol, withflash = true) ->
 		mCol = @getColumnIndex(mCol)
-		@fnSetColumnVis(mCol, not oS.aoColumns[mCol].bVisible) if mCol?
-	
-	# show a column by index or title
-	api.showColumn = (oS, mCol) ->
-		mCol = @getColumnIndex(mCol)
-		@fnSetColumnVis mCol, true if mCol?
+		if mCol?
+			visible = oSettings.aoColumns[mCol].bVisible
+			if visible
+				@hideColumn(mCol)
+			else
+				@showColumn(mCol, withflash)
 	
 	# if amCols is undefined or equals "all": show all columns
 	# @param amCols (optional): array of column indexes or titles (can be mixed)
 	api.showColumns = (oSettings, amCols = "all") ->
 		if amCols is "all"
 			@fnSetColumnVis(i, true) for mCol, i in oSettings.aoColumns
+			true for i in oSettings.aoColumns
 		else
 			@showColumn mCol for mCol in amCols
+	
+	# @param mCol: column index or title
+	api.isVisible = (oSettings, mCol) ->
+		mCol = @getColumnIndex(mCol)
+		oSettings.aoColumns[mCol].bVisible if mCol?
 	
 #################################################
 )(jQuery)

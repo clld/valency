@@ -8,7 +8,7 @@
     	<% end %>
     </h1>
     <% if @verb.comment %>
-      <a class="btn btn-mini toggle-next">show comment</a>
+      <a class="btn btn-mini toggle-next with-h1">show comment</a>
       <div class="comment"><p class="box"><%= raw @verb.comment %></p></div>
     <% end %>
 	</div>
@@ -168,74 +168,96 @@
 </div>
 
 <div class="row new">
-	<!-- ALTERNATIONS --><div class="span12">
-		<% avs = @verb.alternation_values %>
-		<% comments = @verb.av_comments? %>
-		<h3 class="pull-left">
-		  Alternations
-		</h3>
+	<!-- Alternations --><div class="span12">
+	  <% avs = @verb.alternation_values %>
+    <h3 class="pull-left">
+      Alternations
+    </h3>
+    <form class="pull-left with-h3">
+      <label class="checkbox inline"> also show: </label>
+      <label class="checkbox inline">
+        <input type="checkbox" class="toggle-dt-column" data-column="comment">
+        Comments
+      </label>
+      <label class="checkbox inline">
+        <input type="checkbox" class="toggle-dt-column" data-column="derived coding frame"> Derived Coding frames
+      </label>
+  	</form>        
 
-		<form class="form-inline pull-left">
-		  <% if comments %>
-		    <label class="checkbox">
-		      <input type="checkbox" class="toggle_dt_column" data-index="2" checked="true">
-		      Comment
-		    </label>
-		  <% end %>
-	    &nbsp; &nbsp;
-	    <label class="checkbox">
-	      <input type="checkbox" class="toggle_dt_column" data-index="3" checked="true">Coded/Uncoded
-	    </label>
-		</form>
+    <div class="row">
+      <div class="span12 dt-filters"><!-- filters for dataTable -->
+        Filter by alternation type:
+        <div class="btn-group column-filter" data-toggle="buttons-checkbox" data-column="coded?">
+          <button type="button" class="btn btn-mini">Coded</button>
+          <button type="button" class="btn btn-mini">Uncoded</button>
+        </div>
+        &nbsp; Filter by occurrence:
+        <div class="btn-group column-filter" data-toggle="buttons-checkbox" data-column="occurs">
+          <button type="button" class="btn btn-mini">Regularly</button>
+          <button type="button" class="btn btn-mini">Marginally</button>
+          <button type="button" class="btn btn-mini">Never</button>
+        </div>
+        &nbsp;
+        <a class="btn btn-mini dt-filters-clear">
+          <i class="icon-remove"></i> Clear filters
+        </a>
+        
+      </div>
+    </div><!-- end row -->
+
 		<div class="row"><div class="span12">
-		<table id="alternation_values_list" class="table dataTable table-striped table-bordered table-hover">
+		<table id="av_list" class="table dataTable table-striped table-bordered table-hover">
 		  <thead>
 		  	<tr>
           <th>Alternation name</th>
-  				<th>Occurs</th>
-			    <th class="<%= 'empty' unless comments %>">Comment</th>
-  				<th>Coded?</th>
-			    <th>Derived Coding frame</th>
-			    <th>Examples</th>
+          <th>Occurs</th>
+          <th>Comment</th>              <!-- hidden (toggle w/checkbox) -->
+          <th>Coded?</th> <!-- always hidden (for dataTable filtering only) -->
+          <th>Derived Coding frame</th> <!-- hidden (toggle w/checkbox) -->
+          <th>Examples</th>
 		  	</tr>
 		  </thead>
 		<tbody>
 		<% avs.each do |av| %>
 		<% altn, dcf, exs = av.alternation, av.derived_coding_frame, av.examples %>
 		<tr>
-			<td><%= link_to raw(altn), [@language, altn] %></td>
-			<td><%= av.alternation_occurs %></td>
-	    <td><%= raw av.comment %></td>
-			<td><%= coded_uncoded(altn) %></td>
-			<td><%= link_to(dcf, [@language, dcf]) unless dcf.nil? %></td>
-		  <td><% if exs.first %>
-    				<% ex = exs.first %>
-    				<a class="whole-ex block" href="<%= language_example_path(@language, ex) %>">
-    				<div class="pull-left"><%= raw "(#{ex.number})&nbsp;" %></div>
-    				<div class="inline">
-    				  <div class="object-language"><%= ex.primary_text %></div>
-    				  <div><%= "‘#{ex.translation}’" %></div>
-    				</div>
-    				</a>
-  				<% end %>
-  				
-  				<% if exs.size > 1 %>
-  				<% exs.shift %>
-  				<div><a class="btn btn-mini reveal-below">and <%= exs.size %> more…</a></div>
-          <div class="reveal-me">
-  				  <% exs.each do |ex| %>
-    				<a class="whole-ex block" href="<%= language_example_path(@language, ex) %>">
-    				<div class="pull-left"><%= raw "(#{ex.number})&nbsp;" %></div>
-    				<div class="inline">
-    				  <div class="object-language"><%= ex.primary_text %></div>
-    				  <div><%= "‘#{ex.translation}’" %></div>
-    				</div>
-    				</a>
-  				  <% end %>
-          </div>
+			<td>
+        <span class="label" title="<%= altn.coded? ? 'Coded alternation' : 'Uncoded alternation' %>">
+        <%= altn.coded? ? 'C' : 'U' %></span>
+        <%= link_to raw(altn), [@language, altn] %>
+      </td>
+      <td><%= av.alternation_occurs %></td>
+      <td><%= raw av.comment %></td>
+      <td><%= altn.alternation_type %></td>
+      <td><%= link_to(dcf, [@language, dcf]) unless dcf.nil? %></td>
+      <td>
+        <% if exs.first %>
+          <% ex = exs.first %>
+          <a class="whole-ex block" href="<%= language_example_path(@language, ex) %>">
+            <div class="pull-left"><%= raw "(#{ex.number})&nbsp;" %></div>
+            <div class="inline">
+              <div class="object-language"><%= ex.primary_text %></div>
+              <div><%= "‘#{ex.translation}’" %></div>
+            </div>
+          </a>
+        <% end %>
 
-  				<% end %>
-  		</td>
+        <% if exs.size > 1 %>
+          <% exs.shift %>
+          <div><a class="btn btn-mini reveal-below">and <%= exs.size %> more…</a></div>
+          <div class="reveal-me">
+            <% exs.each do |ex| %>
+              <a class="whole-ex block" href="<%= language_example_path(@language, ex) %>">
+                <div class="pull-left"><%= raw "(#{ex.number})&nbsp;" %></div>
+                <div class="inline">
+                  <div class="object-language"><%= ex.primary_text %></div>
+                  <div><%= "‘#{ex.translation}’" %></div>
+                </div>
+              </a>
+            <% end %>
+          </div>
+        <% end %>
+      </td>
 		</tr>
 		<% end %>
 		</tbody>

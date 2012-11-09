@@ -11,4 +11,8 @@ class Alternation < ActiveRecord::Base
     name
   end
   
+  def coded?
+    alternation_type.casecmp("Coded") == 0
+  end
+  
 end

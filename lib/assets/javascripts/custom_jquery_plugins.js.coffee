@@ -59,4 +59,16 @@
 				)
 		this
 	
+	# flash: highlight an element for a split-second
+	# by quickly changing and restoring its background-color
+	$.fn.flash = (color = 'yellow', duration = 300) ->
+		_it      = this # the jQuery object to flash
+		restore  = _it.css('background-color')
+		_it.queue (next)->
+			_it.css('background-color', color); next()
+		.queue (next)->
+			_it.delay(duration); next()
+		.queue (next)->
+			_it.css('background-color', restore); next()
+	
 )(jQuery)
