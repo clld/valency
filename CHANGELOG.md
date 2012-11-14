@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## November 9, 2012
+- **new feature** toggle columns of dataTables on/off
+- column filters on dataTables: per button groups 
+
+
+## October 2012
+**technical improvements**
+- upgraded to Boostrap v2.1.0; refactored stylesheets
+- reorganized JavaScript files for better modularity; translate custom jQuery plugins and custom jQuery datatables plugins to CoffeeScript
+- changed top navbar behaviour w/tooltip for Languages dropdown menu
+- added Meanings dropdown to navbar
 
 
 ## September 21, 2012
