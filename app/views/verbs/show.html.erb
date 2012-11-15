@@ -1,4 +1,8 @@
 <!-- Verb detail -->
+<% meanings = @verb.meanings %>
+<% cframe   = @verb.coding_frame %>
+
+
 <div class="row">
   <div class="span12">
     <h1 class="pull-left">
@@ -16,33 +20,29 @@
 
 <div class="row">
 	<!-- CODING FRAME --><div class="span4">
-	  <% cframe = @verb.coding_frame %>
-		<h3>Coding frame</h3>
-		<%= div_for cframe, :class => 'well bg-cf' do |cf| %>
-			<big><%= link_to cf, [@language, cf] %></big>
-		<% end %>
-		
-    <!-- <% j_av_altn = cframe.verbs.joins(:alternation_values).joins(:alternations) %>
-    <% j_derived_cfs = j_av_altn.joins('INNER JOIN coding_frames ON coding_frames.id = alternation_values.derived_coding_frame_id') %>
-    <% derived_cfs = j_derived_cfs.select('coding_frames.coding_frame_schema as derived_cf').uniq %>
-    <div class="row">
+    <h4>Coding frame</h4>
+    <%= div_for cframe, :class => 'well bg-cf' do |cf| %>
+      <big><%= link_to cf, [@language, cf] %></big>
+    <% end %>
+
+  	<!-- MEANINGS --><div class="row">
       <div class="span4">
-        <p><strong>Derived coding frames:</strong></p>
-        <% derived_cfs.each do |dcf| %>
-          <p><%= dcf.derived_cf %></p>
-        <% end %>
+        <h4>
+          <%= 'Meaning'.pluralize meanings.size %>&nbsp; &nbsp; 
+          <small><%= meaning_list @verb %></small>
+        </h4>
       </div>
-    </div> -->
+    </div>
 
-	</div>
-
+  </div><!-- end of outer span4 -->
+  
   <!-- EXAMPLES --><div class="span8">
   	<% examples = @verb.examples_of_coding_frame %>
   	<% excount  = examples.size %>
-  	<h3><!-- Examples -->
+  	<h4><!-- Examples -->
   		<%= if excount == 0 then raw("<small>no example given</small>") else 'Example'.pluralize(excount) end  %>
   		<small>for the coding frame</small>
-  	</h3>
+  	</h4>
   	<% if example = examples.first %>
   		<%= div_for example, :class=>"row new" do %>
     		<div class="span1">
@@ -100,69 +100,33 @@
 
 </div>
 
-<div class="new row">
+<div class="row">
 
-	<!--  MEANINGS & MRs  --><div class="span4">
-	  <% meanings = @verb.meanings  %>
-	  <% basic_mroles = cframe.microroles.joins(:meaning).where(microroles: {meaning_id: meanings.pluck(:id)}).uniq %>
-		<h3>
-			<%= 'Meaning'.pluralize meanings.size  %>
-			and Microroles
-		</h3>
-		<table class="table table-bordered"><tbody>
-		  <% meanings.each do |meaning| %>
-		    <% basic_mroles_of_meaning = basic_mroles.where(meaning_id: meaning.id) %>
-		    <tr>
-    			<td class="bg-me"><%= link_to meaning, meaning %></td>
-          <td class="bg-mr">
-          
-  				<% basic_mroles_of_meaning.each do |mrole| %>
-  				  <% begin %>
-				      <% idx_no = cframe.coding_frame_index_numbers.joins(:microroles).where(microroles:{id:mrole.id}).first.index_number %>
-				    <% rescue idx_no = nil; end %>
-  					<%= div_for mrole do %>
-  					  <%= raw "#{idx_no}&nbsp; &nbsp;#{mrole}" %>
-  					<% end %>
-  				<% end %>
-			    </td>
-			  </tr>
-		  <% end %>
-		</tbody></table>
-		
-		<% all_mrs = @verb.microroles.uniq %>
-		<% basic_mrs = cframe.microroles.joins(:meaning).where(microroles: {meaning_id: @verb.meanings.pluck(:id)}) %>
-		<% new_mrs = all_mrs - basic_mrs %>
-		<% if new_mrs.size > 0 %>
-			<div class="row new"><div class="span4">
-				<strong>MR of arguments introduced via alternations:</strong>
-				<br><%= new_mrs.map{|x|x.name}.join(', ') %>
-			</div></div>			
-		<% end %>
-		
-	</div>
-	
-	<!-- INDEX# CS ArgTyp --><div class="span5">
-		<h3>
-			Coding sets and Argument types
-		</h3>
-		<% j_argtypes = cframe.coding_frame_index_numbers.joins("LEFT OUTER JOIN argument_types ON coding_frame_index_numbers.argument_type_id = argument_types.id") %>
-		<% j_codsets  = j_argtypes.joins("LEFT OUTER JOIN coding_sets ON coding_frame_index_numbers.coding_set_id = coding_sets.id") %>
-    <% result_set = j_codsets.where(coding_frame_id: cframe.id).select("coding_frame_index_numbers.index_number as i, argument_types.argument_type as at, coding_sets.name as cs").order("index_number") %>
-		<table class="table">
-			<thead>
-				<tr class="bg-cs-darker">
-					<th>#</th> <th>Coding set</th> <th>Argument type</th> 
-				</tr>
-			</thead><tbody>
-			<% result_set.each do |row| %>
-  			<tr class="bg-cs">
-  				<td><%= row.i %></td>
-  				<td><%= row.cs %></td>
-  				<td><%= row.at %></td>
+	<!-- INDEX#, Microroles, Coding sets, Argument types --><div class="span8">
+    <% all_mrs = @verb.microroles.uniq %>
+    <h4>
+      Microroles, Coding sets and Argument types
+    </h4>
+    <% arguments = cframe.index_numbers_eager_load %>
+    <table class="table">
+      <thead>
+        <tr class="bg-cs-darker">
+          <th>#</th>
+          <th>Microroles</th> 
+          <th>Coding set</th>
+          <th>Argument type</th>
         </tr>
-			<% end %>
-		  </tbody>
-		</table>
+      </thead><tbody>
+      <% arguments.each do |cfin| # cfin is for Coding frame index number %>
+        <tr class="bg-cs">
+          <td><%= cfin.index_number %></td>
+          <td><%= microrole_list( cfin.microroles.where_meaning meanings ) %></td>
+          <td><%= cfin.coding_set %></td>
+          <td><%= cfin.argument_type %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
 
 </div>
@@ -170,10 +134,8 @@
 <div class="row new">
 	<!-- Alternations --><div class="span12">
 	  <% avs = @verb.alternation_values %>
-    <h3 class="pull-left">
-      Alternations
-    </h3>
-    <form class="pull-left with-h3">
+    <h4 class="pull-left">Alternations</h4>
+    <form class="pull-left with-h4">
       <label class="checkbox inline"> also show: </label>
       <label class="checkbox inline">
         <input type="checkbox" class="toggle-dt-column" data-column="comment">
@@ -186,26 +148,24 @@
 
     <div class="row">
       <div class="span12 dt-filters"><!-- filters for dataTable -->
-
-              <div class="btn-label">Filter by type:</div>
-              <div class="btn-group column-filter" data-toggle="buttons-checkbox" data-column="coded?">
-                <button type="button" class="btn btn-mini">Coded</button>
-                <button type="button" class="btn btn-mini">Uncoded</button>
-              </div>
-            
-              <div class="btn-label">Filter by occurrence:</div>
-              <div class="btn-group column-filter inline" data-toggle="buttons-checkbox" data-column="occurs">
-                <button type="button" class="btn btn-mini">Regularly</button>
-                <button type="button" class="btn btn-mini">Marginally</button>
-                <button type="button" class="btn btn-mini">Never</button>
-              </div>
-              <div class="btn-group">
-                <a class="btn btn-mini dt-filters-clear">
-                  <i class="icon-remove"></i> Clear filters
-                </a>
-              </div>
-        
-      </div><!-- end span -->
+        <div class="btn-label">Filter by type:</div>
+        <div class="btn-group column-filter" data-toggle="buttons-checkbox" data-column="coded?">
+          <button type="button" class="btn btn-mini">Coded</button>
+          <button type="button" class="btn btn-mini">Uncoded</button>
+        </div>
+      
+        <div class="btn-label">Filter by occurrence:</div>
+        <div class="btn-group column-filter inline" data-toggle="buttons-checkbox" data-column="occurs">
+          <button type="button" class="btn btn-mini">Regularly</button>
+          <button type="button" class="btn btn-mini">Marginally</button>
+          <button type="button" class="btn btn-mini">Never</button>
+        </div>
+        <div class="btn-group">
+          <a class="btn btn-mini dt-filters-clear">
+            <i class="icon-remove"></i> Clear filters
+          </a>
+        </div>
+      </div><!-- end span12 -->
     </div><!-- end row -->
 
 		<div class="row"><div class="span12">

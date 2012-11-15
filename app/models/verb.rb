@@ -36,5 +36,16 @@ class Verb < ActiveRecord::Base
   def av_comments?
     self.alternation_values.any?{|av| av.comment}
   end
+
+  # alias to get the coding frame
+  def cframe
+    self.coding_frame
+  end
+  
+  # get new microroles introduced by alternations (w/o using those alternations)
+  def derived_microroles
+    self.microroles.uniq - self.coding_frame.basic_microroles(self.meanings)
+  end
+  
   
 end

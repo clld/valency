@@ -28,4 +28,20 @@ class CodingFrame < ActiveRecord::Base
     cfs = self[:coding_frame_schema]
     cfs unless (cfs && cfs.match(/replace me/i))
   end
+  
+  # get basic Microroles of this Coding frame
+  # for a given set of Meanings
+  def basic_microroles meanings
+    self.microroles.joins(:meaning).where_meaning(meanings).uniq
+  end
+  
+  # get a join association including Coding frame index numbers,
+  # Microroles, Coding sets, and Argument types for this CF
+  # @args meanings – set of meanings to limit microroles to
+  def index_numbers_eager_load
+    self.coding_frame_index_numbers.includes(
+      :argument_type, :coding_set, :microroles
+    )
+  end
+
 end

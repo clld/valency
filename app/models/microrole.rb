@@ -1,6 +1,14 @@
 class Microrole < ActiveRecord::Base
   self.primary_key = :id
   # attr_accessible :id, :name, :name_for_url, :original_or_new, :role_letter, :meaning_id
+  default_scope joins(:meaning).order("meanings.label")
+  
+  filter_by_meanings = lambda do |m|
+    meaning_ids = if m.respond_to? :pluck then m.pluck(:id) else m.id end
+    where meaning_id: meaning_ids
+  end
+  
+  scope :where_meaning, filter_by_meanings
 
   belongs_to :meaning
 

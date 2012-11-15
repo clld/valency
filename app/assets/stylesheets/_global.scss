@@ -54,10 +54,17 @@ h1 {
 
 
 // alignment
-form.with-h3 {
-	display:inline-block;
-	line-height:40px;
-	margin:8px 0 0 1em;
+form {
+	&.with-h3 {
+		display:inline-block;
+		line-height:40px;
+		margin:8px 0 0 1em;
+	}
+	&.with-h4 {
+		display:inline-block;
+		line-height:20px;
+		margin:6px 0 0 1em;
+	}
 }
 
 // dataTable filters: buttons/btn-grouos to toggle column filters
@@ -96,7 +103,7 @@ form.with-h3 {
 }
 
 // Headings
-h2, h3 {
+h2, h3, h4 {
 	color:$vt;
 }
 
