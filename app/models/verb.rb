@@ -47,5 +47,9 @@ class Verb < ActiveRecord::Base
     self.microroles.uniq - self.coding_frame.basic_microroles(self.meanings)
   end
   
+  # get number of meanings
+  def meanings_count
+    self.meanings.count
+  end
   
 end
