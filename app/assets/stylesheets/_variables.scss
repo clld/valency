@@ -3,12 +3,12 @@
 */
 
 /********** color variables **********/
-/* vt is for "valency turquoise" */
+/* vt is for "valency teal" */
 $vt: #5299a3;
 
 /* navbar settings */
-$navbarBackground:				  darken($vt, 10%);
-$navbarBackgroundHighlight: lighten($vt, 10%);
+$navbarBackground:					darken($vt, 10%);
+$navbarBackgroundHighlight:	lighten($vt, 10%);
 $navbarLinkColor:						#efefef;
 $navbarLinkColorHover:			lighten($navbarLinkColor, 10%);
 $navbarLinkBackgroundHover:	$vt;
@@ -20,8 +20,15 @@ $linkColor:      #333; /* equals $grayDark */
 $linkColorHover: darken($vt, 10%);
 
 /* dropdown links */
-$dropdownLinkBackgroundHover: $vt;
+$dropdownLinkBackgroundHover:  $vt;
 $dropdownLinkBackgroundActive: $dropdownLinkBackgroundHover;
 
-$bg-me:#cff;    /* background for meanings */	
-$bg-cs:#ffffb3; /* background for coding sets */
+$bg-me: #cff;    /* background for meanings */	
+$bg-mr: lighten($bg-me, 6%); /* background for microroles */	
+$bg-cf: #ffe6cc; /* background for coding frames */
+$bg-cs: #ffffcc; /* background for coding sets */
+$bg-cs-darker: saturate($bg-cs, 10%); /* background for coding sets (column headers) */
+
+/* colors for dataTables */
+$tableHeaderBackground: 				#fefefe;
+$tableHeaderBackgroundHighlight:#dedede;

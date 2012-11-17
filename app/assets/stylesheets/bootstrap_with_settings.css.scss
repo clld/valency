@@ -3,11 +3,4 @@
 body { padding-top: $navbarHeight; } /* leave room for the top nav bar */
 @import "bootstrap-responsive"; /* react to smaller screen sizes */
 
-/* classes for colors */
-.bg-cf { background-color:#fee4c3; }
-.bg-me { background-color:$bg-me; }
-.bg-mr { background-color:lighten($bg-me,6%); }
-.bg-cs { background-color:lighten($bg-cs,6%); }
-.bg-cs-darker{ background-color:darken($bg-cs,10%); }
-.todo  { border:1px dashed $grayLight; }
-
+/* custom mixins */

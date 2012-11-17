@@ -1,6 +1,21 @@
 /*** styles for verbs layouts ***/
 
 // styles for the coding frame index number info table
-th.meaning {
-	width: 7em; // don't let microrole columns get too wide
+td, th {
+	&.digit {
+		width: 1em;
+		text-align: center;
+	}
+}
+
+td {
+	&.bg-mr {
+		width: 8em; // don't let microrole columns get too wide
+	}
+}
+
+th {
+	&.bg-cs {
+		background-color: $bg-cs-darker;
+	}
 }

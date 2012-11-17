@@ -90,6 +90,14 @@ form {
 	}
 } 
 
+// padded box for prominent info
+.padded-box { // based on Bootstrap's .well class
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 10px;
+  border: 1px solid darken($wellBackground, 7%);
+  // @include box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
+}
 
 // multicolumn dropdown menus with div
 .dropdown-menu {
@@ -128,10 +136,40 @@ span.sc { // small caps
 }
 .em { font-style:italic; }
 
+/* utility classes: colors */
+.bg-me { background-color:$bg-me; }
+.bg-mr { background-color:$bg-mr; }
+.bg-cf { background-color:$bg-cf; }
+.bg-cs { background-color:lighten($bg-cs,6%); }
+.bg-gray { background-color:$grayLighter; }
+
 // utility classes: other properties
 div.inline{
 	display:inline-block;
 }
 a.block{
 	display:block;
+}
+.cell {
+	display: table-cell;
+}
+
+// bordered table with sharp corners
+table.table-bordered-sharp {
+	border: 1px solid $tableBorder;
+	th, td {
+    border-left: 1px solid $tableBorder;
+  }
+	// Prevent double borders – copied from Bootstrap's .table-bordered class
+  caption + thead tr:first-child th,
+  caption + tbody tr:first-child th,
+  caption + tbody tr:first-child td,
+  colgroup + thead tr:first-child th,
+  colgroup + tbody tr:first-child th,
+  colgroup + tbody tr:first-child td,
+  thead:first-child tr:first-child th,
+  tbody:first-child tr:first-child th,
+  tbody:first-child tr:first-child td {
+    border-top: 0;
+  }
 }
