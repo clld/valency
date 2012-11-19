@@ -7,6 +7,6 @@ class Example < ActiveRecord::Base
   belongs_to :person
 
   has_and_belongs_to_many :alternation_values
-  has_and_belongs_to_many :verbs
+  has_and_belongs_to_many :verbs  
   
 end

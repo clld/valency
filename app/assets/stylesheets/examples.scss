@@ -1,0 +1,13 @@
+
+.example {
+	& + .example {
+		margin-top:1em;
+	}
+
+}
+.example-number, .example-body {
+	display:table-cell;
+}
+.example-number {
+	min-width:4em;
+}

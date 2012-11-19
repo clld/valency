@@ -141,7 +141,6 @@ span.sc { // small caps
 .bg-mr { background-color:$bg-mr; }
 .bg-cf { background-color:$bg-cf; }
 .bg-cs { background-color:lighten($bg-cs,6%); }
-.bg-gray { background-color:$grayLighter; }
 
 // utility classes: other properties
 div.inline{
@@ -152,6 +151,9 @@ a.block{
 }
 .cell {
 	display: table-cell;
+	&:first-child {
+		padding-right:5px;
+	}
 }
 
 // bordered table with sharp corners

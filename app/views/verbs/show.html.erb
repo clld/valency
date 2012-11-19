@@ -28,65 +28,13 @@
   </div><!-- end of span4 -->
   
   <!-- EXAMPLES --><div class="span8">
-  	<% examples = @verb.examples_of_coding_frame %>
-  	<% excount  = examples.size %>
-  	<h4><!-- Examples -->
-  		<%= if excount == 0 then raw("<small>no example given</small>") else 'Example'.pluralize(excount) end  %>
-  		<small>for the coding frame</small>
+  	<h4>
+  		<%= 'Example'.pluralize @excount if @excount > 0 %>
+			<small>
+				<%= @excount > 0 ? "for the coding frame" : "no example given" %>
+			</small>
   	</h4>
-  	<% if example = examples.first %>
-  		<%= div_for example, :class=>"row new" do %>
-    		<div class="span1">
-    			<%= link_to "(#{example.number})", [@language, example],
-    			:title=>"View details for example #{example.number}" %>
-    		</div>
-    		<div class="span7">
-    			<div class="row object-language"><%= example.primary_text %></div>
-    			<div class="row">
-    				<% at_pieces = example.analyzed_text.split().map!{|s| html_escape(s)} %>
-    				<% gl_pieces = example.gloss.split().map!{|s| html_escape(s).gsub(/[A-Z]+/){|caps| '<span class="sc">'<<caps<<'</span>'} } %>
-    				<% glosses = at_pieces.zip(gl_pieces).map!{|pair| pair.join('<br/>')} %>
-    				<% glosses.each do |gloss| %>
-    				  <div class="gloss-unit"><%= raw gloss %></div>
-    				<% end %>
-    			</div>
-    			<div class="row"><%= "‘#{example.translation}’" %></div>
-    		</div>
-  		<% end %>
-  	<% end %>
-  	
-  	<% if excount > 1 %>
-
-  	  <% examples.shift %>
-			<div class="row offset1">
-		    <a class="btn btn-mini reveal-below">show <%= examples.size %> more…</a>
-		  </div>
-      <div class="reveal-me">
-        <% examples.each do |example| %>
-      		<%= div_for example, :class=>"row new" do %>
-        		<div class="span1">
-        			<%= link_to "(#{example.number})", [@language, example],
-        			:title=>"View details for example #{example.number}" %>
-        		</div>
-        		<div class="span7">
-        			<div class="row object-language"><%= example.primary_text %></div>
-        			<div class="row">
-        				<% at_pieces = example.analyzed_text.split().map!{|s| html_escape(s)} %>
-        				<% gl_pieces = example.gloss.split().map!{|s| html_escape(s).gsub(/[A-Z]+/){|caps| '<span class="sc">'<<caps<<'</span>'} } %>
-        				<% glosses = at_pieces.zip(gl_pieces).map!{|pair| pair.join('<br/>')} %>
-        				<% glosses.each do |gloss| %>
-        				  <div class="gloss-unit"><%= raw gloss %></div>
-        				<% end %>
-        			</div>
-        			<div class="row"><%= "‘#{example.translation}’" %></div>
-        		</div>
-      		<% end %>          
-        <% end %>
-      </div>
-  	  
-  	<% end %>
-  	
-
+  		<%= render partial: "example", collection: @examples %>
   </div>
 
 </div>
@@ -148,8 +96,8 @@
       <div class="span12 dt-filters"><!-- filters for dataTable -->
         <div class="btn-label">Filter by type:</div>
         <div class="btn-group column-filter" data-toggle="buttons-checkbox" data-column="coded?">
-          <button type="button" class="btn btn-mini">Coded</button>
-          <button type="button" class="btn btn-mini">Uncoded</button>
+          <button type="button" class="btn btn-mini" value="y">Coded</button>
+          <button type="button" class="btn btn-mini" value="n">Uncoded</button>
         </div>
       
         <div class="btn-label">Filter by occurrence:</div>
@@ -184,16 +132,18 @@
 		<tr>
 			<td>
 			  <div class="cell">
+				<% if altn.alternation_type %>
           <span class="label" title="<%= altn.coded? ? 'Coded alternation' : 'Uncoded alternation' %>">
             <%= altn.coded? ? 'C' : 'U' %>
           </span>
+				<% end %>
         </div><div class="cell">
           <%= link_to raw(altn), [@language, altn] %>
         </div>
       </td>
       <td><%= av.alternation_occurs %></td>
       <td><%= raw av.comment %></td>
-      <td><%= altn.alternation_type %></td>
+      <td><%= altn.coded_y_n %></td>
       <td><%= link_to(dcf, [@language, dcf]) unless dcf.nil? %></td>
       <td>
         <% if exs.first %>

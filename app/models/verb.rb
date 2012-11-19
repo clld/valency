@@ -11,13 +11,13 @@ class Verb < ActiveRecord::Base
   has_and_belongs_to_many :meanings
 
   has_many :alternation_values
-  has_many :alternations,                   :through => :alternation_values
+  has_many :alternations, :through => :alternation_values
 
   has_many :coding_frame_examples
   has_many :examples_of_coding_frame, :through => :coding_frame_examples, :source => :example
 
   has_many :verb_coding_frame_microroles
-  has_many :microroles,         :through => :verb_coding_frame_microroles
+  has_many :microroles, :through => :verb_coding_frame_microroles
     
   # allows using just @verb instead of @verb.verb_form in views
   def to_s

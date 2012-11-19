@@ -11,8 +11,17 @@ class Alternation < ActiveRecord::Base
     name
   end
   
+  # return true iff the alternation_type is "coded" or "Coded"
   def coded?
-    alternation_type.casecmp("Coded") == 0
+    alternation_type && alternation_type.casecmp("coded") == 0
+  end
+  
+  # return "y" if alternation_type is "coded", 'n' if it isn't
+  # returns nil if alternation_type is nil
+  def coded_y_n
+    if alternation_type
+      self.coded? ? 'y' : 'n'
+    end 
   end
   
 end

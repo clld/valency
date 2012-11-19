@@ -22,6 +22,8 @@ class VerbsController < ApplicationController
   def show
     @verb = @language.verbs.includes(:alternation_values,
     :coding_frame, :meanings, :microroles).find(params[:id])
+    @examples = @verb.examples_of_coding_frame
+    @excount  = @examples.size
 
     # flash[:notice] ="Hello World!"
     respond_to do |format|

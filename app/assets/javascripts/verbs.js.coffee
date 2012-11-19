@@ -78,8 +78,8 @@ oDTSettings =
 			$btn    = $(event.target)
 			$group  = $(this) # the .btn-group to filter a column
 			column  = $group.data().column
-			strings = ( $(btn).text() for btn in $btn.siblings() when $(btn).hasClass 'active' )
-			strings.push $btn.text() unless $btn.hasClass 'active'
+			strings = ( $(btn).val() || $(btn).text() for btn in $btn.siblings() when $(btn).hasClass 'active' )
+			strings.push $btn.val() || $btn.text() unless $btn.hasClass 'active'
 			altn_values_dt.filterColumn column, strings.join('|')
 		
 		# link to clear all filters
