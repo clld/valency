@@ -7,8 +7,9 @@
 # this is a necessary closure, used in the sortEmptyLast plugin
 makeDataPropFunctionFor = (iCol) ->
 	(src, type, val) ->
-		if type is 'sort' then (src[iCol] or 'zzz') else
-			if type is 'set' then src[iCol] = val else src[iCol]
+		if   type is 'sort' then (src[iCol] or 'zzz') else
+			if type is 'set'  then  src[iCol] = val     else src[iCol]
+	
 
 (($) ->
 	api = $.fn.dataTableExt.oApi # namespace
@@ -86,6 +87,23 @@ makeDataPropFunctionFor = (iCol) ->
 	api.isVisible = (oSettings, mCol) ->
 		mCol = @getColumnIndex(mCol)
 		oSettings.aoColumns[mCol].bVisible if mCol?
+	
+	#################### change pagination / scrolling to show particular row 
+	# plugin by Allan Jardine
+	# @params nRow must be a DOM node object, *not* a jQuery object.
+	api.fnDisplayRow = (oSettings, nRow) ->
+		dispLen = oSettings._iDisplayLength
+		return this if dispLen is -1
+		# Find the node in the table
+		iPos = -1
+		for displayIndex, i in oSettings.aiDisplay
+			if oSettings.aoData[ displayIndex ].nTr is nRow
+				iPos = i
+				break
+		if iPos >= 0 # Alter the start point of the paging display
+			oSettings._iDisplayStart = Math.floor(i / dispLen) * dispLen
+			oSettings.oApi._fnCalculateEnd oSettings
+		oSettings.oApi._fnDraw oSettings
 	
 #################################################
 )(jQuery)

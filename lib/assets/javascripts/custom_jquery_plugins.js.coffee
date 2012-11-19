@@ -52,12 +52,34 @@
 		.hide()
 		
 		$btn.click ->
-			$toggle_me.slideToggle ->
+			$toggle_me.slideToggle 200, ->
 				label = $btn.text()
 				$btn.text label.replace(
 					/(hide|show)/, if label.match(/hide/) then "show" else "hide"
 				)
 		this
+		
+	# shows only the first (@arg max) elements of the collection. Wraps the remaining ones
+	# in a hidden <div> and includes a link to toggle it. The link gives the number of
+	# hidden items
+	$.fn.show_first = (max = 1) ->
+		return this unless max < @length
+		$parent = this.parent() # container of all the elements
+		$rest = @slice(max).hide()
+		[text_show, text_hide] = ["show #{$rest.length} more…", "show less"]
+		$link = $('<a class="no-href">').text(text_show).click ->
+			$rest.each -> $(this).fadeToggle 300, ->
+				$link.text(if $rest.last().is ':visible' then text_hide else text_show)
+		$link.insertAfter($parent).wrap '<small />'
+		
+		# $rest = @slice(max).wrapAll $('<div/>')
+		# $toggle_me = $rest.parent().hide() # the hidden <div>
+		# [text_show, text_hide] = ["show #{$rest.length} more…", "show less"]
+		# $link = $('<a class="no-href">').text(text_show).click ->
+		# 	$toggle_me.slideToggle 400, =>
+		# 		$(this).text(if $toggle_me.is ':visible' then text_hide else text_show)
+		# $link.insertAfter($toggle_me).wrap '<small />'
+	
 	
 	# flash: highlight an element for a split-second
 	# by quickly changing and restoring its background-color

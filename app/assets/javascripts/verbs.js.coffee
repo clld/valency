@@ -5,6 +5,22 @@ altn_occurs_sort_order =
 	'Regularly' :'A'
 	'Marginally':'B'
 	'Never'     :'C'
+	
+# pad an integer with zeros from left to make a string like 000123 
+# source: http://stackoverflow.com/a/7254108/1030985
+padWithZeros = (num, max_len) ->
+	(1e10 + num + "").slice -max_len
+	
+# returns custom sorting method for the mDataProp of the "Examples" column:
+# the column will be sorted by example number instead of example text
+fnSortByExampleNumber = (iCol) ->
+	(src, type, val) ->
+		if type is 'sort'
+			return 'zzz' unless src[iCol]
+			num = parseInt $(src[iCol]).find('.number').first?().text?().replace?(/\D/g,''), 10
+			padWithZeros (num or 1), 6
+		else
+			if type is 'set' then src[iCol] = val else src[iCol]
 
 oDTSettings = 
 	"sDom": "<'row'<'span4'i><'span8'f>>t"
@@ -21,6 +37,7 @@ oDTSettings =
 			"sType": "html"
 		},{
 			"aTargets": [1] # column 1: Occurs
+			'sWidth'  : '10%'
 			"mDataProp": ( src, type, val ) ->
 				return altn_occurs_sort_order[src[1]] or 'z' if type is 'sort'
 				if type is 'set' then src[1] = val else src[1]
@@ -60,9 +77,18 @@ oDTSettings =
 		# specific to /verbs index page
 	
 	show: ->
-		@setup_reveal_below()
+		$('.examples-container').each -> 
+			$(this).children().show_first()
+		
 		altn_values_dt = $('#av_list').dataTable oDTSettings
 		altn_values_dt.sortEmptyLast('examples', 'derived coding frame', 'comment')
+		
+		oSettings = altn_values_dt.fnSettings()
+		iCol      = altn_values_dt.getColumnIndex('examples')
+		oColOpts  =
+			mDataProp: fnSortByExampleNumber iCol
+		oSettings.oApi._fnColumnOptions( oSettings, iCol, oColOpts )
+		
 		altn_values_dt.hideColumns('derived coding frame', 'comment')
 		
 		# checkbox with data-column attribute "columnTitle" shall toggle that column
@@ -90,10 +116,5 @@ oDTSettings =
 		# move the .dataTables_filter div into the .dt-filters div
 		$('.dataTables_filter').detach().appendTo($('.dt-filters'))
 		
-	setup_reveal_below: ->
-		$('div.reveal-me').hide()
-		$('a.reveal-below').click ->
-			$concealed = $(this).parent().next '.reveal-me'
-			$(this).slideUp 30, ->
-				$concealed.slideToggle()
 	
+

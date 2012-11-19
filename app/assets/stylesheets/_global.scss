@@ -116,18 +116,7 @@ h2, h3, h4 {
 }
 
 // content-specific styles
-// whole example div in a link
-a.whole-ex{
-	text-decoration:none;
-	color:inherit;
-}
-
 .object-language { font-style:italic; }
-
-div.gloss-unit {
-	display:inline-block;
-	margin-right:0.5em;
-}
 
 // utility classes: font styles
 span.sc { // small caps
@@ -146,13 +135,18 @@ span.sc { // small caps
 div.inline{
 	display:inline-block;
 }
-a.block{
+.block{
 	display:block;
 }
 .cell {
 	display: table-cell;
 	&:first-child {
 		padding-right:5px;
+	}
+}
+a.no-href { // treat like regular link
+	&:hover {
+		cursor: pointer;
 	}
 }
 
