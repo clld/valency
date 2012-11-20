@@ -28,8 +28,9 @@ module ApplicationHelper
     controller_names.map do |c_name|
       link_href = send('language_' << c_name << '_path', @language) if @language
       capture do
+        displayed_name = 'Verb forms' if c_name == 'verbs'
         content_tag(:li, :class => css_class, 'data-controller' => c_name) do
-          link_to c_name.humanize, link_href
+          link_to (displayed_name || c_name.humanize), link_href
         end
       end
     end.join("\n").html_safe

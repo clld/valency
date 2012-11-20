@@ -9,18 +9,29 @@ altn_occurs_sort_order =
 # pad an integer with zeros from left to make a string like 000123 
 # source: http://stackoverflow.com/a/7254108/1030985
 padWithZeros = (num, max_len) ->
-	(1e10 + num + "").slice -max_len
+	(1e9 + num + "").slice -max_len
 	
 # returns custom sorting method for the mDataProp of the "Examples" column:
 # the column will be sorted by example number instead of example text
-fnSortByExampleNumber = (iCol) ->
+sort_by_example_number = (iCol) ->
 	(src, type, val) ->
 		if type is 'sort'
 			return 'zzz' unless src[iCol]
 			num = parseInt $(src[iCol]).find('.number').first?().text?().replace?(/\D/g,''), 10
-			padWithZeros (num or 1), 6
+			padWithZeros (num or 9999), 6
 		else
 			if type is 'set' then src[iCol] = val else src[iCol]
+	
+# returns a sorting method for the Alternation name column:
+# sort by alternation name, not by the 'C' or 'U' badge
+sort_by_altn_name = (iCol) ->
+	(src, type, val) ->
+		if type is 'sort'
+			return 'zzz' unless src[iCol]
+			$(src[iCol]).find('span:not(.label)').text?()
+		else
+			if type is 'set' then src[iCol] = val else src[iCol]
+	
 
 oDTSettings = 
 	"sDom": "<'row'<'span4'i><'span8'f>>t"
@@ -81,23 +92,24 @@ oDTSettings =
 			$(this).children().show_first()
 		
 		altn_values_dt = $('#av_list').dataTable oDTSettings
+		
+		# don't allow body to shrink vertically when dataTable is filtered
+		$('body').css 'min-height', $('body').outerHeight() 
+		
 		altn_values_dt.sortEmptyLast('examples', 'derived coding frame', 'comment')
 		
-		oSettings = altn_values_dt.fnSettings()
-		iCol      = altn_values_dt.getColumnIndex('examples')
-		oColOpts  =
-			mDataProp: fnSortByExampleNumber iCol
-		oSettings.oApi._fnColumnOptions( oSettings, iCol, oColOpts )
+		# sort examples in dataTable by example number
+		altn_values_dt.setCustomSortFunction 'examples', sort_by_example_number
+		altn_values_dt.setCustomSortFunction 'alternation name', sort_by_altn_name
 		
 		altn_values_dt.hideColumns('derived coding frame', 'comment')
+		
 		
 		# checkbox with data-column attribute "columnTitle" shall toggle that column
 		$('input.toggle-dt-column').each ->
 			$(this).attr 'checked', altn_values_dt.isVisible $(this).data().column
 		.click ->
-			$(this).attr('checked',
-			  altn_values_dt.toggleColumn $(this).data().column
-			)
+			$(this).attr 'checked', altn_values_dt.toggleColumn $(this).data().column 
 		
 		# buttons to filter dataTable by columns
 		$('.dt-filters .column-filter').click (event)->

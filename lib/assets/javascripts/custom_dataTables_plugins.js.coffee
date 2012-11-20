@@ -5,7 +5,8 @@
 ###
 
 # this is a necessary closure, used in the sortEmptyLast plugin
-makeDataPropFunctionFor = (iCol) ->
+# it makes empty table cells behave like 'zzz' when sorting
+sort_empty_as_zzz = (iCol) ->
 	(src, type, val) ->
 		if   type is 'sort' then (src[iCol] or 'zzz') else
 			if type is 'set'  then  src[iCol] = val     else src[iCol]
@@ -25,37 +26,42 @@ makeDataPropFunctionFor = (iCol) ->
 			mCol = mCol.toLowerCase()
 			for col, i in cols
 				return i if col.sTitle.toLowerCase() is mCol
-		undefined
+		null
 	
+	# uses the plugin setCustomSortFunction to set up column sorting
+	# to sort empty cells last for each of the passed columns
 	api.sortEmptyLast = (oSettings, cols...) ->
 		for col in cols
-			iCol     = @getColumnIndex(col)
-			oColOpts = 
-				mDataProp: makeDataPropFunctionFor iCol
-			# call the internal api method to update column options
+			@setCustomSortFunction col, sort_empty_as_zzz
+	
+	# sets the sort function of column mCol to be the result
+	# returned by 
+	api.setCustomSortFunction = (oSettings, mCol, fnSorter) ->
+		if (iCol = @getColumnIndex(mCol))? and
+		typeof fnSorter is 'function' and
+		typeof (fn = fnSorter iCol) is 'function'
+			oColOpts = { mDataProp: fn }
+			# call internal API method to update column options
 			oSettings.oApi._fnColumnOptions( oSettings, iCol, oColOpts )
 	
 	# filter a column by a regex pattern such as "this|that"
 	# @param mCol column index or title
 	# to reset all filters, use API plugin method fnFilterClear
 	api.filterColumn = (oSettings, mCol, sTerm, bRegex=true) ->
-		mCol = @getColumnIndex(mCol)
-		if mCol?
+		if (mCol = @getColumnIndex(mCol))?
 			@fnFilter sTerm, mCol, bRegex
 			true
 	
 	################## showing and hiding columns ######################
 	# hide a column by index or title
 	api.hideColumn = (oS, mCol) ->
-		mCol = @getColumnIndex(mCol)
-		if mCol?
+		if (mCol = @getColumnIndex(mCol))?
 			@fnSetColumnVis mCol, false
 			false # return column's new visibility
 	
 	# show a column by index or title
 	api.showColumn = (oSettings, mCol, withflash = true) ->
-		mCol = @getColumnIndex(mCol)
-		if mCol?
+		if (mCol = @getColumnIndex(mCol))?
 			@fnSetColumnVis mCol, true
 			$(oSettings.aoColumns[mCol].nTh).flash?() if withflash
 			true # return column's new visibility
@@ -66,8 +72,7 @@ makeDataPropFunctionFor = (iCol) ->
 	
 	# toggle visibility of a column by index or title
 	api.toggleColumn = (oSettings, mCol, withflash = true) ->
-		mCol = @getColumnIndex(mCol)
-		if mCol?
+		if (mCol = @getColumnIndex(mCol))?
 			visible = oSettings.aoColumns[mCol].bVisible
 			if visible
 				@hideColumn(mCol)
@@ -85,8 +90,8 @@ makeDataPropFunctionFor = (iCol) ->
 	
 	# @param mCol: column index or title
 	api.isVisible = (oSettings, mCol) ->
-		mCol = @getColumnIndex(mCol)
-		oSettings.aoColumns[mCol].bVisible if mCol?
+		if (mCol = @getColumnIndex(mCol))?
+			oSettings.aoColumns[mCol].bVisible
 	
 	#################### change pagination / scrolling to show particular row 
 	# plugin by Allan Jardine

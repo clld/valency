@@ -1,13 +1,18 @@
 class LanguagesController < ApplicationController
+
   # GET /languages
   # GET /languages.json
   def index
+    # get alphabetical list of "continents" (geographical regions)
+    @languages = Language.includes(:contributors).all
+    @regions   = Language.unscoped.select(:continent).order(:continent).uniq.pluck(:continent)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @languages }
     end
   end
-
+  
   # GET /languages/1
   # GET /languages/1.json
   def show

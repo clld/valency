@@ -33,13 +33,18 @@ class Verb < ActiveRecord::Base
     self.coding_frame && !self.coding_frame.coding_frame_schema.blank?
   end
   
+  def av_data?
+    self.alternation_values.any?{|av| av.alternation_occurs}
+  end
+
   def av_comments?
     self.alternation_values.any?{|av| av.comment}
   end
 
   # alias to get the coding frame
   def cframe
-    self.coding_frame
+    cf = self.coding_frame
+    cf unless cf.nil? or cf.coding_frame_schema.nil?
   end
   
   # get new microroles introduced by alternations (w/o using those alternations)

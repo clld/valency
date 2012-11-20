@@ -6,11 +6,14 @@ class Language < ActiveRecord::Base
   has_many :coding_frames
   has_many :coding_sets
   has_many :gloss_meanings
-  has_many :contributors, through: :contributions, source: :person_id
   has_many :verbs
   has_many :examples
+
+  has_many :contributions
+  has_many :contributors, through: :contributions, source: :person
+
   
-  default_scope order(:name_for_url)
+  default_scope order(:name)
   
   # allows using just @language instead of @language.name in views
   def to_s
@@ -21,5 +24,5 @@ class Language < ActiveRecord::Base
   def to_param
     name_for_url
   end
-    
+  
 end

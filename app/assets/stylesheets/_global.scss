@@ -70,8 +70,7 @@ form {
 // dataTable filters: buttons/btn-grouos to toggle column filters
 .dt-filters {
 	background-color:$grayLighter;
-	padding:5px;
-	@include border-radius(3px);
+	padding:10px;
 
 	.btn-label {
 		display:inline-block;
@@ -108,10 +107,21 @@ form {
 	li:not(.divider) {
 		display:block;
 	}
+	.no-menu-item {
+		& > a {
+			color: $linkColor;
+			&:hover {
+				background-color: inherit;
+				background-image: none;
+				color:$linkColorHover;
+				text-decoration:underline;
+			}
+		}
+	}
 }
 
 // Headings
-h2, h3, h4 {
+h2, h3, h4, h5 {
 	color:$vt;
 }
 
@@ -137,6 +147,10 @@ div.inline{
 }
 .block{
 	display:block;
+}
+.clear {
+	clear:both;
+	@include clearfix;
 }
 .cell {
 	display: table-cell;

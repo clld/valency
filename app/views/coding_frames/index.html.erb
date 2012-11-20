@@ -9,9 +9,7 @@
     <tr>
       <th>Coding frame</th>
       <th>Description</th>
-      <!-- <th>Comment</th> -->
-      <th>Verb forms</th>
-      <th>Meanings</th>
+      <th>Meaning labels &amp; Verb forms</th>
     </tr>
   </thead>
     
@@ -21,9 +19,7 @@
       <tr>
         <td><%= link_to(cf, [@language, cf]) unless cf.blank? %></td>
         <td><%= cf.description if cf %></td>
-        <!-- <td><%# cf.comment %></td> -->
         <td><%= verb_list(verbs) if verbs %></td>
-        <td><%# meanings %></td>
       </tr>
     <% end %>
   </tbody>

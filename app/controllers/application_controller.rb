@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
   # necessary for languages dropdown,
   # meanings dropdown and more
   def global_queries
-    @languages ||= Language.all
-    @meanings_short_list ||= Meaning.where(meaning_list: "Core list")
+    @languages     ||= Language.all
+    @meanings_core ||= Meaning.where(meaning_list: ['Core list', 'Extended list'])
   end
   
   

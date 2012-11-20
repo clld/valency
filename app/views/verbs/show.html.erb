@@ -1,7 +1,6 @@
 <!-- Verb detail -->
-<% meanings = @verb.meanings %>
-<% cframe   = @verb.coding_frame %>
-
+<% meanings = @verb.meanings %><!-- verb's meanings or [] -->
+<% cframe   = @verb.cframe %>  <!-- basic coding frame or nil -->
 
 <div class="row">
   <div class="span12">
@@ -21,8 +20,12 @@
 <div class="row">
 	<!-- CODING FRAME --><div class="span4">
     <h4>Coding frame</h4>
-    <%= div_for cframe, :class => 'padded-box bg-cf' do |cf| %>
-      <big><%= link_to cf, [@language, cf] %></big>
+    <% if cframe %>
+      <%= div_for cframe, :class => 'padded-box bg-cf' do |cf| %>
+        <big><%= link_to cf, [@language, cf] %></big>
+      <% end %>
+    <% else %>
+      not specified
     <% end %>
 
   </div><!-- end of span4 -->
@@ -52,32 +55,41 @@
       Meaning <%= "label".pluralize meanings.size %>,
       Microroles, Coding&nbsp;sets and Argument&nbsp;types
     </h4>
-    <% arguments = cframe.index_numbers_eager_load %>
-    <table class="table table-bordered-sharp">
-      <thead>
-        <tr class="shadow">
-          <th class="digit bg-cf">#</th>
-          <% meanings.each do |m| %>
-            <th class="bg-me">
-              <%= link_to m, m %>
-            </th>
-          <% end %>
-          <th class="bg-cs">Coding set</th>
-          <th class="bg-cs">Argument type</th>
-        </tr>
-      </thead><tbody>
-      <% arguments.each do |arg| # arg is a Coding frame index number %>
-        <tr>
-          <td class="digit bg-cf"><%= arg.index_number %></td>
-          <% meanings.each do |m| %>
-            <td class="bg-mr"><%= arg.microroles.where_meaning(m)[0] %></td>
-          <% end %>
-          <td class="bg-cs"><%= arg.coding_set %></td>
-          <td class="bg-cs"><%= arg.argument_type %></td>
-        </tr>
+    <% if cframe %>
+      <% arguments = cframe.index_numbers_eager_load %>
+      <table class="table table-bordered-sharp">
+        <thead>
+          <tr class="shadow">
+            <th class="digit bg-cf">#</th>
+            <% meanings.each do |m| %>
+              <th class="bg-me">
+                <%= link_to m, m %>
+              </th>
+            <% end %>
+            <th class="bg-cs">Coding set</th>
+            <th class="bg-cs">Argument type</th>
+          </tr>
+        </thead><tbody>
+        <% arguments.each do |arg| # arg is a Coding frame index number %>
+          <tr>
+            <td class="digit bg-cf"><%= arg.index_number %></td>
+            <% meanings.each do |m| %>
+              <td class="bg-mr"><%= arg.microroles.where_meaning(m)[0] %></td>
+            <% end %>
+            <td class="bg-cs"><%= arg.coding_set %></td>
+            <td class="bg-cs"><%= arg.argument_type %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <% if meanings.size > 0 %>
+        <div><%= "Meaning label".pluralize(meanings.size)%>: <%= meaning_list(@verb) %></div>
+      <% else %>
+        no meaning specified;
       <% end %>
-      </tbody>
-    </table>
+      no coding frame specified
+    <% end %>
   </div>
 
 </div>
@@ -86,6 +98,7 @@
 	<!-- Alternations --><div class="span12">
 	  <% avs = @verb.alternation_values %>
     <h4 class="pull-left">Alternations</h4>
+    <% if @verb.av_data? then %>
     <form class="pull-left with-h4">
       <label class="checkbox inline"> also show: </label>
       <label class="checkbox inline">
@@ -172,6 +185,9 @@
     </table>
   </div><!-- end of .span12 -->
   </div><!-- end of .row -->
+  <% else %>
+    <div class="clear"> no data </div>
+  <% end %>
 
-</div>
+</div><!-- end of .row -->
 </div>

@@ -11,18 +11,18 @@
   <!-- Meanings dropdown -->
   <li class="dropdown" id="meaning_dropdown" data-controller="meanings">
 		<a class="dropdown-toggle" data-toggle="dropdown">
-			<%= @meaning ? @meaning.to_s : "Meanings" %>
+			<%= @meaning ? @meaning.to_s : "Meaning labels" %>
 			<b class="caret"></b>
 		</a>
 	  <ul class="dropdown-menu clearfix">
 			<div class="pull-left disabled">
-				<a>Showing 70 core meanings</a>
+				<a>Showing <%= @meanings_core.size %> core meaning labels</a>
 			</div>
-			<li class="pull-left">
-				<%= link_to "Show all", meanings_path, :class => "em" %>
+			<li class="pull-left no-menu-item">
+				<%= link_to "Show all #{Meaning.count}", meanings_path %>
 			</li>
 			<li class="divider" style="clear:both"></li>
-			<% @meanings_short_list.each do |m| %>
+			<% @meanings_core.each do |m| %>
 				<li><%= link_to m, m %></li>
 			<% end %>
 		</ul>
@@ -32,7 +32,7 @@
   <!-- Languages dropdown -->
   <li class="dropdown" id="language_dropdown" data-controller="languages" rel="tooltip">
 	  <a class="dropdown-toggle" data-toggle="dropdown">
-	    <%= @language ? @language.to_s : "Languages" %>
+	    <%= @language ? @language.to_s : "Language contributions" %>
 	    <b class="caret"></b>
 	  </a>
 	  <ul class="dropdown-menu clearfix">
