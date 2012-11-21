@@ -33,7 +33,7 @@
 			title:     'Please choose a language'
 			trigger:   'manual'
 		$menu_item.mouseenter -> $menu_item.tooltip 'hide'
-		$('header .nav .disabled').click =>
+		$('.nav li.disabled a').click =>
 			$menu_item.tooltip 'show'
 			window.setTimeout( =>
 				$menu_item.tooltip 'hide'

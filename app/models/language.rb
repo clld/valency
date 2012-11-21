@@ -25,4 +25,10 @@ class Language < ActiveRecord::Base
     name_for_url
   end
   
+  # return the list of contributors (as Person objects),
+  # ordered by contributions.sort_order_number
+  def get_contributors
+    Person.joins(:languages).where(contributions:{language_id: self.id}, contributor: 'True').order('contributions.sort_order_number ASC')
+  end
+  
 end

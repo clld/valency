@@ -22,5 +22,5 @@
 //= require dataTables/extras/Scroller
 //= require custom_jquery_plugins
 //= require jquery_datatables_plugins
-//= require custom_datatables_plugins
+//= require custom_data_tables_plugins
 //= require_tree .

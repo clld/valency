@@ -1,5 +1,4 @@
 <!-- Languages index -->
-<h1>Language contributions</h1>
 
 <div class="row">
   <div class="span12">  
@@ -11,11 +10,11 @@
     
     <% @regions.each do |region| %>
       <h5 id="region-#{region.split(' ')[0]}"><%= region %></h5>
-      <table class="table table-condensed">
+      <table class="table table-very-condensed no-borders">
         <tbody>
           <% @languages.select{|l| l.continent == region}.each do |lang| %>
             <tr>
-              <th><%= lang.to_s %></th>
+              <th><%= link_to lang, lang %></th>
               <td>
                 <% if (contributors = lang.contributors).size > 0 %>
                   <%= lang.contributors.first.name %>
@@ -25,10 +24,16 @@
           <% end %>
         </tbody>
       </table>
+			<% if ((counter += 1) % 2).even? # every other table: begin new row %>
+				</div></div><div class="row"><div class="span6">
+			<% else %>
+			  </div><div class="span6">
+			<% end # endif %>
+		
     <% end %>
 
-    </div>      
-  </div>
+    </div><!-- span6 -->
+  </div>  <!-- row -->
 
     
   </div>

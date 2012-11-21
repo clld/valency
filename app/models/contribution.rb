@@ -4,4 +4,6 @@ class Contribution < ActiveRecord::Base
   belongs_to :language
   belongs_to :person
   
+  default_scope order :sort_order_number
+  
 end
