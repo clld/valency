@@ -106,6 +106,11 @@ form {
   }
 	li:not(.divider) {
 		display:block;
+//		a.disabled:hover {
+//			background-color: inherit;
+//			background-image: none;
+//			color: $linkColor;
+//		}
 	}
 	.no-menu-item {
 		& > a {
@@ -164,8 +169,23 @@ a.no-href { // treat like regular link
 	}
 }
 
+/**************** TABLES ****************/
+// table without borders
+table.no-borders {
+	th, td {
+		border-top:none;
+	}
+}
+
+// highly condensed table
+.table-very-condensed {
+	th, td {
+		padding: 2px 0;
+	}
+}
+
 // bordered table with sharp corners
-table.table-bordered-sharp {
+.table-bordered-sharp {
 	border: 1px solid $tableBorder;
 	th, td {
     border-left: 1px solid $tableBorder;
