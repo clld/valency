@@ -1,5 +1,5 @@
 <!-- Languages index -->
-
+<% enable_gmaps %>
 <div class="row">
   <div class="span12">  
 
@@ -8,29 +8,30 @@
     <div class="row">
       <div class="span6">
     
-    <% @regions.each do |region| %>
-      <h5 id="region-#{region.split(' ')[0]}"><%= region %></h5>
-      <table class="table table-very-condensed no-borders">
+<!-- - - - - - - - -  alternative solution: show regions in columns - - - - - - -->
+ <% @regions_custom.each do |region| %>
+      <%= content_tag :h5, region, id: region_id(region)%>
+      <table class="table table-very-condensed">
         <tbody>
           <% @languages.select{|l| l.continent == region}.each do |lang| %>
-            <tr>
-              <th><%= link_to lang, lang %></th>
+            <%= content_tag_for(:tr, lang) do %>
+              <th class="language-name"><%= link_to lang, lang %></th>
               <td>
                 <% if (contributors = lang.contributors).size > 0 %>
-                  <%= lang.contributors.first.name %>
+                  <%= contributors_as_links lang, false %>
                 <% end %>
               </td>
-            </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>
-			<% if ((counter += 1) % 2).even? # every other table: begin new row %>
-				</div></div><div class="row"><div class="span6">
-			<% else %>
-			  </div><div class="span6">
+			<% if (counter += 1) > 2 # begin next column %>
+				<% counter = 0 %>
+				
+				</div><div class="span6">
 			<% end # endif %>
-		
     <% end %>
+<!-- - - - - - - - - - - - - end alternative layout - - - - - - - - -->
 
     </div><!-- span6 -->
   </div>  <!-- row -->
@@ -38,39 +39,3 @@
     
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <table id="languages_list" class="table table-striped table-bordered">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Iso code</th>
-    <th>Family</th>
-    <th>Variety</th>
-    <th>Region</th>
-  </tr>
-</thead><tbody>
-<% @languages.each do |l| %>
-  <tr>
-    <td><%= link_to l, l %></td>
-    <td><%= l.iso_code %></td>
-    <td><%= l.family %></td>
-    <td><%= l.variety %></td>
-    <td><%= l.continent %></td>
-  </tr>
-<% end %>
-</tbody>
-</table> -->
-

@@ -179,8 +179,9 @@ table.no-borders {
 
 // highly condensed table
 .table-very-condensed {
+  font-size: 90%;
 	th, td {
-		padding: 2px 0;
+		padding: 0; //2px 0;
 	}
 }
 

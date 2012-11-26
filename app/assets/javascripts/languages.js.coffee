@@ -5,15 +5,13 @@
 	init: ->
 		
 	index: ->
-		$('#languages_list').dataTable
-			"sDom": "<'row'<'span4'i><'span8'f>>t"
-			"bPaginate": false
-			"oLanguage":
-				"sInfoFiltered": " (filtered)"
-				"sSearch": "Filter:"
-	
+		map = new GMaps
+			div: '#map_canvas'
+			lat: -12.043333
+			lng: -77.028333
+		
 	show: ->
-		$('#language_metadata th').css('width', '6em')
+		
 		
 	
 

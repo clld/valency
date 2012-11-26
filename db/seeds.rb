@@ -137,7 +137,7 @@ class FieldFinder
 
       else # no special field name: guess regular field name
         name_transformations do |transf|
-          if fm_fields.include? (transformed = transf.call(attr_name))
+          if fm_fields.include?(transformed = transf.call(attr_name))
             result[attr_name] = transformed
             break # found a match! exit the block
           end
@@ -184,10 +184,10 @@ class DataImporter
     fields_with_test_records = ["name", "coding_frame_schema", "verb_form"]
     no_data_strings = ['no data', 'none', '(please fill in)']
 
-    LOG.info ("Will import data for:\n#{@models.empty? ? "(no models)" : @models.map{|m|m.to_s}.join(', ')}\n")
+    LOG.info "Will import data for:\n#{@models.empty? ? "(no models)" : @models.map{|m|m.to_s}.join(', ')}\n"
 
     @models.each do |model|
-      LOG.info (' '<<model.to_s<<' ').center(40, '=')
+      LOG.info((' '<<model.to_s<<' ').center 40, '=')
       LOG.info "Deleting all #{model.to_s} records... "
       timestamp_begin = Time.now
       model.delete_all
@@ -240,7 +240,7 @@ class DataImporter
           rescue Exception => e
             # print err
             err_stats[e.class.to_s] += 1
-            LOG.error (e.message)
+            LOG.error e.message
           end
 
         end #loop over records

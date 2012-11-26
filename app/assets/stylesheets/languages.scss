@@ -1,0 +1,16 @@
+
+tr.language {
+  th.language-name {
+    width:40%;
+  }
+
+  td.contributor {
+    padding-left:1em;    
+  }
+  .person {
+    white-space: nowrap;
+  }
+}
+
+// copied over from JS:
+// $('#language_metadata th').css('width', '6em')
