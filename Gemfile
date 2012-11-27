@@ -19,6 +19,7 @@ end
 
 # Gems for both development and production
 group :development, :production do
+  gem 'gmaps4rails'
   gem 'newrelic_rpm'
 end
 

@@ -25,15 +25,7 @@ module ApplicationHelper
     end.join("\n").html_safe
   end
   
-  # load JS libraries required for displaying Google maps
-  def enable_gmaps
-    content_for :head do
-  	  javascript_include_tag( "//maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&sensor=false") <<
-  	  javascript_include_tag("gmaps")
-    end
-  end
-
-
+  
   def li_wrapped_nav_links_to_controllers controller_names
     css_class = "disabled" if @language.nil?
     controller_names.map do |c_name|

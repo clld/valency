@@ -14,7 +14,7 @@
 	<%= stylesheet_link_tag    "application", media:"all" %>
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
-	<%= yield(:head) %>
+	<%= yield :head %>
 </head>
 <body data-controller="<%= controller_name %>" data-action="<%= action_name %>">
 
@@ -41,6 +41,8 @@
 	</div><!-- end of #main -->
 
 	<footer>
+	  <!-- scripts for google maps go here -->
+	  <%= yield :scripts %>
 	</footer>
 
 </body>

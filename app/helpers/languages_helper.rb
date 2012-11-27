@@ -8,8 +8,13 @@ module LanguagesHelper
     end.to_sentence.html_safe
   end
   
-  def region_id region
-    "region-#{region.match(/\w+/).to_s.downcase}"
+  # load JS libraries required for displaying Google maps
+  def enable_gmaps
+    content_for :scripts do
+      javascript_include_tag("gmaps4rails/gmaps4rails.base") <<
+      javascript_include_tag("gmaps4rails/gmaps4rails.googlemaps")
+    end
   end
+
 
 end

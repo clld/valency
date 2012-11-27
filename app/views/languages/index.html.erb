@@ -2,40 +2,73 @@
 <% enable_gmaps %>
 <div class="row">
   <div class="span12">  
+    
+    
+    <div class="row">
+      <div class="span10 offset1">
+        <h4>Languages by geographical region</h4>
+        <%= gmaps({
+          map_options: {
+            provider_key: @google_api_key,
+            auto_adjust:  true,
+            auto_zoom:    false,
+            zoom: 2,
+            center_latitude:  30,
+            center_longitude: 130,
+            mapTypeControl:   false,
+            disableDoubleClickZoom: true,
+            raw: "{
+              streetViewControl: false,
+              navigationControlOptions: {
+                style: google.maps.NavigationControlStyle.SMALL
+              }
+            }"
+          },
+          markers: {
+            data: @map_data,
+            options: {
+              raw: "{
+                animation: google.maps.Animation.DROP
+              }"
+            }
+          }
+        }) %>
+      </div>
+    </div>
 
-    <h4>Languages by geographical region</h4>
+    <!-- List of languages -->
     <% counter = 0 %>
     <div class="row">
-      <div class="span6">
-    
-<!-- - - - - - - - -  alternative solution: show regions in columns - - - - - - -->
- <% @regions_custom.each do |region| %>
-      <%= content_tag :h5, region, id: region_id(region)%>
-      <table class="table table-very-condensed">
-        <tbody>
-          <% @languages.select{|l| l.continent == region}.each do |lang| %>
-            <%= content_tag_for(:tr, lang) do %>
-              <th class="language-name"><%= link_to lang, lang %></th>
-              <td>
-                <% if (contributors = lang.contributors).size > 0 %>
-                  <%= contributors_as_links lang, false %>
-                <% end %>
-              </td>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
-			<% if (counter += 1) > 2 # begin next column %>
-				<% counter = 0 %>
-				
-				</div><div class="span6">
-			<% end # endif %>
-    <% end %>
-<!-- - - - - - - - - - - - - end alternative layout - - - - - - - - -->
+      <div class="span6">    
+        
+        <% @regions_custom.each do |region| %>
+          <% next if region.nil? %>
+          <% languages_in_region = @languages.select{|l| l.continent == region} %>
 
+          <%= content_tag :h5, region, id: languages_in_region[0].region_id %>
+
+          <table class="table table-very-condensed">
+            <tbody>
+              <% languages_in_region.each do |lang| %>
+                <%= content_tag_for(:tr, lang) do %>
+                <th class="language-name"><%= link_to lang, lang %></th>
+                <td>
+                  <%= contributors_as_links lang, false if (lang.contributors).size > 0 %>
+                </td>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+
+          <% if (counter += 1) > 2 # begin next column %>
+            <% counter = 0 %>
+            </div><div class="span6">
+          <% end # endif %>
+
+        <% end # .each region %>
+        
     </div><!-- span6 -->
   </div>  <!-- row -->
-
     
   </div>
 </div>

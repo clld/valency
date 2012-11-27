@@ -11,9 +11,11 @@ class Language < ActiveRecord::Base
 
   has_many :contributions
   has_many :contributors, through: :contributions, source: :person
-
   
   default_scope order(:name)
+  
+  # generate helper methods for gmaps4rails
+  acts_as_gmappable process_geocoding: false
   
   # allows using just @language instead of @language.name in views
   def to_s
@@ -23,6 +25,16 @@ class Language < ActiveRecord::Base
   # readable URL parameter: language name
   def to_param
     name_for_url
+  end
+  
+  # make the continent available under different name
+  def region
+    self.continent
+  end
+  
+  # dom_is replacement for the language's region
+  def region_id
+    "region-#{self.region.match(/\w+/).to_s.downcase}"
   end
   
   # return the list of contributors (as Person objects),

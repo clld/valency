@@ -7,8 +7,6 @@ class Person < ActiveRecord::Base
   
   def to_s
     self.name
-    # (self.name.gsub!(/\s+/,'&nbsp;') || name).html_safe
-    # rejected this hack – do it with CSS instead
   end
 
 end
