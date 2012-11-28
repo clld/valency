@@ -79,33 +79,63 @@
 
 <div class="row new">
   <div class="span12">
-    <h3 id="data-list">Data</h3>
-    <%= link_to "#{@language.verbs.count} Verbs", language_verbs_path(@language), :class =>"btn btn-large btn-info" %>
-    <%= link_to "#{@language.coding_frames.count} Coding Frames", language_coding_frames_path(@language), :class =>"btn btn-large" %>
-    <%= link_to "#{@language.alternations.count} Alternations", language_alternations_path(@language), :class =>"btn btn-large" %>
-    <%= link_to "#{@language.examples.count} Glossed Examples", language_examples_path(@language), :class =>"btn btn-large" %>
+    <h4>Data</h3>
+      <ul>
+        <li><%= link_to "#{@language.verbs.count} Verbs", language_verbs_path(@language) %></li>
+        <li><%= link_to "#{@language.coding_frames.count} Coding Frames", language_coding_frames_path(@language) %></li>
+        <li><%= link_to "#{@language.alternations.count} Alternations", language_alternations_path(@language) %></li>
+        <li><%= link_to "#{@language.examples.count} Glossed Examples", language_examples_path(@language) %></li>
+      </ul>
   </div>
 </div>
 
-<div class="row new">
-	<div class="span6"><div class="todo">
-		<strong>To Do:</strong> display <em>"Contributors' Notes"</em>, which include:
-		<ul>
-		<li>General comments</li>
-		<li>Source of data generalizations / contributors' background</li>
-		<li>Criteria used for judging if an alternation occurs with a verb</li>
-		<li>Characterization of flagging, indexing, and ordering resources</li>
-		</ul>
-	</div></div>
-	<div class="span6">
+<div class="row">
+  <div class="span12">
+    <h4>Contributors' comments</h4>
+    <div class="row">
 
-	</div>
-</div>
-<div class="row new">
-	<div class="span6">
+  <% counter = 0 %>
 
-	</div>
-	<div class="span6">
+  <% if @language.comments %>
+    <%= content_tag :div, raw("<h5>General comments</h5>#{@language.comments}"), class: 'span6' %>
+    <% if (counter += 1)%2 == 0 then raw('</div><div class="row">') else "" end %>
+  <% end %>
 
-	</div>
-</div>
+  <% if @language.data_sources_generalizations_contributor_backgrounds %>
+    <%= content_tag :div, raw("<h5>Source of data and generalizations / contributors' background</h5>#{@language.data_sources_generalizations_contributor_backgrounds}"), class: 'span6' %>
+    <% if (counter += 1)%2 == 0 then raw('</div><div class="row">') else "" end %>
+  <% end %>
+
+  <% if @language.alternation_occurs_judgement_criteria %>
+    <%= content_tag :div, raw("<h5>Judgment criteria for verb alternations</h5>#{@language.alternation_occurs_judgement_criteria}"), class: 'span6' %>
+    <% if (counter += 1)%2 == 0 then raw('</div><div class="row">') else "" end %>
+  <% end %>
+  </div><!-- end row -->
+  </div><!-- end span12 -->
+  </div><!-- end row -->
+
+  <div class="new row">
+    <div class="span12">
+  <h4>Characterization of...</h4>
+  <div class="row">
+  <% counter = 0 %>
+
+  <% if @language.characterization_of_flagging_resources %>
+    <%= content_tag :div, raw("<h5>...Flagging</h5>#{@language.characterization_of_flagging_resources}"), class: 'span6' %>
+    <% if (counter += 1)%2 == 0 then raw('</div><div class="row">') else "" end %>
+  <% end %>
+
+  <% if @language.characterization_of_indexing_resources %>
+    <%= content_tag :div, raw("<h5>...Indexing</h5>#{@language.characterization_of_indexing_resources
+}"), class: 'span6' %>
+    <% if (counter += 1)%2 == 0 then raw('</div><div class="row">') else "" end %>
+  <% end %>
+
+  <% if @language.characterization_of_ordering_resources %>
+    <%= content_tag :div, raw("<h5>...Ordering</h5>#{@language.characterization_of_ordering_resources}"), class: 'span6' %>
+    <% if (counter += 1)%2 == 0 then raw('</div><div class="row">') else "" end %>
+  <% end %>
+  </div><!-- end row -->
+  </div><!-- end span12 -->
+  </div><!-- end row -->
+  
