@@ -2,53 +2,47 @@
 <!-- this is rendered in the top navbar -->
 <%= link_to "Valency", root_path, :class => 'brand' %>
 
-<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-  Menu
-</a>
-
 <ul class="nav" style="margin-right:0">
   <!-- Meanings dropdown -->
   <li class="dropdown" id="meaning_dropdown" data-controller="meanings">
-		<a class="dropdown-toggle" data-toggle="dropdown">
-			<%= @meaning ? @meaning.to_s : "Meaning labels" %>
-			<b class="caret"></b>
-		</a>
-	  <ul class="dropdown-menu clearfix">
-			<div class="pull-left disabled">
-				<a>Showing <%= @meanings_core.size %> core meaning labels</a>
-			</div>
-			<li class="pull-left no-menu-item">
-				<%= link_to "Show all #{Meaning.count}", meanings_path %>
-			</li>
-			<li class="divider" style="clear:both"></li>
-			<% @meanings_core.each do |m| %>
-				<li><%= link_to m, m %></li>
-			<% end %>
-		</ul>
-	</li>
-	<li class="divider-vertical"></li>
+    <a class="dropdown-toggle" data-toggle="dropdown">
+      <%= @meaning ? @meaning.to_s : "Meaning labels" %>
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu clearfix">
+      <div class="pull-left disabled">
+        <a>Showing <%= @meanings_core.size %> core meaning labels</a>
+      </div>
+      <li class="pull-left no-menu-item">
+        <%= link_to "Show all #{Meaning.count}", meanings_path %>
+      </li>
+      <li class="divider" style="clear:both"></li>
+      <% @meanings_core.each do |m| %>
+        <li><%= link_to m, m %></li>
+      <% end %>
+    </ul>
+  </li>
+  <li class="divider-vertical"></li>
 
   <!-- Languages dropdown -->
   <li class="dropdown" id="language_dropdown" data-controller="languages" rel="tooltip">
-	  <a class="dropdown-toggle" data-toggle="dropdown">
-	    <%= @language ? @language.to_s : "Language contributions" %>
-	    <b class="caret"></b>
-	  </a>
-	  <ul class="dropdown-menu clearfix">
-			<% if @language && controller_name != "languages" %>
-		    <li class="pull-left">
-					<%= link_to "Overview", @language, :class => "em", :title => @language.name %>
-				</li>
-			<% end %>
-	    <li class="pull-left">
-				<%= link_to "All languages", languages_path, :class => "em" %>
-			</li>		
-	    <li class="divider" style="clear:both"></li>
-	    <%= li_wrapped_links_to_same_controller_all_languages %>
-	  </ul>
+    <a class="dropdown-toggle" data-toggle="dropdown">
+      <%= @language ? @language.to_s : "Language contributions" %>
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu clearfix">
+      <% if @language && controller_name != "languages" %>
+        <li class="pull-left">
+          <%= link_to "Overview", @language, :class => "em", :title => @language.name %>
+        </li>
+      <% end %>
+      <li class="pull-left">
+        <%= link_to "All languages", languages_path, :class => "em" %>
+      </li>
+      <li class="divider" style="clear:both"></li>
+      <%= li_wrapped_links_to_same_controller_all_languages %>
+    </ul>
   </li>
-	<li class="divider-vertical"></li>
+  <li class="divider-vertical"></li>
+
 </ul>
-
-

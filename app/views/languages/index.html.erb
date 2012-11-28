@@ -17,23 +17,14 @@
             zoom: 2,
             mapTypeControl: false,
             raw: "{
-              scrollwheel: false,
               streetViewControl: false,
+              overviewMapControl: true,
               navigationControlOptions: {
                 style: google.maps.NavigationControlStyle.SMALL
               }
             }"
           },
-          markers: {
-            data: @map_data,
-            options: {
-              randomize: true,
-              max_random_distance: 50000,
-              raw: "{
-                animation: google.maps.Animation.DROP
-              }"
-            }
-          }
+          markers: { data: @map_data, options: { randomize: false } }
         }) %>
       </div>
     </div>

@@ -41,7 +41,6 @@
         zoom: 5,
         mapTypeControl: true,
         raw: "{
-          scrollwheel: false,
           streetViewControl: false,
           overviewMapControl: true,
           navigationControlOptions: {
@@ -49,16 +48,7 @@
           }
         }"
       },
-      markers: {
-        data: @map_data,
-        options: {
-          randomize: true,
-          max_random_distance: 50000,
-          raw: "{
-            animation: google.maps.Animation.DROP
-          }"
-        }
-      }
+      markers: { data: @map_data, options: { randomize: false } }
     }) %>
   </div>
 

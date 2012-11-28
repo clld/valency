@@ -1,9 +1,9 @@
 module ApplicationHelper
   
+  # If a @language is specified and the action name is "index"
+  # then this must be the controller of a language-specific resource
+  # otherwise, link to language page
   def li_wrapped_links_to_same_controller_all_languages
-    # If a @language is specified and the action name is "index"
-    # then this must be the controller of a language-specific resource
-    # otherwise, link to language page
     same_controller = @language &&
       action_name == 'index' && controller_name != 'languages'
     @languages.map do |lang|
@@ -25,23 +25,7 @@ module ApplicationHelper
     end.join("\n").html_safe
   end
   
-  
-  def li_wrapped_nav_links_to_controllers controller_names
-    css_class = "disabled" if @language.nil?
-    controller_names.map do |c_name|
-      link_href = send('language_' << c_name << '_path', @language) if @language
-      capture do
-        displayed_name = c_name == 'verbs' ? 'Verb forms' : c_name.humanize
-        content_tag(:li, :class => css_class, 'data-controller' => c_name) do
-          link_to_unless_current displayed_name, link_href do
-            content_tag(:a, displayed_name)
-          end
-        end
-      end
-    end.join("\n").html_safe
-  end
-  
-  # generate <li> tags for the submenu (one .tab per controller)
+  # generate <li> tags for the submenu (one per controller)
   def submenu_tabs controller_names
     css_class = "disabled" if @language.nil?
     controller_names.map do |c_name|
