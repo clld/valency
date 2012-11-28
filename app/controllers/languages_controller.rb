@@ -11,10 +11,35 @@ class LanguagesController < ApplicationController
     # custom order
     rr              = @regions
     @regions_custom = [rr[0], rr[2], rr[4], rr[1], rr[3]]
+    @map_data = get_map_data @languages
     
-    # prepare data for gmaps4rails' gmaps helper
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @languages }
+    end
+  end
+  
+  # GET /languages/1
+  # GET /languages/1.json
+  def show
+    @language        = Language.find_by_name_for_url(params[:id])
+    @iso_code        = @language.iso_code
+    @contributors    = @language.get_contributors
+    @native_speakers = @language.get_native_speakers
+
+    @map_data = get_map_data @language
+    
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @language }
+    end
+  end
+
+  # prepare data for gmaps4rails' gmaps helper
+  def get_map_data language_set
     @google_api_key ||= ENV['GOOGLE_API_KEY']
-    @map_data = @languages.to_gmaps4rails do |lang, marker|
+    
+    language_set.to_gmaps4rails do |lang, marker|
       marker.infowindow render_to_string(
         partial: 'map_infowindow', object: lang, as: 'language'
       )
@@ -30,23 +55,8 @@ class LanguagesController < ApplicationController
         region: lang.region_id
       })
     end
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @languages }
-    end
+
   end
   
-  # GET /languages/1
-  # GET /languages/1.json
-  def show
-    @language = Language.find_by_name_for_url(params[:id])
-    @iso_code = @language.iso_code
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @language }
-    end
-  end
 
 end

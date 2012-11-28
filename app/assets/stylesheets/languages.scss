@@ -22,8 +22,26 @@ tr.language {
   width: 6em;
 }
 
+// contributor profiles / pictures
+.contributor {
+  .contributor-name {
+    color:$linkColor;
+  }
+  width: 12em;
+  h5 {
+    margin-bottom:8px;
+  }
+  .photo {
+    max-width:100%;
+    max-height:200px;
+  }
+  & + .contributor {
+    margin-left:1em;
+  }
+}
+
 // customized styles for gmaps4rails
-.map_container {
+.map_container { // the outer container of the map: governs borders etc.
   padding: 6px;
   border: {
     width: 1px;
@@ -31,6 +49,15 @@ tr.language {
     color: $tableBorder;
   };
   @include box-shadow(0 0 10px 0 rgba(64, 64, 64, 0.3));
+  .gmaps4rails_map { // the inner map div
+    height: 500px;
+  }
+  &.single {
+    height:300px;
+    .gmaps4rails_map { // the inner map div
+      height: 300px;
+    }
+  }
 }
 // fix for Bootstrap
 .map_container, .gmaps4rails_map {
@@ -43,10 +70,6 @@ tr.language {
   } 
 }
 
-.gmaps4rails_map {
-  //width: 800px;
-  height: 500px;
-}
 
 .bing_map {
    position: absolute;

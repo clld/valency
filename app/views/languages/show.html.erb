@@ -1,14 +1,16 @@
 <!-- Language details -->
 <% enable_gmaps %>
-<h1>
-  <%= @language %>
-  <% if @iso_code %>
-    <a title="ISO code" href="http://www.glottolog.org/glottolog/?iso=<%= @iso_code %>" 
-       class="label"><%= @iso_code %></a>
-  <% end %>
-</h1>
 <div class="row">
-	<div class="span6">
+  <div class="span6">
+    
+    <h1>
+      <%= @language %>
+      <% if @iso_code %>
+        <a title="ISO code" href="http://www.glottolog.org/glottolog/?iso=<%= @iso_code %>" 
+           class="label"><%= @iso_code %></a>
+      <% end %>
+    </h1>
+    
     <table class="table table-condensed table-hover" id="language_metadata">
       <% if @language.variety %>
         <tr>
@@ -29,11 +31,50 @@
         </tr>
       <% end %>
     </table>
+    
+    <%= gmaps({
+      map_options: {
+        container_class: "map_container single",
+        provider_key: @google_api_key,
+        auto_adjust:  true,
+        auto_zoom:    false,
+        zoom: 5,
+        mapTypeControl: true,
+        raw: "{
+          scrollwheel: false,
+          streetViewControl: false,
+          overviewMapControl: true,
+          navigationControlOptions: {
+            style: google.maps.NavigationControlStyle.SMALL
+          }
+        }"
+      },
+      markers: {
+        data: @map_data,
+        options: {
+          randomize: true,
+          max_random_distance: 50000,
+          raw: "{
+            animation: google.maps.Animation.DROP
+          }"
+        }
+      }
+    }) %>
   </div>
 
-  <div class="span6"><div class="todo">
-    <strong>To Do:</strong> display Contributor information
-  </div></div>
+  <div class="span6">
+    <h4><%= "Contributor".pluralize @contributors.size %></h4>
+    <% if @contributors.size == 0 %>
+      (not specified)
+    <% else %>
+      <%= render partial: 'contributor', collection: @contributors %>
+    <% end %>
+    
+    <% if @native_speakers.size > 0 %>
+      <h4 class="clear">Native speakers, consultants</h4>
+      <%= @native_speakers.map{|p|p.name}.to_sentence %>
+    <% end %>
+  </div>
 </div>
 
 <div class="row new">

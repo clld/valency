@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905162708) do
+ActiveRecord::Schema.define(:version => 20121128055959) do
 
   create_table "alternation_values", :id => false, :force => true do |t|
     t.integer "verb_id"
@@ -231,6 +231,9 @@ ActiveRecord::Schema.define(:version => 20120905162708) do
     t.string   "url"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "affiliation"
+    t.string   "photo_url"
+    t.string   "email"
   end
 
   add_index "people", ["id"], :name => "index_people_on_id", :unique => true

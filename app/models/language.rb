@@ -47,4 +47,16 @@ class Language < ActiveRecord::Base
     self.contributors.where(contributor: 'True').count
   end
   
+  alias_method :contributors_count, :contributor_count
+  
+  def get_native_speakers
+    Person.joins(:languages).where(contributions:{language_id: self.id}, native_speaker: 'True').order('contributions.sort_order_number ASC')
+  end
+
+  def native_speaker_count
+    self.contributors.where(native_speaker: 'True').count
+  end
+  
+  alias_method :native_speakers_count, :native_speaker_count
+  
 end

@@ -65,6 +65,11 @@ class FieldFinder
       },
       CodingFrame => {
         'derived' => 'z_calc_basic_or_derived'
+      },
+      Person => {
+        'email'       => 'email_address',
+        'affiliation' => 'academic affiliation',
+        'photo_url'   => 'photo url'
       }
     }
   end
@@ -125,7 +130,7 @@ class FieldFinder
     attr_names.each do |attr_name| # for each of the model's attributes
       
       special = @special_field_name[@model] # possibly nil
-      f_name = special.nil? ? nil : special[attr_name] # possibly nil
+      f_name  = special.nil? ? nil : special[attr_name] # possibly nil
 
       if f_name then
         if fm_fields.include?(f_name)
