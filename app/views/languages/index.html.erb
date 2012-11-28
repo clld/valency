@@ -10,14 +10,14 @@
         <%= gmaps({
           map_options: {
             provider_key: @google_api_key,
+            center_latitude:  0,
+            center_longitude: 0,
             auto_adjust:  true,
             auto_zoom:    false,
             zoom: 2,
-            center_latitude:  30,
-            center_longitude: 130,
-            mapTypeControl:   false,
-            disableDoubleClickZoom: true,
+            mapTypeControl: false,
             raw: "{
+              scrollwheel: false,
               streetViewControl: false,
               navigationControlOptions: {
                 style: google.maps.NavigationControlStyle.SMALL
@@ -27,6 +27,8 @@
           markers: {
             data: @map_data,
             options: {
+              randomize: true,
+              max_random_distance: 50000,
               raw: "{
                 animation: google.maps.Animation.DROP
               }"
@@ -45,9 +47,12 @@
           <% next if region.nil? %>
           <% languages_in_region = @languages.select{|l| l.continent == region} %>
 
-          <%= content_tag :h5, region, id: languages_in_region[0].region_id %>
+          <%= content_tag :h5, id: languages_in_region[0].region_id do %>
+            <%= region %>
+            <small>(<%= languages_in_region.size %>)</small>
+          <% end %>
 
-          <table class="table table-very-condensed">
+          <table class="table table-very-condensed table-hover">
             <tbody>
               <% languages_in_region.each do |lang| %>
                 <%= content_tag_for(:tr, lang) do %>

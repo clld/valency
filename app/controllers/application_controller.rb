@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   # meanings dropdown and more
   def global_queries
     @languages     ||= Language.all
-    @meanings_core ||= Meaning.where(meaning_list: ['Core list', 'Extended list'])
+    @meanings_core ||= Meaning.core
   end
   
   

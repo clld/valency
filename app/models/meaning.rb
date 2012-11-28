@@ -6,6 +6,7 @@ class Meaning < ActiveRecord::Base
   has_and_belongs_to_many :verbs
 
   default_scope order(:label)
+  scope :core, where(meaning_list: ['Core list', 'Extended list'])
   
   def to_s
     label

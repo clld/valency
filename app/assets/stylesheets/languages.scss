@@ -1,19 +1,26 @@
-
+// styles for the /languages list
 tr.language {
   th.language-name {
     width:40%;
   }
-
   td.contributor {
     padding-left:1em;    
   }
   .person {
     white-space: nowrap;
   }
+  &.selected, &.selected:hover {
+    background-color: yellow;
+  }
+}
+[id^="region"].selected {
+  background-color: yellow;
 }
 
 // copied over from JS:
-// $('#language_metadata th').css('width', '6em')
+#language_metadata th {
+  width: 6em;
+}
 
 // customized styles for gmaps4rails
 .map_container {
@@ -49,3 +56,6 @@ tr.language {
    height: 400px;
    border:#555555 2px solid;
 } 
+.infowindow.text {
+	max-width: 250px;
+}

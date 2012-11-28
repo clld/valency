@@ -43,4 +43,8 @@ class Language < ActiveRecord::Base
     Person.joins(:languages).where(contributions:{language_id: self.id}, contributor: 'True').order('contributions.sort_order_number ASC')
   end
   
+  def contributor_count
+    self.contributors.where(contributor: 'True').count
+  end
+  
 end
