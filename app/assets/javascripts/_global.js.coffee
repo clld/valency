@@ -24,27 +24,9 @@
 		# align submenu with language name / dropdown
 		@submenu.offset left: @language_dropdown.offset().left
 				
-		# prevent .disabled links from firing; show tooltip instead
+		# prevent .disabled links from firing
 		$('.disabled').click (e) -> e.preventDefault()
-		@dropdown_tooltip @language_dropdown # calls the method of global
 	
-	# when a .disabled .nav li item is clicked, show a tooltip
-	# on the language dropdown trigger link
-	dropdown_tooltip: ($menu_item) ->
-		$menu_item.tooltip
-			html:      false
-			placement: 'bottom'
-			title:     'Please choose a language'
-			trigger:   'manual'
-		$menu_item.mouseenter -> $menu_item.tooltip 'hide'
-		$('.nav li.disabled a').click =>
-			$menu_item.tooltip 'show'
-			window.setTimeout( =>
-				$menu_item.tooltip 'hide'
-			, 1200)
-		
-	
-
 
 # @UTIL.init calls these: 
 # @VALENCY.global.init()

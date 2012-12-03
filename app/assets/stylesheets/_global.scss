@@ -16,17 +16,23 @@
 		  cursor: default;
 		}
 	}
+	.navbar-inner.no-gradient {
+    background-image:none;
+    background-color:lighten($vt, 10%);
+    border:none;
+  }
+  .nav-tabs { // override Bootstrap defaults: no bottom border in nav tabs
+    border-bottom: none;
+    & > li {
+      margin-bottom: 0;
+    }    
+  }
 }
 /*.nav-collapse {
 	.nav > li > a, .dropdown-menu a {
 		font-weight: normal;
 	}
 }*/
-.navbar .navbar-inner.no-gradient {
-  background-image:none;
-  background-color:lighten($vt, 10%);
-  border:none;
-}
 
 // button to toggle the comment below it
 .btn-mini.with-h1{ // button to be aligned with h1
@@ -139,10 +145,6 @@ h2, h3, h4, h5 {
 .object-language { font-style:italic; }
 
 // utility classes: font styles
-span.sc { // small caps
-	text-transform:lowercase;
-	font-variant:small-caps;
-}
 .em { font-style:italic; }
 
 /* utility classes: colors */

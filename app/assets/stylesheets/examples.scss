@@ -1,6 +1,12 @@
 // Example-specific styles. Esp. for gloss formatting
 // Used in all views that show examples.
 
+span.sc { // small caps
+	text-transform:lowercase;
+	font-variant:small-caps;
+}
+
+
 // example div (contains everything from ex. number to interlinear glossed text)
 .examples-container {
 	display:table;
@@ -37,9 +43,10 @@
 			margin-left:0.5em;
 		}
 		.gl { // a chunk of gloss
-			font-size:85%;
+			font-size:90%;
 			.sc {
 				font-size:120%;
+				line-height:1.1em;
 			}
 		}
 	}
