@@ -1,6 +1,6 @@
 @import "variables"; /* to override Bootstrap defaults */
 @import "bootstrap"; /* other variables are set to defaults */
-body { padding-top: $navbarHeight; } /* leave room for the top nav bar */
+// body { padding-top: $navbarHeight; } /* leave room for the top nav bar */
 @import "bootstrap-responsive"; /* react to smaller screen sizes */
 
 /* custom mixins */

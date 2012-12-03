@@ -1,8 +1,12 @@
 <!-- navigation partial -->
 <!-- this is rendered in the top navbar -->
+<div class="navbar-inner">
+ <div class="container">
+
 <%= link_to "Valency", root_path, :class => 'brand' %>
 
-<ul class="nav" style="margin-right:0">
+<ul class="nav">
+
   <!-- Meanings dropdown -->
   <li class="dropdown" id="meaning_dropdown" data-controller="meanings">
     <a class="dropdown-toggle" data-toggle="dropdown">
@@ -46,3 +50,18 @@
   <li class="divider-vertical"></li>
 
 </ul>
+</div>
+</div>
+
+
+<% if @language %>
+<div class="navbar-inner no-gradient">
+  <div class="container">
+    <ul class="nav nav-tabs" id="submenu">
+      <%= submenu_tabs %w(languages verbs coding_frames alternations examples) %>
+    </ul>
+  </div>
+</div>
+<% end %>
+
+

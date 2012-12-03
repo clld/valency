@@ -19,18 +19,12 @@
 <body data-controller="<%= controller_name %>" data-action="<%= action_name %>">
 
   <header class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <%= render 'layouts/navigation' %>
-      </div>
-    </div>
+    <%= render 'layouts/navigation' %>
   </header>
 
   <div id="main" role="main">
     <div class="container">
       
-      <%= render 'layouts/submenu' unless controller_name == 'meanings' or controller_name == 'languages' && action_name == 'index' %>
-
       <div class="row">
         <div class="span12">
           <%= render 'layouts/messages' %>

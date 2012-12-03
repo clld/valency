@@ -17,10 +17,15 @@
 		}
 	}
 }
-.nav-collapse {
+/*.nav-collapse {
 	.nav > li > a, .dropdown-menu a {
 		font-weight: normal;
 	}
+}*/
+.navbar .navbar-inner.no-gradient {
+  background-image:none;
+  background-color:lighten($vt, 10%);
+  border:none;
 }
 
 // button to toggle the comment below it

@@ -9,6 +9,10 @@
 		# object caching
 		@language_dropdown or= $('#language_dropdown')
 		@meaning_dropdown  or= $('#meaning_dropdown')
+		@submenu or= $('#submenu')
+		
+		# shift body down by height of navbar
+		$(document.body).css 'padding-top', $('.navbar-fixed-top').outerHeight()
 		
 		# show dropdown menus in columns (see custom jQuery plugin)
 		@language_dropdown.find('.dropdown-menu .divider').nextAll().inColumns 3
@@ -17,9 +21,9 @@
 		# setup button to toggle the comment box below it – see custom jQuery plugins
 		$('.toggle-next').align_below_and_setup_toggle()
 		
-		# make navbar link for current controller active
-		$("header [data-controller='#{window.VALENCY.controller}']").addClass "active"
-		
+		# align submenu with language name / dropdown
+		@submenu.offset left: @language_dropdown.offset().left
+				
 		# prevent .disabled links from firing; show tooltip instead
 		$('.disabled').click (e) -> e.preventDefault()
 		@dropdown_tooltip @language_dropdown # calls the method of global
