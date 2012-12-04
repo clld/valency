@@ -170,7 +170,8 @@ div.inline{
 		padding-right:5px;
 	}
 }
-a.no-href { // treat like regular link
+/* link without href: style like regular link */
+a.no-href {
 	&:hover {
 		cursor: pointer;
 	}
@@ -184,7 +185,7 @@ table.no-borders {
 	}
 }
 
-// highly condensed table
+/* highly condensed table */
 .table-very-condensed {
   font-size: 90%;
 	th, td {

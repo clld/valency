@@ -22,10 +22,17 @@
 		$('.toggle-next').align_below_and_setup_toggle()
 		
 		# align submenu with language name / dropdown
-		@submenu.offset left: @language_dropdown.offset().left
+		@submenu.offset({left: @language_dropdown.offset().left}).fadeIn() if @submenu.length > 0
 				
 		# prevent .disabled links from firing
 		$('.disabled').click (e) -> e.preventDefault()
+		
+		# global settings for dataTables. Extend these to customize settings
+		@oDTSettings =
+		  fnInitComplete: (oSettings, json) ->
+		    alert 'DataTables has finished its initialisation.'
+		  
+		  
 	
 
 # @UTIL.init calls these: 

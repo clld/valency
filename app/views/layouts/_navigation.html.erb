@@ -35,11 +35,6 @@
       <b class="caret"></b>
     </a>
     <ul class="dropdown-menu clearfix">
-      <% if @language && controller_name != "languages" %>
-        <li class="pull-left">
-          <%= link_to "Overview", @language, :class => "em", :title => @language.name %>
-        </li>
-      <% end %>
       <li class="pull-left">
         <%= link_to "All languages", languages_path, :class => "em" %>
       </li>
@@ -57,7 +52,7 @@
 <% if @language %>
 <div class="navbar-inner no-gradient">
   <div class="container">
-    <ul class="nav nav-tabs" id="submenu">
+    <ul class="nav nav-tabs hide" id="submenu">
       <%= submenu_tabs %w(languages verbs coding_frames alternations examples) %>
     </ul>
   </div>

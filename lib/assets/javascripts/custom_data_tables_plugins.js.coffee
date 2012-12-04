@@ -14,7 +14,7 @@ sort_empty_as_zzz = (iCol) ->
 
 (($) ->
 	api = $.fn.dataTableExt.oApi # namespace
-	################## utility methods #################################
+	#---------------------- utility methods ---------------------------------
 	# get valid column index by title or index
 	# @param mCol: integer or string (column title)
 	# @returns: undefined if no column found or index invalid
@@ -52,7 +52,7 @@ sort_empty_as_zzz = (iCol) ->
 			@fnFilter sTerm, mCol, bRegex
 			true
 	
-	################## showing and hiding columns ######################
+	#--------------------------------- showing and hiding columns ---------------------------------
 	# hide a column by index or title
 	api.hideColumn = (oS, mCol) ->
 		if (mCol = @getColumnIndex(mCol))?
@@ -93,7 +93,7 @@ sort_empty_as_zzz = (iCol) ->
 		if (mCol = @getColumnIndex(mCol))?
 			oSettings.aoColumns[mCol].bVisible
 	
-	#################### change pagination / scrolling to show particular row 
+	#--------------------------------- change pagination / scrolling to show particular row 
 	# plugin by Allan Jardine
 	# @params nRow must be a DOM node object, *not* a jQuery object.
 	api.fnDisplayRow = (oSettings, nRow) ->
@@ -110,5 +110,5 @@ sort_empty_as_zzz = (iCol) ->
 			oSettings.oApi._fnCalculateEnd oSettings
 		oSettings.oApi._fnDraw oSettings
 	
-#################################################
+#--------------------------------------------------------------------
 )(jQuery)

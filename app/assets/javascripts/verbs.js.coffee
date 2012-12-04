@@ -128,5 +128,3 @@ oDTSettings =
 		# move the .dataTables_filter div into the .dt-filters div
 		$('.dataTables_filter').detach().appendTo($('.dt-filters'))
 		
-	
-

@@ -26,7 +26,7 @@ class CodingFrame < ActiveRecord::Base
   # treat "replace me!" as empty
   def coding_frame_schema
     cfs = self[:coding_frame_schema]
-    cfs unless (cfs && cfs.match(/replace me/i))
+    cfs unless cfs && cfs.match(/replace me/i)
   end
   
   # get basic Microroles of this Coding frame
@@ -42,6 +42,13 @@ class CodingFrame < ActiveRecord::Base
     self.coding_frame_index_numbers.includes(
       :argument_type, :coding_set, :microroles
     )
+  end
+  
+  # count the number of distinct arguments for sorting
+  def arg_count
+    cfs = coding_frame_schema
+    0 if cfs.nil?
+    coding_frame_schema.scan(/\d/).uniq.size
   end
 
 end

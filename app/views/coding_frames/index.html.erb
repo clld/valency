@@ -4,12 +4,13 @@
   <small>of <%= link_to @language.name, @language %></small>
 </h1>
 
-<table id="coding_frames_list" class="table table-striped table-bordered dataTable">
+<table id="coding_frames_list" class="table table-striped table-hover table-bordered-sharp dataTable">
   <thead>
     <tr>
       <th>Coding frame</th>
-      <th>Description</th>
-      <th>Meaning labels &amp; Verb forms</th>
+      <th data-hide="true">derived</th>
+      <th data-hide="true">arg_count</th>
+      <th>Meaning labels &amp; Verbs</th>
     </tr>
   </thead>
     
@@ -17,8 +18,9 @@
     <% @coding_frames.each do |cf| %>
     <% verbs = cf.verbs %>
       <tr>
-        <td><%= link_to(cf, [@language, cf]) unless cf.blank? %></td>
-        <td><%= cf.description if cf %></td>
+        <td><%= link_to(cf, [@language, cf]) unless cf.to_s.blank? %></td>
+        <td><%= cf.derived   %></td>
+        <td><%= cf.arg_count %></td>
         <td><%= verb_list(verbs) if verbs %></td>
       </tr>
     <% end %>
