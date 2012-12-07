@@ -1,0 +1,58 @@
+// styles for CSS (animations) used by the Isotope jQuery plugin
+// For documentation see http://isotope.metafizzy.co/docs/introduction.html
+// modified to take advantage of SCSS
+
+$isotopeTransitionDuration: 0.8s;
+@mixin transition-duration($duration) {
+  -webkit-transition-duration: $duration;
+     -moz-transition-duration: $duration;
+      -ms-transition-duration: $duration;
+       -o-transition-duration: $duration;
+          transition-duration: $duration;
+}
+@mixin transition-property($properties...) {
+  -webkit-transition-property: $properties;
+     -moz-transition-property: $properties;
+      -ms-transition-property: $properties;
+       -o-transition-property: $properties;
+          transition-property: $properties;
+}
+
+
+// Isotope CSS3 transitions 
+.isotope {
+  @include transition-property(height, width);
+
+  &, & .isotope-item {
+    @include transition-duration($isotopeTransitionDuration);
+  }
+
+  .isotope-item {
+    -webkit-transition-property: -webkit-transform, opacity;
+       -moz-transition-property:    -moz-transform, opacity;
+        -ms-transition-property:     -ms-transform, opacity;
+         -o-transition-property:      -o-transform, opacity;
+            transition-property:         transform, opacity;
+
+    // Isotope Filtering
+    z-index: 2;
+    &.isotope-hidden {
+      pointer-events: none;
+      z-index: 1;
+    }    
+  }
+  
+  // disable CSS transitions for
+  // containers with infinite scrolling
+  &.infinite-scrolling {
+    @include transition(none);
+  }
+}
+
+
+// disabling Isotope CSS3 transitions 
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  @include transition-duration(0s);
+}

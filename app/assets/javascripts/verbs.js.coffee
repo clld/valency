@@ -1,6 +1,9 @@
 # JS for Verbs
 @VALENCY or= {}
 
+ns  = @VALENCY.global
+max = String.fromCharCode 65535
+
 altn_occurs_sort_order =
 	'Regularly' :'A'
 	'Marginally':'B'
@@ -32,44 +35,44 @@ sort_by_altn_name = (iCol) ->
 		else
 			if type is 'set' then src[iCol] = val else src[iCol]
 	
-
+# dataTable settings
 oDTSettings = 
-	"sDom": "<'row'<'span4'i><'span8'f>>t"
-	"bPaginate": false
-	"oLanguage":
-		"sInfoFiltered": " (filtered)"
-		"sSearch": "Search:"
-	"aaSorting": [[1,'asc'], [0,'asc']] # "Regularly" first, then alphabetically
+	sDom: "<'row'<'span4'i><'span8'f>>t"
+	bPaginate: false
+	oLanguage:
+		sInfoFiltered: " (filtered)"
+		sSearch: "Search:"
+	aaSorting: [[1,'asc'], [0,'asc']] # "Regularly" first, then alphabetically
 	# custom column settings
 	# colums: 0:altn_name, 1:occurs, 2:comment, 3:coded, 4:derived_cf, 5:example
-	"aoColumnDefs": [
+	aoColumnDefs: [
 		{
-			"aTargets":[0,2,4,5]
-			"sType": "html"
+			aTargets:[0,2,4,5]
+			sType: "html"
 		},{
-			"aTargets": [1] # column 1: Occurs
-			'sWidth'  : '10%'
-			"mDataProp": ( src, type, val ) ->
-				return altn_occurs_sort_order[src[1]] or 'z' if type is 'sort'
+			aTargets: [1] # column 1: Occurs
+			sWidth  : '10%'
+			mDataProp: ( src, type, val ) ->
+				return altn_occurs_sort_order[src[1]] or max if type is 'sort'
 				if type is 'set' then src[1] = val else src[1]
 		},{
-			"aTargets": [0] # alternation name
-			"sWidth"  : "33%"
+			aTargets: [0] # alternation name
+			sWidth  : "33%"
 		},{
-			"aTargets": [2] # comment
-			"sWidth"  : "15%"
-			'asSorting':['asc']
+			aTargets: [2] # comment
+			sWidth  : "15%"
 		},{
-			'aTargets': [3] # coded? – always hide
-			'bVisible': false
+  		aTargets: [2, 4, 5] # comment, dcf, examples
+  		asSorting:['asc']
+  	},{
+			aTargets: [3] # coded? – always hide
+			bVisible: false
 		},{
-			'aTargets': [4] # derived coding frame
-			'sWidth'  : '20%'
-			'asSorting':['asc']
+			aTargets: [4] # derived coding frame
+			sWidth  : '20%'
 		},{
-			"aTargets" : [5] # examples
-			"sWidth"   : "50%"
-			'asSorting':['asc']
+			aTargets : [5] # examples
+			sWidth   : "50%"
 		}
 	]
 	
@@ -79,52 +82,27 @@ oDTSettings =
 		
 	
 	index: ->
-		$('#verbs_list').dataTable
-			"sDom": "<'row'<'span4'i><'span8'f>>tS"
-			"sScrollY": "700px"
-			"oLanguage":
-				"sInfoFiltered": " (filtered)"
-				"sSearch": "Filter:"
-		# specific to /verbs index page
+		$('#verbs_list').dataTable $.extend(
+			ns.oDTSettings,
+			{
+				sDom: "<'row'<'span4'i><'span8'f>>tS"
+				sScrollY: "700px"
+				oLanguage:
+					sInfoFiltered: " (filtered)"
+					sSearch: "Filter:"				
+			}
+		)
 	
 	show: ->
 		$('.examples-container').each -> 
-			$(this).children().show_first()
+			$(this).children().show_first(1, 'btn btn-mini')
 		
-		altn_values_dt = $('#av_list').dataTable oDTSettings
+		$dt = $('#av_list').dataTable $.extend(
+			ns.oDTSettings, oDTSettings)
 		
-		# don't allow body to shrink vertically when dataTable is filtered
-		$('body').css 'min-height', $('body').outerHeight() 
-		
-		altn_values_dt.sortEmptyLast('examples', 'derived coding frame', 'comment')
+		$dt.sortEmptyLast('examples', 'derived coding frame', 'comment')
 		
 		# sort examples in dataTable by example number
-		altn_values_dt.setCustomSortFunction 'examples', sort_by_example_number
-		altn_values_dt.setCustomSortFunction 'alternation name', sort_by_altn_name
-		
-		altn_values_dt.hideColumns('derived coding frame', 'comment')
-		
-		
-		# checkbox with data-column attribute "columnTitle" shall toggle that column
-		$('input.toggle-dt-column').each ->
-			$(this).attr 'checked', altn_values_dt.isVisible $(this).data().column
-		.click ->
-			$(this).attr 'checked', altn_values_dt.toggleColumn $(this).data().column 
-		
-		# buttons to filter dataTable by columns
-		$('.dt-filters .column-filter').click (event)->
-			$btn    = $(event.target)
-			$group  = $(this) # the .btn-group to filter a column
-			column  = $group.data().column
-			strings = ( $(btn).val() || $(btn).text() for btn in $btn.siblings() when $(btn).hasClass 'active' )
-			strings.push $btn.val() || $btn.text() unless $btn.hasClass 'active'
-			altn_values_dt.filterColumn column, strings.join('|')
-		
-		# link to clear all filters
-		$('.dt-filters-clear').click ->
-			altn_values_dt.fnFilterClear()
-			$('.dt-filters .btn').removeClass 'active'
+		$dt.setCustomSortFunction 'examples', sort_by_example_number
+		$dt.setCustomSortFunction 'alternation name', sort_by_altn_name
 			
-		# move the .dataTables_filter div into the .dt-filters div
-		$('.dataTables_filter').detach().appendTo($('.dt-filters'))
-		

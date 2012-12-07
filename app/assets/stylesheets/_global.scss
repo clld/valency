@@ -28,11 +28,12 @@
     }    
   }
 }
-/*.nav-collapse {
-	.nav > li > a, .dropdown-menu a {
-		font-weight: normal;
-	}
-}*/
+
+// mini buttons with icons: change alignment
+.btn-mini [class^="icon-"] {
+  vertical-align:top;
+}
+
 
 // button to toggle the comment below it
 .btn-mini.with-h1{ // button to be aligned with h1
@@ -78,7 +79,7 @@ form {
 	}
 }
 
-// dataTable filters: buttons/btn-grouos to toggle column filters
+// dataTable filters: buttons/btn-groups to toggle column filters
 .dt-filters {
 	background-color:$grayLighter;
 	padding:10px;
@@ -117,11 +118,6 @@ form {
   }
 	li:not(.divider) {
 		display:block;
-//		a.disabled:hover {
-//			background-color: inherit;
-//			background-image: none;
-//			color: $linkColor;
-//		}
 	}
 	.no-menu-item {
 		& > a {
@@ -178,37 +174,40 @@ a.no-href {
 }
 
 /**************** TABLES ****************/
-// table without borders
-table.no-borders {
-	th, td {
-		border-top:none;
+table {
+	/* table without borders */
+	&.no-borders {
+		th, td {
+			border-top:none;
+		}
+	}
+	
+	/* highly condensed table */
+	&.table-very-condensed {
+	  font-size: 90%;
+		th, td {
+			padding: 0; //2px 0;
+		}
+	}
+
+	/* bordered table with sharp corners */
+	&.table-bordered-sharp {
+		border: 1px solid $tableBorder;
+		th, td {
+	    border-left: 1px solid $tableBorder;
+	  }
+		/* Prevent double borders – see Bootstrap's .table-bordered class */
+	  caption + thead tr:first-child th,
+	  caption + tbody tr:first-child th,
+	  caption + tbody tr:first-child td,
+	  colgroup + thead tr:first-child th,
+	  colgroup + tbody tr:first-child th,
+	  colgroup + tbody tr:first-child td,
+	  thead:first-child tr:first-child th,
+	  tbody:first-child tr:first-child th,
+	  tbody:first-child tr:first-child td {
+	    border-top: 0;
+	  }
 	}
 }
 
-/* highly condensed table */
-.table-very-condensed {
-  font-size: 90%;
-	th, td {
-		padding: 0; //2px 0;
-	}
-}
-
-// bordered table with sharp corners
-.table-bordered-sharp {
-	border: 1px solid $tableBorder;
-	th, td {
-    border-left: 1px solid $tableBorder;
-  }
-	// Prevent double borders – copied from Bootstrap's .table-bordered class
-  caption + thead tr:first-child th,
-  caption + tbody tr:first-child th,
-  caption + tbody tr:first-child td,
-  colgroup + thead tr:first-child th,
-  colgroup + tbody tr:first-child th,
-  colgroup + tbody tr:first-child td,
-  thead:first-child tr:first-child th,
-  tbody:first-child tr:first-child th,
-  tbody:first-child tr:first-child td {
-    border-top: 0;
-  }
-}

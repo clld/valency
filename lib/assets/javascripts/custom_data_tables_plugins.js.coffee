@@ -4,17 +4,19 @@
 # requires DataTables v 1.9.2
 ###
 
-# this is a necessary closure, used in the sortEmptyLast plugin
-# it makes empty table cells behave like 'zzz' when sorting
-sort_empty_as_zzz = (iCol) ->
-	(src, type, val) ->
-		if   type is 'sort' then (src[iCol] or 'zzz') else
-			if type is 'set'  then  src[iCol] = val     else src[iCol]
-	
+max = String.fromCharCode 65535 # last char of basic multilingual pane
 
 (($) ->
 	api = $.fn.dataTableExt.oApi # namespace
 	#---------------------- utility methods ---------------------------------
+	# this is a necessary closure, used in the sortEmptyLast plugin
+	# it makes empty table cells behave like 'zzz' when sorting
+	api._sorter_fn_empty_last = (iCol) ->
+  	(src, type, val) ->
+  		if   type is 'sort' then (src[iCol] or max) else
+  			if type is 'set'  then  src[iCol] = val   else src[iCol]
+	
+	
 	# get valid column index by title or index
 	# @param mCol: integer or string (column title)
 	# @returns: undefined if no column found or index invalid
@@ -26,13 +28,13 @@ sort_empty_as_zzz = (iCol) ->
 			mCol = mCol.toLowerCase()
 			for col, i in cols
 				return i if col.sTitle.toLowerCase() is mCol
-		null
+		null # default to null: allows checking with `dataTableInstance.getColumnIndex('colname')?`
 	
 	# uses the plugin setCustomSortFunction to set up column sorting
 	# to sort empty cells last for each of the passed columns
 	api.sortEmptyLast = (oSettings, cols...) ->
 		for col in cols
-			@setCustomSortFunction col, sort_empty_as_zzz
+			@setCustomSortFunction col, api._sorter_fn_empty_last
 	
 	# sets the sort function of column mCol to be the result
 	# returned by 
@@ -92,6 +94,12 @@ sort_empty_as_zzz = (iCol) ->
 	api.isVisible = (oSettings, mCol) ->
 		if (mCol = @getColumnIndex(mCol))?
 			oSettings.aoColumns[mCol].bVisible
+			
+	# check if the column is empty
+	api.isEmpty = (oSettings, mCol) ->
+	  if (mCol = @getColumnIndex(mCol))?
+	    oSettings.aoData.every (oRow) ->
+	      oRow._aData[mCol] in ["", null, undefined]
 	
 	#--------------------------------- change pagination / scrolling to show particular row 
 	# plugin by Allan Jardine
