@@ -34,6 +34,10 @@
   vertical-align:top;
 }
 
+// disabled labels
+label.disabled {
+  color:$grayLight;
+}
 
 // button to toggle the comment below it
 .btn-mini.with-h1{ // button to be aligned with h1
@@ -82,22 +86,22 @@ form {
 // dataTable filters: buttons/btn-groups to toggle column filters
 .dt-filters {
 	background-color:$grayLighter;
+	border:1px dashed $grayDark;
 	padding:10px;
 
-	.btn-label {
-		display:inline-block;
-		line-height:22px; // same as outerHeight of .btn-mini
-		vertical-align:middle;
-		margin-right:5px;
+	label {
+	  margin-right:5px;
+	  &:nth-child(n+2){
+	    margin-left:10px;
+	  }
 	}
 	.btn-group {
+	  vertical-align:middle;
 		display:inline-block;
 	}
-	
 	.dataTables_filter {
 		display:inline-block;
 		float:right;
-		height:30px;
 	}
 } 
 
@@ -181,7 +185,7 @@ table {
 			border-top:none;
 		}
 	}
-	
+		
 	/* highly condensed table */
 	&.table-very-condensed {
 	  font-size: 90%;
@@ -209,5 +213,9 @@ table {
 	    border-top: 0;
 	  }
 	}
+}
+td.number {
+  text-align:right;
+  padding-right:0.5em;
 }
 

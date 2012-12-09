@@ -44,10 +44,20 @@ class CodingFrame < ActiveRecord::Base
     )
   end
   
+  # return true if the coding frame is derived
+  def derived?
+    self.derived == 'Derived'
+  end
+  
   # count the number of distinct arguments for sorting
   def arg_count
     cfs = coding_frame_schema
     cfs.nil? ? 99 : coding_frame_schema.scan(/\d/).uniq.size
+  end
+  
+  # count the verbs that have this basic coding frame
+  def verb_count
+    self.verbs.size
   end
 
 end

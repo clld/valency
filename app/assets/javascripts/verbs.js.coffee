@@ -2,7 +2,7 @@
 @VALENCY or= {}
 
 ns  = @VALENCY.global
-max = String.fromCharCode 65535
+max = $.fn.dataTableExt.oApi.MAX
 
 altn_occurs_sort_order =
 	'Regularly' :'A'
@@ -41,7 +41,7 @@ oDTSettings =
 	bPaginate: false
 	oLanguage:
 		sInfoFiltered: " (filtered)"
-		sSearch: "Search:"
+		sSearch: ''
 	aaSorting: [[1,'asc'], [0,'asc']] # "Regularly" first, then alphabetically
 	# custom column settings
 	# colums: 0:altn_name, 1:occurs, 2:comment, 3:coded, 4:derived_cf, 5:example

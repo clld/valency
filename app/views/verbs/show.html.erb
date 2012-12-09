@@ -111,15 +111,15 @@
 
     <div class="row">
       <div class="span12">
-        <div class="dt-filters"><!-- filters for dataTable -->
-          <div class="btn-label">Filter by type:</div>
+        <div class="form-inline dt-filters"><!-- filters for dataTable -->
+          <label>Filter by type:</label>
           <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="coded?">
             <button class="btn btn-mini" value="y">Coded</button>
             <button class="btn btn-mini" value="n">Uncoded</button>
           </div>
       
-          <div class="btn-label">Filter by occurrence:</div>
-          <div class="btn-group filter-col inline" data-toggle="buttons-checkbox" data-col="occurs">
+          <label>Filter by occurrence:</label>
+          <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="occurs">
             <button class="btn btn-mini">Regularly</button>
             <button class="btn btn-mini">Marginally</button>
             <button class="btn btn-mini">Never</button>
@@ -153,7 +153,7 @@
         <td>
           <div class="cell">
             <% if altn.alternation_type %>
-              <span class="label" title="<%= altn.coded? ? 'Coded alternation' : 'Uncoded alternation' %>">
+              <span class="label" title="<%= altn.coded? ? 'Coded' : 'Uncoded' %> alternation">
               <%= altn.coded? ? 'C' : 'U' %>
               </span>
             <% end %>

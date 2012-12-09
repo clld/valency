@@ -4,18 +4,17 @@
 # requires DataTables v 1.9.2
 ###
 
-max = String.fromCharCode 65535 # last char of basic multilingual pane
-
 (($) ->
 	api = $.fn.dataTableExt.oApi # namespace
+  # utility constant: last char of basic multilingual pane
+	api.MAX = String.fromCharCode 65535
 	#---------------------- utility methods ---------------------------------
 	# this is a necessary closure, used in the sortEmptyLast plugin
 	# it makes empty table cells behave like 'zzz' when sorting
 	api._sorter_fn_empty_last = (iCol) ->
   	(src, type, val) ->
-  		if   type is 'sort' then (src[iCol] or max) else
+  		if   type is 'sort' then (src[iCol] or api.MAX) else
   			if type is 'set'  then  src[iCol] = val   else src[iCol]
-	
 	
 	# get valid column index by title or index
 	# @param mCol: integer or string (column title)
@@ -97,9 +96,9 @@ max = String.fromCharCode 65535 # last char of basic multilingual pane
 			
 	# check if the column is empty
 	api.isEmpty = (oSettings, mCol) ->
-	  if (mCol = @getColumnIndex(mCol))?
-	    oSettings.aoData.every (oRow) ->
-	      oRow._aData[mCol] in ["", null, undefined]
+    if (mCol = @getColumnIndex(mCol))?
+      oSettings.aoData.every (oRow) ->
+        oRow._aData[mCol] in ["", null, undefined]
 	
 	#--------------------------------- change pagination / scrolling to show particular row 
 	# plugin by Allan Jardine

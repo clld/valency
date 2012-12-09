@@ -4,6 +4,8 @@
 # global VALENCY object holds page-specific Javascript code
 @VALENCY or= {}
 
+
+
 @VALENCY.global =
 	init: ->
 		# object caching
@@ -44,32 +46,46 @@
         # from the table, go up to the .dt-with-filters container
         $dt = this
         $container = $(oSettings.nTable).closest('.dt-with-filters')
+        $(oSettings.nTableWrapper).find('.dataTables_filter input')
+        .attr 'placeholder', 'type to search'
+        
         # checkboxes
-        $container.find('.toggle-col').each ->
-        	$checkbox = $(this)
+        $container.find('.toggle-col').each (index, checkbox)->
+        	$checkbox = $(checkbox)
         	$labelfor = $("label[for=#{$checkbox.attr 'id'}]")
         	$label    = if $labelfor.length then $labelfor else $checkbox.closest 'label' 
         	col = $checkbox.data().col
-        	if $dt.isEmpty(col)    # empty column
-        	  $dt.hideColumn col
-        		$checkbox.add($label).addClass('disabled')
-        		  .attr 'title', 'no data in this column'
-        	$checkbox.attr('checked', $dt.isVisible col)
-          .click -> # checkbox click handler
+        	if $dt.isEmpty(col)
+            $dt.hideColumn col
+            $checkbox.add($label).addClass('disabled')
+            .attr 'title', 'no data in this column'
+          $checkbox.attr('checked', $dt.isVisible col)
+          $checkbox.click -> # checkbox click handler
             unless $checkbox.hasClass('disabled')
-      	      $checkbox.attr 'checked', $dt.toggleColumn col
+              $checkbox.attr 'checked', $dt.toggleColumn $checkbox.data().col
         
         # filter buttons
+        # function to apply a column filter button group
+        apply_column_filter = ($button_group, event = null) ->
+          column  = $button_group.data().col
+          unless event # not called by event handler: collect all
+            strings = $button_group.children('.active').get().map (child) ->
+              $(child).val() || $(child).text().trim()
+          else # called by event handler: add or remove one button
+            $btn    = $(event.target)
+            strings = $btn.siblings('.active').get().map (sibling) ->
+              $(sibling).val() || $(sibling).text().trim()
+            strings.push $btn.val() || $btn.text().trim() unless $btn.is '.active'
+          console.log "Filtering \"#{column}\" by \"#{strings.join '|'}\"" # DEBUG
+          $dt.filterColumn(column, strings.join '|')
+        
+        # apply all active filter buttons after init
+        $container.find('.filter-col .active').each ->
+          apply_column_filter $(this).parent() # no event!
+        
+        # attach event handler to .filter-col button groups
         $container.find('.filter-col').click (event)-> 
-        	$btn    = $(event.target)
-        	$group  = $(this) # the .btn-group to filter a column
-        	column  = $group.data().col
-        	strings = $btn.siblings('.active').get().map (sibling) ->
-        		$(sibling).val() || $(sibling).text()
-        	console.log "strings of siblings: "+strings.toString()	
-        	strings.push $btn.val() || $btn.text() unless $btn.is '.active'
-        	console.log("filter by: #{strings.join '|'}")
-        	$dt.filterColumn column, strings.join('|')
+        	apply_column_filter($(this), event)
         
         # link to clear the column filters
         $container.find('.clear-filters').click ->
@@ -77,8 +93,8 @@
           $container.find('.filter-col .btn').removeClass 'active'
         
         # move the .dataTables_filter div into the .dt-filters div
-        $container.find('.dataTables_filter').detach()
-        .appendTo $container.find('.dt-filters')
+        $container.find('.dataTables_filter')
+          .detach().appendTo($container.find('.dt-filters'))          
 
 	
 # @UTIL.init calls these: 
