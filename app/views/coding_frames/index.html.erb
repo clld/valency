@@ -59,25 +59,25 @@
 						<div class="cell">
              	<span class="label" title="<%= cf.derived? ? 'Derived' : 'Basic' %> coding frame">
              	<%= cf.derived? ? 'D' : 'B' %></span>
-	          </div>
-	          <div class="cell">
-							<span class="hidden"><%= cf.arg_count %></span>
-	            <%= link_to cf, [@language, cf] %>
-	          </div>
+            </div>
+            <div class="cell">
+              <span class="hidden"><%= cf.arg_count %></span>
+              <%= link_to cf, [@language, cf] %>
+            </div>
           <% end %>
-				</td>
+        </td>
         <td><%= cf.derived   %></td>
         <td><%= cf.arg_count %></td>
-				<td class="number">
-					<%= (vcount = cf.verb_count) > 0 ? vcount : 'none' %>
-				</td>
-        <td class="isotope">
-					<% mvv.each do |m, vv| %>
-						<div class="item">
-							<%= link_to m, m %> (<%= verb_list(vv, true) %>)
-						</div>
-					<% end %>
+        <td class="number">
+          <%= (vcount = cf.verb_count) > 0 ? vcount : 'none' %>
         </td>
+        <td><div class="isotope no-transition">
+          <% mvv.each do |m, vv| %>
+            <div class="item">
+              <%= m %> (<%= verb_list(vv, true) %>)
+            </div>          
+          <% end %>
+        </div></td>
       </tr>
     <% end %>
   </tbody>

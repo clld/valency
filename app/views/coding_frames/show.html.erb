@@ -1,11 +1,13 @@
 <!-- Coding frame -->
 <p id="notice"><%= notice %></p>
 
-<h1>
-  <small>Coding frame:</small>
-  <%= @coding_frame.coding_frame_schema %>
-  <!-- <small>of <%= link_to @language, @language %></small> -->
-</h1>
+<div class="row">
+  <div class="span8">
+    <div class="coding_frame padded-box bg-cf">
+      <h1 style="font-weight:normal;"><%= @coding_frame.coding_frame_schema %></h1>
+    </div>
+  </div>
+</div>
 
 <% if @coding_frame.description %>
 <p>
@@ -20,20 +22,57 @@
 </p>
 <% end %>
 
-<div class="new row"><div class="span8"><table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Verb form</th>
-      <th>Meanings</th>
-    </tr>
-  </thead>
-  <tbody>
-<%      @coding_frame.verbs.each do |v| %>
-    <tr>
-      <td><%= link_to v.verb_form, [@language, v] %></td>
-      <td><%# link_to v.meaning.label, v.meanings %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table></div>
-</div>
+<div class="new row">
+  <div class="span8">
+    
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a data-toggle="tab" href="#basic"  > Basic coding frame  </a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#derived"> Derived coding frame</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="basic">
+        <table id="verb_list" class="table table-bordered-sharp table-striped table-hover dataTable">
+        <thead>
+          <tr>
+            <th>Verb form</th>
+            <th>Meanings and Microroles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% arguments = @coding_frame.index_numbers_eager_load %>
+          <% @coding_frame.verbs.each do |v| %>
+          <tr>
+            <td><%= link_to v.verb_form, [@language, v], class: 'object-language' %></td>
+            
+            <td>
+              <% v.meanings.each do |m| %>
+                <div>
+                <%= link_to m, m %>
+                (
+                <%= arguments.map{ |arg| arg.microroles.where_meaning(m)[0].to_s }.join(', ') %>
+                )
+                </div>
+              <% end %>
+            </td>
+            
+          </tr>
+          <% end %>
+        </tbody>
+        </table>
+
+      </div>
+      
+      <div class="tab-pane" id="derived">
+
+      </div><!-- end of .tab-pane#derived -->
+    </div><!-- end of .tab-content -->
+    
+
+
+  </div><!-- end of .span -->
+</div><!-- end of .row -->

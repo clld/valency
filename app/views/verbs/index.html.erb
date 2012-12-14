@@ -12,11 +12,12 @@
         <th>Original script</th>
       <% end %>
       <th>Meanings</th>
-      <th>Coding frame</th>
+      <th>Basic Coding frame</th>
     </tr>
   </thead>
 <tbody>
 <% @verbs.each do |verb| %>
+<% cf = verb.coding_frame %>
   <tr>
 
     <td class="object-language">
@@ -29,9 +30,12 @@
 
     <td><%= meaning_list(verb) %></td>
 
-	  <td><%= link_to(verb.coding_frame.coding_frame_schema,
-            [@language, verb.coding_frame]) if verb.coding_frame? %>
-		</td>
+    <td>
+      <% unless cf.to_s.blank? %>
+        <span class="hidden"><%= cf.arg_count %></span>
+        <%= link_to(cf, [@language, cf]) %>
+      <% end %>
+    </td>
 
   </tr>
 <% end %>

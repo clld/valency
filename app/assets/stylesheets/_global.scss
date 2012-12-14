@@ -25,7 +25,11 @@
     border-bottom: none;
     & > li {
       margin-bottom: 0;
-    }    
+    }
+    & .cursor-hand, & .cursor-hand:hover { // show cursor as hand – typically on a link (to override Bootstrap default)
+      cursor: pointer;
+    }
+    
   }
 }
 
@@ -177,6 +181,7 @@ div.inline{
 		padding-right:5px;
 	}
 }
+
 /* link without href: style like regular link */
 a.no-href {
 	&:hover {

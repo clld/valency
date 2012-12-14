@@ -44,7 +44,7 @@ module ApplicationHelper
 
       capture do
         content_tag(:li, class: css_class) do
-          link_to_unless_current displayed_name, link_href do
+          link_to_unless_current displayed_name, link_href, class: 'cursor-hand' do
             content_tag(:a, displayed_name)
           end
         end
