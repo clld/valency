@@ -26,33 +26,34 @@ module ApplicationHelper
   end
   
   # generate <li> tags for the submenu (one per controller)
+  # used for the controllers of resources nested under a language
   def submenu_tabs(controller_names)
-
     controller_names.map do |c_name|
-
-      if c_name == 'languages'
-        link_href = language_path(@language) if @language
-      else
-        link_href = send('language_' << c_name << '_path', @language) if @language
-      end
-
-      displayed_name = if c_name == 'verbs' then 'Verb forms'
-        elsif c_name == 'languages' then 'Overview'
-        else  c_name.humanize end
-        
-      css_class = 'active' if c_name == controller_name
+      
+      # 
+      # if c_name == 'languages'
+      #   link_href = if @language then language_path(@language) else languages_path end
+      # else
+      #   link_href = send('language_' << c_name << '_path', @language) if @language
+      # end
+      # 
+      # displayed_name = if c_name == 'verbs' then 'Verb forms'
+      #   elsif c_name == 'languages' && action_name == '' then 'Overview'
+      #   else  c_name.humanize end
+      css_class = if c_name == controller_name then 'active' else '' end
+      css_class << ' disabled' unless @language
+      link_href = send('language_' << c_name << '_path', @language) if @language      
 
       capture do
         content_tag(:li, class: css_class) do
-          link_to_unless_current displayed_name, link_href, class: 'cursor-hand' do
-            content_tag(:a, displayed_name)
+          link_to_unless_current c_name.humanize, link_href, class: 'cursor-hand' do
+            content_tag(:a, c_name.humanize)
           end
         end
       end
 
     end.join("\n").html_safe
-
   end
-  
+
 end
 

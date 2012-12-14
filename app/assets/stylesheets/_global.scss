@@ -131,19 +131,22 @@ form {
 		display:inline-block;
 		float:left;
   }
+  .caption {
+    & > a {
+      display: inline;
+      padding-right:0;
+      color: $linkColor;
+      &:hover {
+				//background-color: inherit;
+				//background-image: none;
+				color:$linkColorHover;
+				//text-decoration:underline;
+			}
+			
+    }
+  }
 	li:not(.divider) {
 		display:block;
-	}
-	.no-menu-item {
-		& > a {
-			color: $linkColor;
-			&:hover {
-				background-color: inherit;
-				background-image: none;
-				color:$linkColorHover;
-				text-decoration:underline;
-			}
-		}
 	}
 }
 

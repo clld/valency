@@ -1,62 +1,65 @@
 <!-- navigation partial -->
 <!-- this is rendered in the top navbar -->
 <div class="navbar-inner">
- <div class="container">
+  <div class="container">
 
-<%= link_to "Valency", root_path, :class => 'brand' %>
+    <%= link_to "ValPaL", root_path, :class => 'brand' %>
 
-<ul class="nav">
+    <ul class="nav">
 
-  <!-- Meanings dropdown -->
-  <li class="dropdown" id="meaning_dropdown" data-controller="meanings">
-    <a class="dropdown-toggle" data-toggle="dropdown">
-      <%= @meaning ? @meaning.to_s : "Meaning labels" %>
-      <b class="caret"></b>
-    </a>
-    <ul class="dropdown-menu clearfix">
-      <div class="pull-left disabled">
-        <a>Showing <%= @meanings_core.size %> core meaning labels</a>
-      </div>
-      <li class="pull-left no-menu-item">
-        <%= link_to "Show all #{Meaning.count}", meanings_path %>
+      <!-- Languages dropdown -->
+      <li class="dropdown" id="language_dropdown" data-controller="languages" rel="tooltip">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+          Language contributions <b class="caret"></b>
+        </a>
+
+        <ul class="dropdown-menu clearfix">
+          <li><%= link_to "All languages", languages_path %></li>
+          <li class="divider"></li>
+          <%= li_wrapped_links_to_same_controller_all_languages %>
+        </ul>
       </li>
-      <li class="divider" style="clear:both"></li>
-      <% @meanings_core.each do |m| %>
-        <li><%= link_to m, m %></li>
-      <% end %>
-    </ul>
-  </li>
-  <li class="divider-vertical"></li>
+      <li class="divider-vertical"></li>
 
-  <!-- Languages dropdown -->
-  <li class="dropdown" id="language_dropdown" data-controller="languages" rel="tooltip">
-    <a class="dropdown-toggle" data-toggle="dropdown">
-      <%= @language ? @language.to_s : "Language contributions" %>
-      <b class="caret"></b>
-    </a>
-    <ul class="dropdown-menu clearfix">
-      <li class="pull-left">
-        <%= link_to "All languages", languages_path, :class => "em" %>
+      <!-- Meanings dropdown. TODO: move to sub-menu -->
+      <li class="dropdown" id="meaning_dropdown" data-controller="meanings">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+          Verb meanings <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu clearfix">
+          <div class="caption">
+            <%= link_to "Show all Verb meanings", meanings_path, class: "inline" %>,
+            or select one of the <%= @meanings_core.size %> core meanings:
+          </div>
+          <li class="divider"></li>
+          <% @meanings_core.each do |m| %>
+            <li><%= link_to m, m %></li>
+          <% end %>
+        </ul>
       </li>
-      <li class="divider" style="clear:both"></li>
-      <%= li_wrapped_links_to_same_controller_all_languages %>
-    </ul>
-  </li>
-  <li class="divider-vertical"></li>
+      <li class="divider-vertical"></li>
 
-</ul>
-</div>
-</div>
+    </ul><!-- end .nav -->
+  </div><!-- end .navbar-inner -->
+</div><!-- end .container -->
 
 
-<% if @language %>
 <div class="navbar-inner no-gradient">
   <div class="container">
+    <ul class="nav">
+      <% if @language %>
+        <li>
+          <%= @language.to_s + ':' %></a>
+        </li>
+      <% end %>
+    </ul>
     <ul class="nav nav-tabs hide" id="submenu">
-      <%= submenu_tabs %w(languages verbs coding_frames alternations examples) %>
+      <li>
+        Verb forms
+      </li>
+      <%= submenu_tabs %w(coding_frames alternations examples) %>
     </ul>
   </div>
 </div>
-<% end %>
 
 

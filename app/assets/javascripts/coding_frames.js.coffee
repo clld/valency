@@ -23,7 +23,7 @@ oDTSettings_index =
     sInfoFiltered: " (filtered)"
     sSearch: ""
   aoColumnDefs: [ # 0: Coding frame, 1: derived, 2: arg_count,
-                  # 3: verb_count,   4: Meaning labels & Verbs
+                  # 3: verb_count,   4: Verb meanings & Verbs
     {
       aTargets:[0] # Coding frame
       sType: "html"
@@ -34,7 +34,7 @@ oDTSettings_index =
       sType: 'numeric'
       asSorting: ['desc', 'asc']
     },{
-      aTargets:[4] # Meaning labels & Verbs
+      aTargets:[4] # Verb meanings & Verbs
       sType: 'html'
       sWidth: '60%'
       mDataProp: dtapi._sorter_fn_empty_last 4
