@@ -24,4 +24,10 @@ class Alternation < ActiveRecord::Base
     end 
   end
   
+  # get verbs that occur regularly in this alternation (as Array)
+  def get_verbs
+    self.alternation_values.where(alternation_occurs: 'Regularly').map{ |av| av.verb }
+  end
+  
+  
 end

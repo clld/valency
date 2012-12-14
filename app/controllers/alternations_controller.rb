@@ -8,7 +8,7 @@ class AlternationsController < ApplicationController
   # GET /languages/1/alternations
   # GET /languages/1/alternations.json
   def index
-    @alternations = @language.alternations.includes(:alternation_values).all
+    @alternations = @language.alternations.includes(:alternation_values, :verbs).all
 
     respond_to do |format|
       format.html # index.html.erb

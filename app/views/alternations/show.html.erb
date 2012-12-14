@@ -1,28 +1,21 @@
 <p id="notice"><%= notice %></p>
+<% a = @alternation %>
+<div class="alternation padded-box">
+  <h1 style="font-weight:normal;"><%= raw a.name %></h1>
+</div>
+<%= a.coded? ? 'Coded' : 'Uncoded' %> alternation
+<% unless a.description.nil? %>
+  <h4>Description</h4>
+  <%= raw a.description %>
+<% end %>
 
-<p>
-  <b>Alternation name:</b>
-  <%= @alternation.name %>
-</p>
 
-<p>
-  <b>Language:</b>
-  <%= @alternation.language %>
-</p>
-
-<p>
-  <b>Alternation type:</b>
-  <%= @alternation.alternation_type %>
-</p>
-
-<p>
-  <b>Coding frames of alternation:</b>
-  <%= @alternation.coding_frames_text %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @alternation.description %>
-</p>
-
+<div class="new row">
+  <div class="span6">
+    <p style="max-width:400px;">
+  <b>TODO:</b>
+  Table showing verbs (w/ Meaning labels) that occur regularly or marginally with this alternation. (incl. Derived Coding frames?)
+    </p>
+  </div>
+</div>
 <%= link_to 'Show All', language_alternations_path(@language) %>

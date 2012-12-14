@@ -1,41 +1,30 @@
-<h1>Examples</h1>
+<h1>
+  Examples
+  <small>of <%= link_to @language, @language %></small>
+</h1>
 
-<table>
-  <tr>
-    <th>Id</th>
-    <th>Language</th>
-    <th>Reference</th>
-    <th>Person</th>
-    <th>Primary text</th>
-    <th>Original orthography</th>
-    <th>Analyzed text</th>
-    <th>Gloss</th>
-    <th>Translation</th>
-    <th>Translation other</th>
-    <th>Comment</th>
-    <th>Media file name</th>
-    <th>Media file timecode</th>
-    <th>Reference pages</th>
-  </tr>
+<big>...under construction...</big>
 
-<% @examples.each do |example| %>
-  <tr>
-    <td><%= example.id %></td>
-    <td><%= example.language %></td>
-    <td><%= example.reference %></td>
-    <td><%= example.person %></td>
-    <td><%= example.primary_text %></td>
-    <td><%= example.original_orthography %></td>
-    <td><%= example.analyzed_text %></td>
-    <td><%= example.gloss %></td>
-    <td><%= example.translation %></td>
-    <td><%= example.translation_other %></td>
-    <td><%= example.comment %></td>
-    <td><%= example.media_file_name %></td>
-    <td><%= example.media_file_timecode %></td>
-    <td><%= example.reference_pages %></td>
-  </tr>
-<% end %>
-</table>
+<div class="new row">
+  <div class="span12">
 
-<br />
+    <table class="table table-bordered-sharp table-striped table-hover dataTable">
+      <thead>
+      <tr>
+        <th>example</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @examples.each do |ex| %>
+      <%= content_tag_for :tr, ex do %>
+      <td>
+        <%= render_example ex, {} %>
+      </td>
+      <% end %>
+    <% end %>
+  </tbody>
+  </table>
+
+  </div>
+</div>
+

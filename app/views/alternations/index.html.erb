@@ -2,20 +2,57 @@
   <small>of <%= link_to @language, @language %></small>
 </h1> 
 
-<table>
-  <tr>
-    <th>Alternation name</th>
-    <th>Alternation type</th>
-    <th>Coding frames of alternation</th>
-  </tr>
+<div class="row">
+  <div class="span12 dt-with-filters">
+    <div class="form-inline dt-filters"><!-- filters for dataTable -->
+      <label> Show </label>
+      <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="coded?">
+        <button class="btn btn-mini" value="y">Coded</button>
+        <button class="btn btn-mini" value="n">Uncoded</button>
+      </div> Alternations. 
+  
+      <div class="btn-group">
+        <a class="btn btn-mini clear-filters"><i class="icon-remove"></i> Clear filters
+        </a>
+      </div>
+    </div><!-- end .dt-filters-->
 
-<% @alternations.each do |alternation| %>
-  <tr>
-    <td><%= link_to raw(alternation.name), [@language, alternation] %></td>
-    <td><%= alternation.alternation_type %></td>
-    <td><%= alternation.coding_frames_text %></td>
-  </tr>
-<% end %>
-</table>
+  <table id="altn_list" class="table table-striped table-bordered-sharp table-hover dataTable">
+    <thead>
+      <tr>
+        <th>Alternation name</th>
+        <th class="hidden-col">Coded?</th>
+        <th>Verbs</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @alternations.each do |altn| %>
+      <% desc = altn.description %>
+      <%= content_tag_for(:tr, altn) do %>
+        <td>
+          <div class="cell">
+            <% if altn.alternation_type %>
+              <span class="label" title="<%= altn.coded? ? 'Coded' : 'Uncoded' %> alternation">
+              <%= altn.coded? ? 'C' : 'U' %>
+              </span>
+            <% end %>
+          </div>
+          <div class="cell">
+            <%= link_to raw(altn), [@language, altn] %>
+          </div>
+        </td>
 
-<br />
+        <td><%= altn.coded_y_n %></td>
+        
+        <td><%= raw altn.get_verbs.map{|v| link_to v, [@language, v], class: 'object-language'}.to_sentence %></td>
+
+        <td><%= raw desc %></td>
+      <% end %>
+    <% end %>
+  </tbody>
+  </table>
+</div><!-- end of .span12 -->
+</div><!-- end of .row -->
+
+
