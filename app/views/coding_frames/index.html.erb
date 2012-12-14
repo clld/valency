@@ -51,6 +51,7 @@
   <tbody>
     <% @coding_frames.each do |cf| %>
     <% verbs = cf.verbs %>
+  	<% mvv   = cf.get_meanings_and_verbs #array of [meaning [verb, verb, ...]] arrays %>
       <tr>
 
         <td>
@@ -68,11 +69,15 @@
         <td><%= cf.derived   %></td>
         <td><%= cf.arg_count %></td>
 				<td class="number">
-					<% if (vcount = cf.verb_count) > 0 %>
-						<%= vcount %>
-					<% end %>
+					<%= (vcount = cf.verb_count) > 0 ? vcount : 'none' %>
 				</td>
-        <td><%= verb_list(verbs) if verbs %></td>
+        <td class="isotope">
+					<% mvv.each do |m, vv| %>
+						<div class="item">
+							<%= link_to m, m %> (<%= verb_list(vv, true) %>)
+						</div>
+					<% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

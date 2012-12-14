@@ -86,7 +86,7 @@ form {
 // dataTable filters: buttons/btn-groups to toggle column filters
 .dt-filters {
 	background-color:$grayLighter;
-	border:1px dashed $grayDark;
+	border:1px solid $tableBorder;
 	padding:10px;
 
 	label {
@@ -98,6 +98,13 @@ form {
 	.btn-group {
 	  vertical-align:middle;
 		display:inline-block;
+	}
+	.btn {
+	  &.active {
+      color: $textColor;
+      background-color: $btnActiveBackground;
+      *background-color: darken($btnActiveBackground, 5%);
+    }
 	}
 	.dataTables_filter {
 		display:inline-block;

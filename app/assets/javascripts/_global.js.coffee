@@ -4,8 +4,22 @@
 # global VALENCY object holds page-specific Javascript code
 @VALENCY or= {}
 
+# function to apply a .btn-group's column filter to a dataTable (@param $dt)
+apply_column_filter = ($dt, $button_group, event = null) ->
+  column  = $button_group.data().col
+  unless event # not called by event handler: collect all
+    strings = $button_group.children('.active').get().map (child) ->
+      $(child).val() || $(child).text().trim()
+  else # called by event handler: add or remove one button
+    $btn    = $(event.target)
+    strings = $btn.siblings('.active').get().map (sibling) ->
+      $(sibling).val() || $(sibling).text().trim()
+    unless $btn.is '.active'
+      strings.push $btn.val() || $btn.text().trim()
+  # console.log "Filtering \"#{column}\" by \"#{strings.join '|'}\"" # DEBUG
+  $dt.filterColumn(column, strings.join '|')
 
-
+# the global namespace: for shared initialization code
 @VALENCY.global =
 	init: ->
 		# object caching
@@ -34,10 +48,7 @@
 		
 		# global settings for dataTables. These are extended in the controllers' handlers
 		@oDTSettings =
-      fnInitComplete: (oSettings, json) ->
-        # don't allow body to shrink vertically when dataTable is filtered
-        $('body').css 'min-height', $('body').height()
-        
+      fnInitComplete: (oSettings, json) ->        
         # hide columns whose <th> is .hidden-col
         @hideColumn i for col, i in oSettings.aoColumns when col
           .nTh.className.match('hidden-col')
@@ -64,28 +75,14 @@
             unless $checkbox.hasClass('disabled')
               $checkbox.attr 'checked', $dt.toggleColumn $checkbox.data().col
         
-        # filter buttons
-        # function to apply a column filter button group
-        apply_column_filter = ($button_group, event = null) ->
-          column  = $button_group.data().col
-          unless event # not called by event handler: collect all
-            strings = $button_group.children('.active').get().map (child) ->
-              $(child).val() || $(child).text().trim()
-          else # called by event handler: add or remove one button
-            $btn    = $(event.target)
-            strings = $btn.siblings('.active').get().map (sibling) ->
-              $(sibling).val() || $(sibling).text().trim()
-            strings.push $btn.val() || $btn.text().trim() unless $btn.is '.active'
-          console.log "Filtering \"#{column}\" by \"#{strings.join '|'}\"" # DEBUG
-          $dt.filterColumn(column, strings.join '|')
-        
+        # filter buttons        
         # apply all active filter buttons after init
         $container.find('.filter-col .active').each ->
-          apply_column_filter $(this).parent() # no event!
+          apply_column_filter $dt, $(this).parent() # no event!
         
         # attach event handler to .filter-col button groups
         $container.find('.filter-col').click (event)-> 
-        	apply_column_filter($(this), event)
+        	apply_column_filter $dt, $(this), event
         
         # link to clear the column filters
         $container.find('.clear-filters').click ->
@@ -95,6 +92,9 @@
         # move the .dataTables_filter div into the .dt-filters div
         $container.find('.dataTables_filter')
           .detach().appendTo($container.find('.dt-filters'))          
+
+        # don't allow body to shrink vertically when dataTable is filtered
+        $('body').css 'min-height', $('body').height()
 
 	
 # @UTIL.init calls these: 

@@ -59,5 +59,14 @@ class CodingFrame < ActiveRecord::Base
   def verb_count
     self.verbs.size
   end
+  
+  # query database for meanings of all verbs associated with this basic CF
+  # return array of arrays [meaning, [verb, verb, ...]]
+  # one per unique meaning
+  def get_meanings_and_verbs
+    # Meanings will be ordered by meaning label (default scope in meaning.rb)
+    mm = Meaning.joins(:verbs).where('verbs.coding_frame_id' => self[:id]).uniq
+    mm.map{|m| [m, m.verbs & self.verbs]}
+  end
 
 end

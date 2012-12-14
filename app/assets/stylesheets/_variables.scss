@@ -33,3 +33,6 @@ $bg-cs-darker: saturate($bg-cs, 10%); /* background for coding sets (column head
 /* colors for dataTables */
 $tableHeaderBackground: 				#fefefe;
 $tableHeaderBackgroundHighlight:#dedede;
+
+/* darken .active buttons for dataTable filters – see _global.scss */
+$btnActiveBackground: #bbb;
