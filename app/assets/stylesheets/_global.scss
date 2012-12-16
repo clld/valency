@@ -5,6 +5,7 @@
 /* navigation bar: override some Bootstrap defaults */
 .navbar {
 	.brand, .nav > li > a {
+    @include transition(background-color .3s ease);
 		text-shadow:none;
 	}
 	.divider-vertical { margin:0; }
@@ -109,11 +110,25 @@ form {
 		display:inline-block;
 	}
 	.btn {
-	  &.active {
-      color: $textColor;
-      background-color: $btnActiveBackground;
-      *background-color: darken($btnActiveBackground, 5%);
-    }
+	  &:not(.btn-danger):not(.btn-success):not(.btn-warning) {
+    	&.active {
+  	    color: $textColor;
+        background-color: $btnActiveBackground;
+        *background-color: darken($btnActiveBackground, 5%);
+    	}	    
+	  }
+  	&.btn-danger.active {
+      background-color: darken($btnDangerBackgroundHighlight,10%);
+      *background-color: darken($btnDangerBackgroundHighlight, 16%);
+  	}
+  	&.btn-success.active {
+      background-color: darken($btnSuccessBackgroundHighlight,10%);
+      *background-color: darken($btnSuccessBackgroundHighlight, 16%);
+  	}
+  	&.btn-warning.active {
+      background-color: darken($btnWarningBackgroundHighlight,10%);
+      *background-color: darken($btnWarningBackgroundHighlight, 16%);
+  	}
 	}
 	.dataTables_filter {
 		display:inline-block;
@@ -142,17 +157,42 @@ form {
       padding-right:0;
       color: $linkColor;
       &:hover {
-				//background-color: inherit;
-				//background-image: none;
-				color:$linkColorHover;
-				//text-decoration:underline;
-			}
-			
+        color:$linkColorHover;
+      }
     }
   }
 	li:not(.divider) {
 		display:block;
 	}
+	&.hover-items { /* links change on hover */
+	  a {
+	    max-width:110px;
+	    .toggle-hover:first-child {
+        opacity: 1;
+        height: auto;
+  	  }
+	    .toggle-hover:last-child {
+        opacity: 0;
+        height:   0;
+  	  }  	  
+	  } // end .hover-items a
+	  a:hover, a:active {
+	    .toggle-hover:first-child {
+        opacity: 0;
+        height:   0;
+  	  }
+	    .toggle-hover:last-child {
+        opacity: 1;
+        height: auto;
+  	  }  	  
+	  } // end .hover-items a:hover	  
+	}
+}
+.toggle-hover {
+  overflow: hidden;
+  white-space: normal;
+  display:  block;
+  @include transition(opacity .3s ease-in-out);
 }
 
 // Headings

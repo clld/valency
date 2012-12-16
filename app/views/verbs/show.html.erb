@@ -52,7 +52,7 @@
 	<!-- INDEX#, Microroles, Coding sets, Argument types -->
 	<div class="span<%= meanings.size + 6 %>">
     <h4>
-      Meaning <%= "label".pluralize meanings.size %>,
+      Verb <%= "meaning".pluralize meanings.size %>,
       Microroles, Coding&nbsp;sets and Argument&nbsp;types
     </h4>
     <% if cframe %>
@@ -120,9 +120,9 @@
       
           <label>Filter by occurrence:</label>
           <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="occurs">
-            <button class="btn btn-mini">Regularly</button>
-            <button class="btn btn-mini">Marginally</button>
-            <button class="btn btn-mini">Never</button>
+            <button class="btn btn-mini btn-success" value="R">Regularly</button>
+            <button class="btn btn-mini btn-warning" value="M">Marginally</button>
+            <button class="btn btn-mini btn-danger" value="N">Never</button>
           </div>
           <div class="btn-group">
             <a class="btn btn-mini clear-filters">
@@ -147,6 +147,7 @@
         </tr>
       </thead>
       <tbody>
+			<% label_class = {'R'=>'success', 'M'=>'warning', 'N'=>'important'} %>
       <% avs.each do |av| %>
       <% altn, dcf, exs = av.alternation, av.derived_coding_frame, av.examples %>
       <%= content_tag_for(:tr, altn) do %>
@@ -162,13 +163,23 @@
             <%= link_to raw(altn), [@language, altn] %>
           </div>
         </td>
-        <td><%= av.alternation_occurs %></td>
+
+        <td>
+					<% if (val = av.occurs) %>
+						<% cls = "label label-#{label_class[val[0]] || 'inverse'}" %>
+						<%= content_tag :span, val[0].gsub('-','–'), class: cls, title: av.title %>
+					<% end %>
+				</td>
+
         <td><%= raw av.comment %></td>
+
         <td><%= altn.coded_y_n %></td>
+
         <td><% unless dcf.nil? %>
               <%= link_to dcf, [@language, dcf] %>
             <% end %>
         </td>
+
         <td>
           <% if exs.size > 0 %>
             <div class="examples-container">
@@ -179,6 +190,7 @@
             </div>
           <% end %>
         </td>
+
       <% end %>
       <% end %>
     </tbody>

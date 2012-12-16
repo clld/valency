@@ -4,10 +4,14 @@
 ns  = @VALENCY.global
 max = $.fn.dataTableExt.oApi.MAX
 
-altn_occurs_sort_order =
-	'Regularly' :'A'
-	'Marginally':'B'
-	'Never'     :'C'
+sort_order =
+	'R' : 'A'
+	'M' : 'B'
+	'N' : 'C'
+
+altn_occurs_sort_order = (html) ->
+  html = html.replace(/[\n\s]/g,'').replace(/<.*?>/g,'')
+  sort_order[html] or max
 	
 # pad an integer with zeros from left to make a string like 000123 
 # source: http://stackoverflow.com/a/7254108/1030985
@@ -47,13 +51,13 @@ oDTSettings =
 	# colums: 0:altn_name, 1:occurs, 2:comment, 3:coded, 4:derived_cf, 5:example
 	aoColumnDefs: [
 		{
-			aTargets:[0,2,4,5]
+			aTargets:[0,1,2,4,5]
 			sType: "html"
 		},{
 			aTargets: [1] # column 1: Occurs
 			sWidth  : '10%'
 			mDataProp: ( src, type, val ) ->
-				return altn_occurs_sort_order[src[1]] or max if type is 'sort'
+				return altn_occurs_sort_order(src[1]) if type is 'sort'
 				if type is 'set' then src[1] = val else src[1]
 		},{
 			aTargets: [0] # alternation name
