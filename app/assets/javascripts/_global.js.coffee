@@ -4,6 +4,8 @@
 # global VALENCY object holds page-specific Javascript code
 @VALENCY or= {}
 
+navbarLinkBackgroundActive = "rgb(230, 96, 20)" # for the flash effect
+
 # function to apply a .btn-group's column filter to a dataTable (@param $dt)
 apply_column_filter = ($dt, $button_group, event = null) ->
   column  = $button_group.data().col
@@ -21,33 +23,42 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 
 # the global namespace: for shared initialization code
 @VALENCY.global =
-	init: ->
-		# object caching
-		@body = $('body')
-		@language_dropdown or= $('#language_dropdown')
-		@meaning_dropdown  or= $('#meaning_dropdown')
-		@submenu or= $('#submenu')
-		
-		# align submenu with language name / dropdown
-    # @submenu.offset({left: @language_dropdown.offset().left})
-    #   .fadeIn() if @submenu.length > 0
-		
-		# shift body down by height of navbar
-		$(document.body).css 'padding-top', $('.navbar-fixed-top').outerHeight()
-		
-		# show dropdown menus in columns (see custom jQuery plugin)
-		@language_dropdown.find('.dropdown-menu .divider').nextAll().inColumns 3
-		@meaning_dropdown.find( '.dropdown-menu .divider').nextAll().inColumns 5
-		
-		# setup button to toggle comment box – see custom jQuery plugins
-		$('.toggle-next').align_below_and_setup_toggle()
-				
-		# prevent .disabled links from firing
-		@body.on 'click', '.disabled,.disabled input,.disabled .btn,.disabled a',
-		  (e) -> e.preventDefault()
-		
-		# global settings for dataTables. These are extended in the controllers' handlers
-		@oDTSettings =
+  init: ->
+    # object caching
+    @body = $('body')
+    @language_dropdown or= $('#language_dropdown')
+    @meaning_dropdown  or= $('#meaning_dropdown')
+    @submenu or= $('#submenu')
+    
+    # shift body down by height of navbar
+    $(document.body).css 'padding-top', $('.navbar-fixed-top').outerHeight()
+    
+    # align submenu with language name / dropdown
+    @submenu.css 'margin-left', @language_dropdown.offset().left
+    
+    # flash the "choose language" link when .disabled tab clicked
+    @submenu.find('.nav li.disabled').click ->
+      $('#choose_lang').flash navbarLinkBackgroundActive
+    
+    # make #choose_lang link open the dropdown
+    $('#choose_lang').click (e) =>
+      @language_dropdown.find('.dropdown-toggle').click()
+      e.stopPropagation()
+    
+    # show dropdown menus in columns (see custom jQuery plugin)
+    @language_dropdown.find('.dropdown-menu .divider').nextAll().inColumns 3
+    @meaning_dropdown.find( '.dropdown-menu .divider').nextAll().inColumns 5
+    $('#verb_dropdown').find( '.dropdown-menu .divider').nextAll().inColumns 5
+    
+    # setup button to toggle comment box – see custom jQuery plugins
+    $('.toggle-next').align_below_and_setup_toggle()
+    
+    # prevent .disabled links from firing
+    @body.on 'click', '.disabled,.disabled input,.disabled .btn,.disabled a',
+      (e) -> e.preventDefault()
+    
+    # global settings for dataTables. These are extended in the controllers' handlers
+    @oDTSettings =
       fnInitComplete: (oSettings, json) ->        
         # hide columns whose <th> is .hidden-col
         @hideColumn i for col, i in oSettings.aoColumns when col
@@ -62,11 +73,11 @@ apply_column_filter = ($dt, $button_group, event = null) ->
         
         # checkboxes
         $container.find('.toggle-col').each (index, checkbox)->
-        	$checkbox = $(checkbox)
-        	$labelfor = $("label[for=#{$checkbox.attr 'id'}]")
-        	$label    = if $labelfor.length then $labelfor else $checkbox.closest 'label' 
-        	col = $checkbox.data().col
-        	if $dt.isEmpty(col)
+          $checkbox = $(checkbox)
+          $labelfor = $("label[for=#{$checkbox.attr 'id'}]")
+          $label    = if $labelfor.length then $labelfor else $checkbox.closest 'label' 
+          col = $checkbox.data().col
+          if $dt.isEmpty(col)
             $dt.hideColumn col
             $checkbox.add($label).addClass('disabled')
             .attr 'title', 'no data in this column'

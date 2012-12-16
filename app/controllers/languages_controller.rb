@@ -22,7 +22,7 @@ class LanguagesController < ApplicationController
   # GET /languages/1
   # GET /languages/1.json
   def show
-    @language        = Language.find_by_name_for_url(params[:id])
+    @language        = Language.includes(:verbs).find_by_name_for_url(params[:id])
     @iso_code        = @language.iso_code
     @contributors    = @language.get_contributors
     @native_speakers = @language.get_native_speakers

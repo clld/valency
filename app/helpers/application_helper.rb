@@ -2,8 +2,10 @@ module ApplicationHelper
   
   # If a @language is specified then this must be the controller
   # of a language-specific resource. Otherwise, link to language page
-  def li_wrapped_links_to_same_controller_all_languages
-    keep_controller = @language && controller_name != 'languages'
+  def li_wrapped_links_to_all_languages(link_to_same_controller = false)
+    
+    keep_controller = link_to_same_controller && @language && 
+    controller_name != 'languages'
     @languages.map do |lang|
       css_class = 'active' if lang == @language
       if keep_controller
@@ -27,9 +29,8 @@ module ApplicationHelper
   # used for the controllers of resources nested under a language
   def submenu_tabs(controller_names)
     controller_names.map do |c_name|
-      
       css_class = if c_name == controller_name then 'active' else '' end
-      css_class << ' disabled' unless @language
+      css_class << "#{' ' unless css_class.blank?}disabled" unless @language
       target = send('language_' << c_name << '_path', @language) if @language      
       text  = c_name == 'verbs' ? 'Verb forms' : c_name.humanize
       
