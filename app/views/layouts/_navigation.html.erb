@@ -8,7 +8,7 @@
     <ul class="nav">
 
       <!-- Languages dropdown -->
-      <li class="dropdown" id="language_dropdown" data-controller="languages" rel="tooltip">
+      <li class="dropdown" id="language_dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown">
           Language contributions <b class="caret"></b>
         </a>
@@ -22,7 +22,7 @@
       <li class="divider-vertical"></li>
 
       <!-- Meanings dropdown. TODO: move to sub-menu -->
-      <li class="dropdown" id="meaning_dropdown" data-controller="meanings">
+      <li class="dropdown" id="meaning_dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown">
           Verb meanings <b class="caret"></b>
         </a>
@@ -46,18 +46,17 @@
 
 <div class="navbar-inner no-gradient">
   <div class="container">
-    <ul class="nav">
+    <ul class="nav align-with-tabs">
       <% if @language %>
-        <li>
-          <%= @language.to_s + ':' %></a>
+        <li class="active">
+        	<%= link_to_unless_current @language.to_s<<' :', @language do %>
+						<%= content_tag :a, @language.to_s %>
+					<% end %>
         </li>
       <% end %>
     </ul>
     <ul class="nav nav-tabs hide" id="submenu">
-      <li>
-        Verb forms
-      </li>
-      <%= submenu_tabs %w(coding_frames alternations examples) %>
+      <%= submenu_tabs %w(verbs coding_frames alternations examples) %>
     </ul>
   </div>
 </div>

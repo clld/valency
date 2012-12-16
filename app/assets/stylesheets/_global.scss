@@ -2,7 +2,7 @@
  *   and shared classes. Don't put page-specific CSS here
  */
 
-// override some Bootstrap defaults
+/* navigation bar: override some Bootstrap defaults */
 .navbar {
 	.brand, .nav > li > a {
 		text-shadow:none;
@@ -18,7 +18,7 @@
 	}
 	.navbar-inner.no-gradient {
     background-image:none;
-    background-color:lighten($vt, 10%);
+    background-color:$secondNavbarBackground;
     border:none;
   }
   .nav-tabs { // override Bootstrap defaults: no bottom border in nav tabs
@@ -26,11 +26,14 @@
     & > li {
       margin-bottom: 0;
     }
-    & .cursor-hand, & .cursor-hand:hover { // show cursor as hand – typically on a link (to override Bootstrap default)
-      cursor: pointer;
-    }
-    
   }
+  .align-with-tabs > li > a { // for an ul.nav with elements: add transparent border
+    border-top:    1px solid transparent;
+    border-bottom: 1px solid transparent;
+  }
+  & .cursor-hand, & .cursor-hand:hover { // show cursor as hand – typically on a link (to override Bootstrap default)
+    cursor: pointer;
+  }  
 }
 
 // mini buttons with icons: change alignment
@@ -60,20 +63,22 @@ label.disabled {
 	}
 }
 
-h1 {
+/* Headings */
+h1, h2, h3, h4 {
 	.label, .badge, .btn {
 		vertical-align:middle;
 	}
-	small a {
+	small a { /* don't color links in a <small> inside a heading */
 		color: $grayLight;
 	}
 }
+
+/* scaffold adjustments */
 .new.row {
 	margin-top:14px;
 }
 
-
-// alignment
+/* alignment */
 form {
 	&.with-h3 {
 		display:inline-block;

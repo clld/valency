@@ -4,17 +4,18 @@
 
 /********** color variables **********/
 /* vt is for "valency teal" */
-$vt: #5299a3;
+$vt: rgb(58, 168, 182); // #5299a3 is from the Valency project homepage
 
 /* navbar settings */
 $navbarHeight: 30px;
 $navbarBackground:					darken($vt, 10%);
 $navbarBackgroundHighlight:	lighten($vt, 10%);
+$secondNavbarBackground:    lighten(desaturate($vt, 10%),5%);
 $navbarLinkColor:						#efefef;
 $navbarLinkColorHover:			lighten($navbarLinkColor, 10%);
-$navbarLinkBackgroundHover:	$vt;
+$navbarLinkBackgroundHover:	$navbarBackground;
 $navbarLinkColorActive:			$navbarLinkColor;
-$navbarLinkBackgroundActive:$navbarBackground;
+$navbarLinkBackgroundActive:rgb(230, 96, 20);
 
 /* link colors */
 $linkColor:      #333; /* equals $grayDark */

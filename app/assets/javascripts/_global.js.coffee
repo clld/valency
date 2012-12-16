@@ -28,6 +28,10 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 		@meaning_dropdown  or= $('#meaning_dropdown')
 		@submenu or= $('#submenu')
 		
+		# align submenu with language name / dropdown
+    # @submenu.offset({left: @language_dropdown.offset().left})
+    #   .fadeIn() if @submenu.length > 0
+		
 		# shift body down by height of navbar
 		$(document.body).css 'padding-top', $('.navbar-fixed-top').outerHeight()
 		
@@ -37,10 +41,6 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 		
 		# setup button to toggle comment box – see custom jQuery plugins
 		$('.toggle-next').align_below_and_setup_toggle()
-		
-		# align submenu with language name / dropdown
-		@submenu.offset({left: @language_dropdown.offset().left})
-		  .fadeIn() if @submenu.length > 0
 				
 		# prevent .disabled links from firing
 		@body.on 'click', '.disabled,.disabled input,.disabled .btn,.disabled a',

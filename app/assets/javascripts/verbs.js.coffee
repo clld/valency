@@ -88,8 +88,8 @@ oDTSettings =
 				sDom: "<'row'<'span4'i><'span8'f>>tS"
 				sScrollY: "700px"
 				oLanguage:
-					sInfoFiltered: " (filtered)"
-					sSearch: "Filter:"				
+					sInfoFiltered: ' (filtered)'
+					sSearch: ''
 			}
 		)
 	
