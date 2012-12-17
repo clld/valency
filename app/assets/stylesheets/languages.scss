@@ -10,14 +10,14 @@ tr.language {
     white-space: nowrap;
   }
   &.selected, &.selected:hover {
-    background-color: yellow;
+    background-color: $navbarLinkBackgroundActive;
   }
 }
 [id^="region"].selected {
-  background-color: yellow;
+  background-color: $navbarLinkBackgroundActive;
 }
 
-// copied over from JS:
+/* fixed width <th> */
 #language_metadata th {
   width: 6em;
 }
@@ -43,6 +43,10 @@ tr.language {
 }
 
 /* styles for the maps */
+.map-caption {
+  font-size:18px;
+  line-height:20px;
+}
 h3.infowindow {
   font-size: $baseFontSize;
   line-height: $baseLineHeight;

@@ -51,7 +51,7 @@ label.disabled {
 // TODO check out if this is easier to do with a .form-inline 
 .btn-mini.with-h1{ /* button to be shown in line with h1 */
 	position:relative;
-	top:22px;
+	top:16px;
 	margin:0 2em;	
 }
 .comment { // a div with a p.box inside
@@ -67,10 +67,18 @@ label.disabled {
 
 /* Headings */
 h1, h2, h3 {
-  line-height: 36px;
+  line-height: 32px;
 }
-h1 { font-size: 28px; }
-h2 { }
+h1 {
+  color: inherit;
+          font-size: 28px;
+  small { font-size: 20px; }
+}
+h2 { font-size: 18px; small { font-size:14px; } }
+h3 { font-size: 14px; small { font-size:12px; } }
+
+h4, h5, h6 { font-size: 12px; line-height: 20px; }
+h4 { small { font-size:12px; } }
 
 h1, h2, h3, h4 {
 	.label, .badge, .btn {
@@ -86,21 +94,16 @@ h1, h2, h3, h4 {
 	margin-top:14px;
 }
 
-/* alignment */
+
+/* alignment of a form */
 form {
-	&.with-h3 {
+	&.with-h2 {
 		display:inline-block;
-		line-height:40px;
+		line-height:32px; // like h2
 		margin:8px 0 0 1em;
 	}
-	&.with-h4 {
-		display:inline-block;
-		line-height:20px;
-		margin:6px 0 0 1em;
-	}
 }
-
-// dataTable filters: buttons/btn-groups to toggle column filters
+/* dataTable filters: buttons/btn-groups to toggle column filters */
 .dt-filters {
 	background-color:$grayLighter;
 	border:1px solid $tableBorder;
@@ -202,11 +205,6 @@ form {
   @include transition(opacity .3s ease-in-out);
 }
 
-// Headings
-h2, h3, h4, h5 {
-	color:$vt;
-}
-
 // content-specific styles
 .object-language { font-style:italic; }
 
@@ -215,7 +213,7 @@ h2, h3, h4, h5 {
 
 /* utility classes: colors */
 .bg-me { background-color:$bg-me; }
-.bg-mr { background-color:$bg-mr; }
+.bg-mr { background-color:$bg-me; }
 .bg-cf { background-color:$bg-cf; }
 .bg-cs { background-color:lighten($bg-cs,6%); }
 
