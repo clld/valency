@@ -26,16 +26,16 @@ tr.language {
 .contributor {
   display: inline-block;
   vertical-align:top;
-  max-width: 12em;
+  max-width: 10em;
   .contributor-name { /* is a <p> */
     font-weight: bold;
     margin: 6px 0;
   }
   .photo-container {
-    height:180px;
+    height:150px;
   }
   .photo {
-    max-height:160px;
+    max-height:140px;
   }
   & + .contributor {
     margin-left:1em;

@@ -62,8 +62,9 @@
     <% end %>
     
     <% if @native_speakers.size > 0 %>
-      <h3 class="clear">Native speakers, consultants</h3>
-      <%= @native_speakers.map{|p|p.name}.to_sentence %>
+      <div class="clear">
+        <b>with data contributions by <%= @native_speakers.size %> native speakers</b>
+      </div>
     <% end %>
   </div>
 </div>
@@ -79,56 +80,4 @@
   </div>
 </div>
 
-<div class="new row">
-  <div class="span12">
-    <% if @language.comments %>
-      <% #TODO fix the formatting of this section (Issur #50) %>
-      <h2>Contributor comments</h2>
-    <div class="row">
-
-  <% counter = 0 %>
-
-  <% if @language.comments %>
-    <%= content_tag :div, raw("<h4>General comments</h4>#{@language.comments}"), class: 'span6' %>
-    <% if (counter += 1)%2 == 0 then raw('</div><div class="row">') else "" end %>
-  <% end %>
-
-  <% if @language.data_sources_generalizations_contributor_backgrounds %>
-    <%= content_tag :div, raw("<h4>Source of data and generalizations / contributors' background</h4>#{@language.data_sources_generalizations_contributor_backgrounds}"), class: 'span6' %>
-    <% if (counter += 1)%2 == 0 then raw('</div><div class="row">') else "" end %>
-  <% end %>
-
-  <% if @language.alternation_occurs_judgement_criteria %>
-    <%= content_tag :div, raw("<h4>Judgment criteria for verb alternations</h4>#{@language.alternation_occurs_judgement_criteria}"), class: 'span6' %>
-    <% if (counter += 1)%2 == 0 then raw('</div><div class="row">') else "" end %>
-  <% end %>
-  </div><!-- end row -->
-  </div><!-- end span12 -->
-  </div><!-- end row -->
-
-  <div class="new row">
-    <div class="span12">
-  <h3>Characterization of...</h3>
-  <div class="row">
-  <% counter = 0 %>
-
-  <% if @language.characterization_of_flagging_resources %>
-    <%= content_tag :div, raw("<h4>...Flagging</h4>#{@language.characterization_of_flagging_resources}"), class: 'span6' %>
-    <% if (counter += 1)%2 == 0 then raw('</div><div class="row">') else "" end %>
-  <% end %>
-
-  <% if @language.characterization_of_indexing_resources %>
-    <%= content_tag :div, raw("<h4>...Indexing</h4>#{@language.characterization_of_indexing_resources
-}"), class: 'span6' %>
-    <% if (counter += 1)%2 == 0 then raw('</div><div class="row">') else "" end %>
-  <% end %>
-
-  <% if @language.characterization_of_ordering_resources %>
-    <%= content_tag :div, raw("<h4>...Ordering</h4>#{@language.characterization_of_ordering_resources}"), class: 'span6' %>
-    <% if (counter += 1)%2 == 0 then raw('</div><div class="row">') else "" end %>
-  <% end %>
-</div><!-- end row -->
-<% end %>
-</div><!-- end span12 -->
-</div><!-- end row -->
-  
+<!-- all comments hidden for now -->
