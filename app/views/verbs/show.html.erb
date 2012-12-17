@@ -19,7 +19,7 @@
 
 <div class="row">
 	<!-- CODING FRAME --><div class="span4">
-    <h4>Coding frame</h4>
+    <h2>Coding frame</h2>
     <% if cframe %>
       <%= div_for cframe, :class => 'padded-box bg-cf' do |cf| %>
         <big><%= link_to cf, [@language, cf] %></big>
@@ -31,12 +31,12 @@
   </div><!-- end of span4 -->
   
   <!-- EXAMPLES --><div class="span8">
-    <h4>
+    <h2>
       <%= 'Example'.pluralize @excount if @excount > 0 %>
       <small>
         <%= @excount > 0 ? "for the coding frame" : "no example given" %>
       </small>
-    </h4>
+    </h2>
     <div class="examples-container">
       <% example_options = {number_as_link: true} %>
       <% @examples.each do |ex| %>
@@ -51,10 +51,10 @@
 
 	<!-- INDEX#, Microroles, Coding sets, Argument types -->
 	<div class="span<%= meanings.size + 6 %>">
-    <h4>
+    <h2>
       Verb <%= "meaning".pluralize meanings.size %>,
       Microroles, Coding&nbsp;sets and Argument&nbsp;types
-    </h4>
+    </h2>
     <% if cframe %>
       <% arguments = cframe.index_numbers_eager_load %>
       <table class="table table-bordered-sharp">
@@ -97,7 +97,7 @@
 <div class="new row">
 	<!-- Alternations --><div class="span12 dt-with-filters">
 	  <% avs = @verb.alternation_values %>
-    <h4 class="pull-left">Alternations</h4>
+    <h2 class="pull-left">Alternations</h2>
     <% if @verb.av_data? then %>
     <form class="pull-left with-h4">
       <label class="checkbox inline"> also show: </label>

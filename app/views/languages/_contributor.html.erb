@@ -1,12 +1,13 @@
-<div class="contributor pull-left" id="<%= dom_id(contributor) %>">
+<div class="contributor" id="<%= dom_id(contributor) %>">
   <% c = contributor %>
   <% if c.photo_url %>
     <% photo = capture { image_tag(c.photo_url, class: 'img-polaroid photo') } %>
-    <%= link_to_if c.url, photo, c.url %>
+    <div class="photo-container">
+      <%= link_to_if c.url, photo, c.url %>
+    </div>
   <% end %>
-  <h5 class="contributor-name"><%= link_to_if c.url, c.name, c.url %></h5>
+  <p class="contributor-name"><%= link_to_if c.url, c.name, c.url %></p>
   <% if c.affiliation %>
     <p><%= c.affiliation %></p>
   <% end %>
-  
 </div>

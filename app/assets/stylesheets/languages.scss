@@ -24,16 +24,18 @@ tr.language {
 
 // contributor profiles / pictures
 .contributor {
-  .contributor-name {
-    color:$linkColor;
+  display: inline-block;
+  vertical-align:top;
+  max-width: 12em;
+  .contributor-name { /* is a <p> */
+    font-weight: bold;
+    margin: 6px 0;
   }
-  width: 12em;
-  h5 {
-    margin-bottom:8px;
+  .photo-container {
+    height:180px;
   }
   .photo {
-    max-width:100%;
-    max-height:200px;
+    max-height:160px;
   }
   & + .contributor {
     margin-left:1em;

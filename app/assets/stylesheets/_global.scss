@@ -47,8 +47,9 @@ label.disabled {
   color:$grayLight;
 }
 
-// button to toggle the comment below it
-.btn-mini.with-h1{ // button to be aligned with h1
+/* button to toggle the comment below it */
+// TODO check out if this is easier to do with a .form-inline 
+.btn-mini.with-h1{ /* button to be shown in line with h1 */
 	position:relative;
 	top:22px;
 	margin:0 2em;	
@@ -65,6 +66,12 @@ label.disabled {
 }
 
 /* Headings */
+h1, h2, h3 {
+  line-height: 36px;
+}
+h1 { font-size: 28px; }
+h2 { }
+
 h1, h2, h3, h4 {
 	.label, .badge, .btn {
 		vertical-align:middle;
@@ -231,6 +238,7 @@ div.inline{
 }
 
 /* link without href: style like regular link */
+// TODO check if anything uses this: if not, remove
 a.no-href {
 	&:hover {
 		cursor: pointer;

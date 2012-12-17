@@ -33,11 +33,6 @@ apply_column_filter = ($dt, $button_group, event = null) ->
     # shift body down by height of navbar
     $(document.body).css 'padding-top', $('.navbar-fixed-top').outerHeight()
     
-    # alignment of second menu bar items
-    @submenu.css 'margin-left', @language_dropdown.offset().left
-    $('#nav_language').css  'width', @language_dropdown.width()
-    $('#verb_dropdown').css 'width', @meaning_dropdown.width()
-    
     # flash the "choose language" link when .disabled tab clicked
     @submenu.find('.nav li.disabled').click ->
       $('#choose_lang').flash navbarLinkBackgroundActive
@@ -58,6 +53,11 @@ apply_column_filter = ($dt, $button_group, event = null) ->
     # prevent .disabled links from firing
     @body.on 'click', '.disabled,.disabled input,.disabled .btn,.disabled a',
       (e) -> e.preventDefault()
+    
+    # alignment of second menu bar items
+    @submenu.css 'margin-left', @language_dropdown.offset().left
+    $('#nav_language').css  'width', @language_dropdown.width()
+    $('#verb_dropdown').css 'width', @meaning_dropdown.width()
     
     # global settings for dataTables. These are extended in the controllers' handlers
     @oDTSettings =
