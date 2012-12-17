@@ -13,7 +13,7 @@ $navbarBackgroundHighlight:	lighten($vt, 10%);
 $secondNavbarBackground:    lighten(desaturate($vt, 10%),5%);
 $navbarLinkColor:						#efefef;
 $navbarLinkColorHover:			lighten($navbarLinkColor, 10%);
-$navbarLinkBackgroundHover:	#067280; //$navbarBackground;
+$navbarLinkBackgroundHover:	darken(saturate($navbarBackground, 10%), 6%);
 $navbarLinkColorActive:			$navbarLinkColor;
 $navbarLinkBackgroundActive:rgb(230, 96, 20);
 
@@ -31,9 +31,13 @@ $bg-cf: #ffe6cc; /* background for coding frames */
 $bg-cs: #ffffcc; /* background for coding sets */
 $bg-cs-darker: saturate($bg-cs, 10%); /* background for coding sets (column headers) */
 
-/* colors for dataTables */
+/* colors for (data-)Tables */
+$tableBorder: $navbarBackground;
 $tableHeaderBackground: 				#fefefe;
-$tableHeaderBackgroundHighlight:#dedede;
+$tableHeaderBackgroundHighlight:#cdcdcd;
+$tableBackgroundAccent: #eee;
+$tableBackgroundHover:  #ddd;
+
 
 /* darken .active buttons for dataTable filters – see _global.scss */
 $btnActiveBackground: #bbb;
