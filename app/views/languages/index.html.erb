@@ -6,7 +6,7 @@
     
     <div class="row">
       <div class="span10 offset1">
-        <h4>Languages by geographical region</h4>
+        <h1>Languages by geographical region</h1>
         <%= gmaps({
           map_options: {
             provider_key: @google_api_key,
@@ -15,6 +15,7 @@
             auto_adjust:  true,
             auto_zoom:    false,
             zoom: 2,
+            minZoom: 2,
             mapTypeControl: false,
             raw: "{
               streetViewControl: false,
@@ -38,13 +39,19 @@
           <% next if region.nil? %>
           <% languages_in_region = @languages.select{|l| l.continent == region} %>
 
-          <%= content_tag :h5, id: languages_in_region[0].region_id do %>
+          <%= content_tag :h2, id: languages_in_region[0].region_id, class: 'region' do %>
             <%= region %>
-            <small>(<%= languages_in_region.size %>)</small>
+            <span class="badge" title="<%= "#{(lcount = languages_in_region.size)} languages" %>">
+              <%= lcount %>
+            </span>
           <% end %>
 
           <table class="table table-very-condensed table-hover">
             <tbody>
+              <% if region == 'Americas' # custom sort order: North to South %>
+                
+              <% end %>
+              
               <% languages_in_region.each do |lang| %>
                 <%= content_tag_for(:tr, lang) do %>
                 <th class="language-name"><%= link_to lang, lang %></th>

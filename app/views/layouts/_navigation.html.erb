@@ -12,7 +12,6 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
           Language contributions <b class="caret"></b>
         </a>
-
         <ul class="dropdown-menu">
           <li><%= link_to "All languages", languages_path %></li>
           <li class="divider"></li>
@@ -44,71 +43,71 @@
 </div><!-- end .container -->
 
 
-<div class="navbar-inner no-gradient">
+<div class="navbar-inner no-gradient"><!-- second nav bar -->
 	<div class="container" id="submenu">
 
 		<!-- language name or "Choose a Language" link -->
-		<ul class="nav align-with-tabs">
-			<li class="<%= (controller_name == 'languages' && @language) ? "active" : '' %>">
+		<ul class="nav">
+			<li id="nav_language" class="<%= 'active' if controller_name == 'languages' && @language %>">
 			<% if @language %>
 				<%= link_to_unless_current @language.to_s, @language, title: "Overview for #{@language.to_s}" do %>
 					<%= content_tag :a, @language.to_s %>
 				<% end %>
 			<% else %>
 				<%# no language selected %>
-				<a id="choose_lang">Choose a language</a>
+				<a id="choose_lang">(choose a language)</a>
 			<% end %>
 		</li>
-		</ul>
 
-		<ul class="nav nav-tabs">
-			
-			<% unless @language # no language selected %>
-				<%= submenu_tabs ['verbs'] %>
-			<% else # a language is selected %>
-			
-			<!-- Verb forms dropdown (w/ meanings) -->			  
-			<li class="dropdown" id="verb_dropdown">
-				<% cls = "dropdown-toggle#{' active' if controller_name == 'verbs'}" %>
-		    <a class="<%= cls %>" data-toggle="dropdown" href="#">
-					Verb forms <b class="caret"></b>
-	      </a>
-		    <ul class="dropdown-menu hover-items">
-          <div class="caption">
-						<%= link_to "Show all #{@language.verbs.size} Verb forms", language_verbs_path(@language), class: "inline" %>,
-            or choose by Verb meaning (80 core meanings shown):
-          </div>
-          <li class="divider"></li>
+		<li class="divider-vertical"></li>	
 
-		      <% @meanings_core.includes(:verbs).each do |m| %>
-						<% verbs = (m.verbs & @language.verbs) %>
-            <li>
-							<% if verbs.size > 0 %>
-								<%= link_to(controller: 'verbs', action: 'show', id: verbs.first.to_param, meaning: m.to_param) do %>
-									<span class="toggle-hover"><%= m.to_s %></span>
-									<span class="toggle-hover object-language">
-										<%= verbs.map{|v| v.to_s}.join(', ').html_safe %>
-									</span>
-								<% end %>
-								
-							<% else # no verbs for this meaning %>
+		<% unless @language # no language selected %>
+			<%= submenu_items ['verbs'] %>
+		<% else # a language is selected %>
+		
+		<!-- Verb forms dropdown (w/ meanings) -->			  
+		<li class="dropdown<%= ' active' if controller_name == 'verbs' %>" id="verb_dropdown">
+	    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				Verb forms <b class="caret"></b>
+      </a>
+	    <ul class="dropdown-menu hover-items">
+        <div class="caption">
+					<%= link_to "Show all #{@language.verbs.size} Verb forms", language_verbs_path(@language), class: "inline" %>,
+          or choose by Verb meaning (80 core meanings shown):
+        </div>
+        <li class="divider"></li>
 
-								<%= content_tag :a, class: 'disabled' do %>
-									<span class="toggle-hover"><%= m.to_s %></span>
-									<span class="toggle-hover">(no counterpart)</span>
-								<% end %>
-
+	      <% @meanings_core.includes(:verbs).each do |m| %>
+					<% verbs = (m.verbs & @language.verbs) %>
+          <li>
+						<% if verbs.size > 0 %>
+							<%= link_to(controller: 'verbs', action: 'show', language_id: @language.to_param, id: verbs.first.to_param, meaning: m.to_param) do %>
+								<span class="toggle-hover"><%= m.to_s %></span>
+								<span class="toggle-hover object-language">
+									<%= verbs.map{|v| v.to_s}.join(', ').html_safe %>
+								</span>
 							<% end %>
-						</li>
-          <% end %>						
+							
+						<% else # no verbs for this meaning %>
 
-		    </ul>
-		  </li>
-			<% end # unless %>
+							<%= content_tag :a, class: 'disabled' do %>
+								<span class="toggle-hover"><%= m.to_s %></span>
+								<span class="toggle-hover">(no counterpart)</span>
+							<% end %>
 
-			<%= submenu_tabs %w(coding_frames alternations examples) %>
-		</ul><!-- end .nav-tabs -->
+						<% end %>
+					</li>
+        <% end %>						
 
+	    </ul>
+	  </li>
+		<% end # unless %>
+
+    <li class="divider-vertical"></li>
+    
+    <%= submenu_items %w(coding_frames alternations examples), divider='divider-vertical' %>
+    
+		</ul><!-- end .nav -->
 
 	</div><!-- end .container#submenu -->
 </div><!-- end .navbar-inner -->

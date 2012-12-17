@@ -27,7 +27,9 @@ module ApplicationHelper
   
   # generate <li> tags for the submenu (one per controller)
   # used for the controllers of resources nested under a language
-  def submenu_tabs(controller_names)
+  def submenu_items(controller_names, divider=nil)
+    if divider then divider = "<li class=\"#{divider}\"></li>" else divider='' end
+    
     controller_names.map do |c_name|
       css_class = if c_name == controller_name then 'active' else '' end
       css_class << "#{' ' unless css_class.blank?}disabled" unless @language
@@ -42,7 +44,7 @@ module ApplicationHelper
         end
       end
 
-    end.join("\n").html_safe
+    end.join("#{divider}\n").html_safe
   end
 
 end

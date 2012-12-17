@@ -7,13 +7,13 @@
 $vt: rgb(58, 168, 182); // #5299a3 is from the Valency project homepage
 
 /* navbar settings */
-$navbarHeight: 30px;
+$navbarHeight: 28px;
 $navbarBackground:					darken($vt, 10%);
 $navbarBackgroundHighlight:	lighten($vt, 10%);
 $secondNavbarBackground:    lighten(desaturate($vt, 10%),5%);
 $navbarLinkColor:						#efefef;
 $navbarLinkColorHover:			lighten($navbarLinkColor, 10%);
-$navbarLinkBackgroundHover:	$navbarBackground;
+$navbarLinkBackgroundHover:	#067280; //$navbarBackground;
 $navbarLinkColorActive:			$navbarLinkColor;
 $navbarLinkBackgroundActive:rgb(230, 96, 20);
 

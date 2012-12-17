@@ -40,6 +40,12 @@ tr.language {
   }
 }
 
+/* styles for the maps */
+h3.infowindow {
+  font-size: $baseFontSize;
+  line-height: $baseLineHeight;
+}
+
 // customized styles for gmaps4rails
 .map_container { // the outer container of the map: governs borders etc.
   padding: 6px;
