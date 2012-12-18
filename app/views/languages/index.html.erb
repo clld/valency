@@ -6,7 +6,7 @@
     
     <div class="row">
       <div class="span10 offset1">
-        <h1>Languages by geographical region</h1>
+        <h1 class="map-caption">Languages by geographical region</h1>
         <%= gmaps({
           map_options: {
             provider_key: @google_api_key,
@@ -41,7 +41,7 @@
 
           <%= content_tag :h2, id: languages_in_region[0].region_id, class: 'region' do %>
             <%= region %>
-            <span class="badge" title="<%= "#{(lcount = languages_in_region.size)} languages" %>">
+            <span class="badge with-h2" title="<%= "#{(lcount = languages_in_region.size)} languages" %>">
               <%= lcount %>
             </span>
           <% end %>

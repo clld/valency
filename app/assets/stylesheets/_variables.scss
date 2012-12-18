@@ -21,6 +21,9 @@ $navbarLinkBackgroundActive:rgb(230, 96, 20);
 $linkColor:      #333; /* equals $grayDark */
 $linkColorHover: darken($vt, 10%);
 
+/* text colors */
+$headingsColor: $vt;
+
 /* dropdown links */
 $dropdownLinkBackgroundHover:  $vt;
 $dropdownLinkBackgroundActive: $dropdownLinkBackgroundHover;

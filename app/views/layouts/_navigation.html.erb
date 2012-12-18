@@ -67,7 +67,9 @@
 		<li class="divider-vertical"></li>	
 
 		<% unless @language # no language selected %>
-			<%= submenu_items ['verbs'] %>
+		  <li id="verb_dropdown" class="disabled">
+			  <a>Verb forms</a>
+			</li>
 		<% else # a language is selected %>
 		
 		<!-- Verb forms dropdown (w/ meanings) -->			  
