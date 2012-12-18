@@ -296,6 +296,11 @@ table {
       }
     }
   }
+  &.table-horizontal {
+    th {
+      width:10em;
+    }
+  }
 }
 
 /* for weak projectors: increase contrast */

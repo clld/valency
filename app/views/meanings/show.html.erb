@@ -3,53 +3,56 @@
 
 <h1>
   <%= @meaning.label.upcase %>
-  <small>(<%= @meaning.meaning_list.downcase %>)</small>
+  <small><%= @meaning.core_or_additional %> meaning</small>
 </h1>
 
 <div class="row">
   <div class="span6"><!-- meaning details -->
-    <table class="table table-condensed">
+    <table class="table table-condensed table-horizontal">
       <tbody>
         <tr>
-          <td><strong>Role frame</strong></td>
+          <th>Role frame</th>
           <td><%= @meaning.role_frame %></td>
         </tr>
 
         <tr>
-          <td><strong>Typical context</strong></td>
+          <th>Typical context</th>
           <td><em><%= @meaning.typical_context %></em></td>
         </tr>
 
         <tr>
-          <td><strong>Microroles</strong></td>
+          <th>Microroles</th>
           <td><%= @meaning.microroles.all.map{|mr| mr.name}.join(', ') %></td>
         </tr>
 
       </tbody>
     </table>
   </div>
-  <!-- <div class="span4">
-    
-  </div> -->
 </div>
-<div class="new row">
-  <div class="span6">
-    There are <strong><%= @meaning.verbs.size %></strong> Verb forms for this meaning:
-    <!-- meaning_verbs_list  is an ugly workaround. Can use better ID once JS is modular -->
-	  <table id="meaning_verbs_list" class="table table-striped table-bordered dataTable">
+<div class="row">
+  <div class="span12">
+    <h2>Verb forms <span class="badge with-h2"><%= @meaning.verbs.size %></span></h2>
+
+	  <table id="verbs_list" class="table table-striped table-bordered-sharp table-hover dataTable">
 	    <thead>
 	     <tr>
-	       <th>Verb form</th>
 	       <th>Language</th>
+	       <th class="hidden-col">region</th>
+	       <th class="hidden-col">family</th>
+	       <th>Verb form</th>
+	       <th>Basic Coding frame</th>
 	     </tr>
 	    </thead>
 
 	    <tbody>
 	     <% @meaning.verbs.each do |v| %>
-  	     <% lang = v.language %>
+  	     <% lang = v.language; cf = v.coding_frame %>
   	     <tr>
-  	       <td><%= link_to v, [lang, v] %></td>
   	       <td><%= link_to lang, lang %></td>
+  	       <td><%= lang.region %></td>
+  	       <td><%= lang.family %></td>
+  	       <td><%= link_to v,  [lang, v ], class: 'object-language' %></td>
+  	       <td><%= link_to cf, [lang, cf] %></td>
   	     </tr>
 	     <% end %>
 	    </tbody>
