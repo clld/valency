@@ -19,7 +19,13 @@ class AlternationsController < ApplicationController
   # GET /languages/1/alternations/1
   # GET /languages/1/alternations/1.json
   def show
-    @alternation = @language.alternations.includes(:alternation_values => [{:verb => :meanings}, :examples]).find(params[:id])
+    @alternation = @language.alternations.includes(
+      :alternation_values => [
+        :examples,
+        :derived_coding_frame,
+        {:verb => [:meanings, :coding_frame]}
+      ]
+    ).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

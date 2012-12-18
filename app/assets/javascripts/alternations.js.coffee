@@ -18,7 +18,6 @@ sort_by_altn_name = (iCol) ->
 
 oDTSettings_index = 
   sDom: "<'row'<'span4'i><'span8'f>>t" # no scrolling
-  # sScrollY: "700px"
   bPaginate: false
   oLanguage:
     sInfoFiltered: " (filtered)"
@@ -43,6 +42,35 @@ oDTSettings_index =
   ]
   aaSorting: [[0,'asc']]
 
+oDTSettings_show = 
+  sDom: "<'row'<'span4'i><'span8'f>>t" # no scrolling
+  bPaginate: false
+  oLanguage:
+    sInfoFiltered: " (filtered)"
+    sSearch: ""
+  aoColumnDefs: [ # 0: Meaning, 1: Verb , 2: occurs, 3: arg_count,
+                  # 4: basic CF, 5: derived CF, 6: arg_count_derived, 7: example(true) 
+    {
+      aTargets:[0, 1, 2, 4, 5] 
+      sType: "html"
+    },{
+      aTargets:[4, 5]
+      sWidth: '30%'
+      asSorting:['desc']
+    },{
+      aTargets:[0] # Meaning
+      sWidth: '5%'
+    },{
+      aTargets:[1] # Verb form
+      sWidth: '10%'
+    },{
+      aTargets:[2] # occurs
+      sWidth: '5%'
+    }
+  ]
+  aaSorting: [[0,'asc']]
+
+
 @VALENCY.alternations =
   init: ->
     
@@ -55,5 +83,7 @@ oDTSettings_index =
     
   
   show: ->
-    
+    $av_list = $('#av_list')
+    $dt      = $av_list.dataTable $.extend ns.oDTSettings, oDTSettings_show
+    $dt.sortEmptyLast 'basic coding frame', 'derived coding frame'
   
