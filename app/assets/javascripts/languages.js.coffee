@@ -3,8 +3,8 @@
 
 ### utitilies for gmaps4rails interactions
 ###
-yellow_circle = "http://wals.info/static/wals/images/icons/cff0.png"
-red_circle    = "http://wals.info/static/wals/images/icons/cd00.png"
+yellow_circle = "http://wals.info/static/wals/images/icons/cf60.png"
+red_circle    = "http://wals.info/static/wals/images/icons/c00d.png"
 
 switch_on  = (marker) ->
   marker.serviceObject.setIcon red_circle
