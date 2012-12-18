@@ -1,19 +1,43 @@
 <!-- Alternation detail -->
-<p id="notice"><%= notice %></p>
 <% a = @alternation %>
-<div class="alternation padded-box">
-  <h1 style="font-weight:normal;"><%= raw a.name %></h1>
-</div>
-<%= a.coded? ? 'Coded' : 'Uncoded' %> alternation
-<% unless a.description.nil? %>
-  <h2>Description</h2>
-  <%= raw a.description %>
-<% end %>
+<p id="notice"><%= notice %></p>
 
+  <h1 class="alternation">
+    <%= raw a.name %>
+    <%= render partial: 'alternations/cu_label', locals: {alternation: a} %>
+  </h1>
 
-<div class="new row">
+<div class="row">
   <div class="span6">
-
+    <% unless a.description.nil? %>
+      <h2>Description</h2>
+      <%= raw a.description %>
+    <% end %>
   </div>
 </div>
 
+<div class="new row">
+  <div class="span12 dt-with-filters">
+
+    <table id="av_list" class="table table-bordered-sharp table-striped table-hover dataTable">
+      <thead>
+        <tr>
+      		<th>Verb meaning</th>
+          <th>Verb form</th>
+          <th>Occurs</th>
+          <th>Basic Coding frame</th>
+          <th>Derived Coding frame</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td></td>
+    		  <td></td>		
+        </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+</div>

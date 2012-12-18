@@ -26,7 +26,13 @@ class Alternation < ActiveRecord::Base
   
   # get verbs that occur regularly in this alternation (as Array)
   def get_verbs
-    self.alternation_values.where(alternation_occurs: 'Regularly').map{ |av| av.verb }
+    self.alternation_values.includes(:verb).where(alternation_occurs: 'Regularly').map{ |av| av.verb }
+  end
+  
+  # get examples for Regular values of this alt'n
+  def get_examples
+    avs = self.alternation_values.includes(:examples).where(alternation_occurs: 'Regularly')
+    avs.map { |av| av.examples }.flatten
   end
   
   

@@ -35,7 +35,8 @@ sort_by_altn_name = (iCol) ->
 	(src, type, val) ->
 		if type is 'sort'
 			return 'zzz' unless src[iCol]
-			$(src[iCol]).find('span:not(.label)').text?()
+			console.log($(src[iCol]).find('span:not(.label)').text())
+			$(src[iCol]).find(':not(.label)').text?()
 		else
 			if type is 'set' then src[iCol] = val else src[iCol]
 	

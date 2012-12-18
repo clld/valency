@@ -25,7 +25,7 @@ module ExamplesHelper
   # number_as_link: have the ex. number link to the Example object. Default: false
   # wrap: wrap the entire primary text in an <a> with href to the Example. Default: false
   # gloss: display the gloss. Default: true
-  def render_example ex, options
+  def render_example ex, options = {}
     css_class      = options[:class]          || ''
     wrap           = options[:wrap]           || false
     number_as_link = options[:number_as_link] || false

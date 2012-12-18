@@ -1,0 +1,6 @@
+<% if alternation.alternation_type %>
+  <% coded_uncoded = alternation.coded? ? 'Coded' : 'Uncoded' %>
+  <span class="label" title="<%= coded_uncoded %> alternation">
+    <%= coded_uncoded[0] %>
+  </span>
+<% end %>
