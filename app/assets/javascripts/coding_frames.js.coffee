@@ -31,16 +31,16 @@ oDTSettings_index =
       mDataProp: sort_ignoring_label 0
     },{
       aTargets:[3] # verb_count
-      sType: 'numeric'
       asSorting: ['desc', 'asc']
     },{
       aTargets:[4] # Verb meanings & Verbs
       sType: 'html'
       sWidth: '60%'
       mDataProp: dtapi._sorter_fn_empty_last 4
+      asSorting: []
     }
   ]
-  aaSorting: [[0,'asc'], [1,'asc']]
+  aaSorting: [[3,'desc'], [0,'asc']]
     
 
 
@@ -53,18 +53,7 @@ oDTSettings_index =
     $cf_list = $('#coding_frames_list')
     $dt      = $cf_list.dataTable $.extend(ns.oDTSettings, oDTSettings_index)
     
-    item_height = $('.isotope').first().children().first().outerHeight() or 20
-    $('.isotope').each (i, container) ->
-      $container  = $(container)
-      $children   = $container.children()
-      item_count  = $children.length
-      cols        = if $container.width() < 420 then 2 else 3
-      items_per_col = Math.ceil(item_count / cols)
-      $children.filter(":nth-child(n + #{items_per_col + 1})").css 'margin-left', '2em'
-      $container.height( items_per_col * item_height )
-      .isotope
-        animationEngine: 'css'
-        layoutMode: 'fitColumns'
+    $('td.columns').each -> $(this).children().inColumns 3
     
   
   show: ->

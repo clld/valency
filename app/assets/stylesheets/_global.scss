@@ -59,9 +59,9 @@ label.disabled {
 	clear:both;
 	width:auto;
 	.box {
-		background-color:lightyellow;
+		background-color:white;
 		padding:10px;
-		border:1px dotted gray;	
+		border:1px dashed $tableBorder;
 	}
 }
 
@@ -279,11 +279,31 @@ table {
 	    border-top: 0;
 	  }
 	}
+  td {
+    &.number {
+      text-align:right;
+      padding-right:0.5em;
+    }
+    &.center	{
+      text-align:center;
+    }
+    &.columns {
+      .column {
+        display:table-cell;
+      }
+      .column + .column {
+        padding-left:1em;
+      }
+    }
+  }
+  &.table-horizontal {
+    th {
+      width:10em;
+    }
+  }
 }
-td.number {
-  text-align:right;
-  padding-right:0.5em;
-}
+
+/* for weak projectors: increase contrast */
 
 /* for weak projectors: increase contrast */
 

@@ -1,19 +1,130 @@
 <!-- Alternation detail -->
-<p id="notice"><%= notice %></p>
 <% a = @alternation %>
-<div class="alternation padded-box">
-  <h1 style="font-weight:normal;"><%= raw a.name %></h1>
-</div>
-<%= a.coded? ? 'Coded' : 'Uncoded' %> alternation
-<% unless a.description.nil? %>
-  <h2>Description</h2>
-  <%= raw a.description %>
-<% end %>
+<p id="notice"><%= notice %></p>
 
+  <h1 class="alternation">
+    <%= raw a.name %>
+    <%= render partial: 'alternations/cu_label', locals: {alternation: a} %>
+  </h1>
 
-<div class="new row">
+<div class="row">
   <div class="span6">
-
+    <% unless a.description.nil? %>
+      <h2>Description</h2>
+      <%= raw a.description %>
+    <% end %>
   </div>
 </div>
 
+<div class="new row">
+  <div class="span12 dt-with-filters">
+    <div class="form-inline dt-filters"><!-- filters for dataTable -->
+  
+    <label>Alternation occurs:</label>
+    <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="occurs">
+      <button class="btn btn-mini btn-success" value="R">Regularly</button>
+      <button class="btn btn-mini btn-warning" value="M">Marginally</button>
+      <button class="btn btn-mini btn-danger" value="N">Never</button>
+    </div>
+    <label>Only</label>
+    <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="example">
+      <button class="btn btn-mini" value="true">with examples</button>
+    </div> for Derived CF
+
+    <div class="btn-group">
+      <a class="btn btn-mini clear-filters">
+        <i class="icon-remove"></i> Clear filters
+      </a>
+    </div>    
+
+    <div class="inline" style="margin-top:10px;"><!-- second line of filters -->
+      <label>Participants in Basic CF:</label>
+      <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="arg_count">
+        <button class="btn btn-mini" value="0"> none </button>
+        <button class="btn btn-mini"> 1 </button>
+        <button class="btn btn-mini"> 2 </button>
+        <button class="btn btn-mini"> 3 </button>
+        <button class="btn btn-mini"> 4 </button>
+        <button class="btn btn-mini" value="5|6|7|8|9"> more than 4 </button>
+      </div>
+    </div>
+    
+  </div>
+  
+    <table id="av_list" class="table table-bordered-sharp table-striped table-hover dataTable">
+      <thead>
+        <tr>
+      		<th>Verb meaning</th>
+          <th>Verb form</th>
+          <th>Occurs</th>
+          <th class="hidden-col">arg_count</th>
+          <th>Basic Coding frame</th>
+          <th>Derived Coding frame</th>
+          <th class="hidden-col">arg_count_derived</th>
+          <th class="hidden-col">example</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% a.alternation_values.each do |av| %>
+          <% v   = av.verb %>
+          <% next unless v %>
+          <% m   = if v then v.meanings.first else nil end %>
+          <% basic_cf  = if v then v.coding_frame   else nil end %>
+          <% deriv_cf = av.derived_coding_frame %>
+          <% basic_ex = if v then v.examples.first else nil end %>
+          <% deriv_ex = av.examples.first %>
+          
+          <%= content_tag_for :tr, av do %>
+
+            <td><%= link_to m, m unless m.nil? or m.to_s.blank? %></td>
+
+            <td><%= link_to(v, [@language, v], class: 'object-language') if v %></td>
+
+            <td class="center"><%= value_label av %></td>
+
+            <td><%= basic_cf.arg_count if basic_cf %></td>
+
+            <td>
+              <% if basic_cf %>
+                <div>
+                  <span class="hidden"><%= basic_cf.arg_count %></span>
+                  <%= link_to(raw(basic_cf), [@language, basic_cf]) %>
+                </div>
+                <% if basic_ex %>
+                  <hr/>
+                  <div>
+                      <%= render_example basic_ex %>
+                  </div>
+                <% end %>
+              <% end %>
+            </td>
+
+            <td>
+              <% if deriv_cf %>
+                <div>
+                  <span class="hidden"><%= deriv_cf.arg_count %></span>
+                  <%= link_to(raw(deriv_cf), [@language, deriv_cf]) %>
+                </div>
+                <% if deriv_ex %>
+                  <hr/>
+                  <div>
+                      <%= render_example deriv_ex %>
+                  </div>                
+                <% end %>
+              <% end %>
+            </td>
+            
+            <td><%= deriv_cf.arg_count if deriv_cf %></td>
+
+            <td><%= "true" if deriv_cf && deriv_ex %></td>
+            
+            
+          <% end #table row %>
+        <% end %>
+      </tbody>
+
+    </table>
+
+  </div>
+</div>

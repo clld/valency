@@ -1,4 +1,6 @@
-<h1>Alternations
+<!-- Alternations index -->
+<h1>
+  Alternations
   <small>of <%= link_to @language, @language %></small>
 </h1> 
 
@@ -22,14 +24,15 @@
       <tr>
         <th>Alternation name</th>
         <th class="hidden-col">Coded?</th>
-        <th>Verb forms</th>
         <th>Description</th>
+        <th>Examples</th>
+        <th>Verbs</th>
       </tr>
     </thead>
     <tbody>
     <% @alternations.each do |altn| %>
-      <% desc = altn.description %>
-      <%= content_tag_for(:tr, altn) do %>
+      <% desc = altn.description; verbs = altn.get_verbs; exs = altn.get_examples %>
+      <%= content_tag_for :tr, altn do %>
         <td>
           <div class="cell">
             <% if altn.alternation_type %>
@@ -45,9 +48,15 @@
 
         <td><%= altn.coded_y_n %></td>
         
-        <td><%= raw altn.get_verbs.map{|v| link_to v, [@language, v], class: 'object-language'}.to_sentence %></td>
-
         <td><%= raw desc %></td>
+
+        <td>
+          <% if exs.first.is_a? Example %>
+          <%= render_example exs.first %>
+          <% end %>
+        </td>
+        
+        <td><%= verbs.count %></td>
       <% end %>
     <% end %>
   </tbody>

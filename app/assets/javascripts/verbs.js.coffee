@@ -35,7 +35,8 @@ sort_by_altn_name = (iCol) ->
 	(src, type, val) ->
 		if type is 'sort'
 			return 'zzz' unless src[iCol]
-			$(src[iCol]).find('span:not(.label)').text?()
+			console.log($(src[iCol]).find('span:not(.label)').text())
+			$(src[iCol]).find(':not(.label)').text?()
 		else
 			if type is 'set' then src[iCol] = val else src[iCol]
 	
@@ -55,7 +56,7 @@ oDTSettings =
 			sType: "html"
 		},{
 			aTargets: [1] # column 1: Occurs
-			sWidth  : '10%'
+			sWidth  : '1%'
 			mDataProp: ( src, type, val ) ->
 				return altn_occurs_sort_order(src[1]) if type is 'sort'
 				if type is 'set' then src[1] = val else src[1]

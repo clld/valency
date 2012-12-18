@@ -32,7 +32,8 @@
           </div>
           <li class="divider"></li>
           <% @meanings_core.each do |m| %>
-            <li><%= link_to m, m %></li>
+          <% cls = 'active' if m == @meaning %>
+            <li class="<%= cls %>"><%= link_to m, m %></li>
           <% end %>
         </ul>
       </li>
@@ -86,7 +87,7 @@
 
 	      <% @meanings_core.includes(:verbs).each do |m| %>
 					<% verbs = (m.verbs & @language.verbs) %>
-          <li>
+          <li class="<%= 'active' if m == @meaning %>">
 						<% if verbs.size > 0 %>
 							<%= link_to(controller: 'verbs', action: 'show', language_id: @language.to_param, id: verbs.first.to_param, meaning: m.to_param) do %>
 								<span class="toggle-hover"><%= m.to_s %></span>

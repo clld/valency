@@ -147,29 +147,19 @@
         </tr>
       </thead>
       <tbody>
-			<% label_class = {'R'=>'success', 'M'=>'warning', 'N'=>'important'} %>
       <% avs.each do |av| %>
       <% altn, dcf, exs = av.alternation, av.derived_coding_frame, av.examples %>
       <%= content_tag_for(:tr, altn) do %>
         <td>
           <div class="cell">
-            <% if altn.alternation_type %>
-              <span class="label" title="<%= altn.coded? ? 'Coded' : 'Uncoded' %> alternation">
-              <%= altn.coded? ? 'C' : 'U' %>
-              </span>
-            <% end %>
+            <%= render partial: 'alternations/cu_label', locals: {alternation: altn} %>
           </div>
           <div class="cell">
             <%= link_to raw(altn), [@language, altn] %>
           </div>
         </td>
 
-        <td class="center">
-					<% if (val = av.occurs) %>
-						<% cls = "label label-#{label_class[val[0]] || 'inverse'}" %>
-						<%= content_tag :span, val[0].gsub('-','–'), class: cls, title: av.title %>
-					<% end %>
-				</td>
+        <td class="center"><%= value_label av %></td>
 
         <td><%= raw av.comment %></td>
 
