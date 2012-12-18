@@ -6,8 +6,11 @@
     <h1>
       <%= @language %>
       <% if @iso_code %>
-        <a title="ISO code" href="http://www.glottolog.org/glottolog/?iso=<%= @iso_code %>" 
+        <a title="Look up ISO code in Glottolog" href="http://www.glottolog.org/glottolog/?iso=<%= @iso_code %>" 
            class="label"><%= @iso_code %></a>
+        <a title="Look up in WALS" href="http://wals.info/languoid/by_code/iso_639_3_<%= @iso_code %>">
+          <%= image_tag('icons/wals.png', size: '16x16') %>
+        </a>
       <% end %>
     </h1>
     

@@ -9,12 +9,15 @@ tr.language {
   .person {
     white-space: nowrap;
   }
-  &.selected, &.selected:hover {
-    background-color: $navbarLinkBackgroundActive;
+  &.selected {
+    background-color: lighten($navbarLinkBackgroundActive,20%);
+    &:hover td, &:hover th {
+      background-color: lighten($navbarLinkBackgroundActive,20%);      
+    }
   }
 }
 [id^="region"].selected {
-  background-color: $navbarLinkBackgroundActive;
+  background-color: lighten($navbarLinkBackgroundActive,20%);
 }
 
 /* fixed width <th> */
@@ -44,7 +47,7 @@ tr.language {
 
 /* styles for the maps */
 .map-caption {
-  font-size:18px;
+  font-size:14px;
   line-height:20px;
 }
 h3.infowindow {

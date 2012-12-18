@@ -23,7 +23,7 @@ class VerbsController < ApplicationController
     @verb = @language.verbs.includes(:alternation_values,
     :coding_frame, :meanings, :microroles).find(params[:id])
     if (param_meaning = params[:meaning])
-      @meaning  = Meaning.find_by_label_for_url!(param_meaning) || nil
+      @meaning = Meaning.find_by_label_for_url!(param_meaning) || nil
     end
     
     @examples = @verb.examples_of_coding_frame
