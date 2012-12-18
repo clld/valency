@@ -67,7 +67,7 @@
               </th>
             <% end %>
             <th class="bg-cs">Coding set</th>
-            <th class="bg-cs">Argument type</th>
+            <th>Argument type</th>
           </tr>
         </thead><tbody>
         <% arguments.each do |arg| # arg is a Coding frame index number %>
@@ -77,7 +77,7 @@
               <td class="bg-mr"><%= arg.microroles.where_meaning(m)[0] %></td>
             <% end %>
             <td class="bg-cs"><%= arg.coding_set %></td>
-            <td class="bg-cs"><%= arg.argument_type %></td>
+            <td><%= arg.argument_type %></td>
           </tr>
         <% end %>
         </tbody>
@@ -164,7 +164,7 @@
           </div>
         </td>
 
-        <td>
+        <td class="center">
 					<% if (val = av.occurs) %>
 						<% cls = "label label-#{label_class[val[0]] || 'inverse'}" %>
 						<%= content_tag :span, val[0].gsub('-','–'), class: cls, title: av.title %>

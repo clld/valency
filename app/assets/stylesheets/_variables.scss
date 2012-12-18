@@ -28,10 +28,10 @@ $headingsColor: $vt;
 $dropdownLinkBackgroundHover:  $vt;
 $dropdownLinkBackgroundActive: $dropdownLinkBackgroundHover;
 
-$bg-me: #cff;    /* background for meanings */	
-$bg-mr: lighten($bg-me, 6%); /* background for microroles */	
-$bg-cf: #ffe6cc; /* background for coding frames */
-$bg-cs: #ffffcc; /* background for coding sets */
+$bg-me: saturate(#cff,10%);    /* background for meanings */	
+$bg-mr: lighten($bg-me, 6%); /* background for microroles */
+$bg-cf: orange; /* background for coding frames */
+$bg-cs: $bg-cf; /* background for coding sets */
 $bg-cs-darker: saturate($bg-cs, 10%); /* background for coding sets (column headers) */
 
 /* colors for (data-)Tables */
