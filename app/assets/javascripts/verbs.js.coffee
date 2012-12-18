@@ -55,7 +55,7 @@ oDTSettings =
 			sType: "html"
 		},{
 			aTargets: [1] # column 1: Occurs
-			sWidth  : '10%'
+			sWidth  : '1%'
 			mDataProp: ( src, type, val ) ->
 				return altn_occurs_sort_order(src[1]) if type is 'sort'
 				if type is 'set' then src[1] = val else src[1]

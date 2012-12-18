@@ -10,12 +10,15 @@
 <div class="row">
   <div class="span12">
     <div class="form-inline dt-filters"><!-- filters for dataTable -->
+      <div>
       <label> Show </label>
 	      <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="derived">
 	        <button class="btn btn-mini active"> Basic </button>
 	        <button class="btn btn-mini"> Derived </button>
 	      </div> coding frames.
-  
+      </div>
+      
+      <div class="inline">
       <label>Filter by number of participants:</label>
       <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="arg_count">
         <button class="btn btn-mini" value="0"> none </button>
@@ -30,6 +33,7 @@
           <i class="icon-remove"></i> Clear filters
         </a>
       </div>
+      </div>
     </div><!-- end .dt-filters-->
   </div><!-- end span12 -->
 </div><!-- end row -->
@@ -42,7 +46,7 @@
       <th>Coding frame</th>
       <th class="hidden-col">derived</th>
       <th class="hidden-col">arg_count</th>
-			<th># of Verbs</th>
+			<th>Verbs</th>
       <th>Verb meanings &amp; Verb forms</th>
     </tr>
   </thead>
@@ -69,15 +73,15 @@
         <td><%= cf.derived   %></td>
         <td><%= cf.arg_count %></td>
         <td class="number">
-          <%= (vcount = cf.verb_count) > 0 ? vcount : 'none' %>
+          <%= (vcount = cf.verb_count) %>
         </td>
-        <td><div class="isotope no-transition">
+        <td class="columns">
           <% mvv.each do |m, vv| %>
-            <div class="item">
+            <div class="item meaning-and-verbs">
               <%= m %> (<%= verb_list(vv, true) %>)
-            </div>          
+            </div>   
           <% end %>
-        </div></td>
+        </td>
       </tr>
     <% end %>
   </tbody>
