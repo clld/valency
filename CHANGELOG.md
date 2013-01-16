@@ -1,9 +1,15 @@
 # CHANGELOG
 
+## Version 0.2 – December 18, 2012
+**Pre-Launch Prototype**
+- improved Language maps, Alternations index page, Alternation detail page, Language detail page
+- improved Coding frame index and detail pages, Meanings index and Meaning detail page
+- changed color schema: higher contrast colors to improve legibility on projector
+- added feedback link (points to [this LinguaWiki page](http://lingweb.eva.mpg.de/linguawiki/index.php/ValPaL_Preview))
+
 ## November 9, 2012
 - **new feature** toggle columns of dataTables on/off
-- column filters on dataTables: per button groups 
-
+- column filters on dataTables: per button groups
 
 ## October 2012
 **technical improvements**
@@ -11,7 +17,6 @@
 - reorganized JavaScript files for better modularity; translate custom jQuery plugins and custom jQuery datatables plugins to CoffeeScript
 - changed top navbar behaviour w/tooltip for Languages dropdown menu
 - added Meanings dropdown to navbar
-
 
 ## September 21, 2012
 **minor improvements**
