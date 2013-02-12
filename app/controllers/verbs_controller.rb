@@ -20,8 +20,8 @@ class VerbsController < ApplicationController
   # GET /languages/1/verbs/1
   # GET /languages/1/verbs/1.json
   def show
-    @verb = @language.verbs.includes(:alternation_values,
-    :coding_frame, :meanings, :microroles).find(params[:id])
+    @verb = @language.verbs.includes(:coding_frame, :meanings, :microroles,
+    :alternation_values => [:alternation]).find(params[:id])
     if (param_meaning = params[:meaning])
       @meaning = Meaning.find_by_label_for_url!(param_meaning) || nil
     end

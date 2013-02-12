@@ -156,6 +156,10 @@
           </div>
           <div class="cell">
             <%= link_to raw(altn), [@language, altn] %>
+            <% if altn.description %>
+            <a rel="popover" class="btn btn-mini" title="<%= altn.name %>"
+               data-content="<%= altn.description %>">more info</a>
+            <% end %>
           </div>
         </td>
 

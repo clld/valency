@@ -233,7 +233,11 @@ div.inline{
 	&:first-child {
 		padding-right:5px;
 	}
+  a[rel="popover"] { // popover links in dataTables
+    margin-left:0.5em;
+  }
 }
+
 
 /* link without href: style like regular link */
 // TODO check if anything uses this: if not, remove
@@ -303,7 +307,9 @@ table {
   }
 }
 
-/* for weak projectors: increase contrast */
-
-/* for weak projectors: increase contrast */
-
+/* override Bootstrap default for popover width */
+/* this is obsolete with Bootstrap v2.3, but might not work now */
+.popover {
+  width: auto;
+  max-width: 326px;
+}

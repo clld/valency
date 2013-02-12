@@ -110,4 +110,9 @@ oDTSettings =
 		# sort examples in dataTable by example number
 		$dt.setCustomSortFunction 'examples', sort_by_example_number
 		$dt.setCustomSortFunction 'alternation name', sort_by_altn_name
-			
+		
+		# initialize popover for Alternation names
+		$('.cell a[rel="popover"]').popover({
+		  placement: 'right'
+		})
+		  
