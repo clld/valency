@@ -74,7 +74,8 @@
           <tr>
             <td class="digit bg-cf"><%= arg.index_number %></td>
             <% meanings.each do |m| %>
-              <td class="bg-mr"><%= arg.microroles.where_meaning(m)[0] %></td>
+            <% microrole = arg.microroles.where_meaning(m)[0] %>
+              <td class="bg-mr"><%= link_to microrole, microrole %></td>
             <% end %>
             <td class="bg-cs"><%= arg.coding_set %></td>
             <td><%= arg.argument_type %></td>

@@ -37,7 +37,7 @@
     <th>#</th>
     <th>Verb meaning</th>
     <th>Role frame</th>
-    <th>Verbs</th>    
+    <th>Verbs</th>
     <th>Microroles</th>
   </tr>
   </thead>
@@ -48,13 +48,11 @@
     <td><%= m.core_or_additional %></td>
     <td><%= m.role_count %></td>
     
-    <td><%= m.number %></td>
+    <td class="number"><%= m.number %></td>
     <td><%= link_to m, m %></td>
     <td><%= m.role_frame %></td>
-    <td class="number">
-      <%= link_to m.verbs.size, m, title: "Show Verb forms for #{m.to_s}" %>
-    </td>
-    <td><%= m.microroles_commalist %></td>
+    <td class="number"><%= m.verbs.size %></td>
+    <td><%= microrole_list m.microroles %></td>
     
   </tr>
 <% end %>

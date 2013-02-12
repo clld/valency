@@ -20,10 +20,6 @@ class Meaning < ActiveRecord::Base
     label_for_url
   end
 
-  def microroles_commalist
-    self.microroles.all.map{|mr| mr.to_s}.join(', ')
-  end
-  
   def core_or_additional
     return CORE_STRING if CORE.include? self.meaning_list
     OTHER_STRING

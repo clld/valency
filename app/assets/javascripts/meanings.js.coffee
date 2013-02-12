@@ -6,9 +6,8 @@ ns    = @VALENCY.global
 
 # dataTable settings
 oDTSettings_index = 
-	sDom: "<'row'<'span4'i><'span8'f>>tS"
-	sScrollY: "480px"
-	bPaginate: true
+	sDom: "<'row'<'span4'i><'span8'f>>t"
+	bPaginate: false
 	oLanguage:
 		sInfoFiltered: " (filtered)"
 		sSearch: ""
@@ -17,13 +16,17 @@ oDTSettings_index =
 	aoColumnDefs: [
 	  {
 	    aTargets:[5] # verb count
+	    sType: 'numeric'
 	    asSorting:['desc','asc']
 	  },{
 	    aTargets:[6] # microroles
 	    asSorting:['asc']
 	  },{
-	    aTargets:[3, 5] # meaning label and verb count
-	    sType:['html']
+	    aTargets:[3] # meaning label and verb count
+	    sType: 'html'
+	  },{
+	    aTargets:[2] # meaning number
+	    sType: 'numeric'
 	  }
 	]
 	aaSorting: [[2, 'asc']]# sort by meaning number

@@ -22,7 +22,7 @@
 
         <tr>
           <th>Microroles</th>
-          <td><%= @meaning.microroles.all.map{|mr| mr.name}.join(', ') %></td>
+          <td><%= microrole_list(@microroles) %></td>
         </tr>
 
       </tbody>
@@ -47,6 +47,7 @@
 	    <tbody>
 	     <% @meaning.verbs.each do |v| %>
   	     <% lang = v.language; cf = v.coding_frame %>
+  	     <% next unless lang #this isn't really necessary but there are test records %>
   	     <tr>
   	       <td><%= link_to lang, lang %></td>
   	       <td><%= lang.region %></td>

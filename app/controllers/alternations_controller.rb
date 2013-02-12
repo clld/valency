@@ -6,8 +6,7 @@ class AlternationsController < ApplicationController
     @gloss_abbr = Hash[@language.gloss_meanings.map{|gm| [gm.gloss, gm.meaning]}]
   end
   
-  # GET /languages/1/alternations
-  # GET /languages/1/alternations.json
+  # GET /languages/german/alternations[.json]
   def index
     @alternations = @language.alternations.includes(:alternation_values, :verbs).all
 
@@ -17,8 +16,7 @@ class AlternationsController < ApplicationController
     end
   end
 
-  # GET /languages/1/alternations/1
-  # GET /languages/1/alternations/1.json
+  # GET /languages/german/alternations/1[.json]
   def show
     @alternation = @language.alternations.includes(
       :alternation_values => [

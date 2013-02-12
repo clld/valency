@@ -59,9 +59,9 @@ label.disabled {
 	clear:both;
 	width:auto;
 	.box {
-		background-color:white;
-		padding:10px;
-		border:1px dashed $tableBorder;
+  	background-color:$grayLighter;
+  	border:1px solid $tableBorder;
+  	padding:10px;
 	}
 }
 

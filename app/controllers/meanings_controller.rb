@@ -15,6 +15,7 @@ class MeaningsController < ApplicationController
   def show
     # TODO remove the bang in production
     @meaning = Meaning.find_by_label_for_url!(params[:id])
+    @microroles = @meaning.microroles.all
 
     respond_to do |format|
       format.html # show.html.erb
