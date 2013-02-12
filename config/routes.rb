@@ -3,20 +3,21 @@ Valency::Application.routes.draw do
   # routes for language-specific resources
   resources :languages, :only => [:show, :index] do
     
-    resources :verbs, :only => [:show, :index]
+    resources :verbs,         :only => [:show, :index]
     resources :coding_frames, :only => [:show, :index]
-    resources :alternations, :only => [:show, :index]
-    resources :examples, :only => [:show, :index]
+    resources :coding_sets,   :only => [:show, :index]
+    resources :alternations,  :only => [:show, :index]
+    resources :examples,      :only => [:show, :index]
     
   end
 
-  resources :meanings, :only => [:show, :index]
+  resources :meanings,   :only => [:show, :index]
   
   resources :microroles, :only => [:show, :index]
 
   resources :references, :only => [:show, :index]
 
-  resources :people, :only => [:show, :index]
+  resources :people,     :only => [:show, :index]
 
 
   # The priority is based upon order of creation:
@@ -66,8 +67,8 @@ Valency::Application.routes.draw do
   #     resources :products
   #   end
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
+  # have the root of your site routed with "root"
+  # (root will redirect to public/index.html otherwise)
   root :to => 'languages#index'
 
   # See how all your routes lay out with "rake routes"

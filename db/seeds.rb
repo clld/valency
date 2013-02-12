@@ -186,10 +186,10 @@ class DataImporter
   # and creates records in Rails' database
   def import_data
     models_with_test_records = [Alternation, CodingFrame, Language, Verb]
-    fields_with_test_records = ["name", "coding_frame_schema", "verb_form"]
+    fields_with_test_records = ["name", "coding_frame_schema"]
     no_data_strings = ['no data', 'none', '(please fill in)']
 
-    LOG.info "Will import data for:\n#{@models.empty? ? "(no models)" : @models.map{|m|m.to_s}.join(', ')}\n"
+    LOG.info "Will import data for:\n#{@models.empty? ? "(no models)" : @models.map(&:to_s).join(', ')}\n"
 
     @models.each do |model|
       LOG.info((' '<<model.to_s<<' ').center 40, '=')
@@ -206,7 +206,6 @@ class DataImporter
 
       err_stats = Hash.new(0) # count errors by type
       available_attributes = model.attribute_names & fields.keys
-      filter_test_records  = models_with_test_records.include? model
       
       total = layout.total_count
       LOG.info "Connected to FileMaker, layout = #{layout.name}"
@@ -219,13 +218,12 @@ class DataImporter
 
         found_set.each do |fm_record|
 
-          if filter_test_records # skip this record if it's a test record
+          if models_with_test_records.include? model # consider skipping this record
             attr_value = nil
             if fields_with_test_records.any? do |attr_name|
               (attr_value = fm_record[fields[attr_name]]).respond_to?(:match) and
               (attr_value.match(/test.*brad/i) ||
-               model == Language && attr_value.match(/(french|spanish)/i) ||
-               attr_name == 'verb_form' && attr_value.match(/no.*counterpart/i) ||
+               model == Language && attr_value.match(/(afrikaans|french|kriol|spanish)/i) ||
                no_data_strings.include?(attr_value.downcase))
             end then
               LOG.info(%(Skipping "#{attr_value.gsub(/<.+?>/,'')}"...))

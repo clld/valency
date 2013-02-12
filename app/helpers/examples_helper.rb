@@ -42,7 +42,7 @@ module ExamplesHelper
       content_tag(:div, link_or_number.html_safe, class: "number") <<
       content_tag(:div, class: "body") do
         content_tag(:div, link_or_text.html_safe, class: "object-language") <<
-        (gloss ? content_tag(:div, format_gloss(ex), class: "gloss-container") : '') <<
+        (gloss ? content_tag(:div, format_gloss(ex), class: "gloss-box") : '') <<
         content_tag(:div, "‘#{ex.translation}’", class: "translation")
       end
     

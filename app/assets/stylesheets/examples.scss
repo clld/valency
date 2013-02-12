@@ -36,11 +36,14 @@ span.sc { // small caps
 			}
 		}
 	}
-	
-	.gloss-unit { // a gloss unit is a div with two vertically stacked divs
+
+	 // a gloss unit is a div with two vertically stacked divs
+	 // should only occur within a div.gloss-box
+	.gloss-unit {
 		display:inline-block;
-		& + .gloss-unit {
-			margin-left:0.5em;
+		margin-bottom:0.5em;
+		&:not(:last-child) {
+      margin-right:0.5em;
 		}
 		.gl { // a chunk of gloss
 			font-size:90%;
@@ -49,6 +52,10 @@ span.sc { // small caps
 				line-height:1.1em;
 			}
 		}
+	}
+	
+	.gloss-box + .translation {
+	  margin-top:-0.5em;
 	}
 	
 }
