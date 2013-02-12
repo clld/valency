@@ -59,6 +59,12 @@ apply_column_filter = ($dt, $button_group, event = null) ->
     $('#nav_language').css  'width', @language_dropdown.width()
     $('#verb_dropdown').css 'width', @meaning_dropdown.width()
     
+    # show tooltip on Example glosses
+    $('.gl .ttip').tooltip({
+      placement: 'bottom'
+      delay: {hide: 300}
+    })
+    
     # global settings for dataTables. These are extended in the controllers' handlers
     @oDTSettings =
       fnInitComplete: (oSettings, json) ->        

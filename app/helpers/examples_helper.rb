@@ -5,9 +5,14 @@ module ExamplesHelper
   def format_gloss ex
     at_chunks = ex.analyzed_text.split.map! {|str| html_escape(str)}
     gl_chunks = ex.gloss.split.map! do |str|
-      html_escape(str).gsub(/(?<![[:alpha:]])([A-Z]+)(?![[:alpha:]])/) { |caps|
-        '<span class="sc">' << caps << '</span>'
-      }
+      html_escape(str).gsub(/(?<![[:alpha:]])([A-Z]+)(?![[:alpha:]])/) do |caps|
+        html_attrs = if (m = @gloss_abbr[caps])
+          %Q|rel="tooltip" class="sc ttip" title="#{m}"|
+        else
+          'class="sc"'
+        end
+          "<span #{html_attrs}>#{caps}</span>"
+      end
     end
     gloss_chunks = at_chunks.zip(gl_chunks).map! do |word, gloss|
       capture do

@@ -28,8 +28,8 @@ class VerbsController < ApplicationController
     
     @examples = @verb.examples_of_coding_frame
     @excount  = @examples.size
+    @gloss_abbr = Hash[@language.gloss_meanings.map{|gm| [gm.gloss, gm.meaning]}]
 
-    # flash[:notice] ="Hello World!"
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @verb }

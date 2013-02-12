@@ -36,7 +36,6 @@ span.sc { // small caps
 			}
 		}
 	}
-
 	 // a gloss unit is a div with two vertically stacked divs
 	 // should only occur within a div.gloss-box
 	.gloss-unit {
@@ -52,10 +51,17 @@ span.sc { // small caps
 				line-height:1.1em;
 			}
 		}
+		.gl .ttip { // 
+      border-bottom:1px dotted $grayDark;
+      &:hover {
+        cursor:help;
+      }
+    }
 	}
 	
-	.gloss-box + .translation {
+	.gloss-box + .translation { // neutralize .gloss-unit’s margin-bottom 
 	  margin-top:-0.5em;
 	}
 	
 }
+
