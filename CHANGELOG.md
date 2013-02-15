@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## February 2012
+** new features **
+- auto-lookup of gloss abbreviations in Examples
+- added Microroles and Coding sets
+
+** improvements **
+- updated navigation menu
+- improved Verb detail page
+
 ## Version 0.2 – December 18, 2012
 **Pre-Launch Prototype**
 - improved Language maps, Alternations index page, Alternation detail page, Language detail page
