@@ -43,10 +43,6 @@ sort_by_altn_name = (iCol) ->
 # dataTable settings
 oDTSettings = 
 	sDom: "<'row'<'span4'i><'span8'f>>t"
-	bPaginate: false
-	oLanguage:
-		sInfoFiltered: " (filtered)"
-		sSearch: ''
 	aaSorting: [[1,'asc'], [0,'asc']] # "Regularly" first, then alphabetically
 	# custom column settings
 	# colums: 0:altn_name, 1:occurs, 2:comment, 3:coded, 4:derived_cf, 5:example
@@ -92,9 +88,6 @@ oDTSettings =
 			{
 				sDom: "<'row'<'span4'i><'span8'f>>tS"
 				sScrollY: "700px"
-				oLanguage:
-					sInfoFiltered: ' (filtered)'
-					sSearch: ''
 			}
 		)
 	

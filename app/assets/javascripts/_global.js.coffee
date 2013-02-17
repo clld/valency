@@ -67,6 +67,13 @@ apply_column_filter = ($dt, $button_group, event = null) ->
     
     # global settings for dataTables. These are extended in the controllers' handlers
     @oDTSettings =
+      bPaginate: false
+      oLanguage:
+        sInfo:         "Showing _TOTAL_" # variables: _START_, _END_, _MAX_
+        sInfoFiltered: " out of _MAX_"
+        sInfoPostFix:  " entries"
+        sSearch: ""
+      
       fnInitComplete: (oSettings, json) ->        
         # hide columns whose <th> is .hidden-col
         @hideColumn i for col, i in oSettings.aoColumns when col

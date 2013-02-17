@@ -16,7 +16,7 @@ class Microrole < ActiveRecord::Base
   has_many :verbs,         :through => :verb_coding_frame_microroles
   has_many :coding_frames, :through => :verb_coding_frame_microroles
   
-  has_many :indexed_coding_frames, through: :microrole_index_numbers, source: :coding_frame_id
+  has_many :indexed_coding_frames, through: :coding_frame_index_numbers, source: :coding_frame
 
   has_and_belongs_to_many :coding_frame_index_numbers
   
@@ -29,4 +29,14 @@ class Microrole < ActiveRecord::Base
     name_for_url
   end
   
+  # count all verbs associated with this Microrole
+  def verb_count
+    self.verb_coding_frame_microroles.pluck(:verb_id).uniq.size
+  end
+  
+  # count all verbs associated with this Microrole
+  def coding_frame_count
+    self.verb_coding_frame_microroles.pluck(:coding_frame_id).uniq.size
+  end
+
 end

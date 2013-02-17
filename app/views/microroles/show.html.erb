@@ -1,2 +1,40 @@
-<h1><%= @microrole.name %></h1>
-<p><b>TODO</b> list of Verbs and Coding frames across Languages</p>
+<h1>
+	<%= @microrole.name %>
+	<small>(Verb meaning: <%= link_to @meaning, @meaning %>)</small>
+</h1>
+
+<div class="row">
+  <div class="span6"><!-- meaning details -->
+    <table class="table table-condensed table-horizontal">
+      <tbody>
+				<% if @meaning.typical_context %> 
+	        <tr>
+	          <th>Typical context</th>
+	          <td><em><%= @meaning.typical_context %></em></td>
+	        </tr>				
+				<% end %>
+
+        <tr>
+					<th>Microroles</th>
+					<td>
+						<% @meaning.microroles.sort.each do |mr| %>
+							<div><%= link_to_unless_current mr, mr do %>
+								 <%= content_tag :strong, mr.name %>
+								<% end %>
+							</div>
+						<% end %>
+					</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+	<div class="span12 dt-with-filters">
+		
+		
+		
+	</div>
+</div>

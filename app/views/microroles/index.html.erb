@@ -4,33 +4,45 @@
 <div class="row">
   <div class="span12 dt-with-filters">
     
-    <div class="form-inline dt-filters"><!-- filters for dataTable -->
-    </div><!-- dataTable filters -->
+	  <div class="form-inline dt-filters"><!-- filters for microroles list -->
+	    <label>Show</label>
+	    <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="original_or_new">
+	      <button class="btn btn-mini">original</button>
+	      <button class="btn btn-mini">new</button>
+	    </div> Microroles  
+			<label>for</label>
+	    <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="core_or_additional">
+	      <button class="btn btn-mini">core</button>
+	      <button class="btn btn-mini">additional</button>
+	    </div> Verb meanings.
+	    <div class="btn-group">
+	      <a class="btn btn-mini clear-filters"><i class="icon-remove"></i> Clear filters </a>
+	    </div>
+	  </div><!-- end .dt-filters-->
     
-    <table id="microroles_list" class="table table-striped table-bordered-sharp table-hover dataTable">
+    <table id="microroles_list"
+     class="table table-striped table-bordered-sharp table-hover dataTable">
       <thead>
       <tr>
-        <th class="hidden-col">set</th>
-        <th class="hidden-col">role_count</th>
-
-        <th>Meaning</th>
+        <th>Verb meaning</th>
         <th>Microrole</th>
-        <th>Role letter</th>
-        <th>Verbs</th>
+        <th class="hidden-col">original_or_new</th>
+        <th># Verbs</th>
+        <th># Coding frames</th>
+				<th class="hidden-col">core_or_additional</th>
       </tr>
       </thead>
       <tbody>
         
     <% @microroles.each do |mr| %>
+			<% m = mr.meaning %>
       <tr>
-        <td><!-- mr.core_or_additional --></td>
-        <td><!-- role_count --></td>
-
-        <td>...</td>
-        <td></td>
-        <td></td>
-        <td></td>
-
+        <td><%= link_to m.label, m  %></td>
+        <td><%= link_to mr.name, mr %></td>
+        <td><%= mr.original_or_new %></td>
+        <td class="number"><%= mr.verb_count %></td>
+        <td class="number"><%= mr.coding_frame_count %></td>
+				<td><%= m.core_or_additional %></td>
       </tr>
     <% end %>
     </tbody>

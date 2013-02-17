@@ -1,4 +1,4 @@
-# JS for Coding frames
+# JS for Meanings
 @VALENCY or= {}
 
 dtapi = $.fn.dataTableExt.oApi # see custom_data_table_plugins.js
@@ -7,10 +7,6 @@ ns    = @VALENCY.global
 # dataTable settings
 oDTSettings_index = 
 	sDom: "<'row'<'span4'i><'span8'f>>t"
-	bPaginate: false
-	oLanguage:
-		sInfoFiltered: " (filtered)"
-		sSearch: ""
 	# 0: meaning set, 1: role count, 2: meaning no., 3: Meaning, 4: Role frame
 	# 5: verb count, 6: microroles
 	aoColumnDefs: [
@@ -32,12 +28,7 @@ oDTSettings_index =
 	aaSorting: [[2, 'asc']]# sort by meaning number
 
 oDTSettings_show = 
-	sDom: "<'row'<'span4'i><'span8'f>>t"
-	bPaginate: false
-	oLanguage:
-		sInfoFiltered: " (filtered)"
-		sSearch: ""
-  
+	sDom: "<'row'<'span4'i><'span8'f>>t"  
 
 @VALENCY.meanings =
   init: ->

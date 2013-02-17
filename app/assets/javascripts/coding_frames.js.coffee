@@ -18,10 +18,6 @@ sort_ignoring_label = (iCol) ->
 oDTSettings_index = 
   sDom: "<'row'<'span4'i><'span8'f>>t" # no scrolling
   # sScrollY: "700px"
-  bPaginate: false
-  oLanguage:
-    sInfoFiltered: " (filtered)"
-    sSearch: ""
   aoColumnDefs: [ # 0: Coding frame, 1: derived, 2: arg_count,
                   # 3: verb_count,   4: Verb meanings & Verbs
     {
@@ -60,10 +56,6 @@ oDTSettings_index =
     $verb_list = $('#verb_list')
     $dt = $verb_list.dataTable $.extend(ns.oDTSettings, {
       sDom: "<'row'<'span4'i><'span4'f>>t"
-      bPaginate: false
-      oLanguage:
-        sInfoFiltered: " (filtered)"
-        sSearch: ""
       aoColumnDefs: [ # 0: Verb form, 1: Meanings
         {
           aTargets: [0, 1]

@@ -18,10 +18,6 @@ sort_by_altn_name = (iCol) ->
 
 oDTSettings_index = 
   sDom: "<'row'<'span4'i><'span8'f>>t" # no scrolling
-  bPaginate: false
-  oLanguage:
-    sInfoFiltered: " (filtered)"
-    sSearch: ""
   aoColumnDefs: [ # 0: Altn name, 1: coded? , 2: Description, 3: example, 4: verb count 
     {
       aTargets:[0] # Altn name
@@ -44,10 +40,6 @@ oDTSettings_index =
 
 oDTSettings_show = 
   sDom: "<'row'<'span4'i><'span8'f>>t" # no scrolling
-  bPaginate: false
-  oLanguage:
-    sInfoFiltered: " (filtered)"
-    sSearch: ""
   aoColumnDefs: [ # 0: Meaning, 1: Verb , 2: occurs, 3: arg_count,
                   # 4: basic CF, 5: derived CF, 6: arg_count_derived, 7: example(true) 
     {
