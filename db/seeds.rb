@@ -185,8 +185,8 @@ class DataImporter
   # then reads data from the FileMaker connection using RFM 
   # and creates records in Rails' database
   def import_data
-    models_with_test_records = [Alternation, CodingFrame, Language, Verb]
-    fields_with_test_records = ["name", "coding_frame_schema"]
+    models_with_test_records = [Alternation, CodingFrame, Language, Verb, Microrole]
+    fields_with_test_records = ["name", "verb_form", "coding_frame_schema"]
     no_data_strings = ['no data', 'none', '(please fill in)']
 
     LOG.info "Will import data for:\n#{@models.empty? ? "(no models)" : @models.map(&:to_s).join(', ')}\n"
@@ -218,15 +218,19 @@ class DataImporter
 
         found_set.each do |fm_record|
 
-          if models_with_test_records.include? model # consider skipping this record
-            attr_value = nil
-            if fields_with_test_records.any? do |attr_name|
-              (attr_value = fm_record[fields[attr_name]]).respond_to?(:match) and
-              (attr_value.match(/test.*brad/i) ||
-               model == Language && attr_value.match(/(afrikaans|french|kriol|spanish)/i) ||
-               no_data_strings.include?(attr_value.downcase))
+          if models_with_test_records.include?(model) # consider skipping this record
+            attr_value = :dummy
+            if (fields_with_test_records & available_attributes).any? do |attr_name|
+              (attr_value = fm_record[ fields[ attr_name ] ]).nil? ||
+              no_data_strings.include?(attr_value.downcase) ||
+              attr_value.respond_to?(:match) && (
+                attr_value.match(/test.*brad/i) ||
+                model == Language && attr_value.match(/(afrikaans|french|kriol|spanish)/i)
+              )
             end then
-              LOG.info(%(Skipping "#{attr_value.gsub(/<.+?>/,'')}"...))
+              LOG.info( "Skipping "<< (
+                attr_value.nil? ? 'empty record' : "\"#{attr_value.gsub(/<.+?>/,'')}\""
+              ))
               next
             end
           end
