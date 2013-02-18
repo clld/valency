@@ -13,11 +13,16 @@ class MicrorolesController < ApplicationController
   # GET /microroles/1
   # GET /microroles/1.json
   def show
-    @microrole = Microrole.includes(:verbs, :coding_frames => :coding_frame_index_numbers)
-      .find_by_name_for_url(params[:id])
-    @meaning = @microrole.meaning
-    @verbs   = @microrole.verbs
+    @microrole = Microrole.find_by_name_for_url(params[:id])
+    @meaning   = @microrole.meaning
+    @verbs     = @microrole.verbs
     @coding_frames = @microrole.coding_frames
+    @index_numbers = @microrole.coding_frame_index_numbers
+    
+    @cf_to_in = Hash[ @coding_frames.map do |cf|
+      [cf, (cf.coding_frame_index_numbers & @index_numbers).uniq.first || nil]
+    end ]
+    
 
     respond_to do |format|
       format.html # show.html.erb
