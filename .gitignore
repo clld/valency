@@ -15,8 +15,5 @@
 /log/*.log
 /tmp
 
-# Ignore the TextMate project file
-/*.tmproj
-
 # Some custom files to ignore
 /railsmessage.txt

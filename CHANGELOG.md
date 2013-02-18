@@ -1,11 +1,11 @@
 # CHANGELOG
 
 ## February 2012
-** new features **
+**new features**
 - auto-lookup of gloss abbreviations in Examples
 - added Microroles and Coding sets
 
-** improvements **
+**improvements**
 - updated navigation menu
 - improved Verb detail page
 

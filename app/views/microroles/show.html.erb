@@ -1,29 +1,22 @@
 <h1>
-	<%= @microrole.name %>
-	<small>(Verb meaning: <%= link_to @meaning, @meaning %>)</small>
+  <%= @microrole.name %>
 </h1>
 
 <div class="row">
-  <div class="span6"><!-- meaning details -->
+  <div class="span4">
     <table class="table table-condensed table-horizontal">
       <tbody>
-				<% if @meaning.typical_context %> 
-	        <tr>
-	          <th>Typical context</th>
-	          <td><em><%= @meaning.typical_context %></em></td>
-	        </tr>				
-				<% end %>
-
         <tr>
-					<th>Microroles</th>
-					<td>
-						<% @meaning.microroles.sort.each do |mr| %>
-							<div><%= link_to_unless_current mr, mr do %>
-								 <%= content_tag :strong, mr.name %>
-								<% end %>
-							</div>
-						<% end %>
-					</td>
+          <td style="width:40%"> Microroles of <%= link_to @meaning, @meaning %></td>
+          <td>
+            <% @meaning.microroles.sort.each do |mr| %>
+              <div>
+                <%= link_to_unless_current mr, mr do %>
+                <%= content_tag :strong, mr.name %>
+                <% end %>
+              </div>
+            <% end %>
+          </td>
         </tr>
 
       </tbody>
@@ -32,9 +25,41 @@
 </div>
 
 <div class="row">
-	<div class="span12 dt-with-filters">
-		
-		
-		
-	</div>
+  <div class="span12 dt-with-filters">
+    <h2>
+      Coding frames  <span class="badge with-h2"><%= @microrole.coding_frame_count %></span>
+      and Verb forms <span class="badge with-h2"><%= @microrole.verb_count %></span>
+    </h2>
+    
+    <div class="form-inline dt-filters">
+      filters...
+    </div>
+    <table class="table table-striped table-hover table-bordered-sharp dataTable">
+      <thead>
+        <th>Language</th>
+        <th class="hidden-col">region</th>
+        <th class="hidden-col">family</th>
+        <th>Verb form (<%= @meaning.to_s %>)</th>
+        <th>Coding frame</th>
+        <th class="hidden-col">derived</th>
+        <th class="hidden-col">arg_count</th>
+        <th class="number">Index #</th>
+        <th>Coding set</th>
+        <th>Argument type</th>        
+      </thead>
+      <tbody>
+      
+        <td>Language</td>
+        <td class="hidden-col">region</td>
+        <td class="hidden-col">family</td>
+        <td>Verb form (<%= @meaning.to_s %>)</td>
+        <td>Coding frame</td>
+        <td class="hidden-col">derived</td>
+        <td class="hidden-col">arg_count</td>
+        <td class="number">Index #</td>
+        <td>Coding set</td>
+        <td>Argument type</td>
+      </tbody>
+    </table>
+  </div>
 </div>

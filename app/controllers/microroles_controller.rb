@@ -13,14 +13,17 @@ class MicrorolesController < ApplicationController
   # GET /microroles/1
   # GET /microroles/1.json
   def show
-    @microrole = Microrole.find_by_name_for_url(params[:id])
-    @meaning   = @microrole.meaning
-    @verbs     = @microrole.verbs
-    @coding_frames = @microrole.coding_frames
-    @index_numbers = @microrole.coding_frame_index_numbers
-    
-    @cf_to_in = Hash[ @coding_frames.map do |cf|
-      [cf, (cf.coding_frame_index_numbers & @index_numbers).uniq.first || nil]
+    @microrole  = Microrole.find_by_name_for_url(params[:id])
+    @meaning    = @microrole.meaning
+    @verb_cf_mr = @microrole.verb_coding_frame_microroles.includes(
+      :coding_frame => {:coding_frame_index_numbers => [:argument_type, :coding_set]},
+      :verb => :language
+    )
+
+    cframes = @microrole.coding_frames
+    cfins   = @microrole.coding_frame_index_numbers
+    @index_number_for = Hash[ cframes.map do |cf|
+      [cf, (cf.coding_frame_index_numbers & cfins).uniq.first || nil]
     end ]
     
 
