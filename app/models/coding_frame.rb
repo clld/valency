@@ -52,7 +52,7 @@ class CodingFrame < ActiveRecord::Base
   # count the number of distinct arguments for sorting
   def arg_count
     cfs = coding_frame_schema
-    cfs.nil? ? 99 : coding_frame_schema.scan(/\d/).uniq.size
+    cfs.nil? ? 99 : coding_frame_schema.scan(/\d+/).uniq.size
   end
   
   # count the verbs that have this basic coding frame

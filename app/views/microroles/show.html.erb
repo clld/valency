@@ -48,17 +48,25 @@
         <th>Argument type</th>        
       </thead>
       <tbody>
-      
-        <td>Language</td>
-        <td class="hidden-col">region</td>
-        <td class="hidden-col">family</td>
-        <td>Verb form (<%= @meaning.to_s %>)</td>
-        <td>Coding frame</td>
-        <td class="hidden-col">derived</td>
-        <td class="hidden-col">arg_count</td>
-        <td class="number">Index #</td>
-        <td>Coding set</td>
-        <td>Argument type</td>
+      <% @verb_cf_mr.each do |v_cf_mr| %>
+        <% verb   = v_cf_mr.verb; lang = verb.language %>
+        <% cf     = v_cf_mr.coding_frame %>
+        <% idx_no = @index_number_for[cf]; cs = idx_no.coding_set; at = idx_no.argument_type %>
+        <tr>
+          <td><%= link_to lang, lang %></td>
+          <td class="hidden-col"><%= lang.region %></td>
+          <td class="hidden-col"><%= lang.family %></td>
+
+          <td><%= link_to verb, [lang, verb], :class => 'object-language' %></td>
+
+          <td><%= link_to cf, [lang, cf] %></td>
+          <td class="hidden-col"><%= cf.derived %></td>
+          <td class="hidden-col"><%= cf.arg_count %></td>
+          <td class="number"><%= idx_no.index_number %></td>
+          <td><%= link_to cs, [lang, cs] %></td>
+          <td><%= at.to_s %></td>
+        </tr>
+      <% end # looping over records %>
       </tbody>
     </table>
   </div>
