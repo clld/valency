@@ -3,17 +3,22 @@ module ExamplesHelper
   
   # returns a div with class "gloss-unit" for each gloss to be aligned
   def format_gloss ex
+    return '&nbsp;'.html_safe unless ex.analyzed_text.respond_to? :split
     at_chunks = ex.analyzed_text.split.map! {|str| html_escape(str)}
-    gl_chunks = ex.gloss.split.map! do |str|
-      html_escape(str).gsub(/(?<![[:alpha:]])([A-Z]+)(?![[:alpha:]])/) do |caps|
-        html_attrs = if (m = @gloss_abbr[caps])
-          %Q|rel="tooltip" class="sc ttip" title="#{m}"|
-        else
-          'class="sc"'
+    unless ex.gloss.respond_to? :split # no gloss to speak of
+      gl_chunks = [''] * at_chunks.length
+    else # chop up the gloss
+      gl_chunks = ex.gloss.split.map! do |str|
+        html_escape(str).gsub(/(?<![[:alpha:]&])([A-Za-z]+)(?![[:alpha:];])/) do |abbr|
+          html_attrs = if (m = @gloss_abbr[abbr])
+            %Q|rel="tooltip" class="sc ttip" title="#{m}"|
+          elsif abbr.match /^[A-Z]+$/
+            'class="sc"'
+          end
+            "<span #{html_attrs}>#{abbr}</span>"
         end
-          "<span #{html_attrs}>#{caps}</span>"
-      end
-    end
+      end      
+    end # unless
     gloss_chunks = at_chunks.zip(gl_chunks).map! do |word, gloss|
       capture do
         content_tag(:div, word) <<
@@ -42,13 +47,14 @@ module ExamplesHelper
       [@language, ex], title: link_title) << ')'
     
     link_or_text = link_to_if(wrap, ex.primary_text, [@language, ex], title: link_title)
+    transl = "‘#{ex.translation}’" unless ex.translation.blank?
     
     rendered_example =
       content_tag(:div, link_or_number.html_safe, class: "number") <<
       content_tag(:div, class: "body") do
         content_tag(:div, link_or_text.html_safe, class: "object-language") <<
         (gloss ? content_tag(:div, format_gloss(ex), class: "gloss-box") : '') <<
-        content_tag(:div, "‘#{ex.translation}’", class: "translation")
+        content_tag(:div, transl, class: "translation")
       end
     
     # wrap it in a <div> and serve it
