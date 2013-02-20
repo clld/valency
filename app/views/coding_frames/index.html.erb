@@ -59,10 +59,10 @@
       <tr>
 
         <td>
-					<% unless cf.to_s.blank? %>
-						<div class="cell">
-             	<span class="label" title="<%= cf.derived? ? 'Derived' : 'Basic' %> coding frame">
-             	<%= cf.derived? ? 'D' : 'B' %></span>
+          <% unless cf.to_s.blank? %>
+            <div class="cell">
+              <span class="label" title="<%= cf.derived? ? 'Derived' : 'Basic' %> coding frame">
+              <%= cf.derived? ? 'D' : 'B' %></span>
             </div>
             <div class="cell">
               <span class="hidden"><%= cf.arg_count %></span>

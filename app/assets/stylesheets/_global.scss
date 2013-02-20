@@ -109,13 +109,8 @@ form {
 	border:1px solid $tableBorder;
 	padding:10px;
 
-	label {
-	  margin-right:5px;
-	  &:nth-child(n+2){
-	    margin-left:10px;
-	  }
-	}
 	.btn-group {
+	  margin:0 8px;
 	  vertical-align:middle;
 		display:inline-block;
 	}
@@ -139,11 +134,11 @@ form {
       background-color: darken($btnWarningBackgroundHighlight,10%);
       *background-color: darken($btnWarningBackgroundHighlight, 16%);
   	}
-	}
-	.dataTables_filter {
-		display:inline-block;
-		float:right;
-	}
+  }
+  .dataTables_filter {
+    display:inline-block;
+    float:right;
+  }
 } 
 
 // padded box for prominent info

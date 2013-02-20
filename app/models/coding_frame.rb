@@ -19,14 +19,19 @@ class CodingFrame < ActiveRecord::Base
   
   has_many :coding_frame_index_numbers
 
+  # string representation
   def to_s
     self.coding_frame_schema
   end
   
-  # treat "replace me!" as empty
+  # treat "replace me!" as empty; normalize whitespace
   def coding_frame_schema
     cfs = self[:coding_frame_schema]
-    cfs unless cfs && cfs.match(/replace me/i)
+    unless cfs.respond_to?(:match) && cfs.match(/replace me/i)
+      cfs.gsub!(/\s+/,' ')
+      cfs.gsub!(/\s*(<|>)\s*/, ' \\1 ')
+      cfs
+    end
   end
   
   # get basic Microroles of this Coding frame
