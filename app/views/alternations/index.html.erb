@@ -31,7 +31,7 @@
     </thead>
     <tbody>
     <% @alternations.each do |altn| %>
-      <% desc = altn.description; verbs = altn.get_verbs; exs = altn.get_examples %>
+      <% desc = altn.description; verb_count = altn.count_verbs; exs = altn.get_examples %>
       <%= content_tag_for :tr, altn do %>
         <td>
           <div class="cell">
@@ -56,7 +56,8 @@
           <% end %>
         </td>
         
-        <td><%= verbs.count %></td>
+        <td class="number"><%= verb_count %></td>
+        
       <% end %>
     <% end %>
   </tbody>

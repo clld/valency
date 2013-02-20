@@ -60,7 +60,7 @@ apply_column_filter = ($dt, $button_group, event = null) ->
     $('#verb_dropdown').css 'width', @meaning_dropdown.width()
     
     # show tooltip on Example glosses
-    $('.gl .ttip').tooltip({
+    $('.ttip').tooltip({
       placement: 'bottom'
       delay: {hide: 300}
     })

@@ -54,7 +54,7 @@
     <table id="av_list" class="table table-bordered-sharp table-striped table-hover dataTable">
       <thead>
         <tr>
-      		<th>Verb meaning</th>
+          <th>Verb meaning</th>
           <th>Verb form</th>
           <th>Occurs</th>
           <th class="hidden-col">arg_count</th>
@@ -69,10 +69,10 @@
         <% a.alternation_values.each do |av| %>
           <% v   = av.verb %>
           <% next unless v %>
-          <% m   = if v then v.meanings.first else nil end %>
-          <% basic_cf  = if v then v.coding_frame   else nil end %>
+          <% m   = v.meanings.first %>
+          <% basic_cf = v.coding_frame %>
+          <% basic_ex = v.examples_of_coding_frame.first %>
           <% deriv_cf = av.derived_coding_frame %>
-          <% basic_ex = if v then v.examples.first else nil end %>
           <% deriv_ex = av.examples.first %>
           
           <%= content_tag_for :tr, av do %>
