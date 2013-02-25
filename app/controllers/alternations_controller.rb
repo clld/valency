@@ -2,8 +2,8 @@ class AlternationsController < ApplicationController
   before_filter :get_language
   
   def get_language
-    @language = Language.includes(:alternations).find_by_name_for_url(params[:language_id])
-    @gloss_abbr = Hash[@language.gloss_meanings.map{|gm| [gm.gloss, gm.meaning]}]
+    @language = Language.includes(:alternations, :gloss_meanings).find_by_name_for_url(params[:language_id])
+    @gloss_abbr = @language.gloss_meanings_hash
   end
   
   # GET /languages/german/alternations[.json]

@@ -2,8 +2,8 @@ class ExamplesController < ApplicationController
   before_filter :get_language
   
   def get_language
-    @language = Language.includes(:examples).find_by_name_for_url(params[:language_id])
-    @gloss_abbr = Hash[@language.gloss_meanings.map{|gm| [gm.gloss, gm.meaning]}]
+    @language   = Language.includes(:examples, :gloss_meanings).find_by_name_for_url(params[:language_id])
+    @gloss_abbr = @language.gloss_meanings_hash
   end
   
   # GET /languages/1/examples

@@ -60,7 +60,7 @@
 
         <td>
           <% unless cf.to_s.blank? %>
-            <div class="cell">
+          <div class="cell">
               <span class="label" title="<%= cf.derived? ? 'Derived' : 'Basic' %> coding frame">
               <%= cf.derived? ? 'D' : 'B' %></span>
             </div>
@@ -68,7 +68,7 @@
               <span class="hidden"><%= cf.arg_count %></span>
               <%= link_to cf, [@language, cf] %>
             </div>
-          <% end %>
+        <% end %>
         </td>
         <td><%= cf.derived   %></td>
         <td><%= cf.arg_count %></td>

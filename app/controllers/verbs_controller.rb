@@ -2,7 +2,7 @@ class VerbsController < ApplicationController
   before_filter :get_language
   
   def get_language
-    @language = Language.includes(:verbs).find_by_name_for_url(params[:language_id])
+    @language = Language.includes(:verbs, :gloss_meanings).find_by_name_for_url(params[:language_id])
   end
   
   # GET /languages/1/verbs
@@ -26,9 +26,9 @@ class VerbsController < ApplicationController
       @meaning = Meaning.find_by_label_for_url!(param_meaning) || nil
     end
     
-    @examples = @verb.examples_of_coding_frame
-    @excount  = @examples.size
-    @gloss_abbr = Hash[@language.gloss_meanings.map{|gm| [gm.gloss, gm.meaning]}]
+    @examples   = @verb.examples_of_coding_frame
+    @excount    = @examples.size
+    @gloss_abbr = @language.gloss_meanings_hash
 
     respond_to do |format|
       format.html # show.html.erb

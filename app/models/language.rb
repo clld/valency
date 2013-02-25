@@ -32,9 +32,15 @@ class Language < ActiveRecord::Base
     self.continent
   end
   
-  # dom_is replacement for the language's region
+  # dom_id replacement for the language's region
   def region_id
     "region-#{self.region.match(/\w+/).to_s.downcase}"
+  end
+  
+  # retrieve a Hash of all gloss abbreviations with their meanings
+  # the hash has the form {'ABBREV' => 'meaning', ...}
+  def gloss_meanings_hash
+    @gloss_meanings_hash ||= Hash[self.gloss_meanings.map{|gm| [gm.gloss, gm.meaning]}]
   end
   
   # return the list of contributors (as Person objects),

@@ -26,11 +26,12 @@ class CodingFrame < ActiveRecord::Base
   
   # treat "replace me!" as empty; normalize whitespace
   def coding_frame_schema
-    cfs = self[:coding_frame_schema]
-    unless cfs.respond_to?(:match) && cfs.match(/replace me/i)
-      cfs.gsub!(/\s+/,' ')
-      cfs.gsub!(/\s*(<|>)\s*/, ' \\1 ')
-      cfs
+    return @cfs if @cfs
+    @cfs = self[:coding_frame_schema]
+    unless @cfs.respond_to?(:match) && @cfs.match(/replace me/i)
+      @cfs.gsub!(/\s+/,' ')
+      @cfs.gsub!(/\s*(<|>)\s*/, ' \\1 ')
+      @cfs
     end
   end
   
@@ -56,8 +57,7 @@ class CodingFrame < ActiveRecord::Base
   
   # count the number of distinct arguments for sorting
   def arg_count
-    cfs = coding_frame_schema
-    cfs.nil? ? 99 : coding_frame_schema.scan(/\d+/).uniq.size
+    self[:coding_frame_schema].nil? ? 99 : self[:coding_frame_schema].scan(/\d+/).uniq.size
   end
   
   # count the verbs that have this basic coding frame
