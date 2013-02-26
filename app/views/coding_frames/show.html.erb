@@ -4,23 +4,10 @@
 <div class="row">
   <div class="span8">
     <div class="coding_frame padded-box bg-cf">
-      <h1 style="font-weight:normal;"><%= @coding_frame.coding_frame_schema %></h1>
+      <h1 style="font-weight:normal;"><%= render_cf(@coding_frame, link: false) %></h1>
     </div>
   </div>
 </div>
-
-<% if @coding_frame.description %>
-<p>
-  <b>Description:</b>
-  <%= @coding_frame.description %>
-</p>
-<% end %>
-<% if @coding_frame.comment %>
-<p>
-  <b>Comment:</b>
-  <%= @coding_frame.comment %>
-</p>
-<% end %>
 
 <div class="new row">
   <div class="span8">
