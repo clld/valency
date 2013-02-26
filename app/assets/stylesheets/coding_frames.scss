@@ -2,3 +2,11 @@
 .meaning-and-verbs {
   width:12em;
 }
+
+/* undo the effects of .label, except for the padding */
+.label.off {
+  line-height: auto;
+  color: auto;
+  text-shadow: none;
+  background-color: inherit;
+}

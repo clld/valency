@@ -46,7 +46,7 @@
       <th>Coding frame</th>
       <th class="hidden-col">derived</th>
       <th class="hidden-col">arg_count</th>
-			<th>Verbs</th>
+      <th>Verbs</th>
       <th>Verb meanings &amp; Verb forms</th>
     </tr>
   </thead>
@@ -59,16 +59,7 @@
       <tr>
 
         <td>
-          <% unless cf.to_s.blank? %>
-          <div class="cell">
-              <span class="label" title="<%= cf.derived? ? 'Derived' : 'Basic' %> coding frame">
-              <%= cf.derived? ? 'D' : 'B' %></span>
-            </div>
-            <div class="cell">
-              <span class="hidden"><%= cf.arg_count %></span>
-              <%= link_to cf, [@language, cf] %>
-            </div>
-        <% end %>
+          <%= render_cf(cf, prefix: true, count: true) unless cf.to_s.blank? %>
         </td>
         <td><%= cf.derived   %></td>
         <td><%= cf.arg_count %></td>
@@ -77,7 +68,7 @@
         </td>
         <td class="columns">
           <% mvv.each do |m, vv| %>
-            <div class="item meaning-and-verbs">
+            <div class="meaning-and-verbs">
               <%= m %> (<%= verb_list(vv, true) %>)
             </div>   
           <% end %>

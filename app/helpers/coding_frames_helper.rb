@@ -19,15 +19,15 @@ module CodingFramesHelper
     raw verbs.map(&mapper).join(', ')
   end
   
-  # render a coding frame, optionally with a prefixed badge and a hidden arg_count
-  # wrap all numbers in <b class="label">, let CSS make the label invisible without class "on"
-  # addClass('on') later to dynamically highlight numbers
+  # render a coding frame, optionally with a prefixed badge and a hidden <span>arg_count</span>
+  # wrap all numbers in <b class="idx-no" data-idx-no="1">
+  # addClass("label") dynamically to highlight the labels
   # OPTIONS
   #   prefix (boolean, defaults to false): show a 'B'/'D' (basic/derived) prefix
   #   count  (boolean, defaults to dalse): include a hidden span with the argument count
   #     between the prefix and the CF
   #   highlight (array, defaults to []): [2] highlight index no. 2
-  #   tooltip   (hash,  defaults to {}): {2 => "covered thing"} adds that tooltip to index no. 2
+  #   tooltip   (hash,  defaults to {}): {2 => "broken thing"} adds that tooltip to index no. 2
   def render_cf cf, options = {}
     prefix    = options[:prefix]    || false # prefix a 'B'/'D' label for Basic/Derived?
     count     = options[:count ]    || false # prefix a hidden span with arg_count?
@@ -40,23 +40,21 @@ module CodingFramesHelper
       "#{cf.derived? ? 'D' : 'B'}</span></div>"
     end
     
-    cf_html = ""
-    cf_html << "<span class='hidden'>#{cf.arg_count}</span>" if count
-    
-    cf_html << html_escape(cf.to_s).to_s.gsub(/(.?)(\d+)(.?)/) do
-      css_class = "idx-no" # short for: index-number
+    cf_html = count ? "<span class='hidden'>#{cf.arg_count}</span>" : ""
+      
+    cf_with_markup = html_escape(cf.to_s).to_str
+    cf_with_markup.gsub!(/(\[)?(\d+)(\])?/) do |num|
       n         = $2.to_i
-      unless $1.match(/[\[\]]/) # no label for numbers in brackets
-        css_class << " label"
-        css_class << " off" unless highlight.include? n
-      end
-      if tooltip[n]
+      # add class "label", for highlighted numbers, except in brackets
+      css_class "label" if highlight.include?(n) && $1 != '['
+      if tooltip_text = tooltip[n]
         css_class << " ttip"
-        html_attr = "rel='tooltip' title='#{tooltip[n]}'"
+        html_attr = " rel='tooltip' title='#{tooltip_text}'"
       end
-      "#{$1}<b class='#{css_class}' #{html_attr}>#{n}</b>#{$3}"
+      "#{$1}<b class='#{css_class}' data-idx-no='#{n}'#{html_attr}>#{n}</b>#{$3}"
     end
     
+    cf_html << cf_with_markup
     return (prefix ? "#{prefix}<div class='cell'>#{cf_html}</div>" : cf_html).html_safe
     
   end
