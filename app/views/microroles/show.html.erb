@@ -28,8 +28,8 @@
 <div class="row">
   <div class="span12 dt-with-filters">
     <h2>
-      Coding frames  <span class="badge with-h2"><%= @microrole.coding_frame_count %></span>
-      and Verb forms <span class="badge with-h2"><%= @microrole.verb_count %></span>
+      Coding frames  <span class="badge"><%= @microrole.coding_frame_count %></span>
+      and Verb forms <span class="badge"><%= @microrole.verb_count %></span>
     </h2>
     
     <div class="form-inline dt-filters">
@@ -44,13 +44,15 @@
         <th>Coding frame</th>
         <th class="hidden-col">derived</th>
         <th class="hidden-col">arg_count</th>
-        <th class="number">Index #</th>
+        <th class="hidden-col">Index #</th>
         <th>Coding set</th>
         <th>Argument type</th>        
       </thead>
       <tbody>
       <% @verb_cf_mr.each do |v_cf_mr| %>
-        <% verb   = v_cf_mr.verb; lang = verb.language %>
+        <% verb = v_cf_mr.verb %>
+				<% next unless verb %>
+				<% lang = verb.language %>
         <% next if (cf = v_cf_mr.coding_frame).nil? || cf.coding_frame_schema.blank? %>
         <% idx_no = @index_number_for_cf[cf]; %>
         <% unless idx_no.nil? %>
@@ -70,7 +72,7 @@
 					</td>
           <td><%= cf.derived %></td>
           <td><%= cf.arg_count %></td>
-          <td class="number"><%= n unless n.nil? %></td>
+          <td><%= n unless n.nil? %></td>
           <td><%= link_to cs, [lang, cs] unless cs.nil? %></td>
           <td><%= at.to_s %></td>
         </tr>

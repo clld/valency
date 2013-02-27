@@ -5,17 +5,6 @@
 dtapi = $.fn.dataTableExt.oApi # see custom_data_table_plugins.js
 ns    = @VALENCY.global
 
-# returns a sorter function for Coding frame column: ignore the badge; sort lower argument count first
-sort_ignoring_label = (iCol) ->
-  (src, type, val) ->
-    if type is 'sort'
-      return dtapi.MAX unless src[iCol]
-      $html = $(src[iCol])
-      $html.data('arg-count') + $html.text().trim().replace(/\s+/g,' ').substr(1)
-    else
-      if type is 'set' then src[iCol] = val else src[iCol]
-
-
 oDTSettings_index = 
   sDom: "<'row'<'span4'i><'span8'f>>t" # no scrolling
   # sScrollY: "700px"
@@ -25,7 +14,7 @@ oDTSettings_index =
       aTargets:[0] # Coding frame
       sType: "html"
       asSorting: ['asc','desc']
-      mDataProp: sort_ignoring_label 0
+      mDataProp: ns.coding_frame_sorter(0)
     },{
       aTargets:[3] # verb_count
       asSorting: ['desc', 'asc']
@@ -42,9 +31,7 @@ oDTSettings_index =
 
 
 @VALENCY.coding_frames =
-  
   init: ->
-  
     
   index: ->
     $cf_list = $('#coding_frames_list')

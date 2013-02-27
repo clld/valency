@@ -47,18 +47,13 @@ label.disabled {
   color:$grayLight;
 }
 
-/* button to toggle the comment below it */
-// TODO check out if this is easier to do with a .form-inline 
-.btn-mini.with-h1{ /* button to be shown in line with h1 */
-	position:relative;
-	top:16px;
-	margin:0 2em;	
-}
+/* the .comment .box is toggled on and off with a button */
 .comment { // a div with a p.box inside
 	position:relative;
 	clear:both;
 	width:auto;
 	.box {
+	  line-height:normal;
   	background-color:$grayLighter;
   	border:1px solid $tableBorder;
   	padding:10px;
@@ -97,12 +92,16 @@ h1, h2, h3, h4 {
 
 
 /* alignment of a form */
-form {
-	&.with-h2 {
-		display:inline-block;
-		line-height:32px; // like h2
-		margin:8px 0 0 1em;
-	}
+form.with-heading {
+	display:inline-block;
+	line-height:32px; // as h1 or h2
+  h1 + & { margin:10px 0 0 1.5em;	}
+  h2 + & { margin: 8px 0 0 1em;	  }	
+  & > span { // fix to align with h1
+    display:inline-block;
+    margin-top:5px;
+    margin-left:1em;
+  }
 }
 /* dataTable filters: buttons/btn-groups to toggle column filters */
 .dt-filters {
@@ -232,8 +231,8 @@ div.inline{
 	&:first-child {
 		padding-right:0.5em;
 	}
-  a[rel="popover"] { // popover links in dataTables
-    margin-left:0.5em;
+  a:not(:last-child) {
+    margin-right:0.5em;
   }
 }
 

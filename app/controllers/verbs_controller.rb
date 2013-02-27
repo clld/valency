@@ -20,14 +20,14 @@ class VerbsController < ApplicationController
   # GET /languages/1/verbs/1
   # GET /languages/1/verbs/1.json
   def show
-    @verb = @language.verbs.includes(:coding_frame, :meanings, :microroles,
-    :alternation_values => [:alternation]).find(params[:id])
-    if (param_meaning = params[:meaning])
-      @meaning = Meaning.find_by_label_for_url!(param_meaning) || nil
+    @verb = @language.verbs.find(params[:id])
+    if params[:meaning]
+      @meaning  = Meaning.find_by_label_for_url!(params[:meaning]) || nil
+      @synonyms = @meaning.verbs.where(language_id: @language.id) - [@verb]
     end
     
-    @examples   = @verb.examples_of_coding_frame
-    @excount    = @examples.size
+    @examples_of_cf = @verb.examples_of_coding_frame
+    # @examples_other = @verb.examples - @examples_of_cf
     @gloss_abbr = @language.gloss_meanings_hash
 
     respond_to do |format|

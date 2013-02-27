@@ -1,19 +1,27 @@
 <!-- Verb detail -->
 <% meanings = @verb.meanings %><!-- verb's meanings or [] -->
 <% cframe   = @verb.cframe %>  <!-- basic coding frame or nil -->
-
 <div class="row">
   <div class="span12">
     <h1 class="pull-left">
     	<span class="object-language" id="<%= dom_id(@verb) %>"><%= @verb %></span>
     	<% if @verb.original_script %>
-    		<small><span><%= "(#{@verb.original_script})" %></span></small>
+    		<small><%= "(#{@verb.original_script})" %></small>
     	<% end %>
     </h1>
-    <% if @verb.comment %>
-      <a class="btn btn-mini toggle-next with-h1">show comment</a>
-      <div class="comment"><p class="box"><%= raw @verb.comment %></p></div>
-    <% end %>
+		<form class="form-inline pull-left with-heading">
+	    <% if @verb.comment %>
+				<a class="btn btn-mini toggle-next">show comment</a>
+				<div class="comment"><p class="box"><%= raw @verb.comment %></p></div>
+	    <% end %>
+			<% if @synonyms && @synonyms.size > 0 %>
+				<span>
+					<%= pluralize(@synonyms.size, "other Verb form") %>
+					for meaning "<%= @meaning.to_s %>": <%= verb_list(@synonyms, as_links = true, meaning = @meaning) %>
+				</span>
+			<% end %>
+		</form>
+
 	</div>
 </div>
 
@@ -25,22 +33,18 @@
     <% else %>
       not specified
     <% end %>
-
   </div><!-- end of span4 -->
   
   <!-- EXAMPLES --><div class="span8">
     <h2>
-      <%= 'Example'.pluralize @excount if @excount > 0 %>
-      <small>
-        <%= @excount > 0 ? "for the coding frame" : "no example given" %>
-      </small>
-    </h2>
-    <div class="examples-container">
-      <% example_options = {number_as_link: true} %>
-      <% @examples.each do |ex| %>
-        <%= render_example(ex, example_options) %>
-      <% end %>
-    </div>
+			<% if @examples_of_cf.size > 0 %>
+				<%= 'Example'.pluralize(@examples_of_cf.size) %>
+				<small>with basic Coding frame</small>
+			<% else %>
+			  <small>no examples with basic Coding frame</small>
+			<% end %>
+		</h2>
+		<%= render partial: 'examples', object: @examples_of_cf %>
   </div>
 
 </div>
@@ -98,7 +102,7 @@
 	  <% avs = @verb.alternation_values %>
     <h2 class="pull-left">Alternations</h2>
     <% if @verb.av_data? then %>
-    <form class="form-inline pull-left with-h2">
+    <form class="form-inline pull-left with-heading">
       <label class="checkbox inline"> also show: </label>
       <label class="checkbox inline">
         <input type="checkbox" class="toggle-col" data-col="comment">Comments
@@ -169,7 +173,7 @@
         <td><%= altn.coded_y_n %></td>
 
         <td><% unless dcf.nil? %>
-              <%= link_to dcf, [@language, dcf] %>
+              <%= render_cf dcf, link: true %>
             <% end %>
         </td>
 

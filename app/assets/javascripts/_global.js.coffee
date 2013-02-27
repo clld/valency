@@ -3,6 +3,7 @@
 
 # global VALENCY object holds page-specific Javascript code
 @VALENCY or= {}
+dtapi = $.fn.dataTableExt.oApi # access to dataTable API methods
 
 navbarLinkBackgroundActive = "rgb(230, 96, 20)" # for the flash effect
 
@@ -20,6 +21,7 @@ apply_column_filter = ($dt, $button_group, event = null) ->
       strings.push $btn.val() || $btn.text().trim()
   # console.log "Filtering \"#{column}\" by \"#{strings.join '|'}\"" # DEBUG
   $dt.filterColumn(column, strings.join '|')
+
 
 # the global namespace: for shared initialization code
 @VALENCY.global =
@@ -48,7 +50,7 @@ apply_column_filter = ($dt, $button_group, event = null) ->
     $('#verb_dropdown').find('.dropdown-menu .divider').nextAll().inColumns 5
     
     # setup button to toggle comment box – see custom jQuery plugins
-    $('.toggle-next').align_below_and_setup_toggle()
+    $('.toggle-next').each (i,el) -> $(el).align_below_and_setup_toggle()
     
     # prevent .disabled links from firing
     @body.on 'click', '.disabled,.disabled input,.disabled .btn,.disabled a',
@@ -84,6 +86,7 @@ apply_column_filter = ($dt, $button_group, event = null) ->
         @index_numbers.filter("[data-idx-no=#{n}]").flash('green')
     
     
+    
     # global settings for dataTables. These are extended in the controllers' handlers
     @oDTSettings =
       bPaginate: false
@@ -91,6 +94,7 @@ apply_column_filter = ($dt, $button_group, event = null) ->
         sInfo:         "Showing _TOTAL_" # variables: _START_, _END_, _MAX_
         sInfoFiltered: " out of _MAX_"
         sInfoPostFix:  " entries"
+        sInfoEmpty: "0"
         sSearch: ""
       
       fnInitComplete: (oSettings, json) ->        
@@ -140,8 +144,22 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 
         # don't allow body to shrink vertically when dataTable is filtered
         $('body').css 'min-height', $('body').height()
+      
+  
+  ### store some shared functions to reuse in other JS files ###
+  
+  # returns a dataTable sorter function for a Coding frames column:
+  # ignore the badge; sort lower argument count first  
+  coding_frame_sorter: (iCol) ->
+    (src, type, val) ->
+      if type is 'sort'
+        return dtapi.MAX unless src[iCol]
+        $html = $(src[iCol])
+        $html.data('arg-count') + $html.text().trim().replace(/\s+/g,' ').substr(1)
+      else
+        if type is 'set' then src[iCol] = val else src[iCol]
+  
 
-	
 # @UTIL.init calls these: 
 # @VALENCY.global.init()
 # @VALENCY.controller_name.init()

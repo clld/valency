@@ -2,10 +2,19 @@ module CodingFramesHelper
 
   EMPTY_HASH = {}
   EMPTY_ARY  = []
-  # get a comma-separated list of verbs 
-  def verb_list(verbs, as_links = true)
+
+  # get a comma-separated list of verbs, optionally as links,
+  # optionally keeping the meaning parameter
+  def verb_list(verbs, as_links = true, meaning = nil)
     if as_links
-      mapper = ->(x){ link_to x, [@language, x], class: 'object-language' }
+      if meaning
+        mapper = ->(v){
+          link_to(v, language_verb_path(@language, v, meaning: meaning.to_param), 
+          class: 'object-language')
+        }
+      else
+        mapper = ->(v){ link_to v, [@language, v], class: 'object-language' }
+      end
     else
       mapper = ->(x){ content_tag :span, x, class: 'object-language' }
     end
@@ -40,7 +49,7 @@ module CodingFramesHelper
       css_class = "idx-no" # short for index number
       n = $2.to_i
       # add class "label", for highlighted numbers, except in brackets
-      unless $1 == '[' || $2 == ']'
+      unless $1 == '[' || $3 == ']'
         css_class << " free" # for stylesheet and dynamic highlighting
         css_class << " label" if highlight.include?(n)
       end

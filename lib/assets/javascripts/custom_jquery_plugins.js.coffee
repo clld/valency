@@ -47,8 +47,8 @@
 			'left': offset.left
 			'top' : offset.top + $btn.outerHeight()
 		.css
-			'max-width': $parent.width() - offset.left + $parent.offset().left
-			'min-width': "200px"
+			'max-width': '600px'
+			'min-width': '200px'
 		.hide()
 		
 		$btn.click ->

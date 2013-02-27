@@ -92,7 +92,7 @@
           <% verbs = (m.verbs & @language.verbs) %>
           <li class="<%= 'active' if m == @meaning %>">
             <% if verbs.size > 0 %>
-              <%= link_to(controller: 'verbs', action: 'show', language_id: @language.to_param, id: verbs.first.to_param, meaning: m.to_param) do %>
+              <%= link_to(language_verb_path(@language, verbs.first, meaning: m.to_param)) do %>
                 <span class="toggle-hover"><%= m.to_s %></span>
                 <span class="toggle-hover object-language">
                   <%= verbs.map{|v| v.to_s}.join(', ').html_safe %>
