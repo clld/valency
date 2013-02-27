@@ -73,13 +73,12 @@
 		$link.insertAfter($parent)
 		$link.wrap wrapper if wrapper?		
 	
-	# flash: highlight an element for a split-second
-	# by quickly changing and restoring its background-color
-	$.fn.flash = (color = 'yellow', duration = 300) ->
+	# flash: highlight an element for duration milliseconds
+	# by toggling a class that changes background-color
+	$.fn.flash = (color_class = 'yellow', duration = 300) ->
     _it      = this # the jQuery object to flash
-    _it.data('bg-color', _it.css('background-color')) unless _it.data('bg-color')
-    _it.queue((next) -> _it.css('background-color', color); next())
+    _it.queue((next) -> _it.addClass(color_class); next())
        .queue((next) -> _it.delay(duration); next())
-       .queue((next) -> _it.css('background-color', _it.data('bg-color')); next())
+       .queue((next) -> _it.removeClass(color_class); next())
   
 )(jQuery)

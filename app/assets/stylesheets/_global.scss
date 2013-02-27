@@ -72,7 +72,8 @@ h1, h2, h3 {
 h1 {
   color: inherit;
           font-size: 28px;
-  small { font-size: 20px; }
+  small   { font-size: 20px; }
+  &.small { font-size:20px; line-height:20px; margin-top:0; }
 }
 h2 { font-size: 18px; small { font-size:14px; } }
 h3 { font-size: 14px; small { font-size:12px; } }
@@ -123,15 +124,15 @@ form {
     	}	    
 	  }
   	&.btn-danger.active {
-      background-color: darken($btnDangerBackgroundHighlight,10%);
+      background-color: darken($btnDangerBackgroundHighlight,20%);
       *background-color: darken($btnDangerBackgroundHighlight, 16%);
   	}
   	&.btn-success.active {
-      background-color: darken($btnSuccessBackgroundHighlight,10%);
+      background-color: darken($btnSuccessBackgroundHighlight,20%);
       *background-color: darken($btnSuccessBackgroundHighlight, 16%);
   	}
   	&.btn-warning.active {
-      background-color: darken($btnWarningBackgroundHighlight,10%);
+      background-color: darken($btnWarningBackgroundHighlight,20%);
       *background-color: darken($btnWarningBackgroundHighlight, 16%);
   	}
   }
@@ -144,8 +145,7 @@ form {
 // padded box for prominent info
 .padded-box { // based on Bootstrap's .well class
   min-height: 20px;
-  padding: 19px;
-  margin-bottom: 10px;
+  padding: 10px;
   border: 1px solid $navbarBackground;
   @include box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
 }
@@ -208,6 +208,10 @@ form {
 .bg-mr { background-color:$bg-me; }
 .bg-cf { background-color:$bg-cf; }
 .bg-cs { background-color:lighten($bg-cs,6%); }
+/* for highlighting, needed for jQuery .flash() plugin */
+.green { background-color:#00ff80 !important;    }
+.yellow{ background-color:yellow !important; }
+
 
 // utility classes: other properties
 div.inline{
@@ -215,6 +219,9 @@ div.inline{
 }
 .block{
 	display:block;
+}
+.big {
+  font-size:larger;
 }
 .clear {
 	clear:both;

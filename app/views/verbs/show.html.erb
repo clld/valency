@@ -20,10 +20,8 @@
 <div class="row">
 	<!-- CODING FRAME --><div class="span4">
     <h2>Coding frame</h2>
-    <% if cframe %>
-      <%= div_for cframe, :class => 'padded-box bg-cf' do |cf| %>
-        <big><%= link_to cf, [@language, cf] %></big>
-      <% end %>
+		<% if cframe %>
+    	<%= render_cf(cframe, link: true, css_class: "padded-box bg-cf big") if cframe %>
     <% else %>
       not specified
     <% end %>
@@ -71,8 +69,8 @@
           </tr>
         </thead><tbody>
         <% arguments.each do |arg| # arg is a Coding frame index number %>
-          <tr>
-            <td class="digit bg-cf"><%= arg.index_number %></td>
+          <tr data-idx-no="<%= arg.index_number %>">
+            <th class="digit bg-cf"><%= arg.index_number %></th>
             <% meanings.each do |m| %>
             <% microrole = arg.microroles.where_meaning(m)[0] %>
               <td class="bg-mr"><%= link_to microrole, microrole %></td>

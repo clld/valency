@@ -20,10 +20,9 @@ class MicrorolesController < ApplicationController
       :verb => :language
     )
 
-    cframes = @microrole.coding_frames
-    cfins   = @microrole.coding_frame_index_numbers
-    @index_number_for = Hash[ cframes.map do |cf|
-      [cf, (cf.coding_frame_index_numbers & cfins).uniq.first || nil]
+    mr_index_numbers = @microrole.coding_frame_index_numbers
+    @index_number_for_cf = Hash[ @microrole.coding_frames.map do |cf|
+      [cf, (cf.coding_frame_index_numbers & mr_index_numbers).uniq.first || nil]
     end ]
     
 

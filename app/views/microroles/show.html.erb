@@ -52,7 +52,7 @@
       <% @verb_cf_mr.each do |v_cf_mr| %>
         <% verb   = v_cf_mr.verb; lang = verb.language %>
         <% next if (cf = v_cf_mr.coding_frame).nil? %>
-        <% idx_no = @index_number_for[cf]; %>
+        <% idx_no = @index_number_for_cf[cf]; %>
         <% if idx_no.nil? then cs = at = nil else cs = idx_no.coding_set; at = idx_no.argument_type end %>
         <tr>
           <td><%= link_to lang, lang %></td>

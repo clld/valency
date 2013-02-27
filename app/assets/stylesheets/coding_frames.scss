@@ -14,6 +14,7 @@
   .idx-no { /* this styles mimic Bootstrap's .label */
     font-size: 84.6%; // relative instead of absolute size
     font-weight: bold;
+    cursor:default;
     /* line-height: 100%; */ // enable if needed
     &.free { /* look like .label when outside of [] */
       padding: 1px 4px 2px;
@@ -22,6 +23,11 @@
   }
   
   .label { // special behaviour here if needed
+    background-color:$navbarBackground;
     @include transition(background-color .3s ease);
   }
+}
+
+.dataTable .mr + .mr {
+  border-left:none;
 }

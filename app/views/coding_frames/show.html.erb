@@ -1,64 +1,51 @@
 <!-- Coding frame -->
+<% cf = @coding_frame # alias %>
 <p id="notice"><%= notice %></p>
 
 <div class="row">
-  <div class="span8">
-    <div class="coding_frame padded-box bg-cf">
-      <h1 style="font-weight:normal;"><%= render_cf(@coding_frame) %></h1>
-    </div>
+  <div class="span4">
+	<h1 class="small"><%= cf.derived %> Coding frame</h1>
+    <%= render_cf(cf, css_class: "padded-box bg-cf big") %>
   </div>
+
+	<div class="span8">
+	<h1 class="small"><%= cf.derived? ? "Basic": "Derived" %> Coding frames</h1>
+	</div>
+
 </div>
 
 <div class="new row">
   <div class="span8">
-    
-    <ul class="nav nav-tabs">
-      <li class="active">
-        <a data-toggle="tab" href="#basic"  > Basic coding frame  </a>
-      </li>
-      <li>
-        <a data-toggle="tab" href="#derived"> Derived coding frames</a>
-      </li>
-    </ul>
-
-    <div class="tab-content">
-      <div class="tab-pane active" id="basic">
-        <table id="verb_list" class="table table-bordered-sharp table-striped table-hover dataTable">
-        <thead>
-          <tr>
-            <th>Verb form</th>
-            <th>Verb meanings &amp; Microroles</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% arguments = @coding_frame.index_numbers_eager_load %>
-          <% @coding_frame.verbs.each do |v| %>
-          <tr>
-            <td><%= link_to v.verb_form, [@language, v], class: 'object-language' %></td>
-            
-            <td>
-              <% v.meanings.each do |m| %>
-                <div>
-                <%= link_to m, m %>
-                (
-                <%= arguments.map{ |arg| arg.microroles.where_meaning(m)[0].to_s }.join(', ') %>
-                )
-                </div>
-              <% end %>
-            </td>
-            
-          </tr>
-          <% end %>
-        </tbody>
-        </table>
-
-      </div>
-      
-      <div class="tab-pane" id="derived">
-
-      </div><!-- end of .tab-pane#derived -->
-    </div><!-- end of .tab-content -->
-    
+    <table id="verb_list" class="table table-bordered-sharp table-striped table-hover dataTable">
+    <thead>
+      <tr>
+        <th>Verb form</th>
+        <th>Verb meaning</th>
+				<% @cf_index_numbers.each do |cfin| %>
+					<% n = cfin.index_number %>
+					<th data-idx-no="<%= n %>" class="mr">Microrole <%= n %></th>
+				<% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @verbs.each do |v| %>
+				<% v.meanings.each do |m| %>
+		      <tr>
+		        <td><%= link_to v, [@language, v], class: 'object-language' %></td>
+        
+		        <td><%= link_to m, m %></td>
+		
+						<% @cf_index_numbers.each do |cfin| %>
+							<% n  = cfin.index_number %>
+							<% mr = cf.microrole_for(m, cfin) %>
+							<td data-idx-no="<%= n %>" class="mr"><%= link_to mr, mr %></td>
+						<% end %>
+        
+		      </tr>
+				<% end %>
+      <% end %>
+    </tbody>
+    </table>    
 
 
   </div><!-- end of .span -->

@@ -43,9 +43,9 @@ apply_column_filter = ($dt, $button_group, event = null) ->
       e.stopPropagation()
     
     # show dropdown menus in columns (see custom jQuery plugin)
-    @language_dropdown.find('.dropdown-menu .divider').nextAll().inColumns 3
-    @meaning_dropdown.find( '.dropdown-menu .divider').nextAll().inColumns 5
-    $('#verb_dropdown').find( '.dropdown-menu .divider').nextAll().inColumns 5
+    @language_dropdown.find( '.dropdown-menu .divider').nextAll().inColumns 3
+    @meaning_dropdown.find(  '.dropdown-menu .divider').nextAll().inColumns 5
+    $('#verb_dropdown').find('.dropdown-menu .divider').nextAll().inColumns 5
     
     # setup button to toggle comment box – see custom jQuery plugins
     $('.toggle-next').align_below_and_setup_toggle()
@@ -64,6 +64,23 @@ apply_column_filter = ($dt, $button_group, event = null) ->
       placement: 'bottom'
       delay: {hide: 300}
     })
+    
+    # Coding frame index numbers: setup hover and click handlers for highlighting
+    @index_numbers_in_cf    = $(".coding_frame .idx-no.free")
+    @index_numbers_in_table = $("tr, th, td").filter("[data-idx-no]")
+    @index_numbers_in_table.add(@index_numbers_in_cf).hover((e) =>
+      n = $(e.target).closest("[data-idx-no]").data('idx-no')
+      @index_numbers_in_cf.filter("[data-idx-no=#{n}]").addClass "label"
+    , (e) =>
+      @index_numbers_in_cf.removeClass("label")
+    ).click (e)=>
+      $target = $(e.target)
+      n = $target.closest("[data-idx-no]").data('idx-no')
+      if $target.is('.idx-no')
+        @index_numbers_in_table.filter("th[data-idx-no=#{n}]").flash()
+      else
+        @index_numbers_in_cf.filter("[data-idx-no=#{n}]").flash('green')
+    
     
     # global settings for dataTables. These are extended in the controllers' handlers
     @oDTSettings =

@@ -23,11 +23,12 @@ module CodingFramesHelper
   # wrap all numbers in <b class="idx-no" data-idx-no="1">
   # addClass("label") dynamically to highlight the labels
   # options can include "link" (boolean), defaults to false
+  # optional CSS class string to be applied to outermost Coding frame div
   def render_cf cf, options = {}
     prefix    = options[:prefix]    || false # prefix a 'B'/'D' label for Basic/Derived?
     highlight = options[:highlight] || EMPTY_ARY  # [2] highlight index no. 2
     tooltip   = options[:tooltip]   || EMPTY_HASH # {2 => "tooltip for 2"}
-    
+    container_class = options[:css_class]
     if prefix
       prefix = "<div class='cell'>"<<
       "<span class='label' title='#{cf.derived? ? 'Derived' : 'Basic'} coding frame'>"<<
@@ -52,7 +53,9 @@ module CodingFramesHelper
     
     cf_html = link_to_if(options[:link] && @language, cf_with_markup.html_safe, [@language, cf])
     cf_html = "#{prefix}<div class='cell'>#{cf_html}</div>" if prefix
-    div_for(cf, :'data-arg-count' => cf.arg_count) {cf_html.html_safe}
+    div_for(cf, :'data-arg-count' => cf.arg_count, :class => options[:css_class]) do
+      cf_html.html_safe
+    end
     
   end
   

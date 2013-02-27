@@ -48,11 +48,19 @@ class CodingFrame < ActiveRecord::Base
     self.coding_frame_index_numbers.includes(
       :argument_type, :coding_set, :microroles
     )
-  end
+  end  
   
   # return true if the coding frame is derived
   def derived?
     self.derived == 'Derived'
+  end
+
+  # Helper method. Gets the microrole for this CodingFrame
+  # given a Meaning and a CodingFrameIndexNumber.
+  # Only call if all associations are cached!
+  # See coding_frames_controller#show
+  def microrole_for(m, idx_no)
+    (self.microroles.where_meaning(m) & idx_no.microroles).uniq.first
   end
   
   # count the number of distinct arguments for sorting
