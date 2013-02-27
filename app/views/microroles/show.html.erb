@@ -51,9 +51,13 @@
       <tbody>
       <% @verb_cf_mr.each do |v_cf_mr| %>
         <% verb   = v_cf_mr.verb; lang = verb.language %>
-        <% next if (cf = v_cf_mr.coding_frame).nil? %>
+        <% next if (cf = v_cf_mr.coding_frame).nil? || cf.coding_frame_schema.blank? %>
         <% idx_no = @index_number_for_cf[cf]; %>
-        <% if idx_no.nil? then cs = at = nil else cs = idx_no.coding_set; at = idx_no.argument_type end %>
+        <% unless idx_no.nil? %>
+					<% n, cs, at = idx_no.index_number, idx_no.coding_set, idx_no.argument_type %>
+				<% else %>
+					<% n = cs = at = nil %>
+				<% end %>
         <tr>
           <td><%= link_to lang, lang %></td>
           <td><%= lang.region %></td>
@@ -61,10 +65,12 @@
 
           <td><%= link_to verb, [lang, verb], :class => 'object-language' %></td>
 
-          <td><%= link_to cf, [lang, cf] %></td>
+          <td>
+						<%= render_cf cf, :css_class => "in-table", link: true, tooltip:{n => @microrole.name}, highlight: [n] %>							
+					</td>
           <td><%= cf.derived %></td>
           <td><%= cf.arg_count %></td>
-          <td class="number"><%= idx_no.index_number unless idx_no.nil? %></td>
+          <td class="number"><%= n unless n.nil? %></td>
           <td><%= link_to cs, [lang, cs] unless cs.nil? %></td>
           <td><%= at.to_s %></td>
         </tr>

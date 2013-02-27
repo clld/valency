@@ -66,20 +66,22 @@ apply_column_filter = ($dt, $button_group, event = null) ->
     })
     
     # Coding frame index numbers: setup hover and click handlers for highlighting
-    @index_numbers_in_cf    = $(".coding_frame .idx-no.free")
+    @index_numbers          = $(".coding_frame:not(.in-table) .idx-no.free")
     @index_numbers_in_table = $("tr, th, td").filter("[data-idx-no]")
-    @index_numbers_in_table.add(@index_numbers_in_cf).hover((e) =>
+    @index_numbers_in_table.add(@index_numbers).hover((e) =>
       n = $(e.target).closest("[data-idx-no]").data('idx-no')
-      @index_numbers_in_cf.filter("[data-idx-no=#{n}]").addClass "label"
+      @index_numbers.filter("[data-idx-no=#{n}]").addClass "label"
+      @index_numbers_in_table.filter("tr[data-idx-no=#{n}]").addClass "outline"
     , (e) =>
-      @index_numbers_in_cf.removeClass("label")
+      @index_numbers.removeClass "label"
+      @index_numbers_in_table.removeClass "outline"
     ).click (e)=>
       $target = $(e.target)
       n = $target.closest("[data-idx-no]").data('idx-no')
       if $target.is('.idx-no')
         @index_numbers_in_table.filter("th[data-idx-no=#{n}]").flash()
       else
-        @index_numbers_in_cf.filter("[data-idx-no=#{n}]").flash('green')
+        @index_numbers.filter("[data-idx-no=#{n}]").flash('green')
     
     
     # global settings for dataTables. These are extended in the controllers' handlers

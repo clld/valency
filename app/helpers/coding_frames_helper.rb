@@ -40,7 +40,7 @@ module CodingFramesHelper
       css_class = "idx-no" # short for index number
       n = $2.to_i
       # add class "label", for highlighted numbers, except in brackets
-      if $1 != '['
+      unless $1 == '[' || $2 == ']'
         css_class << " free" # for stylesheet and dynamic highlighting
         css_class << " label" if highlight.include?(n)
       end

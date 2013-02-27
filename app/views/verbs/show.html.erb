@@ -57,7 +57,7 @@
       <% arguments = cframe.index_numbers_eager_load %>
       <table class="table table-bordered-sharp">
         <thead>
-          <tr class="shadow">
+          <tr>
             <th class="digit bg-cf">#</th>
             <% meanings.each do |m| %>
               <th class="bg-me">
@@ -119,9 +119,9 @@
       
           <label>Filter by occurrence:</label>
           <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="occurs">
-            <button class="btn btn-mini btn-success" value="R">Regularly</button>
-            <button class="btn btn-mini btn-warning" value="M">Marginally</button>
-            <button class="btn btn-mini btn-danger" value="N">Never</button>
+            <button class="btn btn-mini btn-success">Regularly</button>
+            <button class="btn btn-mini btn-warning">Marginally</button>
+            <button class="btn btn-mini btn-danger">Never</button>
           </div>
           <div class="btn-group">
             <a class="btn btn-mini clear-filters">

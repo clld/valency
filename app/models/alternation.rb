@@ -26,7 +26,8 @@ class Alternation < ActiveRecord::Base
   
   # count verbs that occur *regularly* in this alternation
   def count_verbs
-    self.alternation_values.where(alternation_occurs: 'Regularly').reduce(0) do |sum, av|
+    @regular_verb_count ||= self.alternation_values
+    .where(alternation_occurs: 'Regularly').reduce(0) do |sum, av|
       if av.verb then sum + 1 else sum end
     end
   end
