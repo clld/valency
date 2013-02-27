@@ -223,7 +223,7 @@ div.inline{
 .cell {
 	display: table-cell;
 	&:first-child {
-		padding-right:5px;
+		padding-right:0.5em;
 	}
   a[rel="popover"] { // popover links in dataTables
     margin-left:0.5em;

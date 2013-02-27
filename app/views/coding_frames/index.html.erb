@@ -59,7 +59,7 @@
       <tr>
 
         <td>
-          <%= render_cf(cf, prefix: true, count: true) unless cf.to_s.blank? %>
+          <%= render_cf(cf, prefix: true, count: true, link: true) unless cf.to_s.blank? %>
         </td>
         <td><%= cf.derived   %></td>
         <td><%= cf.arg_count %></td>

@@ -1,12 +1,27 @@
 // styles specific to the formatting of Coding frames
 .meaning-and-verbs {
-  width:12em;
+  width:14em;
 }
 
-/* undo the effects of .label, except for the padding */
-.label.off {
-  line-height: auto;
-  color: auto;
-  text-shadow: none;
-  background-color: inherit;
+/* customize Bootstrap's .label for the Coding frames' index numbers (.idx-no.free) */
+.coding_frame {
+  a {
+    text-decoration:none; // don't underline
+  }
+  b { // the V is also inside <b>
+    // deactivate font-weight:bold if required
+  }
+  .idx-no { /* this styles mimic Bootstrap's .label */
+    font-size: 84.6%; // relative instead of absolute size
+    font-weight: bold;
+    /* line-height: 100%; */ // enable if needed
+    &.free { /* look like .label when outside of [] */
+      padding: 1px 4px 2px;
+      @include border-radius(3px);
+    }
+  }
+  
+  .label { // special behaviour here if needed
+    @include transition(background-color .3s ease);
+  }
 }
