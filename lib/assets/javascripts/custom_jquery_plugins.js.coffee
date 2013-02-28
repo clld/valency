@@ -75,7 +75,7 @@
 	
 	# flash: highlight an element for duration milliseconds
 	# by toggling a class that changes background-color
-	$.fn.flash = (color_class = 'yellow', duration = 300) ->
+	$.fn.flash = (color_class = 'flash-yellow', duration = 300) ->
     _it      = this # the jQuery object to flash
     _it.queue((next) -> _it.addClass(color_class); next())
        .queue((next) -> _it.delay(duration); next())

@@ -208,9 +208,9 @@ form.with-heading {
 .bg-cf { background-color:$bg-cf; }
 .bg-cs { background-color:lighten($bg-cs,6%); }
 /* for highlighting, needed for jQuery .flash() plugin */
-.green { background-color:#00ff80 !important;    }
-.yellow{ background-color:yellow !important; }
-
+.flash-green { background-color:#00ff80 !important; }
+.flash-yellow{ background-color:yellow  !important; }
+.flash-navbar{ background-color:$navbarLinkBackgroundActive; }
 
 // utility classes: other properties
 div.inline{
@@ -282,6 +282,10 @@ table {
 	  }
 	}
   td {
+    .label { /*fix minimum width for single-character labels*/
+      display:inline-block;
+      min-width:8px;
+    }
     &.number {
       text-align:right;
       padding-right:0.5em;

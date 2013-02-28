@@ -5,8 +5,6 @@
 @VALENCY or= {}
 dtapi = $.fn.dataTableExt.oApi # access to dataTable API methods
 
-navbarLinkBackgroundActive = "rgb(230, 96, 20)" # for the flash effect
-
 # function to apply a .btn-group's column filter to a dataTable (@param $dt)
 apply_column_filter = ($dt, $button_group, event = null) ->
   column  = $button_group.data().col
@@ -37,7 +35,7 @@ apply_column_filter = ($dt, $button_group, event = null) ->
     
     # flash the "choose language" link when .disabled tab clicked
     @submenu.find('.nav li.disabled').click ->
-      $('#choose_lang').flash navbarLinkBackgroundActive
+      $('#choose_lang').flash "flash-navbar"
     
     # make #choose_lang link open the dropdown
     $('#choose_lang').click (e) =>
@@ -69,21 +67,26 @@ apply_column_filter = ($dt, $button_group, event = null) ->
     
     # Coding frame index numbers: setup hover and click handlers for highlighting
     @index_numbers          = $(".coding_frame:not(.in-table) .idx-no.free")
-    @index_numbers_in_table = $("tr, th, td").filter("[data-idx-no]")
-    @index_numbers_in_table.add(@index_numbers).hover((e) =>
-      n = $(e.target).closest("[data-idx-no]").data('idx-no')
+    @index_numbers_in_table = $("tr, th, td").filter "[data-idx-no]"
+    @index_numbers.add(@index_numbers_in_table).hover((e) =>
+      $target = $(e.target)
+      $number = $target.closest "[data-idx-no]"
+      n = $number.data 'idx-no'
       @index_numbers.filter("[data-idx-no=#{n}]").addClass "label"
-      @index_numbers_in_table.filter("tr[data-idx-no=#{n}]").addClass "outline"
-    , (e) =>
+      if $target.is $number
+        $("tr[data-idx-no=#{n}]").addClass "outline"
+      else
+        $number.find('th').addClass "outline"
+    ,(e) =>
       @index_numbers.removeClass "label"
-      @index_numbers_in_table.removeClass "outline"
+      @index_numbers_in_table.removeClass("outline").find('th').removeClass('outline')
     ).click (e)=>
       $target = $(e.target)
-      n = $target.closest("[data-idx-no]").data('idx-no')
-      if $target.is('.idx-no')
+      n = $target.closest("[data-idx-no]").data 'idx-no'
+      if $target.is '.idx-no'
         @index_numbers_in_table.filter("th[data-idx-no=#{n}]").flash()
       else
-        @index_numbers.filter("[data-idx-no=#{n}]").flash('green')
+        @index_numbers.filter("[data-idx-no=#{n}]").flash 'flash-green'
     
     
     

@@ -34,7 +34,7 @@
       not specified
     <% end %>
 
-		<% if (s = @verb.simplex_or_complex) != "Unknown" %>
+		<% if ["Simplex", "Complex"].include? (s = @verb.simplex_or_complex) %>
 			<%= s %> verb
 		<% end %>
   </div><!-- end of span4 -->
@@ -56,14 +56,14 @@
 <div class="new row">
 
 	<!-- INDEX#, Microroles, Coding sets, Argument types -->
-	<div class="span<%= meanings.size + 6 %>">
+	<div class="span12">
     <h2>
       Verb <%= "meaning".pluralize meanings.size %>,
       Microroles, Coding&nbsp;sets and Argument&nbsp;types
     </h2>
     <% if cframe %>
       <% arguments = cframe.index_numbers_eager_load %>
-      <table class="table table-bordered-sharp">
+      <table class="table table-bordered-sharp" style="max-width:<%= 390+120*meanings.size %>px;">
         <thead>
           <tr>
             <th class="digit bg-cf">#</th>
@@ -73,12 +73,13 @@
               </th>
             <% end %>
             <th class="bg-cs">Coding set</th>
-            <th>Argument type</th>
+            <th style="max-width:50px;">Argument type</th>
           </tr>
         </thead><tbody>
         <% arguments.each do |arg| # arg is a Coding frame index number %>
-          <tr data-idx-no="<%= arg.index_number %>">
-            <th class="digit bg-cf"><%= arg.index_number %></th>
+				<% n = arg.index_number %>
+          <tr data-idx-no="<%= n %>">
+            <th class="digit bg-cf"><%= n %></th>
             <% meanings.each do |m| %>
             <% microrole = arg.microroles.where_meaning(m)[0] %>
               <td class="bg-mr"><%= link_to microrole, microrole %></td>

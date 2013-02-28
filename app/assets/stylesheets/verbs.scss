@@ -20,7 +20,7 @@ th {
 	}
 }
 
-tr {
+tr, th {
   @include transition(outline linear .2s);
   &.outline {
     outline:2px solid $tableBorder;

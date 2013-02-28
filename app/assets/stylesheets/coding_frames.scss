@@ -20,12 +20,12 @@
       padding: 1px 4px 2px;
       @include border-radius(3px);
     }
+    &.label { // special behaviour here if needed
+      background-color:$navbarBackground;
+      @include transition(background-color .3s ease);
+    }
   }
   
-  .label { // special behaviour here if needed
-    background-color:$navbarBackground;
-    @include transition(background-color .3s ease);
-  }
 }
 
 .dataTable .mr + .mr {
