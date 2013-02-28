@@ -30,8 +30,22 @@
   </div>
 </div>
 <div class="row">
-  <div class="span12">
-    <h2>Verb forms <span class="badge"><%= @meaning.verbs.size %></span></h2>
+  <div class="span12 dt-with-filters">
+    <h2>Verb forms <span class="badge"><%= @verbs.size %></span></h2>
+
+    <div class="form-inline dt-filters"><!-- filters for dataTable -->
+      <label>Show Verb forms with:</label>
+      <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="arg_count">
+			<% @arg_counts.each do |n| %>
+        <button class="btn btn-mini"><%= n %></button>
+			<% end %>
+      </div> participants in basic Coding frame
+      <div class="btn-group">
+        <a class="btn btn-mini clear-filters">
+					<i class="icon-remove"></i> Clear filters
+        </a>
+      </div>
+    </div><!-- end .dt-filters-->
 
     <table id="verbs_list" class="table table-striped table-bordered-sharp table-hover dataTable">
       <thead>
@@ -41,11 +55,12 @@
           <th class="hidden-col">family</th>
           <th>Verb form</th>
           <th>Basic Coding frame</th>
+					<th class="hidden-col">arg_count</th>
         </tr>
       </thead>
 
       <tbody>
-        <% @meaning.verbs.each do |v| %>
+        <% @verbs.each do |v| %>
           <% lang = v.language; cf = v.coding_frame %>
           <% next unless lang #this isn't really necessary but there are test records %>
           <tr>
@@ -53,7 +68,8 @@
             <td><%= lang.region %></td>
             <td><%= lang.family %></td>
             <td><%= link_to v,  [lang, v ], class: 'object-language' %></td>
-            <td><%= render_cf(cf, link: true, language: lang, css_class: 'in-table') unless cf.nil? || cf.to_s.blank? %></td>
+            <td><%= render_cf(cf, link: true, language: lang, css_class: 'in-table') unless cf.nil? || cf.coding_frame_schema.blank? %></td>
+						<td><%= cf.arg_count unless cf.nil? || cf.coding_frame_schema.blank? %></td>
           </tr>
         <% end %>
       </tbody>
