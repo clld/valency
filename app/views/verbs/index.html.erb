@@ -8,9 +8,7 @@
   <thead>
     <tr>
       <th>Verb form</th>
-      <% if @orig_script %>
-        <th>Original script</th>
-      <% end %>
+      <th class="<%= 'hidden-col' unless @orig_script %>">Original script</th>
       <th>Verb meanings</th>
       <th>Basic Coding frame</th>
     </tr>
@@ -24,16 +22,13 @@
       <%= link_to verb, [@language, verb] %>
     </td>
 
-	  <% if @orig_script %>
-    	<td><%= verb.original_script %></td>
-	  <% end %>
+   	<td><%= verb.original_script if @orig_script %></td>
 
     <td><%= meaning_list(verb) %></td>
 
     <td>
       <% unless cf.to_s.blank? %>
-        <span class="hidden"><%= cf.arg_count %></span>
-        <%= link_to(cf, [@language, cf]) %>
+        <%= render_cf(cf, link: true, css_class: 'in-table') %>
       <% end %>
     </td>
 

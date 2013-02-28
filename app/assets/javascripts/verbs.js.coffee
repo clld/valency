@@ -88,6 +88,14 @@ oDTSettings =
 			{
 				sDom: "<'row'<'span4'i><'span8'f>>tS"
 				sScrollY: "700px"
+				aoColumnDefs: [
+				  {
+            aTargets:[3] # Coding frame
+            sType: "html"
+            asSorting: ['asc','desc']
+            mDataProp: ns.coding_frame_sorter(3)
+				  }
+				]
 			}
 		)
 	

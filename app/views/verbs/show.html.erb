@@ -33,6 +33,10 @@
     <% else %>
       not specified
     <% end %>
+
+		<% if (s = @verb.simplex_or_complex) != "Unknown" %>
+			<%= s %> verb
+		<% end %>
   </div><!-- end of span4 -->
   
   <!-- EXAMPLES --><div class="span8">

@@ -1,6 +1,6 @@
 class Verb < ActiveRecord::Base
   self.primary_key = :id
-  # attr_accessible :comment, :id, :original_script, :verb_form, :language_id, :coding_frame_id
+  # attr_accessible :comment, :id, :original_script, :verb_form, :language_id, :coding_frame_id, :simplex_or_complex
 
   validates_presence_of :verb_form, :on => :create, :message => "can't be blank"
 
