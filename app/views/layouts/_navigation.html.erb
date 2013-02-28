@@ -79,7 +79,7 @@
     <!-- Verb forms dropdown (w/ meanings) -->			  
     <li class="dropdown<%= ' active' if controller_name == 'verbs' %>" id="verb_dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        Verb forms <b class="caret"></b>
+        Verb forms <%="(#{@meaning.to_s})" if @meaning %><b class="caret"></b>
       </a>
       <ul class="dropdown-menu hover-items">
         <div class="caption">
