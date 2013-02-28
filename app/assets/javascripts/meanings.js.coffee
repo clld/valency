@@ -28,7 +28,13 @@ oDTSettings_index =
 	aaSorting: [[2, 'asc']]# sort by meaning number
 
 oDTSettings_show = 
-	sDom: "<'row'<'span4'i><'span8'f>>t"  
+	sDom: "<'row'<'span4'i><'span8'f>>t"
+	aoColumnDefs: [
+    aTargets:[4] # Coding frame
+    sType: "html"
+    mDataProp: ns.coding_frame_sorter(4)
+	]
+	aaSorting: [[4,'asc'],[0,'asc']] # By Coding frame then Language
 
 @VALENCY.meanings =
   init: ->

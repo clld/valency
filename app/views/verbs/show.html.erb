@@ -155,44 +155,45 @@
       </thead>
       <tbody>
       <% avs.each do |av| %>
-      <% altn, dcf, exs = av.alternation, av.derived_coding_frame, av.examples %>
-      <%= content_tag_for(:tr, altn) do %>
-        <td>
-          <div class="cell">
-            <%= render partial: 'alternations/cu_label', locals: {alternation: altn} %>
-          </div>
-          <div class="cell">
-            <%= link_to raw(altn), [@language, altn] %>
-            <% if altn.description %>
-            <a rel="popover" class="btn btn-mini" title="<%= altn.name %>"
-               data-content="<%= altn.description %>">more info</a>
-            <% end %>
-          </div>
-        </td>
+	      <% altn, dcf, exs = av.alternation, av.derived_coding_frame, av.examples %>
+				<% next unless altn %>
+	      <%= content_tag_for(:tr, altn) do %>
+	        <td>
+	          <div class="cell">
+	            <%= render partial: 'alternations/cu_label', locals: {alternation: altn} %>
+	          </div>
+	          <div class="cell">
+	            <%= link_to raw(altn), [@language, altn] %>
+	            <% if altn.description %>
+	            <a rel="popover" class="btn btn-mini" title="<%= altn.name %>"
+	               data-content="<%= altn.description %>">more info</a>
+	            <% end %>
+	          </div>
+	        </td>
 
-        <td class="center"><%= value_label av %></td>
+	        <td class="center"><%= value_label av %></td>
 
-        <td><%= raw av.comment %></td>
+	        <td><%= raw av.comment %></td>
 
-        <td><%= altn.coded_y_n %></td>
+	        <td><%= altn.coded_y_n %></td>
 
-        <td><% unless dcf.nil? %>
-              <%= render_cf dcf, link: true %>
-            <% end %>
-        </td>
+	        <td><% unless dcf.nil? %>
+	              <%= render_cf dcf, link: true %>
+	            <% end %>
+	        </td>
 
-        <td>
-          <% if exs.size > 0 %>
-            <div class="examples-container">
-              <% example_options = {class: 'in-table', wrap: true, gloss: false} %>
-              <% exs.each do |ex| %>
-                <%= render_example ex, example_options %>
-              <% end %>
-            </div>
-          <% end %>
-        </td>
+	        <td>
+	          <% if exs.size > 0 %>
+	            <div class="examples-container">
+	              <% example_options = {class: 'in-table', wrap: true, gloss: false} %>
+	              <% exs.each do |ex| %>
+	                <%= render_example ex, example_options %>
+	              <% end %>
+	            </div>
+	          <% end %>
+	        </td>
 
-      <% end %>
+	      <% end %>
       <% end %>
     </tbody>
     </table>

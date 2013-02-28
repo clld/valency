@@ -53,7 +53,7 @@
             <td><%= lang.region %></td>
             <td><%= lang.family %></td>
             <td><%= link_to v,  [lang, v ], class: 'object-language' %></td>
-            <td><%= link_to cf, [lang, cf] unless cf.nil? || cf.to_s.blank? %></td>
+            <td><%= render_cf(cf, link: true, language: lang, css_class: 'in-table') unless cf.nil? || cf.to_s.blank? %></td>
           </tr>
         <% end %>
       </tbody>
