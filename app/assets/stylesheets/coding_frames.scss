@@ -31,3 +31,18 @@
 .dataTable .mr + .mr {
   border-left:none;
 }
+
+.triangle-left { /* left-pointing triangle shape */
+  width: 0;
+  height: 0;
+  border-top: 30px solid transparent;
+  border-right: 30px solid $grayLight;
+  border-bottom: 30px solid transparent;
+}
+.triangle-right { /* right-pointing triangle shape */
+  width: 0;
+  height: 0;
+  border-top: 30px solid transparent;
+  border-left: 30px solid $grayLight;
+  border-bottom: 30px solid transparent;
+}

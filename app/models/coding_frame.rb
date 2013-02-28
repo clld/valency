@@ -48,7 +48,7 @@ class CodingFrame < ActiveRecord::Base
     self.coding_frame_index_numbers.includes(
       :argument_type, :coding_set, :microroles
     )
-  end  
+  end
   
   # return true if the coding frame is derived
   def derived?
@@ -80,6 +80,15 @@ class CodingFrame < ActiveRecord::Base
     # Meanings will be ordered by meaning label (default scope in meaning.rb)
     mm = Meaning.joins(:verbs).where('verbs.coding_frame_id' => self[:id]).uniq
     mm.map{|m| [m, m.verbs & self.verbs]}
+  end
+  
+  # query database for coding frames related to this one via alternations
+  def get_related_coding_frames
+    if derived? 
+      nil
+    else
+      nil
+    end
   end
 
 end

@@ -29,6 +29,7 @@ class VerbsController < ApplicationController
     @examples_of_cf = @verb.examples_of_coding_frame
     # @examples_other = @verb.examples - @examples_of_cf
     @gloss_abbr = @language.gloss_meanings_hash
+    @alternation_values = @verb.alternation_values.includes(:alternation, :derived_coding_frame, :examples)
 
     respond_to do |format|
       format.html # show.html.erb
