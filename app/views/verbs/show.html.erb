@@ -4,46 +4,51 @@
 <div class="row">
   <div class="span12">
     <h1 class="pull-left">
-    	<span class="object-language" id="<%= dom_id(@verb) %>"><%= @verb %></span>
-    	<% if @verb.original_script %>
-    		<small><%= "(#{@verb.original_script})" %></small>
-    	<% end %>
+      <span class="object-language" id="<%= dom_id(@verb) %>"><%= @verb %></span>
+      <% if @verb.original_script %>
+        <small><%= "(#{@verb.original_script})" %></small>
+      <% end %>
     </h1>
-		<form class="form-inline pull-left with-heading">
-	    <% if @verb.comment %>
-				<a class="btn btn-mini toggle-next">show comment</a>
-				<div class="comment"><p class="box"><%= raw @verb.comment %></p></div>
-	    <% end %>
-			<% if @synonyms && @synonyms.size > 0 %>
-				<span>
-					<%= pluralize(@synonyms.size, "other Verb form") %>
-					for meaning "<%= @meaning.to_s %>": <%= verb_list(@synonyms, as_links = true, meaning = @meaning) %>
-				</span>
-			<% end %>
-		</form>
+    <form class="form-inline pull-left with-heading">
+      <% if @verb.comment %>
+        <a class="btn btn-mini toggle-next">show comment</a>
+        <div class="comment"><p class="box"><%= raw @verb.comment %></p></div>
+      <% end %>
+      <% if @synonyms && @synonyms.size > 0 %>
+        <span>
+          <%= pluralize(@synonyms.size, "other Verb form") %>
+          for meaning "<%= @meaning.to_s %>": <%= verb_list(@synonyms, as_links = true, meaning = @meaning) %>
+        </span>
+      <% end %>
+    </form>
 
-	</div>
+  </div>
 </div>
 
 <div class="row">
 	<!-- CODING FRAME --><div class="span4">
-    <h2>Coding frame</h2>
+    <h2>Coding frame</h2> 
 		<% if cframe %>
     	<%= render_cf(cframe, link: true, css_class: "padded-box bg-cf big") if cframe %>
     <% else %>
       not specified
     <% end %>
 
-		<% if ["Simplex", "Complex"].include? (s = @verb.simplex_or_complex) %>
-			<%= s %> verb
-		<% end %>
+    <% if ["Simplex", "Complex"].include? (s = @verb.simplex_or_complex) %>
+      <div><%= s %> Verb form</div>
+    <% end %>
+    <% unless (vt = @verb.verb_type).blank? %>
+      <div>Verb type: <%= vt %></div> 
+    <% end %>
+    
+		
   </div><!-- end of span4 -->
   
   <!-- EXAMPLES --><div class="span8">
     <h2>
 			<% if @examples_of_cf.size > 0 %>
 				<%= 'Example'.pluralize(@examples_of_cf.size) %>
-				<small>with basic Coding frame</small>
+        <small>with basic Coding frame</small>
 			<% else %>
 			  <small>no examples with basic Coding frame</small>
 			<% end %>

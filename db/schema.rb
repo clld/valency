@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228062851) do
+ActiveRecord::Schema.define(:version => 20130228134922) do
 
   create_table "alternation_values", :id => false, :force => true do |t|
     t.integer "verb_id"
@@ -284,6 +284,7 @@ ActiveRecord::Schema.define(:version => 20130228062851) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.string   "simplex_or_complex"
+    t.string   "verb_type"
   end
 
   add_index "verbs", ["coding_frame_id"], :name => "index_verbs_on_coding_frame_id"

@@ -45,8 +45,8 @@ class FieldFinder
       CodingFrameExample        => "Verb_coding_frame_examples (table)",
       CodingFrameIndexNumbersMicrorole => "Coding_frame_Microrole_index_numbers (table)"
     }
-    # this hash maps a model to a hash from property name to field name
-    @special_field_name = { # field names must be in lowercase!
+    # this hash maps a model to a hash from property name to FileMaker field name
+    @special_field_name = { # FileMaker field names must be in lowercase!
       Alternation => {
         'coding_frames_text' => 'coding_frames_of_alternation',
         'complexity'         => 'simplex_or_complex'
@@ -60,7 +60,7 @@ class FieldFinder
       Meaning => {
         'meaning_list' => 'z_calc_meaning_list_core_extended_new_or_old'
       },
-      Language    => {
+      Language=> {
         'name_for_url' => 'z_calc_language_name_for_url'
       },
       CodingFrame => {
@@ -70,6 +70,9 @@ class FieldFinder
         'email'       => 'email_address',
         'affiliation' => 'academic affiliation',
         'photo_url'   => 'photo url'
+      },
+      Verb => {
+        'verb_type'   => 'v_type'
       }
     }
   end
