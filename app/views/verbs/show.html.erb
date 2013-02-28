@@ -46,14 +46,15 @@
   
   <!-- EXAMPLES --><div class="span8">
     <h2>
-			<% if @examples_of_cf.size > 0 %>
-				<%= 'Example'.pluralize(@examples_of_cf.size) %>
-        <small>with basic Coding frame</small>
+			<% if @examples.size > 0 %>
+				<%= 'Example'.pluralize(@examples.size) %>
 			<% else %>
-			  <small>no examples with basic Coding frame</small>
+			  <small>no examples given</small>
 			<% end %>
 		</h2>
-		<%= render partial: 'examples', object: @examples_of_cf %>
+		<% divide = @exs_of_cf.size if @exs_of_cf.size < @examples.size %>
+		<%= render partial: 'examples', object: @examples,
+		  locals: {divide: divide, options: {number_as_link: true}} %>
   </div>
 
 </div>
@@ -189,14 +190,8 @@
 	        </td>
 
 	        <td>
-	          <% if exs.size > 0 %>
-	            <div class="examples-container">
-	              <% example_options = {class: 'in-table', wrap: true, gloss: false} %>
-	              <% exs.each do |ex| %>
-	                <%= render_example ex, example_options %>
-	              <% end %>
-	            </div>
-	          <% end %>
+            <% opts = {class: 'in-table', wrap: true, gloss: false} %>
+        		<%= render partial: 'examples', object: exs, locals: {options: opts} %>
 	        </td>
 
 	      <% end %>

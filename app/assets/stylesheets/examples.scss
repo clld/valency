@@ -6,10 +6,32 @@ span.sc { // small caps
 	font-variant:small-caps;
 }
 
-
 // example div (contains everything from ex. number to interlinear glossed text)
 .examples-container {
 	display:table;
+	.divider {
+	  border:1px solid black;
+	}
+	
+/* need to somehow emulate an empty display:table-row like this, otherwise separator won't be shown at all:
+<div class="example" style="border: 2px solid black;height: 1px;z-index: 40000;">
+<div style="
+    background-color: black;
+    display: table-cell;
+    height: 2px;
+    padding: 0;
+    margin: 0;"
+></div>
+<div style="
+    background-color: black;
+    display: table-cell;
+    height: 1px;
+    padding: 0;
+    margin: 0;"
+></div>
+</div>
+
+*/
 }
 .example {
   display:table-row;

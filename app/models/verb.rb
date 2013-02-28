@@ -15,6 +15,7 @@ class Verb < ActiveRecord::Base
 
   has_many :coding_frame_examples
   has_many :examples_of_coding_frame, :through => :coding_frame_examples, :source => :example
+  has_many :examples_of_alternations, :through => :alternation_values,    :source => :examples
 
   has_many :verb_coding_frame_microroles
   has_many :microroles, :through => :verb_coding_frame_microroles

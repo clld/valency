@@ -1,5 +1,24 @@
-<div class="examples-container">
-  <% examples.each do |ex| %>
-    <%= render_example(ex, number_as_link: true) %>
+<% # render a bunch of examples using the render_example helper %>
+<% if examples.size > 0 %>
+  <% opts = (defined? options) ? options : {} %>
+
+  <% sep = (defined? divide) && divide || 0 %>
+
+  <% parts = examples[0...sep], examples[sep..-1] %>
+  <% parts.map! do |part| %>
+    <% capture do %>
+      <% part.each do |ex| %>
+        <%= render_example(ex, opts) %>
+      <% end %>
+    <% end %>    
   <% end %>
-</div>
+  
+  <div class="examples-container">
+    <%= parts[0] %>
+    <% if sep > 0 %>
+      <div class="divider"/></div>
+    <% end %>
+    <%= parts[1] %>
+  </div>
+            
+<% end %>
