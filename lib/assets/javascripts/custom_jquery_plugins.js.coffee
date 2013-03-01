@@ -61,12 +61,13 @@
 		
 	# shows only the first (@arg max) elements of the collection. Wraps the remaining ones
 	# in a hidden <div> and includes a link to toggle it. The link gives the number of
-	# hidden items
+	# hidden items having the same tag name as the first item of the collection
 	$.fn.show_first = (max=1, css_class='', wrapper=null) ->
-		return this unless max < @length
+		count = this.filter(this[0].tagName).length
+		return this unless max < count
 		$parent = this.parent() # container of all the elements
 		$rest = @slice(max).hide()
-		[text_show, text_hide] = ["show #{$rest.length} more…", "show less"]
+		[text_show, text_hide] = ["show #{count - max} more…", "show less"]
 		$link = $("<a class='#{css_class}'/>").text(text_show).click ->
 			$rest.each -> $(this).fadeToggle 300, ->
 				$link.text(if $rest.last().is ':visible' then text_hide else text_show)

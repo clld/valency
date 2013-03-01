@@ -62,7 +62,7 @@ apply_column_filter = ($dt, $button_group, event = null) ->
     # show tooltip on Example glosses
     $('.ttip').tooltip({
       placement: 'bottom'
-      delay: {hide: 300}
+      delay: {hide: 60}
     })
     
     # Coding frame index numbers: setup hover and click handlers for highlighting

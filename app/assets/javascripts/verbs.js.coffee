@@ -23,9 +23,10 @@ padWithZeros = (num, max_len) ->
 sort_by_example_number = (iCol) ->
 	(src, type, val) ->
 		if type is 'sort'
-			return 'zzz' unless src[iCol]
-			num = parseInt $(src[iCol]).find('.number').first?().text?().replace?(/\D/g,''), 10
-			padWithZeros (num or 9999), 6
+			return max unless src[iCol]
+			text = $(src[iCol]).text()
+			num = parseInt(text.match(/\d+/)[0]) if /\d+/.test(text)
+			padWithZeros (num or 99999), 6
 		else
 			if type is 'set' then src[iCol] = val else src[iCol]
 	
@@ -34,8 +35,7 @@ sort_by_example_number = (iCol) ->
 sort_by_altn_name = (iCol) ->
 	(src, type, val) ->
 		if type is 'sort'
-			return 'zzz' unless src[iCol]
-			console.log($(src[iCol]).find('span:not(.label)').text())
+			return max unless src[iCol]
 			$(src[iCol]).find(':not(.label)').text?()
 		else
 			if type is 'set' then src[iCol] = val else src[iCol]

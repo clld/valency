@@ -9,42 +9,26 @@ span.sc { // small caps
 // example div (contains everything from ex. number to interlinear glossed text)
 .examples-container {
 	display:table;
-	.divider {
-	  border:1px solid black;
-	}
-	
-/* need to somehow emulate an empty display:table-row like this, otherwise separator won't be shown at all:
-<div class="example" style="border: 2px solid black;height: 1px;z-index: 40000;">
-<div style="
-    background-color: black;
-    display: table-cell;
-    height: 2px;
-    padding: 0;
-    margin: 0;"
-></div>
-<div style="
-    background-color: black;
-    display: table-cell;
-    height: 1px;
-    padding: 0;
-    margin: 0;"
-></div>
-</div>
 
-*/
+	.divider { // the divider is invisible because of display:table
+	  margin:0;
+	  & + .example {
+      .number, .body {
+  	    padding-top:1em;
+        border-top:1px solid $tableBorder;
+      }
+	  }
+  }
+  .example:not(:last-child) .body {
+    padding-bottom:1em;
+  }
 }
 .example {
   display:table-row;
-  .body {
+  .number, .body {
     display:table-cell;
-  }
-  & + div {
-    .body {
-      padding-top:1em;
-    }
   }
   .number {
-    display:table-cell;
     padding-right:12px;
   }
   
@@ -52,10 +36,8 @@ span.sc { // small caps
     .number {
       padding-right:6px;
     }
-    & + div {
-      .body {
-        padding-top:0.5em;
-      }
+    &:not(:last-child) .body {
+      padding-bottom:0.5em;
     }
   }
   // a gloss unit is a div with two vertically stacked divs
