@@ -38,7 +38,7 @@
 						<% @cf_index_numbers.each do |cfin| %>
 							<% n  = cfin.index_number %>
 							<% mr = cf.microrole_for(m, cfin) %>
-							<td data-idx-no="<%= n %>" class="mr"><%= link_to mr, mr %></td>
+							<td data-idx-no="<%= n %>" class="mr"><%= link_to mr, mr unless mr.nil? || mr.name.blank? %></td>
 						<% end %>
         
 		      </tr>

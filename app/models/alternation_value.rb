@@ -14,7 +14,7 @@ class AlternationValue < ActiveRecord::Base
   
   validates_uniqueness_of :verb_id, scope: :alternation_id
   
-  # return "No data" for other values
+  # return "No data" for other values, nil if empty
   def occurs
     if (val = self.alternation_occurs)
       val.capitalize!

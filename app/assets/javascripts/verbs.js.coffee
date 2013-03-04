@@ -4,15 +4,13 @@
 ns	= @VALENCY.global
 max = $.fn.dataTableExt.oApi.MAX
 
-sort_order =
-	'R' : 'A'
-	'M' : 'B'
-	'N' : 'C'
+sort_by_data_attr = (iCol) -> # sort by the text of the rel="sort" child
+	(src, type, val) ->
+		if type is 'sort'
+			$(src[iCol]).first().data('sort') || max
+		else
+			if type is 'set' then src[iCol] = val else src[iCol]
 
-altn_occurs_sort_order = (html) ->
-	html = html.replace(/[\n\s]/g,'').replace(/<.*?>/g,'')
-	sort_order[html] or max
-	
 # pad an integer with zeros from left to make a string like 000123 
 # source: http://stackoverflow.com/a/7254108/1030985
 padWithZeros = (num, max_len) ->
@@ -53,9 +51,7 @@ oDTSettings =
 		},{
 			aTargets: [1] # column 1: Occurs
 			sWidth	: '1%'
-			mDataProp: ( src, type, val ) ->
-				return altn_occurs_sort_order(src[1]) if type is 'sort'
-				if type is 'set' then src[1] = val else src[1]
+			mDataProp: sort_by_data_attr(1)
 		},{
 			aTargets: [0] # alternation name
 			sWidth	: "33%"
@@ -100,17 +96,17 @@ oDTSettings =
 		$('.examples-container').each -> 
 			$(this).children().show_first(1, 'btn btn-mini')
 		
-		$dt = $('#av_list').dataTable $.extend(
-			ns.oDTSettings, oDTSettings)
-		
-		$dt.sortEmptyLast('examples', 'comment')
-		
-		# sort examples in dataTable by example number
-		$dt.setCustomSortFunction 'examples', sort_by_example_number
-		$dt.setCustomSortFunction 'alternation name', sort_by_altn_name
+		if $('#av_list').length > 0
+			$dt = $('#av_list').dataTable $.extend(ns.oDTSettings, oDTSettings)
+			$dt.sortEmptyLast('examples', 'comment')
+			
+			# sort examples in dataTable by example number
+			$dt.setCustomSortFunction 'examples', sort_by_example_number
+			$dt.setCustomSortFunction 'alternation name', sort_by_altn_name
 		
 		# initialize popover for Alternation names
-		$('.cell a[rel="popover"]').popover {placement: 'right'}
+		$('.cell a[rel="popover"]').popover({placement: 'right'}).click ->
+			$('.cell a[rel="popover"]').not(this).popover 'hide'
 		
 		# set up hover highlighting for Coding frame index numbers
 		$(".coding_frame.padded-box:not(.no-hover) .idx-no.free").hover ->
