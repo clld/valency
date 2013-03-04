@@ -1,23 +1,20 @@
 /*** styles for verbs layouts ***/
 
 // styles for the coding frame index number info table
-td, th {
-	&.digit {
+th {
+	&.idx-no { /* index number in th */
 		width: 1em;
 		text-align: center;
+		background-color:$bg-cf;
 	}
 }
-
-td {
-	&.bg-mr {
-		width: 8em; // don't let microrole columns get too wide
-	}
-}
-
-th {
-	&.bg-cs {
-		background-color: $bg-cs-darker;
-	}
+td, th {
+  &.meaning, &.microrole {
+    background-color: $bg-me;
+  }
+  &.coding-set {
+    background-color: $bg-cs;    
+  }	  
 }
 
 tr, th {

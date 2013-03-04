@@ -19,7 +19,7 @@ span.sc { // small caps
       }
 	  }
   }
-  .example:not(:last-child) .body {
+  & > .example:not(:last-child) .body {
     padding-bottom:1em;
   }
 }
@@ -30,15 +30,6 @@ span.sc { // small caps
   }
   .number {
     padding-right:12px;
-  }
-  
-  &.in-table { // make paddings smaller when inside a table
-    .number {
-      padding-right:6px;
-    }
-    &:not(:last-child) .body {
-      padding-bottom:0.5em;
-    }
   }
   // a gloss unit is a div with two vertically stacked divs
   // should only occur within a div.gloss-box
@@ -61,3 +52,11 @@ span.sc { // small caps
   }
 }
 
+td .examples-container > .example { /* make paddings smaller when inside a table */
+  .number {
+    padding-right:6px;
+  }
+  &:not(:last-child) .body {
+    padding-bottom:0.5em;
+  }
+}

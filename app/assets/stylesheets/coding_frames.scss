@@ -7,25 +7,38 @@
 .coding_frame {
   a {
     text-decoration:none; // don't underline
+		&.nan { // not a number: Coding frame does not start with a number
+			padding-left:4px; // fix the left padding to align with the numbers
+		}
   }
   b { // the V is also inside <b>
     // deactivate font-weight:bold if required
   }
+	span {
+		white-space: nowrap; // prevent line breaks inside () and []
+	}
   .idx-no { /* this styles mimic Bootstrap's .label */
     font-size: 84.6%; // relative instead of absolute size
     font-weight: bold;
-    cursor:default;
+    display:inline-block;
+    width:8px;
+    line-height:14px;
     /* line-height: 100%; */ // enable if needed
     &.free { /* look like .label when outside of [] */
       padding: 1px 4px 2px;
       @include border-radius(3px);
+			border-bottom: none;
     }
-    &.label { // special behaviour here if needed
+    &.label, &.highlight { // special behaviour here if needed
       background-color:$navbarBackground;
+      color: $white;
+      text-shadow: 0 -1px 0 rgba(0,0,0,.25);
       @include transition(background-color .3s ease);
     }
   }
-  
+  &.padded-box {
+    background-color:$bg-cf;
+  }
 }
 
 .dataTable .mr + .mr {

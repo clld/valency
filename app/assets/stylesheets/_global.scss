@@ -204,10 +204,6 @@ form.with-heading {
 .object-language { font-style:italic; }
 
 /* utility classes: colors */
-.bg-me { background-color:$bg-me; }
-.bg-mr { background-color:$bg-me; }
-.bg-cf { background-color:$bg-cf; }
-.bg-cs { background-color:lighten($bg-cs,6%); }
 /* for highlighting, needed for jQuery .flash() plugin */
 .flash-green { background-color:#00ff80 !important; }
 .flash-yellow{ background-color:yellow  !important; }
@@ -239,10 +235,10 @@ div.inline{
 
 
 /* link without href: style like regular link */
-// TODO check if anything uses this: if not, remove
-a.no-href {
+a:not([href]) {
 	&:hover {
-		cursor: pointer;
+		color:  inherit;
+		cursor: default;
 	}
 }
 
