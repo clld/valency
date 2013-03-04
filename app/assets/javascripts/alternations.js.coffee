@@ -48,7 +48,6 @@ oDTSettings_show =
     },{
       aTargets:[4, 5]
       sWidth: '30%'
-      asSorting:['desc']
     },{
       aTargets:[0] # Meaning
       sWidth: '5%'
@@ -57,6 +56,7 @@ oDTSettings_show =
       sWidth: '10%'
     },{
       aTargets:[2] # occurs
+      mDataProp: ns.sort_by_data_attr(2)
       sWidth: '5%'
     }
   ]
@@ -69,13 +69,13 @@ oDTSettings_show =
   
   index: ->
     $altn_list = $('#altn_list')
-    $dt        = $altn_list.dataTable $.extend ns.oDTSettings, oDTSettings_index
+    $dt        = $altn_list.dataTable $.extend true, ns.oDTSettings, oDTSettings_index
     $dt.setCustomSortFunction 'alternation name', sort_by_altn_name
     $dt.sortEmptyLast 'description', 'examples'
     
   
   show: ->
     $av_list = $('#av_list')
-    $dt      = $av_list.dataTable $.extend ns.oDTSettings, oDTSettings_show
-    $dt.sortEmptyLast 'basic coding frame', 'derived coding frame'
+    $dt      = $av_list.dataTable $.extend true, ns.oDTSettings, oDTSettings_show
+    $dt.sortEmptyLast 'basic coding frame', 'derived coding frame' # this screws up handlers for CFIN highlighting!
   

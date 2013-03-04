@@ -17,8 +17,8 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 			$(sibling).val() || $(sibling).text().trim()
 		unless $btn.is '.active'
 			strings.push $btn.val() || $btn.text().trim()
-	# console.log "Filtering \"#{column}\" by \"#{strings.join '|'}\"" # DEBUG
-	$dt.filterColumn(column, strings.join '|')
+	# console.log "Filtering \"#{column}\" by \"(#{strings.join '|'})\"" # DEBUG
+	$dt.filterColumn(column, "(#{strings.join '|'})")
 
 
 # the global namespace: for shared initialization code
@@ -72,11 +72,7 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 		
 		@idx_no_all = $(idx_no_selector)
 		@idx_no_all.hover toggle_label
-		
-		# bind event handlers to dataTable (for sortable columns that replace the original)
-		# HTML content
-		$('.dataTable tbody').on('hover', idx_no_selector, toggle_label)
-				
+						
 		# global settings for dataTables. These are extended in the controllers' handlers
 		@oDTSettings =
 			bPaginate: false
@@ -131,9 +127,14 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 				# move the .dataTables_filter div into the .dt-filters div
 				$container.find('.dataTables_filter')
 					.detach().appendTo($container.find('.dt-filters'))					
-
+				
 				# don't allow body to shrink vertically when dataTable is filtered
 				$('body').css 'min-height', $('body').height()
+				
+				# bind event handlers to dataTable (for sortable columns that replace the original)
+				# HTML content
+				$('.dataTable tbody').on('hover', idx_no_selector, toggle_label)
+				
 			
 	
 	### store some shared functions to reuse in other JS files ###
@@ -146,6 +147,15 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 				return dtapi.MAX unless src[iCol]
 				$html = $(src[iCol])
 				$html.data('arg-count') + $html.text().trim().replace(/\s+/g,' ').substr(1)
+			else
+				if type is 'set' then src[iCol] = val else src[iCol]
+	
+	# returns a dataTable sorter function for any HTML whose first child has
+	# a data-sort attribute
+	sort_by_data_attr: (iCol) -> # sort by the data-sort of first child
+		(src, type, val) ->
+			if type is 'sort'
+				$(src[iCol]).first().data('sort') || dtapi.MAX
 			else
 				if type is 'set' then src[iCol] = val else src[iCol]
 	

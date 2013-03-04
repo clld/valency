@@ -39,6 +39,8 @@ oDTSettings_index =
 		
 		$('td.columns').each -> $(this).children().inColumns 3
 		
+		$(".idx-no.free").hover -> $(@).toggleClass 'label'
+		
 	
 	show: ->
 		$verb_list = $('#verb_list')
@@ -52,6 +54,7 @@ oDTSettings_index =
 			]
 			aaSorting: [[1, 'asc']]
 		})
+		$dt.sortEmptyLast(2,3,4,5)
 		
 		@index_numbers = $(".coding_frame:not(.no-hover) .idx-no.free")
 		@index_numbers.click ->

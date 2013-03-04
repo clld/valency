@@ -4,13 +4,6 @@
 ns	= @VALENCY.global
 max = $.fn.dataTableExt.oApi.MAX
 
-sort_by_data_attr = (iCol) -> # sort by the text of the rel="sort" child
-	(src, type, val) ->
-		if type is 'sort'
-			$(src[iCol]).first().data('sort') || max
-		else
-			if type is 'set' then src[iCol] = val else src[iCol]
-
 # pad an integer with zeros from left to make a string like 000123 
 # source: http://stackoverflow.com/a/7254108/1030985
 padWithZeros = (num, max_len) ->
@@ -51,7 +44,7 @@ oDTSettings =
 		},{
 			aTargets: [1] # column 1: Occurs
 			sWidth	: '1%'
-			mDataProp: sort_by_data_attr(1)
+			mDataProp: ns.sort_by_data_attr(1)
 		},{
 			aTargets: [0] # alternation name
 			sWidth	: "33%"

@@ -223,6 +223,9 @@ div.inline{
 	clear:both;
 	@include clearfix;
 }
+.no-break {
+	white-space: nowrap;
+}
 .cell {
 	display: table-cell;
 	&:first-child {

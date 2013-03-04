@@ -4,16 +4,18 @@
 </h1>
 
 <div class="row">
-  <div class="span4">
+  <div class="span6">
     <table class="table table-condensed table-horizontal">
       <tbody>
         <tr>
-          <td style="width:40%"> Microroles of <%= link_to @meaning, @meaning %></td>
+          <td style="width:40%">
+						Microroles of <br/> <%= link_to @meaning, @meaning, class: 'no-break' %>
+					</td>
           <td>
             <% @meaning.microroles.sort.each do |mr| %>
               <div>
                 <%= link_to_unless_current mr, mr do %>
-                <%= content_tag :strong, mr.name %>
+                	<%= content_tag :strong, mr.name %>
                 <% end %>
               </div>
             <% end %>
@@ -32,9 +34,29 @@
       and Verb forms <span class="badge"><%= @microrole.verb_count %></span>
     </h2>
     
-    <div class="form-inline dt-filters">
-      filters...
-    </div>
+    <div class="form-inline dt-filters"><!-- filters for dataTable -->
+
+      <label> Show: </label>
+	      <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="derived">
+	        <button class="btn btn-mini"> Basic </button>
+	        <button class="btn btn-mini"> Derived </button>
+	      </div> coding frames
+      
+      <label>with:</label>
+      <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="arg_count">
+				<% @arg_counts.each do |n| %>
+	        <button class="btn btn-mini"><%= n %></button>
+				<% end %>
+      </div> participants
+
+      <div class="btn-group">
+        <a class="btn btn-mini clear-filters">
+          <i class="icon-remove"></i> Clear filters
+        </a>
+      </div>
+
+    </div><!-- end .dt-filters-->
+
     <table class="table table-striped table-hover table-bordered-sharp dataTable">
       <thead>
         <th>Language</th>
@@ -68,7 +90,7 @@
           <td><%= link_to verb, [lang, verb], :class => 'object-language' %></td>
 
           <td>
-						<%= render_cf cf, link: true, tooltip:{n => @microrole.name}, highlight: [n] %>							
+						<%= render_cf cf, link: true, language: lang ,tooltip:{n => @microrole.name}, highlight: [n] %>							
 					</td>
           <td><%= cf.derived %></td>
           <td><%= cf.arg_count %></td>

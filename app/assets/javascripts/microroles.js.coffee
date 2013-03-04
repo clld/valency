@@ -46,5 +46,5 @@ oDTSettings_show =
 	
 	show: ->
 		$('.dataTable').dataTable $.extend ns.oDTSettings, oDTSettings_show
-		$dt.showColumns() # temporarily
-	
+		
+		$('.idx-no.free').hover -> $(@).toggleClass 'label'

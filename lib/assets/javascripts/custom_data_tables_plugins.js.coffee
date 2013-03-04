@@ -45,7 +45,7 @@
 			# call internal API method to update column options
 			oSettings.oApi._fnColumnOptions( oSettings, iCol, oColOpts )
 	
-	# filter a column by a regex pattern such as "this|that"
+	# filter a column by a regex pattern such as "(this|that)"
 	# @param mCol column index or title
 	# to reset all filters, use API plugin method fnFilterClear
 	api.filterColumn = (oSettings, mCol, sTerm, bRegex=true) ->

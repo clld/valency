@@ -20,10 +20,19 @@ class MicrorolesController < ApplicationController
       :verb => :language
     )
 
+    @arg_counts = @verb_cf_mr.map do |entry|
+      cf = entry.coding_frame
+      cf.arg_count unless cf.nil? || cf.coding_frame_schema.blank?
+    end
+    @arg_counts.uniq!
+    @arg_counts.keep_if{|x|x} # reject nil values
+    @arg_counts.sort!
+    
     mr_index_numbers = @microrole.coding_frame_index_numbers
     @index_number_for_cf = Hash[ @microrole.coding_frames.map do |cf|
       [cf, (cf.coding_frame_index_numbers & mr_index_numbers).uniq.first || nil]
     end ]
+    
     
 
     respond_to do |format|
