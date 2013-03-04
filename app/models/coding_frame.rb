@@ -55,12 +55,19 @@ class CodingFrame < ActiveRecord::Base
     self.derived == 'Derived'
   end
 
-  # Helper method. Gets the microrole for this CodingFrame
-  # given a Meaning and a CodingFrameIndexNumber.
+  # Helper method. Returns a Hash from CodingFrameIndexNumbers (ActiveRecord obj.)
+  # to Microroles (ActiveRecord obj.) given a Meaning
   # Only call if all associations are cached!
   # See coding_frames_controller#show
-  def microrole_for(m, idx_no)
-    (self.microroles.where_meaning(m) & idx_no.microroles).uniq.first
+  def idx_no_to_microrole(m)
+    pairs = self.coding_frame_index_numbers.map do |cfin|
+      mrole = cfin.microroles.where_meaning(m).uniq.first
+      unless (mrole.nil? || mrole.name.blank?)
+        [cfin, mrole]
+      end
+    end
+    pairs.keep_if{|x|x} # discard nil values
+    Hash[pairs]
   end
   
   # count the number of distinct arguments for sorting

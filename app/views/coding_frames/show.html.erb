@@ -30,6 +30,7 @@
     <tbody>
       <% @verbs.each do |v| %>
 				<% v.meanings.each do |m| %>
+				<% microrole_for_idx_no = m.cf_index_number_to_microrole(cf) %>
 		      <tr>
 		        <td><%= link_to v, [@language, v], class: 'object-language' %></td>
         
@@ -37,7 +38,7 @@
 		
 						<% @cf_index_numbers.each do |cfin| %>
 							<% n  = cfin.index_number %>
-							<% mr = cf.microrole_for(m, cfin) %>
+							<% mr = microrole_for_idx_no[cfin] %>
 							<td data-idx-no="<%= n %>" class="mr"><%= link_to mr, mr unless mr.nil? || mr.name.blank? %></td>
 						<% end %>
         
