@@ -29,7 +29,7 @@
 	<!-- CODING FRAME --><div class="span4">
     <h2>Coding frame</h2> 
 		<% if cframe %>
-    	<%= render_cf(cframe, link: true, css_class: "padded-box bg-cf big") if cframe %>
+    	<%= render_cf(cframe, link: true, css_class: "padded-box big") if cframe %>
     <% else %>
       not specified
     <% end %>
@@ -72,25 +72,25 @@
       <table class="table table-bordered-sharp" style="max-width:<%= 390+120*meanings.size %>px;">
         <thead>
           <tr>
-            <th class="digit bg-cf">#</th>
+            <th class="idx-no">#</th>
             <% meanings.each do |m| %>
-              <th class="bg-me">
+              <th class="meaning" style="width: 9em">
                 <%= link_to m, m %>
               </th>
             <% end %>
-            <th class="bg-cs">Coding set</th>
+            <th class="coding-set">Coding set</th>
             <th style="max-width:50px;">Argument type</th>
           </tr>
         </thead><tbody>
         <% arguments.each do |arg| # arg is a Coding frame index number %>
 				<% n = arg.index_number %>
           <tr data-idx-no="<%= n %>">
-            <th class="digit bg-cf"><%= n %></th>
+            <th class="idx-no"><%= n %></th>
             <% meanings.each do |m| %>
             <% microrole = arg.microroles.where_meaning(m)[0] %>
-              <td class="bg-mr"><%= link_to microrole, microrole %></td>
+              <td class="microrole"><%= link_to microrole, microrole %></td>
             <% end %>
-            <td class="bg-cs"><%= arg.coding_set %></td>
+            <td class="coding-set"><%= arg.coding_set %></td>
             <td><%= arg.argument_type %></td>
           </tr>
         <% end %>
@@ -190,7 +190,7 @@
 	        </td>
 
 	        <td>
-            <% opts = {class: 'in-table', wrap: true, gloss: false} %>
+            <% opts = {wrap: true, gloss: false} %>
         		<%= render partial: 'examples', object: exs, locals: {options: opts} %>
 	        </td>
 

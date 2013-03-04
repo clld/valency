@@ -29,4 +29,21 @@ class Meaning < ActiveRecord::Base
     self.role_frame.scan(/[A-Z]/).uniq.size if self.role_frame
   end
   
+  # Helper method. Returns a Hash from index numbers (as Integer) to
+  # Microrole names as String (or nil) given a CodingFrame
+  # Only call if all associations are cached!
+  # See meanings_controller#show
+  def idx_no_to_microrole_name(cf)
+    return {} if cf.to_s.blank?
+    pairs = cf.coding_frame_index_numbers.map do |cfin|
+      mrole = cfin.microroles.where_meaning(self).uniq.first
+      unless (mrole.nil? || mrole.name.blank?)
+        [cfin.index_number, mrole.name]
+      end
+    end
+    pairs.keep_if{|x|x} # discard nil values
+    Hash[pairs]
+  end
+  
+  
 end

@@ -68,7 +68,7 @@
           <td><%= link_to verb, [lang, verb], :class => 'object-language' %></td>
 
           <td>
-						<%= render_cf cf, :css_class => "in-table", link: true, tooltip:{n => @microrole.name}, highlight: [n] %>							
+						<%= render_cf cf, link: true, tooltip:{n => @microrole.name}, highlight: [n] %>							
 					</td>
           <td><%= cf.derived %></td>
           <td><%= cf.arg_count %></td>

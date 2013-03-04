@@ -22,9 +22,9 @@
   
     <label>Alternation occurs:</label>
     <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="occurs">
-      <button class="btn btn-mini btn-success" value="R">Regularly</button>
-      <button class="btn btn-mini btn-warning" value="M">Marginally</button>
-      <button class="btn btn-mini btn-danger" value="N">Never</button>
+      <button class="btn btn-mini btn-success">Regularly</button>
+      <button class="btn btn-mini btn-warning">Marginally</button>
+      <button class="btn btn-mini btn-danger" >Never</button>
     </div>
     <label>Only</label>
     <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="example">
@@ -86,10 +86,9 @@
             <td><%= basic_cf.arg_count if basic_cf %></td>
 
             <td>
-              <% if basic_cf %>
+              <% unless basic_cf.nil? || (basic_cf.coding_frame_schema).blank? %>
                 <div>
-                  <span class="hidden"><%= basic_cf.arg_count %></span>
-                  <%= link_to(raw(basic_cf), [@language, basic_cf]) %>
+                  <%= render_cf(basic_cf, link: true) %>
                 </div>
                 <% if basic_ex %>
                   <hr/>
@@ -101,10 +100,9 @@
             </td>
 
             <td>
-              <% if deriv_cf %>
+              <% unless deriv_cf.nil? || (deriv_cf.coding_frame_schema).blank? %>
                 <div>
-                  <span class="hidden"><%= deriv_cf.arg_count %></span>
-                  <%= link_to(raw(deriv_cf), [@language, deriv_cf]) %>
+                  <%= render_cf(deriv_cf, link: true) %>
                 </div>
                 <% if deriv_ex %>
                   <hr/>

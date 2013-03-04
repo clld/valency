@@ -1,7 +1,7 @@
 # JS for Verbs
 @VALENCY or= {}
 
-ns  = @VALENCY.global
+ns	= @VALENCY.global
 max = $.fn.dataTableExt.oApi.MAX
 
 sort_order =
@@ -10,8 +10,8 @@ sort_order =
 	'N' : 'C'
 
 altn_occurs_sort_order = (html) ->
-  html = html.replace(/[\n\s]/g,'').replace(/<.*?>/g,'')
-  sort_order[html] or max
+	html = html.replace(/[\n\s]/g,'').replace(/<.*?>/g,'')
+	sort_order[html] or max
 	
 # pad an integer with zeros from left to make a string like 000123 
 # source: http://stackoverflow.com/a/7254108/1030985
@@ -52,28 +52,26 @@ oDTSettings =
 			sType: "html"
 		},{
 			aTargets: [1] # column 1: Occurs
-			sWidth  : '1%'
+			sWidth	: '1%'
 			mDataProp: ( src, type, val ) ->
 				return altn_occurs_sort_order(src[1]) if type is 'sort'
 				if type is 'set' then src[1] = val else src[1]
 		},{
 			aTargets: [0] # alternation name
-			sWidth  : "33%"
+			sWidth	: "33%"
 		},{
 			aTargets: [2] # comment
-			sWidth  : "15%"
+			sWidth	: "15%"
 		},{
-  		aTargets: [2, 4, 5] # comment, dcf, examples
-  		asSorting:['asc']
-  	},{
-			aTargets: [3] # coded? – always hide
-			bVisible: false
+			aTargets: [2, 5] # comment, dcf, examples
+			asSorting:['asc']
 		},{
 			aTargets: [4] # derived coding frame
-			sWidth  : '20%'
+			sWidth	: '25%'
+			mDataProp: ns.coding_frame_sorter(4)
 		},{
 			aTargets : [5] # examples
-			sWidth   : "50%"
+			sWidth	 : "50%"
 		}
 	]
 	
@@ -81,7 +79,6 @@ oDTSettings =
 @VALENCY.verbs =
 	init: ->
 		
-	
 	index: ->
 		$('#verbs_list').dataTable $.extend(
 			ns.oDTSettings,
@@ -89,12 +86,12 @@ oDTSettings =
 				sDom: "<'row'<'span4'i><'span8'f>>tS"
 				sScrollY: "700px"
 				aoColumnDefs: [
-				  {
-            aTargets:[3] # Coding frame
-            sType: "html"
-            asSorting: ['asc','desc']
-            mDataProp: ns.coding_frame_sorter(3)
-				  }
+					{
+						aTargets:[3] # Coding frame
+						sType: "html"
+						asSorting: ['asc','desc']
+						mDataProp: ns.coding_frame_sorter(3)
+					}
 				]
 			}
 		)
@@ -106,14 +103,25 @@ oDTSettings =
 		$dt = $('#av_list').dataTable $.extend(
 			ns.oDTSettings, oDTSettings)
 		
-		$dt.sortEmptyLast('examples', 'derived coding frame', 'comment')
+		$dt.sortEmptyLast('examples', 'comment')
 		
 		# sort examples in dataTable by example number
 		$dt.setCustomSortFunction 'examples', sort_by_example_number
 		$dt.setCustomSortFunction 'alternation name', sort_by_altn_name
 		
 		# initialize popover for Alternation names
-		$('.cell a[rel="popover"]').popover({
-		  placement: 'right'
-		})
-		  
+		$('.cell a[rel="popover"]').popover {placement: 'right'}
+		
+		# set up hover highlighting for Coding frame index numbers
+		$(".coding_frame.padded-box:not(.no-hover) .idx-no.free").hover ->
+			n = $(this).data('idx-no')
+			$("tr[data-idx-no=#{n}]").toggleClass('outline').find('th').removeClass('outline')
+		$("tr[data-idx-no]").hover ->
+			n = $(this).data('idx-no')
+			$(this).find('th').toggleClass 'outline'
+			$(".coding_frame:not(.no-hover) .idx-no.free[data-idx-no=#{n}]").toggleClass 'label'
+		.click -> 
+			n = $(this).data('idx-no')
+			$(".coding_frame.padded-box:not(.no-hover) .idx-no.free[data-idx-no=#{n}]").flash('flash-green')
+		
+	
