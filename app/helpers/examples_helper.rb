@@ -38,6 +38,7 @@ module ExamplesHelper
   def render_example ex, options = {}
     css_class      = options[:class]          || ''
     wrap           = options[:wrap]           || false
+    orig           = options[:orig] && ex.original_orthography || false
     number_as_link = options[:number_as_link] || false
     gloss          = true unless options[:gloss] == false
     if wrap then number_as_link = true unless options[:number_as_link] == false end
@@ -53,7 +54,8 @@ module ExamplesHelper
       content_tag(:div, link_or_number.html_safe, class: "number") <<
       content_tag(:div, class: "body") do
         content_tag(:div, link_or_text.html_safe, class: "object-language") <<
-        (gloss ? content_tag(:div, format_gloss(ex), class: "gloss-box") : '') <<
+        (orig ? content_tag(:div, orig.html_safe, class: "object-language"): '') <<
+        (gloss ? content_tag(:div, format_gloss(ex), class: "gloss-box"): '') <<
         content_tag(:div, transl, class: "translation")
       end
     

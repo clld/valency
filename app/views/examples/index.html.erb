@@ -4,21 +4,48 @@
   <small>of <%= link_to @language, @language %></small>
 </h1>
 
+<div class="alert alert-block alert-error">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <div><strong>Under Construction</strong></div>
+  This layout isn’t quite finished yet. Improvement suggestions are welcome.
+</div>
+
 <div class="new row">
   <div class="span12">
 
     <table class="table table-bordered-sharp table-striped table-hover dataTable">
       <thead>
       <tr>
-        <th>example</th>
+        <th style="width:50%">Example</th>
+        <th>Verb meaning</th>
+        <th>Example of...</th>
       </tr>
     </thead>
     <tbody>
     <% @examples.each do |ex| %>
+    <% m = ex.get_meaning %>
       <%= content_tag_for :tr, ex do %>
-      <td>
-        <%= render_example ex, {} %>
-      </td>
+        <td>
+          <div class="pull-left">
+            <%= render_example ex, {orig: true} %>
+          </div>
+          <div class="pull-right">
+            <span style="color:#999"><%= ex.example_type %></span>
+          </div>          
+        </td>
+        <td><%= link_to m, m unless m.nil? || m.to_s.blank? %></td>
+        <td>
+          <% thing = ex.exemplifies %>
+          <% if thing.is_a? String %>
+            <%= thing %>
+          <% elsif [CodingFrame,Alternation].include? thing.class %>
+            <% name = thing.class.to_s.underscore.humanize %>
+            <%= "a#{'n' if name[0].match /[AEIOU]/}" %> <%= link_to name, [@language, thing] %>
+          <% elsif thing.class == Verb %>
+            the Verb form <span class="object-language"><%= link_to thing, [@language, thing] %></span>
+          <% end %>
+
+        </td>
       <% end %>
     <% end %>
   </tbody>
