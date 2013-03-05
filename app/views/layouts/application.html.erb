@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="<%= image_path('icons/favicon.ico') %>" type="image/x-icon">
   <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
   <![endif]-->
@@ -43,18 +44,9 @@
   </div><!-- end of #main -->
 
   <footer>
+    <%= yield :footer %>
     <!-- scripts for google maps go here -->
     <%= yield :scripts %>
   </footer>
-
-<!-- script for UserVoice.com -->
-<script type="text/javascript">
-  var uvOptions = {};
-  (function() {
-    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/A8BpaaMIbcllNzyH0xxNEg.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-  })();
-</script>
 </body>
 </html>

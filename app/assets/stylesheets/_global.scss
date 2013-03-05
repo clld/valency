@@ -4,7 +4,16 @@
 
 /* navigation bar: override some Bootstrap defaults */
 .navbar {
-	.brand, .nav > li > a {
+  .logo { /* position the logo */
+    display:block;
+    position:absolute;
+    left: 1px;
+    top: -7px;
+  }
+  .container {
+    margin-left:80px;
+  }
+	.nav > li > a {
     @include transition(background-color .3s ease);
 		text-shadow:none;
 	}
@@ -16,6 +25,12 @@
 		  background-color: transparent;
 		  cursor: default;
 		}
+	}
+	.nav { /* fixed column width for .nav > li items in the two nav bars */
+	  li:first-child { width:194px; }
+	  li:nth-child(3){ width:236px; }
+	  li:nth-child(5){ width:123px; }
+	  li:nth-child(2n+7) { width:105px; }
 	}
 	.navbar-inner.no-gradient {
     background-image:none;
@@ -34,7 +49,7 @@
   }
   & .cursor-hand, & .cursor-hand:hover { // show cursor as hand – typically on a link (to override Bootstrap default)
     cursor: pointer;
-  }  
+  }
 }
 
 // mini buttons with icons: change alignment
@@ -85,7 +100,6 @@ h1, h2, h3, h4 {
 	}
 }
 h1.no-bold { font-weight:normal; }
-
 
 /* don't color headings in alerts */
 .alert {

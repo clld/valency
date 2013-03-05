@@ -1,9 +1,10 @@
 <!-- navigation partial -->
 <!-- this is rendered in the top navbar -->
 <div class="navbar-inner">
+  <%= link_to root_path, class: 'logo', title: "Home" do %>
+    <%= image_tag 'logo_valpal_80.png' %>
+  <% end %>
   <div class="container">
-
-    <%= link_to "ValPaL", root_path, :class => 'brand' %>
 
     <ul class="nav">
 
