@@ -47,5 +47,14 @@
     <%= yield :scripts %>
   </footer>
 
+<!-- script for UserVoice.com -->
+<script type="text/javascript">
+  var uvOptions = {};
+  (function() {
+    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/A8BpaaMIbcllNzyH0xxNEg.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+  })();
+</script>
 </body>
 </html>
