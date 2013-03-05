@@ -40,6 +40,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    daemons (1.1.9)
     em-websocket (0.3.8)
       addressable (>= 2.1.1)
       eventmachine (>= 0.12.9)
@@ -78,8 +79,6 @@ GEM
     method_source (0.8)
     mime-types (1.19)
     multi_json (1.3.6)
-    newrelic_rpm (3.4.2.1)
-    pg (0.14.1)
     polyglot (0.3.3)
     pry (0.9.10)
       coderay (~> 1.0.5)
@@ -126,6 +125,10 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.6)
+    thin (1.5.0)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thor (0.14.6)
     tilt (1.3.3)
     treetop (1.4.10)
@@ -149,12 +152,11 @@ DEPENDENCIES
   hirb
   jquery-datatables-rails
   jquery-rails
-  newrelic_rpm
-  pg
   pry-rails
   rack-livereload
   rails (= 3.2.3)
   rb-fsevent
   sass-rails (~> 3.2.3)
   sqlite3
+  thin
   uglifier (>= 1.0.3)
