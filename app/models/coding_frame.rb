@@ -5,7 +5,9 @@ class CodingFrame < ActiveRecord::Base
   belongs_to :language
 
   has_many :verbs
+  
   has_many :alternation_values, foreign_key: "derived_coding_frame_id", inverse_of: :derived_coding_frame
+  has_many :alternations, :through => :alternation_values
 
   has_many :coding_frame_index_numbers
   has_many :coding_sets,    :through => :coding_frame_index_numbers
@@ -89,13 +91,28 @@ class CodingFrame < ActiveRecord::Base
     mm.map{|m| [m, m.verbs & self.verbs]}
   end
   
-  # query database for coding frames related to this one via alternations
-  def get_related_coding_frames
-    if derived? 
-      nil
-    else
-      nil
-    end
+  # query database for Derived Coding frames related to this Basic Coding frame via alternations
+  # only returns useful results for a Basic coding frame
+  def derived_coding_frames
+    self.class.joins(:alternations)
+      .where(:alternation_values => {:verb_id => self.verb_ids.uniq})
+      .order("coding_frames.id").uniq
   end
+  
+  # query database for Basic Coding frames related to this Derived Coding frame via alternations
+  def basic_coding_frames
+    self.verbs_of_derived_cf.map{|v|v.coding_frame}.uniq
+  end
+  
+  # query database for verbs related to this Coding frame via alternations (no matter which ones)
+  def verbs_of_derived_cf
+    Verb.includes(:coding_frame).where(
+      id: AlternationValue.where(
+        :alternation_occurs => "Regularly", :derived_coding_frame_id => self.id
+      ).pluck(:verb_id)
+    )
+  end
+  
+  
 
 end

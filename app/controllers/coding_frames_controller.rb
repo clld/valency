@@ -21,11 +21,27 @@ class CodingFramesController < ApplicationController
     @coding_frame = @language.coding_frames.find(params[:id])
 
     mroles            = @coding_frame.microroles
-    @cf_index_numbers = @coding_frame.coding_frame_index_numbers.includes(:microroles)
+    @cf_index_numbers = @coding_frame.coding_frame_index_numbers.includes(:microroles, :coding_set)
 
     # only Basic Coding frames have Verbs associated with them
-    unless @coding_frame.derived?
+    if @coding_frame.derived?
+      @verbs = @coding_frame.verbs_of_derived_cf
+      verb_ids = @verbs.pluck(:id)
+      @related_coding_frames = @coding_frame.basic_coding_frames
+      @alternations_of_related_cf = Hash[
+        @related_coding_frames.map do |cf|
+          [ cf,
+            Alternation.joins(:alternation_values)
+              .where(:alternation_values => {
+                :derived_coding_frame_id => @coding_frame.id, :verb_id => verb_ids
+              }).uniq
+          ]
+        end
+      ]
+    else
       @verbs = @coding_frame.verbs.includes(:meanings)
+      @related_coding_frames = @coding_frame.derived_coding_frames.includes(:alternations)
+      @alternations_of_related_cf = Hash[@related_coding_frames.map{ |cf| [cf, cf.alternations.uniq] }]
     end
     
 

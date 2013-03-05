@@ -64,4 +64,18 @@ oDTSettings_index =
 			$(this).toggleClass 'outline'
 			n = $(this).data('idx-no')
 			$(".coding_frame:not(.no-hover) .idx-no.free[data-idx-no=#{n}]").toggleClass 'label'
-			
+
+		# set up hover highlighting for Coding frame index numbers
+		# TODO duplicated from Verbs for now; refactor to reuse!
+		$(".coding_frame.padded-box:not(.no-hover) .idx-no.free").hover ->
+			n = $(this).data('idx-no')
+			$("tr[data-idx-no=#{n}]").toggleClass('outline').find('th').removeClass('outline')
+		$("tr[data-idx-no]").hover ->
+			n = $(this).data('idx-no')
+			$(this).find('th').toggleClass 'outline'
+			$("th[data-idx-no=#{n}]").toggleClass 'outline'
+			$(".coding_frame:not(.no-hover) .idx-no.free[data-idx-no=#{n}]").toggleClass 'label'
+		.click -> 
+			n = $(this).data('idx-no')
+			$(".coding_frame.padded-box:not(.no-hover) .idx-no.free[data-idx-no=#{n}]").flash('flash-green')
+	

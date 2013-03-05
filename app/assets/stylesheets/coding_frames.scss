@@ -37,7 +37,7 @@
       @include transition(background-color .3s ease);
     }
   }
-  &.padded-box {
+  &.padded-box.active {
     background-color:$bg-cf;
   }
 }
@@ -48,18 +48,22 @@
 	  border-left:none;
 	}
 }
-
+.arrow {
+  position:relative;
+  top: 29px;
+  left: 13px;
+}
 .triangle-left { /* left-pointing triangle shape */
   width: 0;
   height: 0;
-  border-top: 30px solid transparent;
-  border-right: 30px solid $grayLight;
-  border-bottom: 30px solid transparent;
+  border-top: 22px solid transparent;
+  border-right: 50px solid $bg-cf;
+  border-bottom: 22px solid transparent;
 }
 .triangle-right { /* right-pointing triangle shape */
   width: 0;
   height: 0;
-  border-top: 30px solid transparent;
-  border-left: 30px solid $grayLight;
-  border-bottom: 30px solid transparent;
+  border-top:22px solid transparent;
+  border-left: 50px solid $bg-cf;
+  border-bottom: 22px solid transparent;
 }
