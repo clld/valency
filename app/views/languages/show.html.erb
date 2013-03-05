@@ -65,8 +65,8 @@
     <% end %>
     
     <% if @native_speakers.size > 0 %>
-      <div class="clear">
-        <b>with data contributions by <%= @native_speakers.size %> native speakers</b>
+      <div class="clear" style="margin-top:8px;">
+        <b>with data contributions by <%= pluralize @native_speakers.size, "native speaker" %></b>
       </div>
     <% end %>
   </div>

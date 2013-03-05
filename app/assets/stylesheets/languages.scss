@@ -35,10 +35,11 @@ tr.language {
     margin: 6px 0;
   }
   .photo-container {
-    height:150px;
+    height:205px;
   }
   .photo {
-    max-height:140px;
+    max-height:190px;
+    max-width:9.5em;
   }
   & + .contributor {
     margin-left:1em;
