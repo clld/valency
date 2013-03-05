@@ -1,2 +1,31 @@
-<h1>Coding set</h1>
-<p>Find me in app/views/coding_sets/show.html.erb</p>
+<!-- Coding set: show -->
+<h1 class="no-bold">
+  <%= @coding_set.to_s %>
+</h1>
+
+<div class="alert alert-block alert-error">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <div><strong>Under Construction</strong></div>
+  This layout isn’t finished yet. Improvement suggestions are welcome.
+</div>
+
+<div class="row">
+  <div class="span12">
+
+    <table class="table table-bordered-sharp table-striped table-hover dataTable">
+      <thead>
+        <tr>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% [].each do |x| %>
+        <tr>
+          <td></td>
+        </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+  </div>
+</div>

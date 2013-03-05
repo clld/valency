@@ -84,6 +84,13 @@ h1, h2, h3, h4 {
 		color: $grayLight;
 	}
 }
+h1.no-bold { font-weight:normal; }
+
+
+/* don't color headings in alerts */
+.alert {
+  h1, h2, h3, h4 {color:inherit;}
+}
 
 /* scaffold adjustments */
 .new.row {

@@ -1,2 +1,38 @@
-<h1>Coding sets</h1>
-<p>Find me in app/views/coding_sets/index.html.erb</p>
+<h1>
+  Coding sets
+  <small>of <%= link_to @language, @language %></small>
+</h1>
+
+<div class="alert alert-block alert-error">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <div><strong>Under Construction</strong></div>
+  This layout isn’t finished yet. Improvement suggestions are welcome.
+</div>
+
+<div class="row">
+  <div class="span12">
+    <table class="table table-bordered-sharp table-striped table-hover dataTable">
+      <thead>
+        <tr>
+          <th>Coding set</th>
+          <th class="hidden-col">Comment</th>
+          <th class="number"># Coding frames</th>
+          <th class="number"># Verbs</th>
+          <th class="number"># Microroles</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @coding_sets.each do |cs| %>
+        <tr>
+          <td><%= link_to cs, [@language, cs] unless cs.to_s.blank? %></td>
+          <td><%= cs.comment %></td>
+          <td class="number"><%= cs.coding_frames.count %></td>
+          <td class="number"><%= cs.verb_count %></td>
+          <td class="number"><%= cs.microrole_count %></td>
+        </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+  </div>
+</div>

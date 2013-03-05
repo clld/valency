@@ -7,9 +7,8 @@ class CodingSetsController < ApplicationController
   
   # GET /languages/ainu/coding_sets[.json]
   def index
-    @coding_sets = @language.coding_sets.includes(
-      :coding_frame_index_numbers => [:coding_frames, :argument_type])
-
+    @coding_sets = @language.coding_sets.includes(:coding_frame_index_numbers => :coding_frame)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @coding_frames }
@@ -18,7 +17,7 @@ class CodingSetsController < ApplicationController
 
   # GET /languages/ainu/coding_sets/1[.json]
   def show
-    @coding_frame = @language.coding_frames.includes(:verbs).find(params[:id])
+    @coding_set = @language.coding_sets.includes(:coding_frame_index_numbers => [:coding_frame, :microroles]).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
