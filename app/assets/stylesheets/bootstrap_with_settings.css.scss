@@ -1,6 +1,19 @@
 @import "variables"; /* to override Bootstrap defaults */
 @import "bootstrap"; /* other variables are set to defaults */
-// body { padding-top: $navbarHeight; } /* leave room for the top nav bar */
+
 @import "bootstrap-responsive"; /* react to smaller screen sizes */
+/* override Bootstrap defaults to correctly adjust body padding-top */
+@media (max-width: 979px) { // tablets and below
+  body { padding-top: 0; }
+  .navbar-fixed-top    { margin-bottom: 0.5*$baseLineHeight; }
+  .navbar-fixed-bottom { margin-top: 0.5*$baseLineHeight; }
+  .navbar-fixed-top .navbar-inner,
+  .navbar-fixed-bottom .navbar-inner {
+    padding: 0px;
+  }
+}
+@media (min-width: 980px) { // desktop screen
+  body { padding-top: 2*$navbarHeight; }
+}
 
 /* custom mixins */

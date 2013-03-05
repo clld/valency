@@ -58,11 +58,8 @@ h3.infowindow {
 // customized styles for gmaps4rails
 .map_container { // the outer container of the map: governs borders etc.
   padding: 6px;
-  border: {
-    width: 1px;
-    style: solid;
-    color: $tableBorder;
-  };
+  border: 1px solid $tableBorder;
+
   @include box-shadow(0 0 10px 0 rgba(64, 64, 64, 0.3));
   .gmaps4rails_map { // the inner map div
     height: 500px;

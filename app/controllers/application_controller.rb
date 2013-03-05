@@ -9,6 +9,9 @@ class ApplicationController < ActionController::Base
     @meanings_core ||= Meaning.core
   end
   
-  
+  # create action for home page
+  def home
+    render 'shared/home'
+  end
 
 end

@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="span6 offset3">
+    <h1 style="text-align:center;">Welcome to <em>ValPaL</em> Preview!</h1>
+    <p>
+      This is the preliminary version of the Valency Patterns Leipzig online database,
+      which is one of the results of the Leipzig Valency Classes Project. 
+    </p>
+<!--    <p>
+      This preview is exclusively for you as Data Contributors. Although several
+      features are still in development, you can browse and explore all of the data
+      that will be made publicly available in a few weeks.
+    </p>
+-->
+    <p>
+      <a href="/languages">Start exploring the database</a> by selecting an item from the top menu bar. 
+    </p>
+    <p>
+      We are looking forward to hearing your feedback, your ideas, and your criticism.
+      Just click the red <strong>Feedback</strong> link in the upper right corner to send
+      an email to our Web developer, <tt>alexander_jahraus@eva.mpg.de</tt>. Thanks!
+    </p>
+    
+  </div>
+</div>
+<div class="new row">  
+  <div class="span3 offset3">
+    <a href ="/languages">
+    <%= image_tag 'logo_valpal_text.png', style: 'width:300px;margin:0 auto;display:block;' %>
+    </a>
+  </div>
+  <div class="span3">
+    <%= image_tag 'logo_valency.png', style: 'width:400px;margin:30px auto;display:block;' %>
+  </div>
+</div>
+
+<% content_for :footer do %>
+<div class="container">
+  <div class="row">
+    <div class="span12" style="text-align:center;position:absolute;bottom:10px;">
+      <%= image_tag 'logo_minerva.png', style: "width:80px;"%>
+      <p style="color:#177A74; font-size:12px; width:200px;margin:5px auto;">
+        Max Planck Institute for Evolutionary Anthropology, Leipzig
+      </p>
+    </div>
+  </div>
+</div>
+<% end  %>
