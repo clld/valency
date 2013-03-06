@@ -65,9 +65,9 @@ Valency::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
-  # Secure Heroku environment with password:
+  # Secure production environment with a password (using HTTP basic authentication):
   # Thanks to this excellent blog post: http://is.gd/Geqpco
-  config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "Production") do |u, p|
-      [u, p] == [ENV['PREVIEW_USERNAME'], ENV['PREVIEW_PASSWORD']]
+  config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "ValPaL Preview") do |u, p|
+      [u, p] == [ENV['HTTP_USER'], ENV['HTTP_PASSWORD']]
     end
 end
