@@ -40,7 +40,8 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass', '~> 2.1.0.0' # use Twitter Bootstrap 2.1 with SASS
-  gem 'jquery-datatables-rails'      # use jQuery Datatables 
+
+  gem 'jquery-datatables-rails'      # use assets from jQuery Datatables gem
 end
 
 gem 'jquery-rails'

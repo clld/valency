@@ -35,6 +35,9 @@ Valency::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   
+  # ignore assets from /public/assets in development
+  config.serve_static_assets = false
+  
   # Use Guard live-reload with rack-livereload
   # change some options:
   #   config.middleware.insert_before(
