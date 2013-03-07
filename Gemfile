@@ -22,11 +22,10 @@ group :development, :production do
   gem 'gmaps4rails'
 end
 
-# Gems for production only: PostgreSQL (gem 'pg') is required for Heroku
+# Gems for production only
 group :production do
-  gem 'thin' # is said to be more robust than WEBrick
-             # still only a temporary solution, of course
-             # will need to check out Phusion Passenger 
+  gem 'mysql'
+  gem 'passenger'
 end
 
 # Gems used only for assets and not required
