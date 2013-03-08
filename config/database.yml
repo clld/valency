@@ -5,8 +5,11 @@ development:
   timeout: 5000
 
 production:
-  adapter: sqlite3 # use sqlite for now, until we figure out how to talk to MySQL server
-  database: db/production.sqlite3
+  adapter:  mysql
+  database: ling_valpal
+  host:     db01.eva.mpg.de
+  username: valpal
+  password: hsvriwa7
   pool: 5
   timeout: 5000
 

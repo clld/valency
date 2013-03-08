@@ -24,7 +24,8 @@ end
 
 # Gems for production only
 group :production do
-  gem 'mysql'
+  gem 'therubyracer', :require => 'v8'
+  gem 'mysql', '~> 2.8.1'
   gem 'passenger'
 end
 
