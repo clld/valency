@@ -18,4 +18,4 @@
 # Some custom files to ignore
 /railsmessage.txt
 /*.tmproj
-
+/*~
