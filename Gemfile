@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '~> 3.2.3'
 
 gem 'ginjo-rfm' # up-to-date fork of Ruby FileMaker API
 
@@ -25,8 +25,9 @@ end
 # Gems for production only
 group :production do
   gem 'therubyracer', :require => 'v8'
-  gem 'mysql2'
-  gem 'passenger'
+  gem 'mysql2'    # ActiveRecord adapter for MySQL
+  gem 'pg'        # ActiveRecord adapter for PostgreSQL
+  gem 'passenger' # see https://www.phusionpassenger.com
 end
 
 # Gems used only for assets and not required
