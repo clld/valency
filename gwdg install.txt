@@ -1,0 +1,33 @@
+# install the latest Ruby version supported by Ubuntu 12.04 LTS
+# despite the package name it's actually Ruby v1.9.3p0
+sudo apt-get install ruby1.9.1 ri1.9.1 graphviz ruby1.9.1-dev
+
+# however, that's a patch from October 2011, so I'm going to install
+# RVM and a more recent Ruby patch with it. RVM can be installed
+# as a package (ruby-rvm), but that package is broken, see 
+# http://stackoverflow.com/a/9056395/497756
+# installing from RVM developer directly
+curl -L https://get.rvm.io | sudo bash -s stable --auto-dotfiles
+
+# you need to add all users that will be using rvm to 'rvm' group
+sudo usermod -a -G rvm valpal
+sudo usermod -a -G rvm froehlich
+sudo usermod -a -G rvm root
+# logout and login, or `source /etc/profile.d/rvm.sh` to use RVM
+
+rvm install 1.9.3 # install latest patch of Ruby
+
+# PostgreSQL 9.1 is already installed, and the server appears to be running
+sudo -u postgres psql postgres    
+postgres=# \password postgres     # PostgreSQL: set password for postgres user
+sudo -u postgres createuser -D -A -P valpal       # create DB user "valpal"
+sudo -u postgres createdb -O valpal valpal        # create database "valpal"
+
+# clone the repository
+git clone https://github.com/fanaugen/valency.git
+cd valency
+
+# install required gems
+bundle install
+
+#PostgreSQL connection: localhost:5432
