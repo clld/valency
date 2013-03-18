@@ -2,6 +2,7 @@ module CodingFramesHelper
 
   EMPTY_HASH = {}
   EMPTY_ARY  = []
+  LT, GT, APOSTROPHE = %w(&lt; &gt; &#39;)
 
   # get a comma-separated list of verbs, optionally as links,
   # optionally keeping the meaning parameter
@@ -40,33 +41,32 @@ module CodingFramesHelper
     tooltip   = options[:tooltip]   || EMPTY_HASH # {2 => "tooltip for 2"}
     lang      = options[:language]  || @language || nil
     if prefix
-      prefix = "<div class='cell'>"<<
-      "<span class='label' title='#{cf.derived? ? 'Derived' : 'Basic'} coding frame'>"<<
+      prefix = "<div class=\"cell\">"<<
+      "<span class=\"label\" title=\"#{cf.derived? ? 'Derived' : 'Basic'} coding frame\">"<<
       "#{cf.derived? ? 'D' : 'B'}</span></div>"
     end
-    cf_with_markup = html_escape(cf.to_s).to_str # escape HTML characters < and >
-    link_class = "nan" unless cf_with_markup.match(/^\d/) # quick fix for the padding issue
-    cf_with_markup.gsub!(/(V'?)/, '<b>\\1</b>')  # make the verb bold
-    cf_with_markup.gsub!(/(\(.+?\)|\[.+?\])/, "<span>\\1</span>")
-    cf_with_markup.gsub!(/(\[)?(\d+)(\])?/) do |num|
-      css_class = "idx-no" # short for index number
-      n = $2.to_i  # $1 and $3 are the brackets (or nothing)
-      # add class "label", for highlighted numbers, except in brackets
-      unless $1 == '[' || $3 == ']'
-        css_class << " free" # for stylesheet and dynamic highlighting
-        css_class << " highlight" if highlight.include?(n)
-      end
+    cf_html = cf.to_s.gsub  /</, LT  # replace HTML special symbols
+              cf_html.gsub! />/, GT
+    cf_html.gsub!(/(V'?)/, '<b>\\1</b>') # make V or V' bold
+    link_class = "nan" unless cf_html.match(/^\d/) # quick fix for the padding issue
+    cf_html.gsub!(/(\(.+?\)|\[.+?\])/, '<span>\\1</span>') # no linebreak (in brackets)
+    cf_html.gsub!(/(\d+)/) do |num|
+      n = $1.to_i  # $1 is the number
+      css_class = 'idx-no' # for index number
+      css_class << ' highlight' if highlight.include?(n)
       if tooltip_text = tooltip[n]
-        css_class << " ttip"
-        html_attr = " rel='tooltip' title='#{tooltip_text}'"
+        css_class << ' ttip'
+        html_attr = " rel=\"tooltip\" title=\"#{tooltip_text}\""
       end
-      "#{$1}<b class='#{css_class}' data-idx-no='#{n}'#{html_attr}>#{n}</b>#{$3}"
+      "<b class=\"#{css_class}\" data-idx-no=\"#{n}\"#{html_attr}>#{$1}</b>"
     end
+    cf_html.gsub!(/'/, APOSTROPHE)
+    cf_html = cf_html.html_safe
     
-    cf_html = link_to_if(options[:link] && lang, cf_with_markup.html_safe, [lang, cf], :class => link_class) do 
-      content_tag(:a, cf_with_markup.html_safe, :class => link_class)
+    cf_link = link_to_if(options[:link] && lang, cf_html, [lang, cf], :class => link_class) do 
+      content_tag(:a, cf_html, :class => link_class)
     end
-    cf_html = "#{prefix}<div class='cell'>#{cf_html}</div>" if prefix
+    cf_html = "#{prefix}<div class=\"cell\">#{cf_html}</div>" if prefix
     div_for(cf, :'data-arg-count' => cf.arg_count, :class => options[:css_class]) do
       cf_html.html_safe
     end

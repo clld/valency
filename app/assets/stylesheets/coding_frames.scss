@@ -3,7 +3,7 @@
   width:14em;
 }
 
-/* customize Bootstrap's .label for the Coding frames' index numbers (.idx-no.free) */
+/* customize Bootstrap's .label for the Coding frames' index numbers (.idx-no) */
 .coding_frame {
   a {
     text-decoration:none; // don't underline
@@ -23,12 +23,11 @@
     display:inline-block;
     width:8px;
     line-height:14px;
-    /* line-height: 100%; */ // enable if needed
-    &.free { /* look like .label when outside of [] */
-      padding: 1px 4px 2px;
-      @include border-radius(3px);
-			border-bottom: none;
-    }
+    /* look like .label */
+    padding: 1px 4px 2px;
+    @include border-radius(3px);
+		border-bottom: none;
+
     &.label, &.highlight { // special behaviour here if needed
       background-color:$navbarBackground;
       color: $white;

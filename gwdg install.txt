@@ -69,26 +69,24 @@ rvmsudo passenger-install-nginx-module
 # verify that passenger is running
 passenger-memory-stats
 
-# make symbolic link in the nginx document root, pointing to the Rails application's public folder:
-sudo ln -s /home/valpal/valency/public /opt/nginx/html/valpal
-
-# add the following to nginx config file, overwriting defaults, if any (/opt/nginx/conf/nginx.conf):
+# add the following to nginx config file /opt/nginx/conf/nginx.conf:
 server {
-  server_name  vmext24-204.gwdg.de;
+  server_name vmext24-204.gwdg.de;  # http://vmext24-204.gwdg.de/ is app's base URL
   access_log  logs/host.access.log;
+  root /home/valpal/valency/public; # serve the application's static files
+  passenger_enabled on;
 
   location / {
-  # possibly this could also be done with location /valpal, but for now I'm just happy it worked
-    root   html;
-    passenger_enabled on;
-    passenger_base_uri /valpal;
-
-    index  index.html index.htm;
+      passenger_enabled on;        # have to re-enable this for some reason
+      index  index.html index.htm;
+      # maybe this last line isn't necessary since I don't have a static index.html
   }
 }
 
-# restart nginx to enable the application
-# it is available at http://vmext24-204.gwdg.de/valpal/
+# restart nginx to enable the application:
+sudo /opt/nginx/sbin/nginx -s reload
+# OR, to restart just the Passenger app server / the Rails app WITHOUT restarting Nginx:
+touch /home/valpal/valency/tmp/restart.txt
 
 # setting environment variables globally (this is probably a bad idea):
 # added these lines to /etc/environment:
@@ -97,4 +95,3 @@ export RFM_PASSWORD=<value>
 export GOOGLE_API_KEY=<value>
 export HTTP_USER=<value>
 export HTTP_PASSWORD=<value>
-

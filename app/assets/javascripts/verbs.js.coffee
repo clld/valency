@@ -102,15 +102,15 @@ oDTSettings =
 			$('.cell a[rel="popover"]').not(this).popover 'hide'
 		
 		# set up hover highlighting for Coding frame index numbers
-		$(".coding_frame.padded-box:not(.no-hover) .idx-no.free").hover ->
+		$(".coding_frame.padded-box:not(.no-hover) .idx-no").hover ->
 			n = $(this).data('idx-no')
 			$("tr[data-idx-no=#{n}]").toggleClass('outline').find('th').removeClass('outline')
 		$("tr[data-idx-no]").hover ->
 			n = $(this).data('idx-no')
 			$(this).find('th').toggleClass 'outline'
-			$(".coding_frame:not(.no-hover) .idx-no.free[data-idx-no=#{n}]").toggleClass 'label'
+			$(".coding_frame:not(.no-hover) .idx-no[data-idx-no=#{n}]").toggleClass 'label'
 		.click -> 
 			n = $(this).data('idx-no')
-			$(".coding_frame.padded-box:not(.no-hover) .idx-no.free[data-idx-no=#{n}]").flash('flash-green')
+			$(".coding_frame.padded-box:not(.no-hover) .idx-no[data-idx-no=#{n}]").flash('flash-green')
 		
 	

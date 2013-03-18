@@ -78,8 +78,8 @@ oDTSettings_show =
     $av_list = $('#av_list')
     $dt      = $av_list.dataTable $.extend true, ns.oDTSettings, oDTSettings_show
     $dt.sortEmptyLast 'basic coding frame', 'derived coding frame' # this screws up handlers for CFIN highlighting!
-    $('.dataTable tbody').on('hover', '.coding_frame:not(.no-hover) .idx-no.free', ->
+    $('.dataTable tbody').on('hover', '.coding_frame:not(.no-hover) .idx-no', ->
       n = $(this).data('idx-no')
-      $(this).closest('tr').find(".idx-no.free[data-idx-no=#{n}]").toggleClass 'label'      
+      $(this).closest('tr').find(".idx-no[data-idx-no=#{n}]").toggleClass 'label'      
     )
   

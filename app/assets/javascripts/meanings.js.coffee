@@ -46,5 +46,5 @@ oDTSettings_show =
 	show: ->
 		$('#verbs_list').dataTable		$.extend ns.oDTSettings, oDTSettings_show
 		$('.ttip').tooltip {placement:'bottom'}
-		$('.idx-no.free').hover -> $(@).toggleClass 'label'
+		$('.idx-no').hover -> $(@).toggleClass 'label'
 	

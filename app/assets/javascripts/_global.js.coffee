@@ -54,8 +54,8 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 		$('.ttip').tooltip({placement: 'bottom'})
 		
 		# Coding frame index numbers: setup hover and click handlers for highlighting
-		# hover on .idx-no.free: toggle .label on .idx-no with the same data-idx-no
-		idx_no_selector = ".coding_frame:not(.no-hover) .idx-no.free"
+		# hover on .idx-no: toggle .label on .idx-no with the same data-idx-no
+		idx_no_selector = ".coding_frame:not(.no-hover) .idx-no"
 		toggle_label = ->
 			n = $(this).data('idx-no')
 			$(idx_no_selector+"[data-idx-no=#{n}]").toggleClass 'label'
