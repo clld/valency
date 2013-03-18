@@ -25,7 +25,6 @@ end
 # Gems for production only
 group :production do
   gem 'therubyracer', :require => 'v8'
-  gem 'mysql2'    # ActiveRecord adapter for MySQL
   gem 'pg'        # ActiveRecord adapter for PostgreSQL
   gem 'passenger' # see https://www.phusionpassenger.com
 end

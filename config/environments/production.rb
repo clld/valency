@@ -8,10 +8,9 @@ Valency::Application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
-  # Disable Rails's static asset server (Apache or nginx will already do this)
-  # temporarily enabled, as long as we're only testing with Rails + thin or WEBrick
-  # This is NOT recommended for production use!
-  config.serve_static_assets = true
+  # Disable Rails's static asset server (Apache or nginx should serve the assets!)
+  # Setting this to true is NOT recommended for production use!
+  # config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -69,7 +68,7 @@ Valency::Application.configure do
   
   # Secure production environment with a password (using HTTP basic authentication):
   # Thanks to this excellent blog post: http://is.gd/Geqpco
-  # config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "ValPaL Preview") do |u, p|
-  #     [u, p] == [ENV['HTTP_USER'], ENV['HTTP_PASSWORD']]
-  #   end
+  config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "ValPaL Preview") do |u, p|
+    [u, p] == [ENV['HTTP_USER'], ENV['HTTP_PASSWORD']]
+  end
 end

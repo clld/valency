@@ -1,6 +1,9 @@
 # install the latest Ruby version supported by Ubuntu 12.04 LTS
 # despite the package name it's actually Ruby v1.9.3p0
-sudo apt-get install ruby1.9.1 ri1.9.1 graphviz ruby1.9.1-dev
+sudo apt-get install ruby1.9.1 ri1.9.1 ruby1.9.1-dev
+
+# install additional packages (libcurl- is needed for passenger)
+sudo apt-get install git postgresql-server-dev-9.1 sqlite3 libsqlite3-dev libcurl4-openssl-dev
 
 # however, that's a patch from October 2011, so I'm going to install
 # RVM and a more recent Ruby patch with it. RVM can be installed
@@ -18,6 +21,7 @@ sudo usermod -a -G rvm root
 rvm install 1.9.3 # install latest patch of Ruby
 
 # PostgreSQL 9.1 is already installed, and the server appears to be running
+# PostgreSQL connection: localhost:5432
 sudo -u postgres psql postgres    
 postgres=# \password postgres     # PostgreSQL: set password for postgres user
 sudo -u postgres createuser -D -A -P valpal       # create DB user "valpal"
@@ -25,9 +29,72 @@ sudo -u postgres createdb -O valpal valpal        # create database "valpal"
 
 # clone the repository
 git clone https://github.com/fanaugen/valency.git
-cd valency
+cd valency           # choose "no" when .rvmrc script asks for permission to run
+git checkout preview # switch to the branch with the latest commits
 
 # install required gems
 bundle install
+# if a gem cannot be installed because a required package is missing,
+# this will show an error message. Install packages on system and retry until 
+# bundler says: "Your bundle is complete!"
 
-#PostgreSQL connection: localhost:5432
+# create database schema from db/schema.rb
+rake db:schema:load RAILS_ENV=production # if RAILS_ENV is set to development, the sqlite DB is used instead
+# set environment variables for db/seeds.rb: RFM_ACCOUNT_NAME, RFM_PASSWORD
+rake db:seed RAILS_ENV=production  # load the latest data (from FileMaker Web XML)
+
+# install nginx with passenger support, following these instructions:
+# http://www.modrails.com/documentation/Users%20guide%20Nginx.html
+# passenger seems to install its own configured copy of nginx, quote:
+# -------------------------------------------------------------------
+# Nginx is a different from other web servers in that it does not support loadable modules.
+# The only way to extend Nginx is to recompile it entirely from source. Phusion Passenger
+# provides a tool to make this easy for you. If you’ve already installed Nginx before,
+# but without Phusion Passenger support, then you **should** uninstall it first.
+# You don’t have to, because you can also install another Nginx with Phusion Passenger support,
+# in parallel to the existing Nginx. We merely recommend uninstalling the existing in order to
+# avoid user confusion, but the choice is yours.
+# -------------------------------------------------------------------
+# so I chose to have passenger install its nginx version
+
+# rvmsudo ensures that sudo finds all the paths set by RVM
+rvmsudo passenger-install-nginx-module
+# the installer is interactive; I accepted the default settings, in particular,
+# nginx installation root: /opt/nginx
+# nginx config file: /opt/nginx/conf/nginx.conf
+# default document root: /opt/nginx/html
+# This installer has already modified the configuration file for you!
+# it added the paths for passenger_root and passenger_ruby
+
+# verify that passenger is running
+passenger-memory-stats
+
+# make symbolic link in the nginx document root, pointing to the Rails application's public folder:
+sudo ln -s /home/valpal/valency/public /opt/nginx/html/valpal
+
+# add the following to nginx config file, overwriting defaults, if any (/opt/nginx/conf/nginx.conf):
+server {
+  server_name  vmext24-204.gwdg.de;
+  access_log  logs/host.access.log;
+
+  location / {
+  # possibly this could also be done with location /valpal, but for now I'm just happy it worked
+    root   html;
+    passenger_enabled on;
+    passenger_base_uri /valpal;
+
+    index  index.html index.htm;
+  }
+}
+
+# restart nginx to enable the application
+# it is available at http://vmext24-204.gwdg.de/valpal/
+
+# setting environment variables globally (this is probably a bad idea):
+# added these lines to /etc/environment:
+export RFM_ACCOUNT_NAME=<value>
+export RFM_PASSWORD=<value>
+export GOOGLE_API_KEY=<value>
+export HTTP_USER=<value>
+export HTTP_PASSWORD=<value>
+

@@ -85,7 +85,6 @@ GEM
     method_source (0.8.1)
     mime-types (1.21)
     multi_json (1.6.1)
-    mysql2 (0.3.11)
     passenger (3.0.19)
       daemon_controller (>= 1.0.0)
       fastthread (>= 1.0.1)
@@ -167,7 +166,6 @@ DEPENDENCIES
   hirb
   jquery-datatables-rails
   jquery-rails
-  mysql2
   passenger
   pg
   pry-rails
