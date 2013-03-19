@@ -1,6 +1,20 @@
 # CHANGELOG
 
-## February 2012
+## March 2013
+** additions **
+- added logo and welcome page
+- made top navigation bar stable on window resize
+- launched [Contributor Preview](http://vmext24-204.gwdg.de/)
+- added Coding frame index number highlighting on mouseover
+- added Derived coding frames to Coding frame detail layout
+
+** improvements **
+- updated layouts for Coding frames, Verbs, Meanings, Microroles, Examples
+- collected and resized contributor photos
+
+
+
+## February 2013
 **new features**
 - auto-lookup of gloss abbreviations in Examples
 - added Microroles and Coding sets
