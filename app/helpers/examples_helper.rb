@@ -50,14 +50,15 @@ module ExamplesHelper
     link_or_text = link_to_if(wrap, ex.primary_text, [@language, ex], title: link_title)
     transl = "‘#{ex.translation}’" unless ex.translation.blank?
     
-    rendered_example =
-      content_tag(:div, link_or_number.html_safe, class: "number") <<
-      content_tag(:div, class: "body") do
+    rendered_example = content_tag(:div, link_or_number.html_safe, class: "number")
+    unless link_or_text.blank?
+      rendered_example << content_tag(:div, class: "body") do
         content_tag(:div, link_or_text.html_safe, class: "object-language") <<
         (orig ? content_tag(:div, orig.html_safe, class: "object-language"): '') <<
         (gloss ? content_tag(:div, format_gloss(ex), class: "gloss-box"): '') <<
         content_tag(:div, transl, class: "translation")
       end
+    end
     
     # wrap it in a <div> and serve it
     div_for(ex, class: css_class) { rendered_example }
