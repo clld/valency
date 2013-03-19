@@ -16,14 +16,15 @@
     <table class="table table-bordered-sharp table-striped table-hover dataTable">
       <thead>
       <tr>
-        <th style="width:50%">Example</th>
+        <th style="width:50%">Example</th>        
         <th>Verb meaning</th>
         <th>Example of...</th>
+        <th class="hidden-col">#</th>
       </tr>
     </thead>
     <tbody>
     <% @examples.each do |ex| %>
-    <% m = ex.get_meaning %>
+    <% next unless (m = ex.get_meaning) %>
       <%= content_tag_for :tr, ex do %>
         <td>
           <div class="pull-left">
@@ -46,6 +47,7 @@
           <% end %>
 
         </td>
+        <td><%= ex.number %></td>
       <% end %>
     <% end %>
   </tbody>

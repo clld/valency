@@ -44,17 +44,20 @@ module ExamplesHelper
     if wrap then number_as_link = true unless options[:number_as_link] == false end
     link_title = options[:link_title] || "View details for example #{ex.number}"
     
-    link_or_number = '(' << link_to_if(number_as_link, ex.number.to_s,
-      [@language, ex], title: link_title) << ')'
+    link_or_number = "(#{link_to_if(number_as_link, ex.number,
+      [@language, ex], title: link_title)})"
     
-    link_or_text = link_to_if(wrap, ex.primary_text, [@language, ex], title: link_title)
+    first_line = orig && ex.original_orthography || ex.primary_text
+    second_line= ex.primary_text if orig
+    
+    link_or_text = link_to_if(wrap, first_line, [@language, ex], title: link_title)
     transl = "‘#{ex.translation}’" unless ex.translation.blank?
     
     rendered_example = content_tag(:div, link_or_number.html_safe, class: "number")
     unless link_or_text.blank?
       rendered_example << content_tag(:div, class: "body") do
         content_tag(:div, link_or_text.html_safe, class: "object-language") <<
-        (orig ? content_tag(:div, orig.html_safe, class: "object-language"): '') <<
+        (orig ? content_tag(:div, second_line.html_safe, class: "object-language"): '') <<
         (gloss ? content_tag(:div, format_gloss(ex), class: "gloss-box"): '') <<
         content_tag(:div, transl, class: "translation")
       end

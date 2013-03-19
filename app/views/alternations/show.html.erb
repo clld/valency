@@ -11,7 +11,7 @@
   <div class="span6">
     <% unless a.description.nil? %>
       <h2>Description</h2>
-      <%= raw a.description %>
+      <div class="justify"><%= raw a.description %></div>
     <% end %>
   </div>
 </div>
@@ -88,7 +88,7 @@
             <td>
               <% unless basic_cf.nil? || (basic_cf.coding_frame_schema).blank? %>
                 <div>
-                  <%= render_cf(basic_cf, link: true) %>
+                  <%= render_cf(basic_cf, link: true, css_class:'no-hover') %>
                 </div>
                 <% if basic_ex %>
                   <hr/>
@@ -102,7 +102,7 @@
             <td>
               <% unless deriv_cf.nil? || (deriv_cf.coding_frame_schema).blank? %>
                 <div>
-                  <%= render_cf(deriv_cf, link: true) %>
+                  <%= render_cf(deriv_cf, link: true, css_class:'no-hover') %>
                 </div>
                 <% if deriv_ex %>
                   <hr/>

@@ -90,7 +90,7 @@
             <% microrole = arg.microroles.where_meaning(m)[0] %>
               <td class="microrole"><%= link_to microrole, microrole unless microrole.nil? || microrole.name.blank? %></td>
             <% end %>
-            <td class="coding-set"><%= arg.coding_set %></td>
+            <td class="coding-set"><%= link_to arg.coding_set, [@language, arg.coding_set] %></td>
             <td><%= arg.argument_type %></td>
           </tr>
         <% end %>

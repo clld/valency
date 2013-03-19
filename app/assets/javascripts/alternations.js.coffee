@@ -77,9 +77,12 @@ oDTSettings_show =
   show: ->
     $av_list = $('#av_list')
     $dt      = $av_list.dataTable $.extend true, ns.oDTSettings, oDTSettings_show
-    $dt.sortEmptyLast 'basic coding frame', 'derived coding frame' # this screws up handlers for CFIN highlighting!
-    $('.dataTable tbody').on('hover', '.coding_frame:not(.no-hover) .idx-no', ->
-      n = $(this).data('idx-no')
-      $(this).closest('tr').find(".idx-no[data-idx-no=#{n}]").toggleClass 'label'      
+    # this screws up handlers for CFIN highlighting!
+    $dt.sortEmptyLast 'basic coding frame', 'derived coding frame'
+    $('#av_list').on('hover', '.coding_frame .idx-no', (e) -> # TODO this doesn't attach handler!
+      console.log "Hovered over index number #{$(e.target).data('idx-no')}"
+      $target = $(e.target)
+      n = $target.data('idx-no')
+      $target.closest('tr').find(".idx-no[data-idx-no=#{n}]").toggleClass 'label'
     )
   

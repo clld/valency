@@ -4,8 +4,11 @@
 
 <div class="row">
   <div class="span4">
-	  <h1 class="small"><%= cf.derived %> Coding frame</h1>
+    <h1 class="small"><%= cf.derived %> Coding frame</h1>
     <%= render_cf(cf, css_class: "padded-box active big") %>
+    <% if cf.description %>
+      <div class="justify"><%= "(#{cf.description})" %></div>
+    <% end %>
     <table class="table table-bordered-sharp table-condensed" style="margin-top:1em">
       <thead>
         <tr>
@@ -15,7 +18,7 @@
         </tr>
       </thead><tbody>
       <% cf.index_numbers_eager_load.each do |arg| # arg is a Coding frame index number %>
-			  <% n = arg.index_number; cs = arg.coding_set %>
+        <% n = arg.index_number; cs = arg.coding_set %>
         <tr data-idx-no="<%= n %>">
           <th class="idx-no"><%= n %></th>
           <td><%= link_to cs, [@language, cs] unless cs.nil? || cs.to_s.blank? %></td>

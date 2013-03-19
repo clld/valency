@@ -63,7 +63,7 @@ module CodingFramesHelper
     cf_html.gsub!(/'/, APOSTROPHE)
     cf_html = cf_html.html_safe
     
-    cf_link = link_to_if(options[:link] && lang, cf_html, [lang, cf], :class => link_class) do 
+    cf_html = link_to_if(options[:link] && lang, cf_html, [lang, cf], :class => link_class) do 
       content_tag(:a, cf_html, :class => link_class)
     end
     cf_html = "#{prefix}<div class=\"cell\">#{cf_html}</div>" if prefix

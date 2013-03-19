@@ -122,10 +122,8 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 				# don't allow body to shrink vertically when dataTable is filtered
 				$('body').css 'min-height', $('body').height()
 				
-				# bind event handlers to dataTable (for sortable columns that replace the original)
-				# HTML content
-				$('.dataTable tbody').on('hover', idx_no_selector, toggle_label)
-				
+				# bind event handlers to dataTable (for sortable columns that replace the original HTML content)
+				$('.dataTable tbody').on('hover', idx_no_selector, toggle_label) # this doesn't work!
 			
 	
 	### store some shared functions to reuse in other JS files ###
