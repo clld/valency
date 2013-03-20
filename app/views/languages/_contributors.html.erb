@@ -1,0 +1,21 @@
+<% photos = get_photo_assets contributors %>
+<% with_photos = contributors.any? {|c| photos[c] } %>
+<% contributors.each do |c| %>
+
+  <div class="contributor" id="<%= dom_id(c) %>">
+
+    <% if with_photos %>
+      <div class="photo-container">
+        <% if photos[c] %>
+          <% photo = capture { image_tag(photos[c], class: 'img-polaroid photo') } %>
+          <%= link_to_if c.url, photo, c.url %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <p class="contributor-name"><%= link_to_if c.url, c.name, c.url %></p>
+    <% if c.affiliation %>
+      <p><%= c.affiliation %></p>
+    <% end %>
+  </div>
+<% end %>

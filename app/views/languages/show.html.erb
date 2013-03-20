@@ -58,10 +58,10 @@
 
   <div class="span6">
     <h2><%= "Contributor".pluralize @contributors.size %></h2>
-    <% if @contributors.size == 0 %>
+    <% if @contributors.size < 1 %>
       (not specified)
     <% else %>
-      <%= render partial: 'contributor', collection: @contributors %>
+      <%= render partial: 'contributors', object: @contributors %>
     <% end %>
     
     <% if @native_speakers.size > 0 %>
