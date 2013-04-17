@@ -31,6 +31,8 @@ end
 puts "done!"
 
 filename = 'abbrevs.csv'
+`touch #{filename}`
+
 print "Writing to file #{filename}... "
 File.open(filename, 'r+') do |f|
   results.each do |line|
