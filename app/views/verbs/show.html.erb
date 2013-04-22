@@ -69,7 +69,8 @@
     </h2>
     <% if cframe %>
       <% arguments = cframe.index_numbers_eager_load %>
-      <table class="table table-bordered-sharp" style="max-width:<%= 390+120*meanings.size %>px;">
+      <div style="max-width:<%= 390+120*meanings.size %>px;">
+      <table class="table table-bordered-sharp">
         <thead>
           <tr>
             <th class="idx-no">#</th>
@@ -83,7 +84,7 @@
           </tr>
         </thead><tbody>
         <% arguments.each do |arg| # arg is a Coding frame index number %>
-				<% n = arg.index_number %>
+          <% n = arg.index_number %>
           <tr data-idx-no="<%= n %>">
             <th class="idx-no"><%= n %></th>
             <% meanings.each do |m| %>
@@ -96,7 +97,8 @@
         <% end %>
         </tbody>
       </table>
-    <% else %>
+      </div>
+      <% else %>
       <% if meanings.size > 0 %>
         <div><%= "Verb meaning".pluralize(meanings.size)%>: <%= meaning_list(@verb) %></div>
       <% else %>
