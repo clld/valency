@@ -27,10 +27,9 @@ postgres=# \password postgres     # PostgreSQL: set password for postgres user
 sudo -u postgres createuser -D -A -P valpal       # create DB user "valpal"
 sudo -u postgres createdb -O valpal valpal        # create database "valpal"
 
-# clone the repository
+# clone the repository (master branch)
 git clone https://github.com/fanaugen/valency.git
-cd valency           # choose "no" when .rvmrc script asks for permission to run
-git checkout preview # switch to the branch with the latest commits
+cd valency   # choose "no" when .rvmrc script asks for permission to run
 
 # install required gems
 bundle install

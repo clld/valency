@@ -98,8 +98,10 @@ oDTSettings =
 			$dt.setCustomSortFunction 'alternation name', sort_by_altn_name
 		
 		# initialize popover for Alternation names
-		$('.cell a[rel="popover"]').popover({placement: 'right'}).click ->
-			$('.cell a[rel="popover"]').not(this).popover 'hide'
+		$('.cell a[rel="popover"]').popover({placement: 'right'})
+		$('body').click (event)->
+			$target = $(event.target)
+			$('a[rel="popover"]').not($target).popover('hide') unless $target.is('.popover *')
 		
 		# set up hover highlighting for Coding frame index numbers
 		$(".coding_frame.padded-box:not(.no-hover) .idx-no").hover ->
