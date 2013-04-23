@@ -29,6 +29,7 @@
     </table>
   </div>
 
+  <% if @related_coding_frames.size > 0 %>
   <div class="span1">
     <div class="arrow triangle-<%= cf.derived? ? 'left' : 'right' %>"></div>
   </div>  
@@ -58,6 +59,8 @@
       </tbody>
     </table>
   </div><!-- end .span7 -->
+  <% end # if related coding frames exist %>
+  
 </div><!-- end .row -->
 
 <div class="new row">

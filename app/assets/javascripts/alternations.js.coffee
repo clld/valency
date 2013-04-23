@@ -75,8 +75,12 @@ oDTSettings_show =
     
   
   show: ->
+    $('.examples-container').each -> 
+      $(this).children().show_first(1, 'btn btn-mini')
+    
     $av_list = $('#av_list')
     $dt      = $av_list.dataTable $.extend true, ns.oDTSettings, oDTSettings_show
+    
     # this screws up handlers for CFIN highlighting!
     $dt.sortEmptyLast 'basic coding frame', 'derived coding frame'
     $('#av_list').on('hover', '.coding_frame .idx-no', (e) -> # TODO this doesn't attach handler!

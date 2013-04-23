@@ -70,10 +70,10 @@
           <% v   = av.verb %>
           <% next unless v %>
           <% m   = v.meanings.first %>
-          <% basic_cf = v.coding_frame %>
-          <% basic_ex = v.examples_of_coding_frame.first %>
-          <% deriv_cf = av.derived_coding_frame %>
-          <% deriv_ex = av.examples.first %>
+          <% basic_cf  = v.coding_frame %>
+          <% basic_exs = v.examples_of_coding_frame %>
+          <% deriv_cf  = av.derived_coding_frame %>
+          <% deriv_exs = av.examples %>
           
           <%= content_tag_for :tr, av do %>
 
@@ -90,10 +90,10 @@
                 <div>
                   <%= render_cf(basic_cf, link: true, css_class:'no-hover') %>
                 </div>
-                <% if basic_ex %>
+                <% if basic_exs && basic_exs.size > 0 %>
                   <hr/>
                   <div>
-                      <%= render_example basic_ex %>
+                    <%= render partial: 'verbs/examples', object: basic_exs, locals: {options: {wrap: true}} %>
                   </div>
                 <% end %>
               <% end %>
@@ -104,18 +104,18 @@
                 <div>
                   <%= render_cf(deriv_cf, link: true, css_class:'no-hover') %>
                 </div>
-                <% if deriv_ex %>
+                <% if deriv_exs && deriv_exs.size > 0 %>
                   <hr/>
                   <div>
-                      <%= render_example deriv_ex %>
-                  </div>                
+                    <%= render partial: 'verbs/examples', object: deriv_exs, locals: {options: {wrap: true}} %>
+                  </div>
                 <% end %>
               <% end %>
             </td>
             
             <td><%= deriv_cf.arg_count if deriv_cf %></td>
 
-            <td><%= "true" if deriv_cf && deriv_ex %></td>
+            <td><%= "true" if deriv_cf && deriv_exs %></td>
             
             
           <% end #table row %>
