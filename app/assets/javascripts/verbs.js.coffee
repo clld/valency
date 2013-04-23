@@ -99,9 +99,6 @@ oDTSettings =
 		
 		# initialize popover for Alternation names
 		$('.cell a[rel="popover"]').popover({placement: 'right'})
-		$('body').click (event)->
-			$target = $(event.target)
-			$('a[rel="popover"]').not($target).popover('hide') unless $target.is('.popover *')
 		
 		# set up hover highlighting for Coding frame index numbers
 		$(".coding_frame.padded-box:not(.no-hover) .idx-no").hover ->

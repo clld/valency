@@ -32,21 +32,6 @@
 	  & > li:nth-child(5){ width:123px; }
 	  & > li:nth-child(2n+7) { width:106px; }
 	}
-	.navbar-inner.no-gradient {
-    background-image:none;
-    background-color:$secondNavbarBackground;
-    border:none;
-  }
-  .nav-tabs { // override Bootstrap defaults: no bottom border in nav tabs
-    border-bottom: none;
-    & > li {
-      margin-bottom: 0;
-    }
-  }
-  .align-with-tabs > li > a { // for an ul.nav with elements: add transparent border
-    border-top:    1px solid transparent;
-    border-bottom: 1px solid transparent;
-  }
   & .cursor-hand, & .cursor-hand:hover { // show cursor as hand – typically on a link (to override Bootstrap default)
     cursor: pointer;
   }
@@ -169,6 +154,13 @@ form.with-heading {
   border: 1px solid $navbarBackground;
   margin: 0 0 10px 0;
   @include box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
+}
+
+// info links (i is the icon)
+a.info > i {
+  cursor: pointer;
+  position:relative;
+  top:0.2em;
 }
 
 // multicolumn dropdown menus with div
