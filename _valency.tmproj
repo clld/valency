@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>currentDocument</key>
-	<string>app/views/layouts/_navigation.html.erb</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -29,50 +27,6 @@
 				<integer>0</integer>
 				<key>line</key>
 				<integer>6</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>app/controllers/languages_controller.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>10</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>9</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>10</integer>
-			</dict>
-		</dict>
-		<key>app/controllers/microroles_controller.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -167,48 +121,6 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>app/views/layouts/_navigation.html.erb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>46</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>24</integer>
-		</dict>
-		<key>app/views/microroles/index.html.erb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>56</integer>
-				<key>line</key>
-				<integer>14</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
-		<key>app/views/verbs/show.html.erb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>0</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
 		<key>db/migrate/20120817141703_add_continent_to_languages.rb</key>
 		<dict>
 			<key>caret</key>
@@ -223,33 +135,10 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>script/abbrevs_nomeaning.rb</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>28</integer>
-				<key>line</key>
-				<integer>3</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
-		</dict>
 	</dict>
-	<key>openDocuments</key>
-	<array>
-		<string>script/abbrevs_nomeaning.rb</string>
-		<string>app/controllers/languages_controller.rb</string>
-		<string>app/views/verbs/show.html.erb</string>
-		<string>app/views/microroles/index.html.erb</string>
-		<string>app/controllers/microroles_controller.rb</string>
-		<string>app/views/layouts/_navigation.html.erb</string>
-	</array>
 	<key>showFileHierarchyDrawer</key>
-	<false/>
+	<true/>
 	<key>windowFrame</key>
-	<string>{{260, 0}, {860, 778}}</string>
+	<string>{{197, 0}, {860, 778}}</string>
 </dict>
 </plist>

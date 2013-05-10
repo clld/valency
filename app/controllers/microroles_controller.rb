@@ -2,7 +2,7 @@ class MicrorolesController < ApplicationController
   # GET /microroles
   # GET /microroles.json
   def index
-    @microroles = Microrole.includes(:verb_coding_frame_microroles).all
+    @microroles = Microrole.joins(:meaning).includes(:verb_coding_frame_microroles).all
 
     respond_to do |format|
       format.html # index.html.erb
