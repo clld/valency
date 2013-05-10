@@ -8,8 +8,8 @@ gem 'ginjo-rfm' # up-to-date fork of Ruby FileMaker API
 group :development do
   gem 'sqlite3'
   gem 'pry-rails'
-  gem 'hirb'      # print formatted result tables to console
-
+  gem 'hirb'       # print formatted result tables to console
+  gem 'xray-rails' # one-click access to views and templates from Browser (experimental)
   # These gems are for triggering tasks upon file changes with Guard
   gem 'rb-fsevent', :require => false
   gem 'guard-bundler'    # run bundle install
