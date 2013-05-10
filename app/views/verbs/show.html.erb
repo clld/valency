@@ -89,9 +89,14 @@
             <th class="idx-no"><%= n %></th>
             <% meanings.each do |m| %>
             <% microrole = arg.microroles.where_meaning(m)[0] %>
-              <td class="microrole"><%= link_to microrole, microrole unless microrole.nil? || microrole.name.blank? %></td>
+              <td class="microrole">
+                <%= link_to microrole, microrole unless microrole.nil? || microrole.name.blank? %>
+              </td>
             <% end %>
-            <td class="coding-set"><%= link_to arg.coding_set, [@language, arg.coding_set] %></td>
+            <td class="coding-set">
+              <% cs = arg.coding_set %>
+              <%= link_to cs, [@language, cs] unless cs.nil? || cs.name.blank? %>
+            </td>
             <td><%= arg.argument_type %></td>
           </tr>
         <% end %>
