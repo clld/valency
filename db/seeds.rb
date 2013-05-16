@@ -228,7 +228,7 @@ class DataImporter
               no_data_strings.include?(attr_value.downcase) ||
               attr_value.respond_to?(:match) && (
                 attr_value.match(/test.*brad/i) ||
-                model == Language && attr_value.match(/(afrikaans|french|kriol|spanish)/i)
+                model == Language && attr_value.match(/(afrikaans|french|kriol|spanish|yupik)/i)
               )
             end then
               LOG.info( "Skipping "<< (
