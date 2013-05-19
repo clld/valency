@@ -72,14 +72,16 @@ class CodingFrame < ActiveRecord::Base
     Hash[pairs]
   end
   
-  # count the number of distinct arguments for sorting
+  # count the number of distinct arguments for sorting (maximum: 9 – for dataTable filters)
   def arg_count
-    @arg_count ||= self[:coding_frame_schema].nil? ? 99 : self[:coding_frame_schema].scan(/\d+/).uniq.size
+    @arg_count ||= self[:coding_frame_schema].nil? ? 9 : self[:coding_frame_schema].scan(/\d+/).uniq.size
   end
   
-  # count the verbs that have this basic coding frame
+  # count the verbs that have this coding frame as their basic coding frame
+  # or that occur regularly in an alternation with this CF as the derived CF
   def verb_count
-    self.verbs.size
+    return self.verbs.count unless self.derived?
+    self.verb_ids_of_derived_cf.uniq.size
   end
   
   # query database for meanings of all verbs associated with this basic CF
@@ -104,13 +106,15 @@ class CodingFrame < ActiveRecord::Base
     self.verbs_of_derived_cf.map{|v|v.coding_frame}.uniq
   end
   
-  # query database for verbs related to this Coding frame via alternations (no matter which ones)
+  # query database for the IDs of verbs related to this Coding frame via alternations
+  def verb_ids_of_derived_cf
+    AlternationValue.where(alternation_occurs: "Regularly", derived_coding_frame_id: self.id)
+    .pluck(:verb_id)
+  end
+  
+  # find the Verbs related to this Coding frame via alternations (only "Regularly")
   def verbs_of_derived_cf
-    Verb.includes(:coding_frame).where(
-      id: AlternationValue.where(
-        :alternation_occurs => "Regularly", :derived_coding_frame_id => self.id
-      ).pluck(:verb_id)
-    )
+    Verb.includes(:coding_frame).where id: verb_ids_of_derived_cf
   end
   
   

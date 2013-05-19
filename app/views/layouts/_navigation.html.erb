@@ -6,8 +6,7 @@
   <% end %>
   <div class="container">
 
-    <ul class="nav">
-
+    <ul class="nav"><!-- upper nav bar -->
       <!-- Languages dropdown -->
       <li class="dropdown" id="language_dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -38,6 +37,9 @@
           <% end %>
         </ul>
       </li>
+      <li class="divider-vertical"></li>
+      
+      <li><%= link_to "All Coding frames", coding_frames_path %></li>
       <li class="divider-vertical"></li>
       
       <li><%= link_to "Microroles", microroles_path %></li>
@@ -86,7 +88,7 @@
       </a>
       <ul class="dropdown-menu hover-items">
         <div class="caption">
-        <%= link_to "Show all #{@language.verbs.size} Verb forms", language_verbs_path(@language), class: "inline" %>,
+        <%= link_to "Show all #{@language.verbs.size} Verb forms", language_verbs_path(@language) %>
           or choose by Verb meaning (80 core meanings shown):
         </div>
         <li class="divider"></li>

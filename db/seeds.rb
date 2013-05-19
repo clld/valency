@@ -226,10 +226,7 @@ class DataImporter
             if (fields_with_test_records & available_attributes).any? do |attr_name|
               (attr_value = fm_record[ fields[ attr_name ] ]).nil? ||
               no_data_strings.include?(attr_value.downcase) ||
-              attr_value.respond_to?(:match) && (
-                attr_value.match(/test.*brad/i) ||
-                model == Language && attr_value.match(/(afrikaans|french|kriol|spanish|yupik)/i)
-              )
+              attr_value.respond_to?(:match) && attr_value.match(/test.*brad/i)
             end then
               LOG.info( "Skipping "<< (
                 attr_value.nil? ? 'empty record' : "\"#{attr_value.gsub(/<.+?>/,'')}\""
@@ -277,3 +274,10 @@ end # of class
 
 di = DataImporter.new
 di.import_data
+
+Language.all.each do |lang|
+  if (name = lang.name).match(/(afrikaans|french|kriol|spanish|central alaskan yupik)/i)
+    LOG.info "Removing all data associated with #{name}..."
+    lang.destroy
+  end
+end

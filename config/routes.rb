@@ -10,16 +10,18 @@ Valency::Application.routes.draw do
     resources :examples,      :only => [:show, :index]
     
   end
-
-  resources :meanings,   :only => [:show, :index]
   
-  resources :microroles, :only => [:show, :index]
-
-  resources :references, :only => [:show, :index]
-
-  resources :people,     :only => [:show, :index]
-
-
+  resources :coding_frames, :only => [:index]
+  
+  resources :meanings,      :only => [:show, :index]
+  
+  resources :microroles,    :only => [:show, :index]
+  
+  resources :references,    :only => [:show, :index]
+  
+  resources :people,        :only => [:show, :index]
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

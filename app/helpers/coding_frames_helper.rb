@@ -34,12 +34,10 @@ module CodingFramesHelper
   # addClass("label") dynamically to highlight the labels
   # options can include "link" (boolean), defaults to false
   # option: css_class - class string to be applied to outermost Coding frame div
-  # option: language - the language the coding frame belongs to (for the link URL)
   def render_cf cf, options = {}
     prefix    = options[:prefix]    || false # prefix a 'B'/'D' label for Basic/Derived?
     highlight = options[:highlight] || EMPTY_ARY  # [2] highlight index no. 2
     tooltip   = options[:tooltip]   || EMPTY_HASH # {2 => "tooltip for 2"}
-    lang      = options[:language]  || @language || nil
     if prefix
       prefix = "<div class=\"cell\">"<<
       "<span class=\"label\" title=\"#{cf.derived? ? 'Derived' : 'Basic'} coding frame\">"<<
@@ -63,7 +61,7 @@ module CodingFramesHelper
     cf_html.gsub!(/'/, APOSTROPHE)
     cf_html = cf_html.html_safe
     
-    cf_html = link_to_if(options[:link] && lang, cf_html, [lang, cf], :class => link_class) do 
+    cf_html = link_to_if(options[:link], cf_html, language_coding_frame_path(cf.language, cf), :class => link_class) do 
       content_tag(:a, cf_html, :class => link_class)
     end
     cf_html = "#{prefix}<div class=\"cell\">#{cf_html}</div>" if prefix

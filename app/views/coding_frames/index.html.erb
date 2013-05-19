@@ -1,9 +1,10 @@
 <!-- Coding frames index -->
 <h1>
   Coding frames
-  <small>of <%= link_to @language.name, @language %></small>
+  <% if @language %>
+    <small>of <%= link_to @language, @language %></small>
+  <% end %>
 </h1>
-
 
 <div class="dt-with-filters">
 
@@ -11,11 +12,11 @@
   <div class="span12">
     <div class="form-inline dt-filters"><!-- filters for dataTable -->
       <div>
-      <label> Show </label>
-	      <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="derived">
-	        <button class="btn btn-mini active"> Basic </button>
-	        <button class="btn btn-mini"> Derived </button>
-	      </div> coding frames.
+        <label> Show </label>
+        <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="derived">
+          <button class="btn btn-mini active"> Basic </button>
+          <button class="btn btn-mini"> Derived </button>
+        </div> coding frames.
       </div>
       
       <div class="inline">
@@ -35,11 +36,11 @@
       </div>
       </div>
     </div><!-- end .dt-filters-->
-  </div><!-- end span12 -->
-</div><!-- end row -->
+  </div><!-- end .span12 -->
+</div><!-- end .row -->
 
 <div class="row">
-  <div class="span12">
+<div class="span12">
 <table id="coding_frames_list" class="table table-striped table-hover table-bordered-sharp dataTable">
   <thead>
     <tr>
@@ -47,32 +48,37 @@
       <th class="hidden-col">derived</th>
       <th class="hidden-col">arg_count</th>
       <th>Verbs</th>
-      <th>Verb meanings &amp; Verb forms</th>
+      <% if @language %>
+        <th>Verb meanings &amp; Verb forms</th>
+      <% else %>
+        <th>Language</th>
+      <% end %>
     </tr>
   </thead>
   
     
   <tbody>
     <% @coding_frames.each do |cf| %>
-    <% verbs = cf.verbs %>
-  	<% mvv   = cf.get_meanings_and_verbs #array of [meaning [verb, verb, ...]] arrays %>
       <tr>
-
         <td>
-          <%= render_cf(cf, prefix: true, count: true, link: true, css_class:'no-hover') unless cf.to_s.blank? %>
+          <%= render_cf(cf, prefix: true, link: true, css_class:'no-hover') unless cf.to_s.blank? %>
         </td>
-        <td><%= cf.derived   %></td>
-        <td><%= cf.arg_count %></td>
-        <td class="number">
-          <%= (vcount = cf.verb_count) %>
-        </td>
-        <td class="columns">
-          <% mvv.each do |m, vv| %>
-            <div class="meaning-and-verbs">
-              <%= m %> (<%= verb_list(vv, true) %>)
-            </div>   
-          <% end %>
-        </td>
+        <td><%= cf.derived %></td>
+        <td class="number"><%= cf.arg_count %> </td>
+        <td class="number"><%= cf.verb_count %></td>
+
+        <% if @language %>
+          <td class="columns">
+            <% mvv   = cf.get_meanings_and_verbs #array of [meaning [verb, verb, ...]] arrays %>
+            <% mvv.each do |m, vv| %>
+              <div class="meaning-and-verbs">
+                <%= m %> (<%= verb_list(vv, true) %>)
+              </div>   
+            <% end %>
+          </td>
+        <% else %>
+          <td></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
