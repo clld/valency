@@ -7,21 +7,21 @@ ns		= @VALENCY.global
 
 oDTSettings_index = 
 	sDom: "<'row'<'span4'i><'span8'f>>t" # no scrolling
-	# sScrollY: "700px"
 	aoColumnDefs: [ # 0: Coding frame, 1: derived, 2: arg_count,
 									# 3: verb_count,	 4: Verb meanings & Verbs
 		{
 			aTargets:[0] # Coding frame
 			sType: "html"
 			asSorting: ['asc','desc']
+			sWidth: "30%"
 			mDataProp: ns.coding_frame_sorter(0)
 		},{
 			aTargets:[3] # verb_count
 			asSorting: ['desc', 'asc']
+			sWidth: "10%"
 		},{
 			aTargets:[4] # Verb meanings & Verbs
 			sType: 'html'
-			sWidth: '60%'
 			mDataProp: dtapi._sorter_fn_empty_last 4
 			asSorting: []
 		}
@@ -38,8 +38,6 @@ oDTSettings_index =
 		$dt			= $cf_list.dataTable $.extend(ns.oDTSettings, oDTSettings_index)
 		
 		$('td.columns').each -> $(this).children().inColumns 3
-		
-		$(".idx-no").hover -> $(@).toggleClass 'label'
 		
 	
 	show: ->

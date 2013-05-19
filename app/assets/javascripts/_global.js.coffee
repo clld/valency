@@ -40,7 +40,7 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 		
 		# show dropdown menus in columns (see custom jQuery plugin)
 		@language_dropdown.find( '.dropdown-menu .divider').nextAll().inColumns 3
-		@meaning_dropdown.find(	'.dropdown-menu .divider').nextAll().inColumns 5
+		@meaning_dropdown.find(  '.dropdown-menu .divider').nextAll().inColumns 5
 		$('#verb_dropdown').find('.dropdown-menu .divider').nextAll().inColumns 5
 		
 		# setup button to toggle comment box – see custom jQuery plugins
@@ -74,10 +74,9 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 				sInfoEmpty: "0"
 				sSearch: ""
 			
-			fnInitComplete: (oSettings, json) ->				
-				# hide columns whose <th> is .hidden-col
-				@hideColumn i for col, i in oSettings.aoColumns when col
-					.nTh.className.match('hidden-col')
+			fnInitComplete: (oSettings, json) ->
+				# hide columns whose <th> is .hidden
+				@hideColumn i for col, i in oSettings.aoColumns when col.nTh.className.match('hidden')
 				
 				# setup filters and togglers
 				# from the table, go up to the .dt-with-filters container

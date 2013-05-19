@@ -45,8 +45,8 @@
   <thead>
     <tr>
       <th>Coding frame</th>
-      <th class="hidden-col">derived</th>
-      <th class="hidden-col">arg_count</th>
+      <th class="hidden">derived</th>
+      <th class="hidden">arg_count</th>
       <th>Verbs</th>
       <% if @language %>
         <th>Verb meanings &amp; Verb forms</th>
@@ -63,8 +63,8 @@
         <td>
           <%= render_cf(cf, prefix: true, link: true, css_class:'no-hover') unless cf.to_s.blank? %>
         </td>
-        <td><%= cf.derived %></td>
-        <td class="number"><%= cf.arg_count %> </td>
+        <td class="hidden"><%= cf.derived %></td>
+        <td class="hidden number"><%= cf.arg_count %> </td>
         <td class="number"><%= cf.verb_count %></td>
 
         <% if @language %>
@@ -77,7 +77,7 @@
             <% end %>
           </td>
         <% else %>
-          <td></td>
+          <td><%= link_to cf.language, cf.language %></td>
         <% end %>
       </tr>
     <% end %>
