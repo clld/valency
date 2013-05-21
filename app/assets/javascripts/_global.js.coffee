@@ -53,6 +53,12 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 		# show tooltip on Example glosses
 		$('.ttip').tooltip({placement: 'bottom'})
 		
+		# show popover on info links (Glossary terms)
+		$('a.info').popover({placement:'bottom'})
+		$('body').click (event)->
+			$target = $(event.target)
+			$('a[rel="popover"]').not($target).popover('hide') unless $target.is('.popover *, a.info *')
+		
 		# Coding frame index numbers: setup hover and click handlers for highlighting
 		# hover on .idx-no: toggle .label on .idx-no with the same data-idx-no
 		idx_no_selector = ".coding_frame:not(.no-hover) .idx-no"

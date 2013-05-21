@@ -27,7 +27,14 @@
 
 <div class="row">  
 	<!-- CODING FRAME --><div class="span4">
-    <h2>Coding frame</h2> 
+    <h2>Coding frame
+      <% definition = truncate(Term.find_by_term('Coding frame').definition, :length => 300, :separator =>'. ', :omission => '... ') %>
+      <a rel="popover" class="info cursor-hand" title="Coding frame"
+         data-content="<%= definition %>">
+         <i class="icon-info-sign"></i>
+      </a>
+      
+    </h2> 
 		<% if cframe %>
     	<%= render_cf(cframe, link: true, css_class: "padded-box active big") if cframe %>
     <% else %>
