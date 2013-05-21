@@ -9,7 +9,7 @@
 	    <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="original_or_new">
 	      <button class="btn btn-mini">original</button>
 	      <button class="btn btn-mini">new</button>
-	    </div> Microroles  
+	    </div> Microroles
 			<label>for</label>
 	    <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="core_or_additional">
 	      <button class="btn btn-mini active">core</button>
@@ -35,14 +35,14 @@
       <tbody>
         
     <% @microroles.each do |mr| %>
-			<% m = mr.meaning %>
+      <% m = mr.meaning %>
       <tr>
-        <td><%= link_to mr.name, mr %></td>
+        <td><%= link_to mr.name, mr, :'data-sort-prefix' => mr.sort_prefix %></td>
         <td><%= link_to m.label, m  %></td>
         <td><%= mr.original_or_new %></td>
         <td class="number"><%= mr.verb_count %></td>
         <td class="number"><%= mr.coding_frame_count %></td>
-				<td><%= m.core_or_additional %></td>
+        <td><%= m.core_or_additional %></td>
       </tr>
     <% end %>
     </tbody>

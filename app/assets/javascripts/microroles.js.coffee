@@ -4,6 +4,17 @@
 dtapi = $.fn.dataTableExt.oApi # see custom_data_table_plugins.js
 ns		= @VALENCY.global
 
+# returns custom sorting method for the mDataProp of the "Microrole" column:
+# using Microrole#sort_prefix, Original roles are to be sorted before new roles
+sort_microroles = (iCol) ->
+	(src, type, val) ->
+		if type is 'sort'
+			return max unless src[iCol]
+			$(src[iCol]).data('sort-prefix') + src[iCol]
+		else
+			if type is 'set' then src[iCol] = val else src[iCol]
+
+
 # dataTable settings for Microroles index
 oDTSettings_index = 
 	sDom: "<'row'<'span8'i><'span4'f>>t"
@@ -20,6 +31,9 @@ oDTSettings_index =
 		},{
 			aTargets:[1] # meaning label
 			sWidth: '20%'
+		},{
+			aTargets:[0] # Microrole
+			mDataProp: sort_microroles 0
 		}
 	]
 	aaSorting: [[1, 'asc'], [0, 'asc']] # sort by meaning label, then microrole

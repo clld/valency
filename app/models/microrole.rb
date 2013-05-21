@@ -1,4 +1,6 @@
 class Microrole < ActiveRecord::Base
+  ORIGINAL = "Original role"
+
   self.primary_key = :id
   # attr_accessible :id, :name, :name_for_url, :original_or_new, :role_letter, :meaning_id
   default_scope joins(:meaning) # had to remove .order("meanings.label") because of PostgreSQL
@@ -37,6 +39,11 @@ class Microrole < ActiveRecord::Base
   # count all verbs associated with this Microrole
   def coding_frame_count
     self.verb_coding_frame_microroles.pluck(:coding_frame_id).uniq.size
+  end
+  
+  # return '0' if it's an Original role, '1' otherwise (for sorting in view)
+  def sort_prefix
+    if self.original_or_new == ORIGINAL then '0' else '1' end
   end
 
 end
