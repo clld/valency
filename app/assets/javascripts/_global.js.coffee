@@ -44,7 +44,7 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 		$('#verb_dropdown').find('.dropdown-menu .divider').nextAll().inColumns 5
 		
 		# setup button to toggle comment box – see custom jQuery plugins
-		$('.toggle-next').each (i,el) -> $(el).align_below_and_setup_toggle()
+		$('.toggle[data-toggle]').each (i,el) -> $(el).align_below_and_setup_toggle()
 		
 		# prevent .disabled links from firing
 		@body.on 'click', '.disabled,.disabled input,.disabled .btn,.disabled a',

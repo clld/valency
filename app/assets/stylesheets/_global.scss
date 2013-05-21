@@ -28,7 +28,7 @@
   }
   .nav { /* fixed column width for .nav > li items in the two nav bars */
     & > li:first-child { width:194px; }
-    & > li:nth-child(3){ width:238px; }
+    & > li:nth-child(3){ width: 10em; }
     & > li:nth-child(5){ width:10.5em; }
     & > li:nth-child(2n+7) { width:106px; }
   }
@@ -101,11 +101,9 @@ h1.no-bold { font-weight:normal; }
 form.with-heading {
   display:inline-block;
   line-height:32px; // as h1 or h2
-  h1 + & { margin:10px 0 0 1.5em;  }
+  h1 + & { margin: 10px 0 0 1.5em;  }
   h2 + & { margin: 8px 0 0 1em;    }  
-  & > span { // fix to align with h1
-    display:inline-block;
-    margin-top:5px;
+  .btn + label { // spacing between button and a following
     margin-left:1em;
   }
 }

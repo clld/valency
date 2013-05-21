@@ -23,7 +23,7 @@
       <!-- Meanings dropdown -->
       <li class="dropdown" id="meaning_dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          Verb meanings (all languages) <b class="caret"></b>
+          Verb meanings <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
           <div class="caption">
@@ -115,7 +115,7 @@
     <!-- Verb forms dropdown (w/ meanings) -->			  
     <li class="dropdown<%= ' active' if controller_name == 'verbs' %>" id="verb_dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        Verb forms <%="(#{@meaning.to_s})" if @meaning %><b class="caret"></b>
+        Verb forms <b class="caret"></b>
       </a>
       <ul class="dropdown-menu hover-items">
         <div class="caption">
@@ -161,7 +161,7 @@
   </div><!-- end .container#submenu -->
 </div><!-- end .navbar-inner -->
 
-<style>.navbar .btn.transparent{opacity:0.2;margin:0.2em;}.navbar .btn.transparent:hover{opacity:1}</style>
+<style>.navbar .btn.transparent{position:absolute;right:0.2em;margin-top:0.2em;opacity:0.25;}.navbar .btn.transparent:hover{opacity:1}</style>
 <a href="mailto:alexander_jahraus@eva.mpg.de?cc=iren_hartmann@eva.mpg.de&subject=ValPaL Feedback&body=Current path (for error reporting): <%= request.path %>"
   class="btn btn-small btn-danger pull-right transparent">
   <i class="icon-white icon-pencil"></i> Feedback

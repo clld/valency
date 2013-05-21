@@ -33,11 +33,12 @@
 	# align_below_and_setup_toggle jQuery Plugin
 	# by Alexander Jahraus
 	# usage: $obj.align_below_and_setup_toggle()
-	# find the immediately following element, align it directly below this
-	# and set a slideToggle handler on click, updating the label of this
+	# $obj must specify a class name in its "data-toggle" attribute
+	# the nearest element of that class is aligned directly below this $obj
+	# and set up to slideToggle on click, updating the label of $obj
 	$.fn.align_below_and_setup_toggle = ->
 		$btn       = this
-		$toggle_me = $btn.next() # could add optional selector here
+		$toggle_me = $btn.siblings(".#{$btn.data 'toggle'}").eq(0)
 		$parent    = $toggle_me.parent()
 		offset     = $btn.offset()
 		
