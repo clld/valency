@@ -18,6 +18,7 @@ class CodingSetsController < ApplicationController
   # GET /languages/ainu/coding_sets/1[.json]
   def show
     @coding_set = @language.coding_sets.includes(:coding_frame_index_numbers => [:coding_frame, :microroles]).find(params[:id])
+    @coding_frames = @coding_set.coding_frames
 
     respond_to do |format|
       format.html # show.html.erb

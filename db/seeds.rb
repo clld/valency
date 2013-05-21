@@ -188,7 +188,7 @@ class DataImporter
   # then reads data from the FileMaker connection using RFM 
   # and creates records in Rails' database
   def import_data
-    models_with_test_records = [Alternation, CodingFrame, Language, Verb, Microrole]
+    models_with_test_records = [Alternation, CodingFrame, CodingSet, Language, Verb, Microrole]
     fields_with_test_records = ["name", "verb_form", "coding_frame_schema"]
     no_data_strings = ['no data', 'none', '(please fill in)']
 

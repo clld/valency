@@ -52,6 +52,35 @@
         <% end %>
       </li>
       <li class="divider-vertical"></li>
+      
+      <li class="dropdown" id="about_dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          About <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Project description</a></li>
+          <li><a href="#">The Database</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Help</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Imprint</a></li>
+        </ul>
+      </li>
+      <li class="divider-vertical"></li>
+
+      <li class="dropdown" id="export_dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          Export <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <% if @language %>
+            <li><a href="#">Data set for <%= @language.to_s %></a></li>
+          <% end %>
+          <li><a href="#">The entire Database</a></li>
+        </ul>
+      </li>
+      <li class="divider-vertical"></li>
+      
 
     </ul><!-- end .nav -->
 
@@ -124,6 +153,8 @@
     <li class="divider-vertical"></li>
     
     <%= submenu_items %w(coding_frames coding_sets alternations examples), divider='divider-vertical' %>
+    
+    <li class="divider-vertical"></li>
     
     </ul><!-- end .nav -->
 

@@ -1,6 +1,6 @@
 <!-- Coding set: show -->
 <h1 class="no-bold">
-  <%= @coding_set.to_s %>
+  <%= @coding_set %>
 </h1>
 
 <div class="alert alert-block alert-error">
@@ -11,19 +11,32 @@
 
 <div class="row">
   <div class="span12">
+    
+    <p>The table is supposed to be similar to the
+      <a href="../coding_frames">Coding frames list</a>.
+    </p>
 
     <table class="table table-bordered-sharp table-striped table-hover dataTable">
       <thead>
         <tr>
-          <th></th>
+          <th>Coding frame</th>
+          <th># Microroles</th>
+          <th>Microrole + Verb form(s), sorted by microrole</th>
         </tr>
       </thead>
       <tbody>
-      <% [].each do |x| %>
+
         <tr>
-          <td></td>
+          <td>…</td>
+          <td class="number">40</td>
+          <td>…</td>
         </tr>
-      <% end %>
+        <tr>
+          <td>…</td>
+          <td class="number">12</td>
+          <td>…</td>
+        </tr>
+
 
       </tbody>
     </table>
