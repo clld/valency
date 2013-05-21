@@ -13,7 +13,6 @@ oDTSettings_index =
 			aTargets:[0] # Coding frame
 			sType: "html"
 			asSorting: ['asc','desc']
-			sWidth: "30%"
 			mDataProp: ns.coding_frame_sorter(0)
 		},{
 			aTargets:[3] # verb_count
@@ -24,10 +23,10 @@ oDTSettings_index =
 			sType: 'html'
 			mDataProp: dtapi._sorter_fn_empty_last 4
 			asSorting: []
+			sWidth: "25%"
 		}
 	]
 	aaSorting: [[3,'desc'], [0,'asc']]
-		
 
 
 @VALENCY.coding_frames =
@@ -35,7 +34,12 @@ oDTSettings_index =
 		
 	index: ->
 		$cf_list = $('#coding_frames_list')
-		$dt			= $cf_list.dataTable $.extend(ns.oDTSettings, oDTSettings_index)
+		$dt      = $cf_list.dataTable $.extend(ns.oDTSettings, oDTSettings_index)
+		
+		oDTsettings = $dt.fnSettings()
+		if oDTsettings.aoColumns[4].sTitle is "Language" #  enable sorting on last column if it's "Language"
+			oDTsettings.aoColumns[4].asSorting.push("asc","desc")
+			s.aoColumns[4].nTh.className = "sorting"
 		
 		$('td.columns').each -> $(this).children().inColumns 3
 		
