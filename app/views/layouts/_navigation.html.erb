@@ -46,16 +46,15 @@
       </li>
       <li class="divider-vertical"></li>
       
-      <li><%= link_to "Microroles", microroles_path %></li>
+      <li class="<%= "active" if controller_name == 'microroles' %>">
+        <%= link_to_unless_current "Microroles", microroles_path do %>
+          <%= link_to "Microroles", '#top' %>
+        <% end %>
+      </li>
       <li class="divider-vertical"></li>
 
     </ul><!-- end .nav -->
 
-    <a href="mailto:alexander_jahraus@eva.mpg.de?cc=iren_hartmann@eva.mpg.de&subject=ValPaL Feedback&body=Current path (for error reporting): <%= request.path %>"
-      class="btn btn-small btn-danger pull-right"
-      style="margin-right:67px; margin-top:1px;">
-      <i class="icon-white icon-pencil"></i> Feedback
-    </a>
 
   </div><!-- end .navbar-inner -->
 </div><!-- end .container -->
@@ -131,4 +130,8 @@
   </div><!-- end .container#submenu -->
 </div><!-- end .navbar-inner -->
 
-
+<style>.navbar .btn.transparent{opacity:0.2;margin:0.2em;}.navbar .btn.transparent:hover{opacity:1}</style>
+<a href="mailto:alexander_jahraus@eva.mpg.de?cc=iren_hartmann@eva.mpg.de&subject=ValPaL Feedback&body=Current path (for error reporting): <%= request.path %>"
+  class="btn btn-small btn-danger pull-right transparent">
+  <i class="icon-white icon-pencil"></i> Feedback
+</a>

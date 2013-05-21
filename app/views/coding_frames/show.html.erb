@@ -3,7 +3,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="row">
-  <div class="span4">
+  <div class="<%= if @related_coding_frames.size > 0 then 'span4' else 'span6' end %>">
     <h1 class="small"><%= cf.derived %> Coding frame</h1>
     <%= render_cf(cf, css_class: "padded-box active big") %>
     <% if cf.description %>
