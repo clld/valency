@@ -29,7 +29,7 @@
   .nav { /* fixed column width for .nav > li items in the two nav bars */
     & > li:first-child { width:194px; }
     & > li:nth-child(3){ width:238px; }
-    & > li:nth-child(5){ width:123px; }
+    & > li:nth-child(5){ width:10.5em; }
     & > li:nth-child(2n+7) { width:106px; }
   }
   .navbar-inner.no-gradient {

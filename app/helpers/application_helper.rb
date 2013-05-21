@@ -31,7 +31,7 @@ module ApplicationHelper
     if divider then divider = "<li class=\"#{divider}\"></li>" else divider='' end
     
     controller_names.map do |c_name|
-      css_class = if c_name == controller_name then 'active' else '' end
+      css_class = if @language && c_name == controller_name then 'active' else '' end
       css_class << "#{' ' unless css_class.blank?}disabled" unless @language
       target = send('language_' << c_name << '_path', @language) if @language      
       text  = c_name == 'verbs' ? 'Verb forms' : c_name.humanize
@@ -39,7 +39,7 @@ module ApplicationHelper
       capture do
         content_tag(:li, class: css_class) do
           link_to_unless_current text, target, class: 'cursor-hand' do
-            content_tag :a, text
+            link_to text, '#top'
           end
         end
       end

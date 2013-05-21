@@ -39,7 +39,11 @@
       </li>
       <li class="divider-vertical"></li>
       
-      <li><%= link_to "All Coding frames", coding_frames_path %></li>
+      <li class="<%= "active" if controller_name == 'coding_frames' && !@language %>">
+        <%= link_to_unless_current "All Coding frames", coding_frames_path do %>
+          <%= link_to "All Coding frames", '#top' %>
+        <% end %>
+      </li>
       <li class="divider-vertical"></li>
       
       <li><%= link_to "Microroles", microroles_path %></li>
@@ -64,14 +68,13 @@
     <ul class="nav">
       <li id="nav_language" class="<%= 'active' if controller_name == 'languages' && @language %>">
       <% if @language %>
-        <%= link_to_unless_current @language.to_s, @language, title: "Overview for #{@language.to_s}" do %>
-          <%= content_tag :a, @language.to_s %>
+        <%= link_to_unless_current @language, @language, title: "Overview for #{@language}" do %>
+          <%= link_to @language.to_s, '#top' %>
         <% end %>
-      <% else %>
-        <%# no language selected %>
+      <% else # no language selected %>
         <a id="choose_lang">(choose a language)</a>
       <% end %>
-    </li>
+      </li>
 
     <li class="divider-vertical"></li>	
 
