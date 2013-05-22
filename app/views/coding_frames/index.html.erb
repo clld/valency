@@ -59,9 +59,10 @@
     
   <tbody>
     <% @coding_frames.each do |cf| %>
+    <% next if cf.to_s.blank? || cf.verb_count < 1 %>
       <tr>
         <td>
-          <%= render_cf(cf, prefix: true, link: true, css_class:'no-hover') unless cf.to_s.blank? %>
+          <%= render_cf(cf, prefix: true, link: true, css_class:'no-hover') %>
         </td>
         <td class="hidden"><%= cf.derived %></td>
         <td class="hidden number"><%= cf.arg_count %> </td>

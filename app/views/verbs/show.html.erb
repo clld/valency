@@ -12,12 +12,14 @@
     <form class="form-inline pull-left with-heading">
       <% if @verb.comment %>
         <a class="btn btn-mini toggle" data-toggle="comment">show comment</a>
-        <% if @synonyms && @synonyms.size > 0 %>
-          <label>
-            <%= pluralize(@synonyms.size, "other Verb form") %>
-            for meaning "<%= @meaning.to_s %>": <%= verb_list(@synonyms, as_links = true, meaning = @meaning) %>
-          </label>
-        <% end %>
+      <% end %>
+      <% if @synonyms && @synonyms.size > 0 %>
+        <label>
+          <%= pluralize(@synonyms.size, "other Verb form") %>
+          for meaning "<%= @meaning.to_s %>": <%= verb_list(@synonyms, as_links = true, meaning = @meaning) %>
+        </label>
+      <% end %>
+      <% if @verb.comment %>
         <div class="comment"><p class="box"><%= raw @verb.comment %></p></div>
       <% end %>
     </form>
