@@ -1,14 +1,19 @@
 class CodingFramesController < ApplicationController
+  before_filter :current_language
+  def current_language
+    @current_language = Language.find cookies[:current_language_id] rescue nil
+  end
 
   def get_language
     @language = Language.includes(:coding_frames).find_by_name_for_url(params[:language_id])
+    cookies[:current_language_id] = @language.id
   end
   
   # GET /coding_frames[.json]
   # GET /languages/russian/coding_frames[.json]
   def index
     if params[:language_id]
-      get_language # sets @language variable
+      get_language # sets @language variable      
       @coding_frames = @language.coding_frames.includes(:verbs => :meanings)
     else # no language given
       @coding_frames = CodingFrame.includes(:language, :verbs).all

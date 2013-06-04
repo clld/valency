@@ -48,6 +48,9 @@ label.disabled {
 }
 
 /* the .comment .box is toggled on and off with a button */
+.btn[data-toggle=comment] {
+  min-width:7.1em;
+}
 .comment { // a div with a p.box inside
   position:relative;
   clear:both;
@@ -97,7 +100,13 @@ h1.no-bold { font-weight:normal; }
 }
 
 
-/* alignment of a form */
+/* vertical alignment of a button group next to a heading */
+.btn-group.with-heading {
+  float: right;
+  position: relative;
+  top: 16px;
+}
+/* alignment of an inline form next to a heading */
 form.with-heading {
   display:inline-block;
   line-height:32px; // as h1 or h2

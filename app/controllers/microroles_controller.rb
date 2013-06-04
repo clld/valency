@@ -1,4 +1,9 @@
 class MicrorolesController < ApplicationController
+  before_filter :current_language
+  def current_language
+    @current_language = Language.find cookies[:current_language_id] rescue nil
+  end
+  
   # GET /microroles
   # GET /microroles.json
   def index
@@ -33,8 +38,6 @@ class MicrorolesController < ApplicationController
       [cf, (cf.coding_frame_index_numbers & mr_index_numbers).uniq.first || nil]
     end ]
     
-    
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @microrole }

@@ -3,6 +3,7 @@ class VerbsController < ApplicationController
   
   def get_language
     @language = Language.includes(:verbs, :gloss_meanings).find_by_name_for_url(params[:language_id])
+    cookies[:current_language_id] = @language.id
   end
   
   # GET /languages/1/verbs
@@ -20,7 +21,11 @@ class VerbsController < ApplicationController
   # GET /languages/1/verbs/1
   # GET /languages/1/verbs/1.json
   def show
-    @verb = @language.verbs.find(params[:id])
+    @verbs = @language.verbs
+    @verbs_of_core_meanings = @verbs.includes(:meanings).where(
+      :meanings_verbs => {:meaning_id => @meanings_core.pluck(:id)}
+    ).uniq.order("meanings.label")
+    @verb = @verbs.find(params[:id])
     if params[:meaning]
       @meaning  = Meaning.find_by_label_for_url!(params[:meaning]) || nil
       @synonyms = @meaning.verbs.where(language_id: @language.id) - [@verb]

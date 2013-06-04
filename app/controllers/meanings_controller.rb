@@ -1,4 +1,9 @@
 class MeaningsController < ApplicationController
+  before_filter :current_language
+  def current_language
+    @current_language = Language.find cookies[:current_language_id] rescue nil
+  end
+
   # GET /meanings
   # GET /meanings.json
   def index
@@ -13,8 +18,8 @@ class MeaningsController < ApplicationController
   # GET /meanings/1
   # GET /meanings/1.json
   def show
-    # TODO remove the bang in production
-    @meaning = Meaning.find_by_label_for_url!(params[:id])
+    @meanings = Meaning.all # for the previous/next links
+    @meaning  = Meaning.find_by_label_for_url!(params[:id])
     @microroles = @meaning.microroles.all
     @verbs      = @meaning.verbs.includes(:coding_frame => {:coding_frame_index_numbers => :microroles})
 

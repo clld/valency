@@ -1,9 +1,13 @@
 <!-- Coding frames index -->
 <h1>
   Coding frames
-  <% if @language %>
-    <small>of <%= link_to @language, @language %></small>
-  <% end %>
+  <small>
+    <% if @language %>
+     of <%= link_to @language, @language %>
+    <% else %>
+      for all Languages
+    <% end %>
+  </small>
 </h1>
 
 <div class="dt-with-filters">

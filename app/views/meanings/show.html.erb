@@ -1,13 +1,15 @@
 <!-- Meaning -->
 <p id="notice"><%= notice %></p>
 
-<h1>
-  <%= @meaning.label.upcase %>
-  <small><%= @meaning.core_or_additional %> meaning</small>
-</h1>
-
 <div class="row">
   <div class="span6"><!-- meaning details -->
+    <div>
+      <h1 class="pull-left">
+        <%= @meaning.label.upcase %>
+        <small><%= @meaning.core_or_additional %> meaning</small>
+      </h1>
+      <div class="btn-group with-heading"><%= prev_next_links(@meanings, @meaning) %></div>
+    </div>
     <table class="table table-condensed table-horizontal">
       <tbody>
         <tr>

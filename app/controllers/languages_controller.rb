@@ -5,6 +5,7 @@ class LanguagesController < ApplicationController
   def index
     # get alphabetical list of "continents" (geographical regions)
     @languages = Language.includes(:contributors).all
+    cookies.delete :current_language_id # unset the cookie
     
     # this sorts regions alphabetically but we might need them in custom order
     @regions   = @languages.map{|l| l.region}.uniq.sort
@@ -23,6 +24,7 @@ class LanguagesController < ApplicationController
   # GET /languages/1.json
   def show
     @language        = Language.includes(:verbs).find_by_name_for_url(params[:id])
+    cookies[:current_language_id] = @language.id
     @iso_code        = @language.iso_code
     @contributors    = @language.get_contributors
     @native_speakers = @language.get_native_speakers

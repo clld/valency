@@ -3,6 +3,7 @@ class CodingSetsController < ApplicationController
   
   def get_language
     @language = Language.includes(:coding_sets).find_by_name_for_url(params[:language_id])
+    cookies[:current_language_id] = @language.id
   end
   
   # GET /languages/ainu/coding_sets[.json]

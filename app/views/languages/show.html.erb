@@ -2,17 +2,19 @@
 <% enable_gmaps %>
 <div class="row">
   <div class="span6">
-    
-    <h1>
-      <%= @language %>
-      <% if @iso_code %>
-        <a title="Look up ISO code in Glottolog" href="http://www.glottolog.org/glottolog/?iso=<%= @iso_code %>" 
-           class="label"><%= @iso_code %></a>
-        <a title="Look up in WALS" href="http://wals.info/languoid/by_code/iso_639_3_<%= @iso_code %>">
-          <%= image_tag('icons/wals.png', size: '16x16') %>
-        </a>
-      <% end %>
-    </h1>
+    <div>
+      <h1 class="pull-left">
+        <%= @language %>
+        <% if @iso_code %>
+          <a title="Look up ISO code in Glottolog" href="http://www.glottolog.org/glottolog/?iso=<%= @iso_code %>" 
+             class="label"><%= @iso_code %></a>
+          <a title="Look up in WALS" href="http://wals.info/languoid/by_code/iso_639_3_<%= @iso_code %>">
+            <%= image_tag('icons/wals.png', size: '16x16') %>
+          </a>
+        <% end %>
+      </h1>
+      <div class="btn-group with-heading"><%= prev_next_links(@languages, @language) %></div>
+    </div>
     
     <table class="table table-condensed table-hover" id="language_metadata">
       <% if @language.variety %>
@@ -57,20 +59,24 @@
   </div>
 
   <div class="span6">
-    <h2><%= "Contributor".pluralize @contributors.size %></h2>
-    <% if @contributors.size < 1 %>
-      (not specified)
-    <% else %>
-      <%= render partial: 'contributors', object: @contributors %>
-    <% end %>
-    
+    <div>
+      <h2 class="pull-left"><%= "Contributor".pluralize @contributors.size %></h2>
+    </div>
+    <div class="clear">
+      <% if @contributors.size < 1 %>
+        (not specified)
+      <% else %>
+        <%= render partial: 'contributors', object: @contributors %>
+      <% end %>
+    </div>
+      
     <% if @native_speakers.size > 0 %>
       <div class="clear" style="margin-top:8px;">
         <b>with data contributions by <%= pluralize @native_speakers.size, "native speaker" %></b>
       </div>
     <% end %>
-  </div>
-</div>
+  </div><!-- .span6 -->
+</div><!-- .row -->
 
 <div class="row">
   <div class="span12">
