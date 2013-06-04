@@ -72,8 +72,7 @@ oDTSettings =
 		$('#verbs_list').dataTable $.extend(
 			ns.oDTSettings,
 			{
-				sDom: "<'row'<'span4'i><'span8'f>>tS"
-				sScrollY: "700px"
+				sDom: "<'row'<'span4'i><'span8'f>>t"
 				aoColumnDefs: [
 					{
 						aTargets:[3] # Coding frame
