@@ -14,6 +14,11 @@ class Example < ActiveRecord::Base
   has_and_belongs_to_many :alternation_values
   has_and_belongs_to_many :verbs  
   
+  # get verbs associated with this example
+  def get_verbs
+    @verbs ||= self.verbs
+  end
+
   # get first Meaning of first related Verb of this Example
   def get_meaning
     unless self.verbs.empty?

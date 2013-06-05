@@ -28,4 +28,4 @@ oDTSettings_index =
 	
 	
 	show: ->
-		@index
+		@index() # we only use one layout for both index and show actions

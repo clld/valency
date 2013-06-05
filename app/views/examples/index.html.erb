@@ -1,7 +1,10 @@
 <!-- Examples index -->
 <h1>
-  Examples
-  <small>of <%= link_to @language, @language %></small>
+  <%= "Example".pluralize @examples.size %>
+  <small>
+    <%= @example.number if @examples.size == 1 %>
+    of <%= link_to @language, @language %>
+  </small>
 </h1>
 
 <div class="alert alert-block alert-error">
@@ -19,7 +22,7 @@
         <th style="width:50%">Example</th>        
         <th>Verb meaning</th>
         <th>Example of...</th>
-        <th class="hidden">#</th>
+        <th class="hidden">#</th><% # for sorting only  %>
       </tr>
     </thead>
     <tbody>
@@ -47,7 +50,9 @@
           <% end %>
 
         </td>
-        <td><%= ex.number %></td>
+        <td class="hidden"><% # table is sorted by this column %>
+          <%= "#{}#{ex.number}" #TODO prefix sort digit: CF examples before the others %>
+        </td>
       <% end %>
     <% end %>
   </tbody>
