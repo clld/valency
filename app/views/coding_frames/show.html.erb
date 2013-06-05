@@ -7,7 +7,7 @@
     <h1 class="small"><%= cf.derived %> Coding frame</h1>
     <%= render_cf(cf, css_class: "padded-box active big") %>
     <% if cf.description %>
-      <div class="justify"><%= "(#{cf.description})" %></div>
+      <div class="justify"><%= "(#{cf.description.strip})" %></div>
     <% end %>
     <table class="table table-bordered-sharp table-condensed" style="margin-top:1em">
       <thead>
