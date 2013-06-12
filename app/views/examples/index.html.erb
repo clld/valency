@@ -17,12 +17,12 @@
   <div class="span12">
 
     <table class="table table-bordered-sharp table-striped table-hover dataTable">
-      <thead>
+    <thead>
       <tr>
-        <th style="width:50%">Example</th>        
+        <th style="width:50%">Example</th>
         <th>Verb meaning</th>
         <th>Example of...</th>
-        <th class="hidden">#</th><% # for sorting only  %>
+        <th class="hidden">#</th>
       </tr>
     </thead>
     <tbody>
@@ -50,8 +50,8 @@
           <% end %>
 
         </td>
-        <td class="hidden"><% # table is sorted by this column %>
-          <%= "#{}#{ex.number}" #TODO prefix sort digit: CF examples before the others %>
+        <td class="hidden">
+          <%= "#{}#{ex.number}" %>
         </td>
       <% end %>
     <% end %>

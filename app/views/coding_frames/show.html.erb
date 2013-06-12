@@ -14,7 +14,7 @@
         <tr>
           <th class="idx-no">#</th>
           <th>Coding set</th>
-          <th style="max-width:50px;">Arg. type</th>
+          <th style="max-width:50px;">Argument type</th>
         </tr>
       </thead><tbody>
       <% cf.index_numbers_eager_load.each do |arg| # arg is a Coding frame index number %>
@@ -67,9 +67,9 @@
   <div class="span8">
     <h2>
       <% if cf.derived? %>
-        Verbs that <em>regularly</em> occur in Alternations with this derived Coding frame
+        Verb forms occurring <em>regularly</em> in Alternations<br/> with this derived Coding frame
       <% else %>
-        Verbs having this basic Coding frame
+        Verb forms with this basic Coding frame
       <% end %>
     </h2>
     <table id="verb_list" class="table table-bordered-sharp table-striped table-hover dataTable">

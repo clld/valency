@@ -34,7 +34,7 @@ oDTSettings_show =
 		sType: "html"
 		mDataProp: ns.coding_frame_sorter(4)
 	]
-	aaSorting: [[4,'asc'],[0,'asc']] # By Coding frame then Language
+	aaSorting: [[0,'asc']] # by Language name, ascending
 
 @VALENCY.meanings =
 	init: ->
