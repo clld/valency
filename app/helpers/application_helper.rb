@@ -60,7 +60,7 @@ module ApplicationHelper
   # @param  current [Object] the currently displayed object to determine neighbours
   def prev_next_links(objects, current, css_class = "btn btn-mini")
     c_name = controller_name
-    pos    = objects.index(current)
+    pos    = objects.index(current) || 0 # avoid nil index: if not found, assume 0
     pred, succ = objects[pos-1], objects[pos+1] # predecessor, successor (one of these can be nil)
     prefix    = 'language_' if @language && c_name == "verbs"
   
@@ -77,10 +77,9 @@ module ApplicationHelper
     end
     
     links = ""
-    title_suffix = ' (core meanings only)' if 'verbs' == c_name
     if pred_path
       links << link_to(raw('<i class="icon-chevron-left"></i>'), pred_path,
-        class: css_class, title: "Previous #{name_sg}#{title_suffix}"
+        class: css_class, title: "Previous #{name_sg}"
       )
     end
     
@@ -88,7 +87,7 @@ module ApplicationHelper
     
     if succ_path
       links << link_to(raw('<i class="icon-chevron-right"></i>'), succ_path,
-      class: css_class, title: "Next #{name_sg}#{title_suffix}"
+      class: css_class, title: "Next #{name_sg}"
     )
     end
     
