@@ -62,7 +62,7 @@ module ApplicationHelper
     c_name = controller_name
     pos    = objects.index(current) || 0 # avoid nil index: if not found, assume 0
     pred, succ = objects[pos-1], objects[pos+1] # predecessor, successor (one of these can be nil)
-    prefix    = 'language_' if @language && c_name == "verbs"
+    prefix = 'language_' if @language && c_name == "verbs"
   
     path_one = "#{prefix}#{c_name.singularize}_path".to_sym # e.g. :language_verb_path
     path_all = "#{prefix}#{c_name}_path".to_sym             # e.g. :language_verbs_path
@@ -73,7 +73,11 @@ module ApplicationHelper
     name_sg  = name_pl.singularize
     
     pred_path, succ_path = [pred, succ].map! do |obj| # get paths for objects
-      obj.nil? ? nil : prefix ? send(path_one, @language, obj) : send(path_one, obj)
+      params = {}
+      if (obj.is_a? Verb) && (mm = obj.meanings).size > 0
+        params[:meaning] = mm.first.to_param
+      end
+      obj.nil? ? nil : prefix ? send(path_one, @language, obj, params) : send(path_one, obj)
     end
     
     links = ""

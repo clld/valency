@@ -21,7 +21,7 @@ class VerbsController < ApplicationController
   # GET /languages/1/verbs/1
   # GET /languages/1/verbs/1.json
   def show
-    @verbs = @language.verbs.includes(:meanings).order("meanings.label")
+    @verbs = @language.verbs.includes(:meanings).order("meanings.label,verbs.verb_form").uniq
     @verb  = @verbs.find(params[:id])
     if params[:meaning]
       @meaning  = Meaning.find_by_label_for_url!(params[:meaning]) || nil
