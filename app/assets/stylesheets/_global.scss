@@ -109,11 +109,11 @@ h1.no-bold { font-weight:normal; }
 /* alignment of an inline form next to a heading */
 form.with-heading {
   display:inline-block;
-  line-height:32px; // as h1 or h2
-  h1 + & { margin: 10px 0 0 1.5em;  }
+  line-height:30px; // as h1 or h2
+  h1 + & { margin: 14px 0 0 1.5em;  }
   h2 + & { margin: 8px 0 0 1em;    }  
-  .btn + label { // spacing between button and a following
-    margin-left:1em;
+  .btn + label { // spacing between button and a following label
+    margin-left: 1em;
   }
 }
 /* dataTable filters: buttons/btn-groups to toggle column filters */
