@@ -55,8 +55,9 @@
 	
 	#--------------------------------- showing and hiding columns ---------------------------------
 	# hide a column by index or title
-	api.hideColumn = (oS, mCol) ->
+	api.hideColumn = (oSettings, mCol) ->
 		if (mCol = @getColumnIndex(mCol))?
+			$(oSettings.aoColumns[mCol].nTh).removeClass("hidden")
 			@fnSetColumnVis mCol, false
 			false # return column's new visibility
 	

@@ -1,8 +1,5 @@
 # CHANGELOG
 
-## August 02, 2013
-
-
 ## March 2013
 ** additions **
 - added logo and welcome page
