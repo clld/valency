@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130423074310) do
+ActiveRecord::Schema.define(:version => 20130806095344) do
 
   create_table "alternation_values", :id => false, :force => true do |t|
     t.integer "verb_id",                 :limit => 8
@@ -204,12 +204,15 @@ ActiveRecord::Schema.define(:version => 20130423074310) do
   add_index "meanings_verbs", ["verb_id"], :name => "index_meanings_verbs_on_verb_id"
 
   create_table "microroles", :id => false, :force => true do |t|
-    t.integer "id",              :limit => 8
+    t.integer "id",                  :limit => 8
     t.string  "name"
-    t.integer "meaning_id",      :limit => 8
+    t.integer "meaning_id",          :limit => 8
     t.string  "role_letter"
     t.string  "original_or_new"
     t.string  "name_for_url"
+    t.integer "verbs_count"
+    t.integer "coding_frames_count"
+    t.integer "languages_count"
   end
 
   add_index "microroles", ["id"], :name => "index_microroles_on_id", :unique => true
