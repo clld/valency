@@ -279,6 +279,11 @@ table {
     }
   }
   
+  hr {
+    border-bottom-color: $tableBorder;
+    border-top-style: none;
+    margin: 14px 0;
+  }
   /* highly condensed table */
   &.table-very-condensed {
     font-size: 90%;
