@@ -10,17 +10,30 @@ span.sc { // small caps
 .examples-container {
 	display:table;
 
+  & > .example .body {
+    padding-bottom: 1em; // vertical padding between examples
+  }
 	.divider { // the divider is invisible because of display:table
+    position: relative; // to display the label on top of the divider
 	  margin:0;
+    &:after {
+      content: "other examples";
+      display: block;
+      position: absolute;
+      top: -10px;
+      left: 80px;
+      width: 8em;
+      text-align: center;
+      font-size: 80%;
+      color: $tableBorder;
+      background: #fff;
+    }
 	  & + .example {
       .number, .body {
   	    padding-top:1em;
         border-top:1px solid $tableBorder;
       }
 	  }
-  }
-  & > .example:not(:last-child) .body {
-    padding-bottom:1em;
   }
 }
 .example {
@@ -56,7 +69,7 @@ td .examples-container > .example { /* make paddings smaller when inside a table
   .number {
     padding-right:6px;
   }
-  &:not(:last-child) .body {
+  .body {
     padding-bottom:0.5em;
   }
 }
