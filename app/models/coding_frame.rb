@@ -1,6 +1,8 @@
 class CodingFrame < ActiveRecord::Base
   self.primary_key = :id
   # attr_accessible :coding_frame_schema, :comment, :description, :id, :language_id, :derived
+  PLACEHOLDER = "replace me!"
+  DERIVED     = "Derived"
 
   belongs_to :language
 
@@ -23,7 +25,7 @@ class CodingFrame < ActiveRecord::Base
 
   # string representation
   def to_s
-    self.coding_frame_schema
+    self.coding_frame_schema unless self.coding_frame_schema == PLACEHOLDER
   end
   
   # treat "replace me!" as empty; normalize whitespace
@@ -54,7 +56,7 @@ class CodingFrame < ActiveRecord::Base
   
   # return true if the coding frame is derived
   def derived?
-    self.derived == 'Derived'
+    self.derived == DERIVED
   end
 
   # Helper method. Returns a Hash from CodingFrameIndexNumbers (ActiveRecord obj.)

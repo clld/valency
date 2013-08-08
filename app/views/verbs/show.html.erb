@@ -41,7 +41,7 @@
 		<% if cframe %>
     	<%= render_cf(cframe, link: true, css_class: "padded-box active big") if cframe %>
     <% else %>
-      not specified
+      <span style="color:#999;">not specified</span>
     <% end %>
 
     <% if ["Simplex", "Complex"].include? (s = @verb.simplex_or_complex) %>
@@ -119,7 +119,7 @@
       <% else %>
         no meaning specified;
       <% end %>
-      no coding frame specified
+      <span style="color:#999;"> no coding frame specified</span>
     <% end %>
   </div>
 

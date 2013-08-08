@@ -18,6 +18,12 @@ class CodingFramesController < ApplicationController
     else # no language given
       @coding_frames = CodingFrame.includes(:language, :verbs).all
     end
+    @arg_counts = @coding_frames.map do |cf|
+      cf.arg_count unless cf.nil? || cf.coding_frame_schema.blank?
+    end
+    @arg_counts.uniq!
+    @arg_counts.keep_if{|x|x} # reject nil values
+    @arg_counts.sort!
 
     respond_to do |format|
       format.html # index.html.erb
