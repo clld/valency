@@ -15,6 +15,7 @@ span.sc { // small caps
   }
 	.divider { // the divider is invisible because of display:table
     position: relative; // to display the label on top of the divider
+    display: block; // otherwise Firefox has trouble with positioning
 	  margin:0;
     &:after {
       content: "other examples";
