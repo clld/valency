@@ -34,16 +34,15 @@ oDTSettings_index =
 		
 	index: ->
 		$cf_list = $('#coding_frames_list')
-		last_column_is_language = ($cf_list.find('th').last().text() is "Language")
 		
-		if last_column_is_language # sort on the Language column
-			oDTSettings_index.aoColumnDefs[2].asSorting = ["asc","desc"] # enable sorting
+		language_column_shown = $cf_list.data("language") is "all" 
+		if language_column_shown # sort on the Language column
+			oDTSettings_index.aoColumnDefs[2].asSorting.push("asc","desc") # enable
 			oDTSettings_index.aaSorting = [[4,'asc']]
 		
-		$dt = $cf_list.dataTable $.extend(ns.oDTSettings, oDTSettings_index)
-		unless last_column_is_language
-			$('td.columns').each -> $(this).children().inColumns(3)
+		$('td.columns').each -> $(this).children().inColumns(3)
 		
+		$dt = $cf_list.dataTable $.extend(ns.oDTSettings, oDTSettings_index)		
 	
 	show: ->
 		$verb_list = $('#verb_list')

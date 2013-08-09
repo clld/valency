@@ -44,7 +44,9 @@
 
 <div class="row">
 <div class="span12">
-<table id="coding_frames_list" class="table table-striped table-hover table-bordered-sharp dataTable">
+<table id="coding_frames_list"
+       class="table table-striped table-hover table-bordered-sharp dataTable"
+       data-language="<%= "all" unless @language  %>">
   <thead>
     <tr>
       <th>Coding frame</th>
@@ -55,6 +57,8 @@
         <th>Verb meanings &amp; Verb forms</th>
       <% else %>
         <th>Language</th>
+        <th class="hidden">Continent</th>
+        <th class="hidden">Family</th>
       <% end %>
     </tr>
   </thead>
@@ -80,8 +84,11 @@
               </div>   
             <% end %>
           </td>
-        <% else %>
-          <td><%= link_to cf.language, cf.language %></td>
+        <% else # no language specified %>
+          <% lang = cf.language %>
+          <td><%= link_to lang, lang %></td>
+          <td class="hidden"><%= lang.continent %></td>
+          <td class="hidden"><%= lang.family %></td>
         <% end %>
       </tr>
     <% end %>

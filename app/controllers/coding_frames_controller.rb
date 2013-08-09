@@ -18,12 +18,15 @@ class CodingFramesController < ApplicationController
     else # no language given
       @coding_frames = CodingFrame.includes(:language, :verbs).all
     end
+
+    # argument counts of the coding frames
     @arg_counts = @coding_frames.map do |cf|
       cf.arg_count unless cf.nil? || cf.coding_frame_schema.blank?
     end
     @arg_counts.uniq!
     @arg_counts.keep_if{|x|x} # reject nil values
     @arg_counts.sort!
+    
 
     respond_to do |format|
       format.html # index.html.erb
@@ -34,16 +37,16 @@ class CodingFramesController < ApplicationController
   # GET /languages/russian/coding_frames/1[.json]
   def show
     get_language
-    @coding_frame = @language.coding_frames.find(params[:id]) # get coding frame
+    @coding_frame = @language.coding_frames.includes(:microroles).find(params[:id]) # get coding frame
 
     mroles            = @coding_frame.microroles
     @cf_index_numbers = @coding_frame.coding_frame_index_numbers.includes(:microroles, :coding_set)
 
-    # only Basic Coding frames have Verbs associated with them
+    @verbs   = @coding_frame.related_verbs.includes(:meanings)
+    verb_ids = @coding_frame.related_verb_ids
+    @related_coding_frames = @coding_frame.related_coding_frames
+
     if @coding_frame.derived?
-      @verbs = @coding_frame.verbs_of_derived_cf
-      verb_ids = @verbs.pluck(:id)
-      @related_coding_frames = @coding_frame.basic_coding_frames
       @alternations_of_related_cf = Hash[
         @related_coding_frames.map do |cf|
           [ cf,
@@ -55,9 +58,9 @@ class CodingFramesController < ApplicationController
         end
       ]
     else
-      @verbs = @coding_frame.verbs.includes(:meanings)
-      @related_coding_frames = @coding_frame.derived_coding_frames.includes(:alternations)
-      @alternations_of_related_cf = Hash[@related_coding_frames.map{ |cf| [cf, cf.alternations.uniq] }]
+      @alternations_of_related_cf = Hash[
+        @related_coding_frames.map{ |cf| [cf, cf.alternations.uniq] }
+      ]
     end
     
 
