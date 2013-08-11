@@ -83,13 +83,11 @@
 
             <td class="center"><%= value_label av %></td>
 
-            <td><%= basic_cf.arg_count if basic_cf %></td>
+            <td class="hidden"><%= basic_cf.arg_count if basic_cf %></td>
 
             <td>
               <% unless basic_cf.nil? || (basic_cf.coding_frame_schema).blank? %>
-                <div>
-                  <%= render_cf(basic_cf, link: true, css_class:'no-hover') %>
-                </div>
+                <%= render_cf(basic_cf, link: true, css_class: "in-table") %>
                 <% if basic_exs && basic_exs.size > 0 %>
                   <hr/>
                   <div>
@@ -101,9 +99,7 @@
 
             <td>
               <% unless deriv_cf.nil? || (deriv_cf.coding_frame_schema).blank? %>
-                <div>
-                  <%= render_cf(deriv_cf, link: true, css_class:'no-hover') %>
-                </div>
+                <%= render_cf(deriv_cf, link: true) %>
                 <% if deriv_exs && deriv_exs.size > 0 %>
                   <hr/>
                   <div>
@@ -113,9 +109,9 @@
               <% end %>
             </td>
             
-            <td><%= deriv_cf.arg_count if deriv_cf %></td>
+            <td class="hidden"><%= deriv_cf.arg_count if deriv_cf %></td>
 
-            <td><%= "true" if deriv_cf && deriv_exs %></td>
+            <td class="hidden"><%= "true" if deriv_cf && deriv_exs %></td>
             
             
           <% end #table row %>

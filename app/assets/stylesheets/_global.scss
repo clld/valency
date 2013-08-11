@@ -347,7 +347,7 @@ table {
   max-width: 326px;
 }
 /* Tooltips */
-.ttip { // span to show tooltip under
+.ttip:not(.idx-no) { // span to show tooltip under
   border-bottom:1px dotted $grayDark;
   &:hover {
     cursor:default;

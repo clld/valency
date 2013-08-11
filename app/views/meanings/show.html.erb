@@ -72,7 +72,7 @@
             <td><%= link_to v,  [lang, v ], class: 'object-language' %></td>
             <td>
               <% unless cf.nil? || cf.coding_frame_schema.blank? %>
-                <%= render_cf(cf, link: true, language: lang, tooltip: @meaning.idx_no_to_microrole_name(cf), css_class: 'no-hover') %>
+                <%= render_cf(cf, link: true, language: lang, tooltip: @meaning.idx_no_to_microrole_name(cf)) %>
               <% end %>
             </td>
             <td><%= cf.arg_count unless cf.nil? || cf.coding_frame_schema.blank? %></td>

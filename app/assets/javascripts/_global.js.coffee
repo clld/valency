@@ -61,7 +61,7 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 		
 		# Coding frame index numbers: setup hover and click handlers for highlighting
 		# hover on .idx-no: toggle .hover on .idx-no with the same data-idx-no
-		idx_no_selector = ".coding_frame:not(.no-hover) .idx-no"
+		idx_no_selector = ".coding_frame:not(.in-table) .idx-no"
 		toggle_hover = ->
 			n = $(this).data('idx-no')
 			$(idx_no_selector+"[data-idx-no=#{n}]").toggleClass 'hover'

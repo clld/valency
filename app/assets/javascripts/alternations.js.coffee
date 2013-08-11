@@ -83,10 +83,4 @@ oDTSettings_show =
     
     # this screws up handlers for CFIN highlighting!
     $dt.sortEmptyLast 'basic coding frame', 'derived coding frame'
-    $('#av_list').on('hover', '.coding_frame .idx-no', (e) -> # TODO this doesn't attach handler!
-      console.log "Hovered over index number #{$(e.target).data('idx-no')}"
-      $target = $(e.target)
-      n = $target.data('idx-no')
-      $target.closest('tr').find(".idx-no[data-idx-no=#{n}]").toggleClass 'label'
-    )
   
