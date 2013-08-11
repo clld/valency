@@ -130,5 +130,10 @@ class CodingFrame < ActiveRecord::Base
       self.related_verbs_with_basic_cf.map{|v| v.coding_frame}.uniq
     end
   end
+  
+  # unique alternations via alt'n values associated with this derived CF
+  def alternations_of_derived_cf
+    self.alternations.uniq
+  end
       
 end

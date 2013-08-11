@@ -69,7 +69,17 @@
     <% next if cf.to_s.blank? || cf.verb_count < 1 %>
       <tr>
         <td>
-          <%= render_cf(cf, prefix: true, link: true, css_class:'no-hover') %>
+          <%= render_cf(cf, prefix: true, link: true, css_class:"pull-left") %>
+          <% if cf.derived? %>
+            <div class="pull-right">
+              <div class="cell">via:</div>
+              <div class="cell">
+                <% cf.alternations_of_derived_cf.each do |altn| %>
+                  <%= link_to raw(altn), [altn.language, altn], class: "block" %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
         </td>
         <td class="hidden"><%= cf.derived %></td>
         <td class="hidden number"><%= cf.arg_count %> </td>

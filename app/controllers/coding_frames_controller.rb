@@ -59,7 +59,7 @@ class CodingFramesController < ApplicationController
       ]
     else
       @alternations_of_related_cf = Hash[
-        @related_coding_frames.map{ |cf| [cf, cf.alternations.uniq] }
+        @related_coding_frames.map{ |cf| [cf, cf.alternations_of_derived_cf] }
       ]
     end
     
