@@ -98,17 +98,14 @@ oDTSettings =
 		
 		# initialize popover for Alternation names
 		$('.cell a[rel="popover"]').popover({placement: 'right'})
-		
-		# set up hover highlighting for Coding frame index numbers
-		$(".coding_frame.padded-box:not(.no-hover) .idx-no").hover ->
-			n = $(this).data('idx-no')
-			$("tr[data-idx-no=#{n}]").toggleClass('outline').find('th').removeClass('outline')
-		$("tr[data-idx-no]").hover ->
-			n = $(this).data('idx-no')
-			$(this).find('th').toggleClass 'outline'
-			$(".coding_frame:not(.no-hover) .idx-no[data-idx-no=#{n}]").toggleClass 'label'
-		.click -> 
-			n = $(this).data('idx-no')
-			$(".coding_frame.padded-box:not(.no-hover) .idx-no[data-idx-no=#{n}]").flash('flash-green')
-		
-	
+				
+		# highlight index numbers in the same coding frame
+		$('.dataTable tbody').on(
+			"mouseenter mouseleave": -> 
+				$this     = $(this)
+				n = $this.data('idx-no')
+				$same_row = $this.closest('tr').find(".idx-no[data-idx-no=#{n}]")
+				$(".idx-no[data-idx-no=#{n}]").not($same_row).toggleClass "hover"
+				$("tr[data-idx-no=#{n}]").toggleClass 'outline'
+		,'.coding_frame .idx-no')
+

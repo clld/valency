@@ -229,6 +229,7 @@ a.info > i {
 /* utility classes: colors */
 /* for highlighting, needed for jQuery .flash() plugin */
 .flash-green { background-color:#00ff80 !important; }
+.flash-red   { background-color:red     !important; }
 .flash-yellow{ background-color:yellow  !important; }
 .flash-navbar{ background-color:$navbarLinkBackgroundActive; }
 

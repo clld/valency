@@ -60,16 +60,28 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 			$('a[rel="popover"]').not($target).popover('hide') unless $target.is('.popover *, a.info *')
 		
 		# Coding frame index numbers: setup hover and click handlers for highlighting
-		# hover on .idx-no: toggle .label on .idx-no with the same data-idx-no
+		# hover on .idx-no: toggle .hover on .idx-no with the same data-idx-no
 		idx_no_selector = ".coding_frame:not(.no-hover) .idx-no"
-		toggle_label = ->
+		toggle_hover = ->
 			n = $(this).data('idx-no')
-			$(idx_no_selector+"[data-idx-no=#{n}]").toggleClass 'label'
-			$("tr[data-idx-no=#{n}] > th").add("th[data-idx-no=#{n}]").toggleClass 'outline'
+			$(idx_no_selector+"[data-idx-no=#{n}]").toggleClass 'hover'
+			$("tr[data-idx-no=#{n}]").toggleClass 'outline'     # table rows
+			$headers = $("th[data-idx-no=#{n}]");               # table headers
+			$headers.toggleClass('outline') if $headers.length
+				
+		$(idx_no_selector).hover toggle_hover
 		
-		@idx_no_all = $(idx_no_selector)
-		@idx_no_all.hover toggle_label
-						
+		# set up hover highlighting for Coding frame index numbers in small table
+		$("tr[data-idx-no], th[data-idx-no]").hover ->
+			$this = $(this)
+			n = $this.data('idx-no')
+			$this.find('th').add("tr[data-idx-no=#{n}]").not($this)
+			.add("th[data-idx-no=#{n}]").toggleClass 'outline'
+			$(".idx-no[data-idx-no=#{n}]").toggleClass 'hover'
+		.click -> 
+			$(".coding_frame.padded-box .idx-no[data-idx-no=#{$(this).data('idx-no')}]").flash('flash-red')
+		
+		
 		# global settings for dataTables. These are extended in the controllers' handlers
 		@oDTSettings =
 			bPaginate: false
@@ -127,10 +139,13 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 				# don't allow body to shrink vertically when dataTable is filtered
 				$('body').css 'min-height', $('body').height()
 				
-				# bind event handlers to dataTable (for sortable columns that replace the original HTML content)
-				$('.dataTable tbody').on('hover', idx_no_selector, toggle_label) # this doesn't work!
-			
-	
+				# highlight index numbers in the same coding frame
+				$('.dataTable tbody').on(
+					"mouseenter mouseleave": -> 
+						$this = $(this)
+						n = $this.data('idx-no')
+						$this.closest('tr').find(".idx-no[data-idx-no=#{n}]").toggleClass "hover"
+				,'.coding_frame .idx-no')
 	### store some shared functions to reuse in other JS files ###
 	
 	# returns a dataTable sorter function for a Coding frames column:

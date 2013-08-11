@@ -46,7 +46,6 @@ module CodingFramesHelper
     cf_html = cf.to_s.gsub  /</, LT  # replace HTML special symbols
               cf_html.gsub! />/, GT
     cf_html.gsub!(/(V'?)/, '<b>\\1</b>') # make V or V' bold
-    link_class = "nan" unless cf_html.match(/^\d/) # quick fix for the padding issue
     cf_html.gsub!(/(\(.+?\)|\[.+?\])/, '<span>\\1</span>') # no linebreak (in brackets)
     cf_html.gsub!(/(\d+)/) do |num|
       n = $1.to_i  # $1 is the number
@@ -61,8 +60,8 @@ module CodingFramesHelper
     cf_html.gsub!(/'/, APOSTROPHE)
     cf_html = cf_html.html_safe
     
-    cf_html = link_to_if(options[:link], cf_html, language_coding_frame_path(cf.language, cf), :class => link_class) do 
-      content_tag(:a, cf_html, :class => link_class)
+    cf_html = link_to_if(options[:link], cf_html, language_coding_frame_path(cf.language, cf)) do 
+      content_tag(:a, cf_html)
     end
     cf_html = "#{prefix}<div class=\"cell\">#{cf_html}</div>" if prefix
     div_for(cf, :'data-arg-count' => cf.arg_count, :class => options[:css_class]) do
