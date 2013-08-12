@@ -7,26 +7,32 @@ ns		= @VALENCY.global
 
 oDTSettings_index = 
 	sDom: "<'row'<'span4'i><'span8'f>>t" # no scrolling
-	aoColumnDefs: [ # 0: Coding frame, 1: derived, 2: arg_count,
-									# 3: verb_count,	 4: Verb meanings & Verbs OR: Language
+	aoColumnDefs: [ # 0: Coding frame, 1: Alternations, 2: derived, 3: arg_count,
+									# 4: Verbs,	       5: Verb meanings & Verbs OR Language
+									# 6: Continent,    7: Family
 		{
 			aTargets:[0] # Coding frame
 			sType: "html"
 			asSorting: ['asc','desc']
 			mDataProp: ns.coding_frame_sorter(0)
 		},{
-			aTargets:[3] # verb_count
+			aTargets:[1] # Alternations
+			sType: "html"
+			asSorting: ['asc','desc']
+		},{
+			aTargets:[4] # Verbs
+			sType: "numeric"
 			asSorting: ['desc', 'asc']
 			sWidth: "10%"
 		},{
-			aTargets:[4] # Verb meanings & Verbs OR: Language
+			aTargets:[5] # Language OR Verb meanings & Verb forms
 			sType: 'html'
-			mDataProp: dtapi._sorter_fn_empty_last(4)
+			mDataProp: dtapi._sorter_fn_empty_last(5)
 			asSorting: []
 			sWidth: "25%"
 		}
 	]
-	aaSorting: [[3,'desc'], [0,'asc']]
+	aaSorting: [[4,'desc'], [0,'asc']]
 
 
 @VALENCY.coding_frames =
@@ -37,8 +43,8 @@ oDTSettings_index =
 		
 		language_column_shown = $cf_list.data("language") is "all" 
 		if language_column_shown # sort on the Language column
-			oDTSettings_index.aoColumnDefs[2].asSorting.push("asc","desc") # enable
-			oDTSettings_index.aaSorting = [[4,'asc']]
+			oDTSettings_index.aoColumnDefs[3].asSorting.push("asc","desc") # enable
+			oDTSettings_index.aaSorting = [[5,'asc']]
 		
 		$('td.columns').each -> $(this).children().inColumns(3)
 		
