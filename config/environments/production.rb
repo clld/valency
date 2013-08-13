@@ -66,9 +66,5 @@ Valency::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
-  # Secure production environment with a password (using HTTP basic authentication):
-  # Thanks to this excellent blog post: http://is.gd/Geqpco
-  config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "ValPaL Preview") do |u, p|
-    [u, p] == [ENV['HTTP_USER'], ENV['HTTP_PASSWORD']]
-  end
+ 
 end
