@@ -34,7 +34,7 @@ apply_column_filter = ($dt, $button_group, event = null) ->
 			$('#choose_lang').flash "flash-navbar"
 		
 		# make #choose_lang link open the dropdown
-		$('#choose_lang').click (e) =>
+		$('#choose_lang').add('.choose_lang').click (e) =>
 			@language_dropdown.find('.dropdown-toggle').click()
 			e.stopPropagation()
 		

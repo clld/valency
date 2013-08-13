@@ -340,6 +340,9 @@ table {
   }
 }
 
+strong {
+  color: $vt;
+}
 /* override Bootstrap default for popover width */
 /* this workaround is obsolete with Bootstrap v2.3 */
 .popover {
