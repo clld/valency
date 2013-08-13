@@ -20,14 +20,10 @@ end
 # Gems for both development and production
 group :development, :production do
   gem 'gmaps4rails'
-  gem 'pg'
 end
 
 # Gems for production only
 group :production do
-  gem 'therubyracer', :require => 'v8'
-  gem 'pg'        # ActiveRecord adapter for PostgreSQL
-  gem 'passenger' # see https://www.phusionpassenger.com
 end
 
 # Gems used only for assets and not required
