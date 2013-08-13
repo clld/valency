@@ -19,15 +19,22 @@ sort_microroles = (iCol) ->
 oDTSettings_index = 
 	sDom: "<'row'<'span8'i><'span4'f>>t"
 	# 0: microrole name, 1: meaning label, 2: original_or_new,
-	# 3: verb count, 4: CF count, 5: core_or_additional
+	# 3: N verbs in M languages, 4: CF count, 5: core_or_additional, 6: verb_count
 	aoColumnDefs: [
 		{
-			aTargets:[3,4] # verb count, coding frame count
+			aTargets:[4] # Coding frame count
 			sType: 'numeric'
 			asSorting:['desc','asc']
 		},{
 			aTargets:[0,1] # microrole name, meaning label
 			sType: 'html'
+		},{
+			aTargets:[3] # N verbs in M languages
+			aDataSort: [6]
+			asSorting:['desc','asc']
+		},{
+			aTargets:[6] # verb_count (hidden)
+			sType: 'numeric'
 		},{
 			aTargets:[1] # meaning label
 			sWidth: '20%'

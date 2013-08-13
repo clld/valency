@@ -7,7 +7,7 @@ class MicrorolesController < ApplicationController
   # GET /microroles
   # GET /microroles.json
   def index
-    @microroles = Microrole.includes(:verb_coding_frame_microroles).all
+    @microroles = Microrole.includes(:verb_coding_frame_microroles).readonly(false).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,7 +18,7 @@ class MicrorolesController < ApplicationController
   # GET /microroles/1
   # GET /microroles/1.json
   def show
-    @microrole  = Microrole.find_by_name_for_url(params[:id])
+    @microrole  = Microrole.readonly(false).find_by_name_for_url(params[:id])
     @meaning    = @microrole.meaning
     @verb_cf_mr = @microrole.verb_coding_frame_microroles.includes(
       :coding_frame => {:coding_frame_index_numbers => [:argument_type, :coding_set]},

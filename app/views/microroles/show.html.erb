@@ -30,8 +30,11 @@
 <div class="row">
   <div class="span12 dt-with-filters">
     <h2>
-      Coding frames  <span class="badge"><%= @microrole.coding_frame_count %></span>
-      and Verb forms <span class="badge"><%= @microrole.verb_count %></span>
+      <% vc, lc, cc = @microrole.verb_count, @microrole.language_count, @microrole.coding_frame_count %>
+      <span class="badge"><%= vc %></span> <%= 'Verb form'.pluralize(vc) %> in
+      <span class="badge"><%= lc %></span> <%= 'Language'.pluralize(lc) %>
+      (<span class="badge"><%= cc %></span> <%= 'Coding frame'.pluralize(cc) %>)
+
     </h2>
     
     <div class="form-inline dt-filters"><!-- filters for dataTable -->
