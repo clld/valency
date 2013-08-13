@@ -6,7 +6,7 @@ development:
 
 production:       # config for OFFLINE USE
   adapter:  sqlite3
-  database: db/development.sqlite
+  database: db/production.sqlite
   pool: 5
   timeout: 5000
 
