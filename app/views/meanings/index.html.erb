@@ -27,7 +27,7 @@
 
     <th>#</th>
     <th>Verb meaning</th>
-    <th>Role frame</th>
+    <th class="hidden">Role frame</th><!-- hidden empty column -->
     <th>Verbs</th>
     <th>Microroles</th>
   </tr>
@@ -41,7 +41,7 @@
     
     <td class="number"><%= m.number %></td>
     <td><%= link_to m, m %></td>
-    <td><%= m.role_frame %></td>
+    <td class="hidden"></td>
     <td class="number"><%= m.verbs.size %></td>
     <td><%= microrole_list m.microroles %></td>
     

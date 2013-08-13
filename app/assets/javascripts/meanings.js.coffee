@@ -7,7 +7,7 @@ ns		= @VALENCY.global
 # dataTable settings
 oDTSettings_index = 
 	sDom: "<'row'<'span4'i><'span8'f>>t"
-	# 0: meaning set, 1: role count, 2: meaning no., 3: Meaning, 4: Role frame
+	# 0: meaning set, 1: role count, 2: meaning no., 3: Meaning, 4: (empty)
 	# 5: verb count, 6: microroles
 	aoColumnDefs: [
 		{
@@ -18,10 +18,10 @@ oDTSettings_index =
 			aTargets:[6] # microroles
 			asSorting:['asc']
 		},{
-			aTargets:[3] # meaning label and verb count
+			aTargets:[3] # Meaning label
 			sType: 'html'
 		},{
-			aTargets:[2] # meaning number
+			aTargets:[2] # Meaning number
 			sType: 'numeric'
 		}
 	]
