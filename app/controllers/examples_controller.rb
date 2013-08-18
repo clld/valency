@@ -1,5 +1,6 @@
 class ExamplesController < ApplicationController
-  before_filter :get_language, :get_examples
+  before_filter :get_language
+  before_filter :get_examples, only: :index
   
   def get_language
     @language   = Language.includes(:examples, :gloss_meanings).find_by_name_for_url(params[:language_id])
@@ -24,7 +25,12 @@ class ExamplesController < ApplicationController
   # GET /languages/1/examples/1
   # GET /languages/1/examples/1.json
   def show
-    @example = @examples.find(params[:id])
+    begin
+      @example = Example.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      # last URL parameter is not example ID, but the example's number
+      @example = @language.examples.where(number: params[:id].to_i).first
+    end
     @examples = [@example]
     respond_to do |format|
       format.html { render 'examples/index' } # also show index.html.erb
