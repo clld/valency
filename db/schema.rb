@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130806095344) do
+ActiveRecord::Schema.define(:version => 20130818111418) do
 
   create_table "alternation_values", :id => false, :force => true do |t|
     t.integer "verb_id",                 :limit => 8
@@ -123,11 +123,11 @@ ActiveRecord::Schema.define(:version => 20130806095344) do
     t.integer "reference_id",         :limit => 8
     t.integer "person_id",            :limit => 8
     t.string  "primary_text"
-    t.string  "original_orthography"
+    t.text    "original_orthography"
     t.string  "analyzed_text"
     t.string  "gloss"
-    t.string  "translation"
-    t.string  "translation_other"
+    t.text    "translation"
+    t.text    "translation_other"
     t.text    "comment"
     t.string  "media_file_name"
     t.string  "media_file_timecode"

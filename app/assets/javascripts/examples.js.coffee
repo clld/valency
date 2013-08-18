@@ -9,12 +9,16 @@ oDTSettings_index =
 	sDom: "<'row'<'span4'i><'span8'f>>t" # scrolling table
 	bPaginate: false
 	
-	aoColumnDefs: [ # 0: Example (rendered), 1: Verb meaning, 2: Example of..., 3: Example number
+	aoColumnDefs: [ # 0: Example (rendered)       1: Verb meaning
+	                # 2: Example of...            3: Example number
 		{
-			aTargets:[0] # Example
+			aTargets: [0] # Example
 			sType: "html"
 			asSorting: ['asc','desc']
 			iDataSort: 3 # Example number (hidden sort column for example)
+		},{
+			aTargets: [3] # sort column for examples
+			sType: "html" 
 		}
 	]
 	aaSorting: [[0,'asc']]
