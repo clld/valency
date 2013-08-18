@@ -1,12 +1,24 @@
 development:
-  adapter:  sqlite3
-  database: db/development.sqlite
+  adapter:  postgresql
+  database: valpal
+  host:     localhost
+  port:     5432
+  username: valpal
+  password: valency-rails3
   pool: 5
   timeout: 5000
+  # adapter:  sqlite3
+  # database: db/development.sqlite
+  # pool: 5
+  # timeout: 5000
 
-production:       # config for OFFLINE use
-  adapter:  sqlite3
-  database: db/production.sqlite
+production:       # config for vmext24-204.gwdg.de
+  adapter:  postgresql
+  database: valpal
+  host:     localhost
+  port:     5432
+  username: valpal
+  password: valency-rails3
   pool: 5
   timeout: 5000
 
