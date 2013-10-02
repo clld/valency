@@ -24,3 +24,5 @@
 # Some custom files to ignore
 /railsmessage.txt
 
+# ignore POW
+.powrc
