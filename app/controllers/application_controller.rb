@@ -14,4 +14,12 @@ class ApplicationController < ActionController::Base
     render 'shared/home'
   end
 
+  def about
+    if params[:name] != nil then
+      render "shared/#{params[:name]}"
+    else
+      render "shared/project"
+    end
+  end
+
 end
