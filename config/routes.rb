@@ -69,6 +69,9 @@ Valency::Application.routes.draw do
   #     resources :products
   #   end
 
+  match '/about' => 'application#about'
+  match '/about/:name' => 'application#about'
+
   # have the root of your site routed with "root"
   # (root will redirect to public/index.html otherwise)
   root :to => 'application#home'
