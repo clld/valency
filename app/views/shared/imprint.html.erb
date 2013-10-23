@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="span6 offset3">
+    <h1 style="text-align:center;">Imprint</h1>
+  </div>
+</div>
+<!-- <div class="new row">  
+  <div class="span3 offset3">
+    <a href ="/languages">
+    <%= image_tag 'logo_valpal_text.png', style: 'width:300px;margin:0 auto;display:block;' %>
+    </a>
+  </div>
+  <div class="span3">
+    <%= image_tag 'logo_valency.png', style: 'width:400px;margin:30px auto;display:block;' %>
+  </div>
+</div> -->
+
+<% content_for :footer do %>
+<div class="container">
+  <div class="row">
+    <div class="span12" style="text-align:center;position:absolute;bottom:10px;">
+      <%= image_tag 'logo_minerva.png', style: "width:80px;"%>
+      <p style="color:#177A74; font-size:12px; width:200px;margin:5px auto;">
+        Max Planck Institute for Evolutionary Anthropology, Leipzig
+      </p>
+    </div>
+  </div>
+</div>
+<% end  %>
