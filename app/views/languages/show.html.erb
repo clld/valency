@@ -84,9 +84,13 @@
     <% readable = {'verbs'=>'Verb forms', 'examples'=>'glossed Examples'} %>
     <% %w(verbs coding_frames alternations examples).each do |resource| %>
       <% name = readable[resource] || resource.humanize %>
+      <%if resource == 'coding_frames'%>
+        <%= link_to "#{@language.send(resource).where(derived:'Basic').count} #{name}", send("language_#{resource}_path", @language), class: 'btn' %>
+      <% else %>
         <%= link_to "#{@language.send(resource).count} #{name}", send("language_#{resource}_path", @language), class: 'btn' %>
+      <% end %>
     <% end %>
   </div>
 </div>
 
-<!-- all comments hidden for now -->
+<!-- all comments hidden for now .where(derived:'Basic')-->
