@@ -75,7 +75,7 @@
           <% if @language %>
             <li><a href="#">Data set for <%= @language.to_s %></a></li>
           <% end %>
-          <li><a href="#">Will coming soon</a></li>
+          <li><a href="#">Coming soon</a></li>
         </ul>
       </li>
       <li class="divider-vertical"></li>
@@ -153,7 +153,19 @@
 
     <li class="divider-vertical"></li>
     
-    <%= submenu_items %w(coding_frames coding_sets alternations examples), divider='divider-vertical' %>
+    <%= submenu_items %w(coding_frames), divider='divider-vertical' %>
+    <li class="divider-vertical"></li>
+    <li class="dropdown" id="dummy_dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        Coding sets
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Coming soon</a></li>
+      </ul>
+    </li>
+    <li class="divider-vertical"></li>
+    
+    <%= submenu_items %w(alternations examples), divider='divider-vertical' %>
     
     <li class="divider-vertical"></li>
     
