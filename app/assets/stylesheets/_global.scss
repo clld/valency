@@ -271,6 +271,10 @@ a:not([href]) {
   }
 }
 
+.ext-link:before {
+  content: "\27B2\0020\0020";
+}
+
 /**************** TABLES ****************/
 table {
   /* table without borders */
