@@ -354,3 +354,100 @@ table {
   }
 }
 
+a {color:$linkColorHover;}
+
+/**************** Static sites ****************/
+.jumpmark-box {
+	border: #0098AC 1px solid;
+	width:225px;
+	float:right;
+	margin-left:15px;
+	margin-bottom: 15px;
+	background-color: #E4EBEC;
+	padding: 15px;
+	padding-bottom:30px;
+	padding-top:30px;	
+	font-size: 1.0em;
+}
+
+.jumpmark-box ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
+.jumpmark-box ul li {
+	list-style:none;
+	background: transparent url(../images/arrow.png) no-repeat -0px 0px;
+	padding-left:15px;	
+}
+
+
+.jumpmark {
+	margin:0;
+	margin-top:15px;
+	margin-right: 5px;
+	float:right;
+	text-align:left;
+}
+.jumpmark ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+.jumpmark ul li {
+	display:inline;
+	padding-left:15px;
+	background: transparent url(../images/arrow.png) no-repeat -0px 0px;
+}
+.trennlinie {
+	border-top:1px solid #5299A3;
+	margin-top:20px;
+	margin-bottom:60px;
+}
+.row_top {
+	background-color: #737373;
+	vertical-align:middle;
+	color:#fff;
+}
+.row_top td {
+	padding-left:5px;
+	padding-right:5px;
+}
+
+.row_first {
+	/*background-color: #dbdbdb;*/
+	background-color: #aeced2;
+	vertical-align:middle;
+}
+.row_first td {
+	padding-left:5px;
+	padding-right:5px;
+}
+.row_second {
+	/*background-color: #eeeeee;*/
+	background-color: #d9e9ea;
+	vertical-align:middle;
+}
+.row_second td {
+	padding-left:5px;
+	padding-right:5px;
+}
+
+.row_plenary {
+	background-color: #5299A3;
+	vertical-align:middle;
+	color:#fff;
+}
+.row_plenary td {
+	padding-left:5px;
+	padding-right:5px;
+}
+.rectangle{
+	border: 1px solid #000;
+	padding:20px;
+	margin-left:30px;
+	margin-right:30px;
+	width:600px;
+}
+
