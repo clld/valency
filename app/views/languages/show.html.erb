@@ -36,6 +36,15 @@
         </tr>
       <% end %>
     </table>
+
+    <!-- <% if @language.comments %>
+    <div class="row" style="margin-left:0px;">
+    <form class="form-inline pull-left with-heading">
+      <a class="btn btn-mini toggle" data-toggle="comment">show comment</a>
+      <div class="comment" style="display:hidden"><p class="box"><%= raw @language.comments %></p></div>
+    </form>
+    </div>
+    <% end %> -->
     
     <%= gmaps({
       map_options: {
@@ -75,11 +84,14 @@
         <b>with data contributions by <%= pluralize @native_speakers.size, "native speaker" %></b>
       </div>
     <% end %>
+        
+    
   </div><!-- .span6 -->
 </div><!-- .row -->
 
 <div class="row">
   <div class="span12">
+
     <h2>Data</h2>
     <% readable = {'verbs'=>'Verb forms', 'examples'=>'glossed Examples'} %>
     <% %w(verbs coding_frames alternations examples).each do |resource| %>
@@ -90,7 +102,32 @@
         <%= link_to "#{@language.send(resource).count} #{name}", send("language_#{resource}_path", @language), class: 'btn' %>
       <% end %>
     <% end %>
+
+<h3><a id="cite"></a>How to cite the dataset for <%=     @language %></h3>
+            <pre><% n = Array.new %>
+<% @contributors.each do |c| %>
+<% a = c.name %>
+<% ix = a.rindex(/ /) %>
+<% n.push(a[ix+1..a.length] + ", " + a[0,ix])%>
+<% end %>
+<%= n.join(' & ')%>. 2013. <%= @language %> Valency Patterns.
+In: Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.) 2013.
+Valency Patterns Leipzig online database
+Leipzig: Max Planck Institute for Evolutionary Anthropology.
+(Available online at http://valpal.info, Accessed on <%= Time.now.strftime("%Y-%m-%d") %>) 
+            </pre>
+    
+
   </div>
 </div>
+
+<% if @language.comments %>
+<div class="row">
+  <div class="span12">
+
+    <h2>Comments</h2>
+  <p><%= raw @language.comments %></p>
+</div>
+<% end %>
 
 <!-- all comments hidden for now .where(derived:'Basic')-->
