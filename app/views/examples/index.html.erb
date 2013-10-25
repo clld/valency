@@ -7,22 +7,16 @@
   </small>
 </h1>
 
-<div class="alert alert-block alert-error">
-  <button type="button" class="close" data-dismiss="alert">×</button>
-  <div><strong>Under Construction</strong></div>
-  This layout isn’t quite finished yet. Improvement suggestions are welcome.
-</div>
-
 <div class="new row">
   <div class="span12">
 
     <table class="table table-bordered-sharp table-striped table-hover dataTable">
     <thead>
       <tr>
-        <th style="width:50%">Example</th>
-        <th>Verb meaning</th>
-        <th>Example of...</th>
-        <th class="hidden">#</th>
+        <th width="50%">Example</th>
+        <th width="100">Verb meaning</th>
+        <th width="120">Example of...</th>
+        <!-- <th class="hidden">#</th> -->
       </tr>
     </thead>
     <tbody>
@@ -35,7 +29,7 @@
           </div>
           <div class="pull-right">
             <span style="color:#999"><%= ex.example_type %></span>
-          </div>          
+          </div>
         </td>
         <td><%= link_to m, m unless m.nil? || m.to_s.blank? %></td>
         <td>
@@ -50,9 +44,9 @@
           <% end %>
 
         </td>
-        <td class="hidden">
+        <!-- <td class="hidden">
           <%= "#{}#{ex.number}" %>
-        </td>
+        </td> -->
       <% end %>
     <% end %>
   </tbody>
