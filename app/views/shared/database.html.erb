@@ -1,28 +1,796 @@
-<div class="row">
-  <div class="span6 offset3">
-    <h1 style="text-align:center;">Database Manual</h1>
-  </div>
-</div>
-<!-- <div class="new row">  
-  <div class="span3 offset3">
-    <a href ="/languages">
-    <%= image_tag 'logo_valpal_text.png', style: 'width:300px;margin:0 auto;display:block;' %>
-    </a>
-  </div>
-  <div class="span3">
-    <%= image_tag 'logo_valency.png', style: 'width:400px;margin:30px auto;display:block;' %>
-  </div>
-</div> -->
+<div class="row" style="margin-top:50px;">
+    <a name="goals">
+    <div class="content"> 
+      <!--################### Jumpmark-Box START ###################-->
+      <div class="jumpmark-box">
+        <ul>
+          <li><a href="#goals">1. Goals and motivations</a></li>
+          <li><a href="#contributions">2. Project contributions</a></li>
+          <li><a href="#verb_meanings">3. The verb meanings</a></li>
+          <li><a href="#tasks">4. Tasks for the database contributors</a></li>
+          <li><a href="#counterpart_verbs">5. Counterpart verbs</a></li>
+          <li><a href="#examples">6. Examples</a></li>
+          <li><a href="#coding_frames">7. Coding frames</a></li>
+          <li><a href="#valency_alternations">8. Valency alternations</a></li>
+          <li><a href="#optional_advanced_features">9. Optional advanced features</a></li>
+        </ul>
+      </div>
+      <!--################### Jumpmark-Box END ###################-->
+    
+      <h1>Database Questionnaire Manual<span style="float:right; color:#000; font-weight:normal; font-size:0.8em; padding-top:5px;"></h1>
+          <%= image_tag 'pdf.png', style: "width:15px;margin-bottom:6px; margin-right:5px;"%>
+          <!-- <img src="../images/pdf.png" width="15" height="15" style="margin-bottom:-2px; margin-right:5px;" alt=""/> -->
+          <a href="/public/ValencyDBQuestionnaireManual.pdf" target="_blank">Download Manual as pdf</a>
+
+      </span>
+      
+      <br /><br />
+      <h2></a>1. Goals and motivations</h2>
+      <p>The  Leipzig Valency Classes Project (funded by the DFG) is carrying out a large-scale cross-linguistic comparison of valency classes  (or &quot;verb types&quot;, in terms of Levin 1993). With respect to their  valency properties, verbs fall into different classes in all languages. The  project is inspired by Levin (1993), a classical study of syntactic classes of  verbs in English, which shows that a semantic classification of verbs can be  achieved through applying syntactic diagnostics. Yet, this study, as well as an  earlier study by Apresjan (1967) on Russian, has not been followed up  cross-linguistically, which leaves open the question of which aspects of these  classifications are universal and which are language-particular. Similarly,  valency dictionaries are few in number and mostly deal with European languages,  thus they cannot fill the gap. </p>
+      <a name="contributions"></a><p class="trennlinie"></p>
+      <h2>2. Project contributions</h2>
+      <p>To make progress  in the cross-linguistic study of valency classes, the members of the Valency  Classes Project (Andrej  Malchukov, Martin Haspelmath, Bernard Comrie, Iren Hartmann) have  assembled a group of contributors, specialists of valency patterns in a  representative set of languages, who are collaborating to obtain a consistent  set of cross-linguistic data. The contributors have been asked to do three  things as part of their contribution&nbsp; to  the project:</p>
+      <ol type="i">
+        <li>fill in the <strong>database  questionnaire</strong>, which (minimally) asks for valency information on a  set of 70 verb meanings  (taken as representative of the verbal lexicon) for each project language;  individual databases will be published as part of an online database (edited by Iren Hartmann and Martin Haspelmath)</li>
+        <li>give a presentation on  language-particular patterns at the <strong>Leipzig Valency Classes  Conference</strong> (2011 April 14-17)</li>
+        <li> contribute a <strong>paper to an edited  volume on valency classes</strong> cross-linguistically (edited by Andrej Malchukov and Bernard Comrie)<br />
+        </li>
+      </ol>
+      <p>In the following, the database  questionnaire is described. (Items (ii) and (iii) are described elsewhere.)</p>
+      <a name="verb_meanings"></a><p class="trennlinie"></p>
+      <h2>3. The verb meanings</h2>
+      <p>The purpose of the Valency Database Questionnaire is to gather  comparable valency data on a wide variety of languages. The data will be  comparable because the verbs are elicited in response to a list of 70  pre-defined verb meanings, and because the valency information is recorded in a  standard way. The 70 verb meanings are described in Table 1, in three columns:  (i) the meaning label, (ii) the role frame, and (iii) a typical context. (Since  the English verbs used as meaning labels sometimes have different meanings, we  have added a sentence for each verb meaning that makes the intended meaning  clear. These sentences are not crucial, they are just intended to help the  contributors find a context for a counterpart.)</p>
+      <p><strong>Table  1: The 70 verb meanings</strong></p>
+      <table border="1" cellspacing="1" cellpadding="0">
+        <tr class="row_top">
+          <td width="178" valign="top"><strong>meaning label</strong></td>
+          <td width="191" valign="top"><strong>role frame</strong></td>
+          <td width="430" valign="top"><strong>typical context</strong></td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">RAIN</td>
+          <td width="191" valign="top">(it) rains</td>
+          <td width="294" valign="top">It rained yesterday.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">BE DRY</td>
+          <td width="191" valign="top">S is dry</td>
+          <td width="294" valign="top">The ground is dry.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">BURN</td>
+          <td width="191" valign="top">S burns</td>
+          <td width="294" valign="top">The house is burning.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">SINK</td>
+          <td width="191" valign="top">S sinks</td>
+          <td width="294" valign="top">The boat    sank.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">ROLL</td>
+          <td width="191" valign="top">A rolls</td>
+          <td width="294" valign="top">The ball    is rolling.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">BE A HUNTER</td>
+          <td width="191" valign="top">S is a hunter</td>
+          <td width="294" valign="top">This man    is a hunter.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">BE HUNGRY</td>
+          <td width="191" valign="top">E is hungry</td>
+          <td width="294" valign="top">The baby is hungry.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">BE SAD</td>
+          <td width="191" valign="top">E is sad</td>
+          <td width="294" valign="top">The    little girl was sad.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">DIE</td>
+          <td width="191" valign="top">S dies</td>
+          <td width="294" valign="top">The snake died.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">FEEL COLD</td>
+          <td width="191" valign="top">S is cold</td>
+          <td width="294" valign="top">I&rsquo;m cold.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">FEEL PAIN </td>
+          <td width="191" valign="top">E feels pain in M</td>
+          <td width="294" valign="top">My arm is hurting. =
+            I&rsquo;m    feeling pain in my arm.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">SCREAM</td>
+          <td width="191" valign="top">S screams</td>
+          <td width="294" valign="top">The man    screamed.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">LAUGH </td>
+          <td width="191" valign="top">S laughs</td>
+          <td width="294" valign="top">The    little girl laughed.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">PLAY</td>
+          <td width="191" valign="top">S plays</td>
+          <td width="294" valign="top">The child    is playing.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">LIVE </td>
+          <td width="191" valign="top">S lives somewhere (L)</td>
+          <td width="294" valign="top">The old    people live in town.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">LEAVE</td>
+          <td width="191" valign="top">A left L</td>
+          <td width="294" valign="top">The boy    left the village.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">GO</td>
+          <td width="191" valign="top">S goes somewhere (L)</td>
+          <td width="294" valign="top">The woman    went to the market.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">SING</td>
+          <td width="191" valign="top">S sings</td>
+          <td width="294" valign="top">The boy    sang (a song).</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">JUMP</td>
+          <td width="191" valign="top">A jumps</td>
+          <td width="294" valign="top">The girl jumped.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">SIT DOWN</td>
+          <td width="191" valign="top">S sits    down (somewhere (L))</td>
+          <td width="294" valign="top">The    children sat down on the bench.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">SIT</td>
+          <td width="191" valign="top">S sits somewhere (L)</td>
+          <td width="294" valign="top">The    children sat on the floor.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">RUN</td>
+          <td width="191" valign="top">A runs</td>
+          <td width="294" valign="top">The horse is running.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">CLIMB</td>
+          <td width="191" valign="top">A climbs (up L)</td>
+          <td width="294" valign="top">The men    climbed (up) the tree.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">COUGH</td>
+          <td width="191" valign="top">S coughs</td>
+          <td width="294" valign="top">The old man coughed.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">BLINK</td>
+          <td width="191" valign="top">S blinks</td>
+          <td width="294" valign="top">I blinked (my eyes).</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">SHAVE</td>
+          <td width="191" valign="top">A shaves    (his beard/hair)</td>
+          <td width="294" valign="top">The man    shaved his beard/cut his hair</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">DRESS</td>
+          <td width="191" valign="top">A dresses P</td>
+          <td width="294" valign="top">The mother    dressed her daughter</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">WASH</td>
+          <td width="191" valign="top">A washes P</td>
+          <td width="294" valign="top">The    mother washed the baby.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">EAT</td>
+          <td width="191" valign="top">A eats P</td>
+          <td width="294" valign="top">The boy    ate the fruit.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">HELP</td>
+          <td width="191" valign="top">A helps X</td>
+          <td width="294" valign="top">I helped the boys.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">FOLLOW</td>
+          <td width="191" valign="top">A follows X</td>
+          <td width="294" valign="top">The boys    followed the girls.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">MEET</td>
+          <td width="191" valign="top">A meets X</td>
+          <td width="294" valign="top">The men    met the boys.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">HUG</td>
+          <td width="191" valign="top">A hugs P</td>
+          <td width="294" valign="top">The    mother hugged her little boy.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">SEARCH FOR</td>
+          <td width="191" valign="top">A searches for X</td>
+          <td width="294" valign="top">The men    searched for the women.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">THINK </td>
+          <td width="191" valign="top">A thinks    about X</td>
+          <td width="294" valign="top">The girl    thought about her grandmother yesterday.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">KNOW</td>
+          <td width="191" valign="top">A knows P</td>
+          <td width="294" valign="top">The girl    knew the boy.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">LIKE</td>
+          <td width="191" valign="top">E likes M</td>
+          <td width="294" valign="top">The boy    liked his new toy.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">FEAR</td>
+          <td width="191" valign="top">E fears M</td>
+          <td width="294" valign="top">The man    feared the bear.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">FRIGHTEN</td>
+          <td width="191" valign="top">A frightens P</td>
+          <td width="294" valign="top">The bear    frightened the man.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">SMELL</td>
+          <td width="191" valign="top">E smells M </td>
+          <td width="294" valign="top">The bear    smelled the boy.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">LOOK AT</td>
+          <td width="191" valign="top">A looks at P</td>
+          <td width="294" valign="top">The boy    looked at the girl.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">SEE</td>
+          <td width="191" valign="top">E sees M</td>
+          <td width="294" valign="top">The man    saw the bear.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">TALK</td>
+          <td width="191" valign="top">A talks    (to X) (about Y)</td>
+          <td width="294" valign="top">The girl    talked to the boy about her dog.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">ASK FOR</td>
+          <td width="191" valign="top">A asks    (X) for Y</td>
+          <td width="294" valign="top">The boy    asked his parents for money.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">SHOUT AT</td>
+          <td width="191" valign="top">A shouts    at X</td>
+          <td width="294" valign="top">The woman    shouted at the children.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">TELL</td>
+          <td width="191" valign="top">A tells    (X) Y</td>
+          <td width="294" valign="top">The girl    told the boy a funny story.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">SAY</td>
+          <td width="191" valign="top">A says    &ldquo;...&rdquo;( to X)</td>
+          <td width="294" valign="top">They said    &ldquo;no&rdquo; to me.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">NAME</td>
+          <td width="191" valign="top">A name X (a) Y</td>
+          <td width="294" valign="top">The parents    called the baby Anna. </td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">BUILD </td>
+          <td width="191" valign="top">A builds P    (out of X)</td>
+          <td width="294" valign="top">The men    built a house out of wood.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">BREAK</td>
+          <td width="191" valign="top">A breaks    P (with I)</td>
+          <td width="294" valign="top">The boy    broke the window with a stone.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">KILL</td>
+          <td width="191" valign="top">A kills P    (with I)</td>
+          <td width="294" valign="top">The man    killed his enemy with a club.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">BEAT</td>
+          <td width="191" valign="top">A beats P    (with I)</td>
+          <td width="294" valign="top">The boy    beat the snake with a stick.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">HIT</td>
+          <td width="191" valign="top">A hits P    (with I)</td>
+          <td width="294" valign="top">The boy    hit the snake with a stick.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">TOUCH</td>
+          <td width="191" valign="top">A touches    P (with I)</td>
+          <td width="294" valign="top">The boy    touched the snake with a stick.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">CUT</td>
+          <td width="191" valign="top">A cuts P    (with I)</td>
+          <td width="294" valign="top">The woman    cut the bread with a sharp knife.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">TAKE </td>
+          <td width="191" valign="top">A takes P    (from X)</td>
+          <td width="294" valign="top">The man    took the money from his friend.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">TEAR</td>
+          <td width="191" valign="top">A tears P    (from X)</td>
+          <td width="294" valign="top">The girl    tore the page from the book.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">PEEL </td>
+          <td width="191" valign="top">A peels    (X off) P</td>
+          <td width="294" valign="top">The boy    peeled the bark off the stick.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">HIDE</td>
+          <td width="191" valign="top">A hides T    (from X)</td>
+          <td width="294" valign="top">The boy    hid the frog from his mother.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">SHOW</td>
+          <td width="191" valign="top">A shows T    (to R)</td>
+          <td width="294" valign="top">The girls    showed pictures to the teacher.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">GIVE</td>
+          <td width="191" valign="top">A gives T    to R </td>
+          <td width="294" valign="top">We gave    the books to the children.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="178" valign="top">SEND</td>
+          <td width="191" valign="top">A sends T    (to X) </td>
+          <td width="294" valign="top">The girl    sent flowers to her grandmother.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="178" valign="top">CARRY</td>
+          <td width="191" valign="top">A carries    T (to X)</td>
+          <td width="294" valign="top">The men    carried the boxes to the market.</td>
+        </tr>
+        <tr class="row_second">
+          <td valign="top">THROW</td>
+          <td valign="top">A throws T somewhere (L)</td>
+          <td valign="top">The boy threw the ball into the window.</td>
+        </tr>
+        <tr class="row_first">
+          <td valign="top">TIE</td>
+          <td valign="top">A ties P (to L) (with I)</td>
+          <td valign="top">The man tied the horse with a rope to the tree.</td>
+        </tr>
+        <tr class="row_second">
+          <td valign="top">PUT </td>
+          <td valign="top">A puts T somewhere (L)</td>
+          <td valign="top">I put the cup onto the table.</td>
+        </tr>
+        <tr class="row_first">
+          <td valign="top">POUR</td>
+          <td valign="top">A pours T somewhere (L)</td>
+          <td valign="top">The man poured water into the glass.</td>
+        </tr>
+        <tr class="row_second">
+          <td valign="top">COVER</td>
+          <td valign="top">A covers P (with X)</td>
+          <td valign="top">The woman covered the boy with a blanket.</td>
+        </tr>
+        <tr class="row_first">
+          <td valign="top">FILL</td>
+          <td valign="top">A fills P (with X)</td>
+          <td valign="top">The girl filled the glass with water.</td>
+        </tr>
+        <tr class="row_second">
+          <td valign="top">LOAD</td>
+          <td valign="top">A loads T (onto L)</td>
+          <td valign="top">The farmer loaded hay onto the truck. = The  farmer loaded the truck with hay.</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p>This  sample of 70 verbs<a href="#ftn1" name="ftnref1" title="Note that the ordering of the verbs in Table 1 (from potentially/frequently zero-valent, through monovalent and divalent to trivalent) is somewhat different from the ordering in the database. The ordering is of course irrelevant."><sup>1</sup></a>, which was in part selected on the basis of the feedback from the contributors<a href="#ftn2" name="ftnref2" title="Please note that the list of verbs was somewhat updated with respect to the June 2010 version of the questionnaire and of the database (at the time there were some discrepancies between them)"><sup>2</sup></a>,  is hoped to be representative of the verbal lexicon. It is in particular these  verb meanings that have been reported to show distinctive grammatical behaviour  in the literature. Of course the editors had to try to strike a balance between  a temptation to include more interesting verb meanings in the list, and  avoiding overload on the part of contributors if confronted with a more  extensive list. Further interesting verbs could be added to the database of  individual languages (see &sect;9.2). </p>
+      <span style="float: right; margin-right: 2px; margin-top:-10px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <a name="tasks"></a><p class="trennlinie"></p>
+      <h2>4. Tasks for the database contributors</h2>
+      <p><a href="contributors_languages.php">Contributors</a> are asked to provide four  types of information, in four different tables of the database:</p>
+      <ol type="1">
+        <li> counterpart  verbs, in the Verbs table (&sect;5)</li>
+        <li> examples, in  the Examples table (&sect;6)</li>
+        <li> coding frames,  in the Coding frames table (of these verbs) (&sect;7)</li>
+        <li> valency  alternations (undergone by these verbs), in the Alternations table (&sect;8)</li>
+      </ol>
+      <span style="float: right; margin-right: 2px; margin-top:-10px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <a name="counterpart_verbs"></a><p class="trennlinie"></p>
+      <h2>5. Counterpart verbs</h2>
+      <p>Please find a  counterpart verb in your language for each of the pre-defined verb meanings.  Note that the meaning definition is given by the role frame (plus optional  comments in the meaning comments field, and example), not by the meaning label  (COVER, FILL, etc.). The latter is only a label that serves as a heading for  the record. The meaning thus includes information about semantic roles, for  which the role frame is crucial (e.g. the meaning intended by WASH is 'A washes  P', not 'A washes').</p>
+      <p>For each verb  meaning of the database, please find the semantically most fitting non-derived  verb in the project language. More generally, the verb should have a  &quot;basic&quot; flavour, i.e. verbs that are used very rarely should be  avoided if a more commonly verb with similar meaning is available. &ldquo;Basic&rdquo;ness  of the counterpart verbs is more important than exact semantic equivalence  between the pre-defined meanings and the counterparts. The only requirement is  that the correspondence is close enough to be helpful for the project.</p>
+  <p> The relationship between pre-defined  meanings and counterpart verbs is many to many. This means that if there are  two basic verbs in your language that correspond to a meaning, you should  include them both, and if a single verb corresponds to two different meanings,  it needs to be given only once.</p>
+      <p> If there is no counterpart in your language  and a paraphrase would have to be used (e.g. if HIDE is expressed as 'put  something somewhere where others cannot see it'), please do not give a  counterpart. (This means checking the field &quot;No counterpart&quot; in the  Meanings layout.)</p>
+      <p> This does not mean that verbs that are  complex in some way should be excluded. If a complex verbal expression, whether  a morphologically derived form or a syntactic phrase, is conventional (or  lexicalized), it should be included, even if it is productively derived.<a href="#ftn3" name="ftnref3" title="In some cases, it is impossible to give basic counterparts, as in the case where all ditransitives including 'give' are derived (applicative, as in the Mayan language Tzotzil).  Therefore it is important to provide information about morphological complexity of Vs. This question is relevant also insofar as the morphological make-up may determine the availability of a certain valency pattern. For example, in Malayalam, only derived ditransitives (causatives of transitives), take a double object construction, while basic (underived) ditransitives take a dative construction."><sup>3</sup></a> Thus, complex precicates like English <em>carry  out</em> or German <em>teil-nehmen</em> 'take  part', as well as serial-verb complexes like Yoruba <em>b&aacute; ... w&iacute;</em> 'rebuke', should be regarded as single verbs.</p>
+      <p> If  a verb has other meanings than the pre-defined meaning for which it is a  counterpart, it is helpful to include these other meanings, in the comments  field.<a href="#ftn4" name="ftnref4" title="This question is relevant insofar as the valency pattern may be motivated through one of the meanings of the polyfunctional item. For example, in some languages, which use the same verbs for both 'hit' and 'throw', this verb follows the allative pattern, as expected for caused motion verbs. Similarly, a verb may have a valency pattern that is motivated by its etymological meaning, not by any of the current meanings."><sup>4</sup></a> (It is also possible to create new meanings; see &sect;9.3 below for this advanced  feature.)</p>
+      <p> Homonymous verbs should be distinguished by  a number, e.g. <strong><em>lie (1)</em></strong> ('be in a horizontal position') and <strong><em>lie  (2)</em></strong> ('say something that is untrue').<br />
+        The  &quot;comments&quot; field can contain further non-structured information about  all aspects of the verb and its relationship to the pre-defined meaning.</p>
+      <div class="rectangle">
+        <p>DATABASE FIELDS:<br />
+          <strong>Verb  form</strong>: Please give the verb in its usual  citation form.<br />
+          <strong>Comments</strong>:  You may comment on any aspect of this verb.<br />
+          relationships:<br />
+          <strong>Meanings</strong>:  A verb may be related to one or more meanings from the Meanings table.<br />
+          <strong>Coding  frames</strong>: A coding frame needs to be entered  (selected or newly created) for each verb.<br />
+          <strong>Alternation  values</strong>: The alternation values (occurs  regularly, occurs marginally, occurs never, no data) are best entered on the  Verbs layout.<br />
+          <strong>Examples</strong>:  An example (with the basic coding frame) needs to be entered (generally newly  created) for each counterpart verb.<br />
+          <strong>Alternation  examples</strong>: At least one example needs to be  entered (generally newly created) for each alternation. This can be done on the  Verbs layout, or on the Alternation values layout.</p>
+      </div>
+      <span style="float: right; margin-right: 2px; margin-top:-10px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <a name="examples"></a><p class="trennlinie"></p>
+      <h2>6. Examples</h2>
+      <p>Please provide  glossed examples of sentences illustrating the coding frames and  alternations.&nbsp; There should be (at least)  one example for each of the counterpart verbs with the basic coding frame, as  well as (at least) one example of each of the alternations (with some verb).<a href="#ftn5" name="ftnref5" title="If the alternation patterns are different for different subclasses of  verbs, the contributor is requested to provide several examples illustrating  the differences (e.g., if the causative derivation produces different  structures when applied to intransitives and transitives, as is frequently the  case; here at least two examples of the causative construction should be  given)."><sup>5</sup></a></p>
+      <p>Ideally there would also be an  example of each possible verb-alternation pair (where the verb should be shown  in the non-basic alternant form). However, since some alternations are very  productive and occur with a large number of verbs, this would be too much work  for most contributors, so a complete set of verb-alternation pair examples is  not required. </p>
+      <div class="rectangle">
+        <p>DATABES FIELDS:<br />
+          <strong>Primary  text</strong>: Please give the example text in the way  the language is normally written by linguists.<br />
+          <strong>Original  orthography</strong>: Give the original orthography, if it  differs from the way linguists write the language (e.g. if it is in a different  script).<br />
+          <strong>Analyzed  text:</strong> This field is for text with hyphenation  or other annotation, if required for morpheme-by-morpheme glosses.<br />
+          <strong>Gloss</strong>:  Morpheme-by-morpheme gloss, following the Leipzig Glossing Rules.<br />
+          <strong>Translation</strong>:  Idiomatic translation into English.<br />
+          <strong>Other  translation</strong>: Idiomatic translation into a major  language other than English.<br />
+          <strong>Comments</strong>:  Any kind of comments on the example.<br />
+          <strong>Example  type</strong>: Select one example type from the list  (elicited from speaker, naturalistic spoken, naturalistic written, constructed  by linguist, constructed by native speaker linguist, other).<br />
+          relationships:<br />
+          <strong>Source  person</strong>: Give the name of the source person if  the example was elicited or constructed.<br />
+          <strong>Reference</strong>:  Include a reference if the example is naturalistic (written or spoken)<br />
+          <strong>Pages</strong>:  Page number of reference</p>
+      </div>
+      <span style="float: right; margin-right: 2px; margin-top:-10px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <a name="coding_frames"></a><p class="trennlinie"></p>
+      <h2>7. Coding frames</h2>
+      <h2>7.1 Defining valency</h2>
+      <p>In our  terminology, the <strong>valency</strong> of a verb  is the list of its <strong>arguments</strong> with  their coding properties (<strong>coding frame</strong>),  their behavioural properties (<strong>syntactic-function  frame</strong>), and with the relationship of the arguments to the roles in the  verb's <strong>role frame</strong>. </p>
+      <p>Coding properties involve the following  techniques (Haspelmath 2005; Malchukov, Haspelmath &amp; Comrie 2010):</p>
+      <ul>
+        <li><strong>flagging</strong> (case or adposition marking)</li>
+        <li><strong>indexing</strong> (agreement, cross-referencing)</li>
+        <li><strong>word order</strong> (in the absence of other  kinds of marking)</li>
+      </ul>
+      <p>Behavioural  properties concern the behaviour with respect to patterns like reflexivization,  passivization, causativization, argument omission, and various cross-clausal  constructions such as control, switch-reference, raising and coordination. As a  verb's valency consists of both the coding properties and the behavioural  properties of its arguments, all these are in principle relevant to valency.  However, in the Leipzig Valency Classes Project, only coding properties and one  aspect of the behavioural properties, alternations, are taken into account.</p>
+      <p> An example of a full specification of a  verb's valency is given below for English <em>remind</em>:</p>
+      <p>English <em>remind</em></p>
+      <table width="461" border="1">
+        <tr>
+          <td width="138">coding frame:&nbsp;</td>
+          <td width="307"><strong>A  &gt; V.subj[A] &gt; R &gt; <em>of</em>+T</strong></td>
+        </tr>
+        <tr>
+          <td>syntactic-function frame:</td>
+          <td>subject<sub>X</sub> direct.object<sub>Y</sub> oblique.object<sub>Z</sub></td>
+        </tr>
+        <tr>
+          <td valign="top">role frame:&nbsp;&nbsp;&nbsp;</td>
+          <td><strong>A reminds R of T</strong> (or: agent<sub>A</sub> addressee<sub>R</sub> theme<sub>T</sub><br />
+            or:  A cause (remember R T))</td>
+        </tr>
+      </table>
+      <br/>
+      <p>&mdash; The <strong>coding frame</strong> contains information about  flagging (e.g. the preposition <em>of</em>),  indexing (e.g. the fact that the verb agrees with the subject), and word order. </p>
+      <p>&mdash; The<strong> syntactic-function frame</strong> contains  information about behavioural properties, summed up in syntactic-function  labels (thus, &quot;subject&quot; means that the argument controls  verb-indexing, can undergo raising, becomes the oblique agent in passivization,  etc.). Although it is part of valency, <u>the syntactic-function frame as such  plays no role in this project</u>, and we limit ourselves to considering the  behaviour of verbs in alternations.</p>
+      <p>&mdash; The <strong>role frame</strong> tells us how the syntactic  arguments map onto semantic roles (this can be done in various ways, by simple  English glosses with participant variables, by informative semantic-role  labels, or by semantic decomposition with participant variables).</p>
+      <p>An <strong>argument</strong> of a verb is a phrase whose  occurrence is made possible by a specific verb, and which therefore cannot  occur with a generic verb. This can be tested by attempting to move a phrase  into a neighboring clause with an anaphoric verb, as shown in (1a, 1c).  Adjuncts, by contrast, are not tied to particular verbs and can therefore be  moved out into a clause with an anaphoric verb (1b, 1d):</p>
+      <p>(1)&nbsp;</p>
+      <ol type="a">
+        <li><em>I wrote a letter. &gt; *I wrote, and I did a  letter. </em></li>
+        <li><em>I wrote with a pen. &gt; I wrote, and I did  it with a pen. </em></li>
+        <li><em>I put the book on the table. <br />*I put the book, and this happened  on the table.</em> </li>
+        <li>I <em> wrote the letter on the table. &gt; </em><br />
+          <em>I  wrote the letter, and this happened on the table. </em></li>
+      </ol>
+      <p>If  you are unsure whether a participant is an argument or an adjunct, please make  an arbitrary choice and include a comment in the verb layout's comment field.  (Please do not use language-specific criteria for &quot;argumenthood&quot;,  because these are really criteria for different concepts labeled  &quot;argument&quot;, not for comparable 'argument' concepts.)</p>
+      <span style="float: right; margin-right: 2px; margin-top:-10px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <p class="trennlinie"></p>
+      <h2><strong>7.2. Representing coding frames</strong></h2>
+      <p>Different  verbs have different coding frames, but in all languages, coding frames recur,  e.g. in German, the sample coding frames shown in (2a-c) occur in many  different verbs:</p>
+      <p>(2)</p>
+      <ol type="a">
+        <li><strong>A-nom  X-dat</strong>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br />
+          (<em>helfen</em> 'A helps X', <em>folgen</em> 'A follows X', <em>dienen</em> 'A serves X', ...)</li>
+        <li><strong>S-nom <em>an</em>+X</strong>:<br />
+          (<em>denken</em> 'S thinks of X', <em>liegen</em> 'S is due to X', etc.)</li>
+        <li><strong>A-nom R-acc <em>an</em>+T</strong>:<br />
+          (<em>erinnern</em> 'A reminds R of T', etc.)</li>
+      </ol>
+      <p>(Note:  capital letters other than V are used as argument/participant variables.<a href="#ftn6" name="ftnref6" title="We often use letters that can  be thought of as standing mnemonically for particular roles (A: agent, P:  patient, S: single central argument of intransitive verb, T: theme (of  ditransitive verb), R: recipient (of ditransitive verb), L: location (including  goal), I: instrument, E: experiencer, M: stimulus, X, Y, Z: other). No claims  are associated with the use of these letters, and they could be replaced by  other arbitrary variable symbols."><sup>6</sup></a>)</p>
+      <p> Since coding frames are not unique, but  recur, they are in a separate table of the database. Once a coding frame has  been set up for a verb, all other verbs using the same coding frame can make  use of the same record, i.e. coding frames need to be entered only once and can  thereafter be simply selected from the list of existing coding frames.</p>
+      <p> A coding frame is a list of all the  argument variables with their standard coding, i.e. flagging (case-marking or  adposition marking), indexing (&quot;agreement&quot; or  &quot;cross-referencing&quot;), possibly word order, plus a verb variable. </p>
+      <p> The following conventions are used: </p>
+      <ul>
+        <li>cases: case labels are attached  to an argument variable by a hyphen, e.g. <strong>A-nom </strong>(for nominative case),<strong> R-dat, P-abs</strong></li>
+        <li>adpositions: forms of  adpositions are attached to an argument variable by a plus sign, e.g. <strong><em>for</em>+X, <em>&agrave;</em>+R</strong></li>
+        <li>indices: index labels are  attached to the verb variable by a period, e.g. <strong>V.subj[A] </strong>(for German subject agreement), <strong>subj[A].obj[P].V</strong> (for Bantu subject and object agreement); the role  information is given in brackets</li>
+        <li>noun incorporation: is marked by angle brackets, e.g.  A P &lt;I&gt;V</li>
+        <li>word  order: if the order of elements is fairly fixed and potentially distinctive,<a href="#ftn7" name="ftnref7" title="Some languages make  word-order distinctions depending on the valency class. Thus, in (Gao) Songhay,  canonical transitives (&lsquo;break&rsquo;, &lsquo;kill&rsquo;) have SOV order, while less canonical  bivalent verbs (&lsquo;see&rsquo;, &lsquo;follow&rsquo;, &lsquo;love&rsquo;) have SVO order."><sup>7</sup></a> an  greater-than character (&gt;) is used between elements that occur adjacent and  normally in the given order (e.g. English <strong>A  &gt; V.subj[A] &gt; P</strong>)</li>
+        <li>optionality:  If a coding element occurs optionally or variably (i.e. only under some  circumstances), it can be put in parentheses<a href="#ftn8" name="ftnref8" title="Two coding frames may differ only in the optionality vs. obligatoriness  of a coding element. For example, in the Austronesian language Manam some  experiencer verbs (&lsquo;like&rsquo;, &lsquo;know&rsquo;, &lsquo;be bad at&rsquo;) use primary-object indexing  only when the primary object is prominent, while canonical transitives (like  &lsquo;break&rsquo;), invariably index the primary object. And in Newari, the availability  of an ergative pattern depends on tense, on the one hand, and on lexical class  of the verb, on the other hand, so that two-argument verbs deviating from the  transitive prototype can take the ergative pattern optionally."><sup>8</sup></a></li>
+      </ul>
+      <p>Note that  case labels and index labels are language-specific entities, just like  adpositions. There is no need to standardize (or abbreviate) them, because they  will eventually have to be defined in full detail anyway (but not within our  database). Transparent labels are good for mnemonic reasons, though. If word  order is not consistent or particularly distinctive, the order in which the  argument variables and the verb variable occur in the coding frame is in  principle arbitrary, but for mnemonic reasons, an order that corresponds to the  most frequent clause order is advisable.</p>
+      <p> It is important to note that the coding  frame descriptions are necessarily schematic and partial and cannot possibly  describe the coding fully. For example, if an index can either be a prefix or a  suffix, then a salient or dominant position should be chosen, without worrying  about the incompleteness of the coding frame. Another example is word order,  which often obeys complex regularities that cannot possibly be captured by  simple schemas. </p>
+      <p>In most cases, arguments are noun  phrases or adpositional phrases with specific coding. However, arguments may  also be adverbial arguments, in particular <strong>locational  arguments</strong>. These arguments do not have any specific coding, cf. (3). In  such cases, all we can say is that the argument is a locational phrase of some  sort, and the coding frame is &quot;A V T LOC&quot;.</p>
+      <p>(3)&nbsp; </p>
+      <ol type="a">
+        <li>Put the  book <em>on the shelf</em></li>
+        <li>Put the money <em>under the mattress</em>.</li>
+        <li>Put it <em>here</em>.</li>
+      </ol>
+      <p>Whether the  arguments are obligatory or optional is not recorded in the coding frames,  because it may depend on too many different factors, most of which have nothing  to do with the verb-specific coding. If an argument can be omitted only with  certain verbs, then this should be regarded as an argument-omission alternation  (e.g. object omission with existenitial/generic meaning that is possible for  objects of certain verbs in English: <em>He  often reads/eats/drinks</em>).</p>
+      <p> If a verb is associated with several  different coding frames that are not related by a regular alternation, then the  verb has to be split up (somewhat artificially) into two different homonymous  verbs. (In reality, the relationship between verbs and coding frames is  many-to-many, but we simplify our database structure by pretending that it is  many-to-one.)</p>
+      <p> The contributors indicate the  semantic roles of the arguments by using the same variables as argument  variables that are used as participant variables in the role frames of the  pre-defined meanings, for instance: </p>
+      <table width="363" border="1">
+        <tr>
+          <td width="200">pre-defined  meaning label:</td>
+          <td width="193">ASK  FOR</td>
+        </tr>
+        <tr>
+          <td>pre-defined  role frame: </td>
+          <td>'A  asks R for T'</td>
+        </tr>
+        <tr>
+          <td>German  counterpart verb:</td>
+          <td><em>bitten</em></td>
+        </tr>
+        <tr>
+          <td>coding  frame:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+          <td><strong>A-nom V R-acc <em>um</em>+T</strong></td>
+        </tr>
+      </table>
+      <p><br />
+        In  this way, it becomes clear that the nominative argument has the asker role, the  accusative argument has the askee role, and the complement of the preposition <em>um</em> has the role of thing asked for.</p>
+      <p>It is important to be aware that the  semantic roles in the role frames do not necessarily correspond to syntactic  arguments in your language. (The role frames are not &quot;semantic valency  frames&quot;, and we do not work with a semantic definition of arguments.) The  role frames are intended to convey the verb's meaning and to provide readily  identifiable participant variables, not to prejudge the number of syntactic  arguments that a counterpart verb will have.</p>
+      <p>Note that in the role frames, some  arguments are given in parentheses. This has no particular meaning, but is  intended to draw attention to the fact that we do not expect all roles to  correspond to arguments of the counterpart verb of your language. The roles in  parentheses seem to us particularly likely not to correspond to arguments, but  this is just an expectation based on our impressions. What counts are the facts  of your language.</p>
+      <p>If your verb is associated with two coding  frames that are related via an uncoded alternation (e.g. English <em>give</em>, which can have the coding frame  &quot;A &gt; V &gt; R &gt; T&quot; or the coding frame &quot;A &gt; V &gt; T  &gt; <em>to</em>+R&quot;), the decision of  which coding frame to take as basic may not be possible on a principled basis,  so an arbitrary decision may have to be taken.<a href="#ftn9" name="ftnref9" title=" We considered two ways of  avoiding an arbitrary choice: (i) by allowing the association of a verb with  two or more coding frames (but in this way, we would have lost the information  that the use of two coding frames is systematic rather than verb-specific), and  (ii) by capturing alternations in a very different way, not via a separate  alternations table, but via different coding frames that may be associated with  a single verb stem (but in this way, we would have lost the ability of  comparing alternations across languages). Clearly, no choice of representation  mode is ideal."><sup>9</sup></a><br />
+        &nbsp;&nbsp;&nbsp;&nbsp; If your verb has an argument with a  semantic role that is not included in the role frame, please use additional  role variables and characterize the additional roles in the comment field of  the coding verb.</p>
+      <div class="rectangle">
+        <p>DATABASE FIELDS:<br />
+          <strong>Coding  frame schema</strong>: Please give the coding frame in  schematic form as explained above<br />
+          <strong>Description</strong>:  Here you should give more details of the coding frame.<br />
+          <strong>Comments:</strong> This field is for any further comments.<br />
+          <strong>Coding-frame  class</strong>: See under &sect;9.4.</p>
+      </div>
+      <span style="float: right; margin-right: 2px; margin-top:-10px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <a name="valency_alternations"></a><p class="trennlinie"></p>
+      <h2>8. Valency alternations </h2>
+      <h2>8.1. Defining alternations</h2>
+      <p>For the purposes of our project, a <strong>valency alternation</strong> is defined as a set  of two different coding frames that are productively (or at least regularly)  associated with both members of a set of verb pairs sharing the same verb stem.  (Thus, we are restricting ourselves to coding alternations.) Valency  alternations may or may not be coded in the verb form, and accordingly we  distinguish two types of alternations, <strong>uncoded  alternations</strong> (such as the English Dative Shift alternation) and <strong>coded alternations</strong> (such as the English  Passive alternation).</p>
+      <p>Examples  of alternations are the following:</p>
+      <table width="631">
+        <tr>
+          <td width="68" valign="top">English:</td>
+          <td colspan="3">Dative  Shift (uncoded)</td>
+        </tr>
+        <tr>
+          <td valign="top">&nbsp;</td>
+          <td width="118" valign="top"><strong>A &gt; V &gt; R &gt; T</strong><br /></td>
+          <td width="25" valign="top">&lt;&gt;</td>
+          <td width="400"><strong>A &gt; V &gt; T &gt; <em>to</em>+R</strong><br />
+            (e.g. <em>give, sell, lend</em>, ...)</td>
+        </tr>
+      </table>
+      <br />
+      <table width="631">
+        <tr>
+          <td width="68" valign="top">Russian:</td>
+          <td colspan="3">Anticausative  alternation (coded)<br /></td>
+        </tr>
+        <tr>
+          <td height="42" valign="top">&nbsp;</td>
+          <td width="118" valign="top"><strong>A-nom V X-acc</strong><br /></td>
+          <td width="25" valign="top">&lt;&gt;</td>
+          <td width="400"><strong>X-nom V-<em>sja</em></strong><br />
+            (e.g. <em>lomat'</em> 'break', <em>otkryt'</em>, 'open', ...)</td>
+        </tr>
+      </table>
+      <br />
+      <table width="631">
+        <tr>
+          <td width="68" valign="top">German:</td>
+          <td colspan="3">Passive  Voice (coded)</td>
+        </tr>
+        <tr>
+          <td valign="top">&nbsp;</td>
+          <td width="118" valign="top"><strong>A-nom X-acc</strong> <strong>V</strong><br /></td>
+          <td width="25" valign="top">&lt;&gt;</td>
+          <td width="400"><strong>X-nom <em>von</em>+A  V<em>-t+werden</em></strong><br />
+            (e.g. <em>nehmen, bringen, schicken</em>, <em>lachen</em>, ...)</td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <p>Alternations are relevant to the project  to the extent they are sensitive to verb classification (e.g., some varieties  of differential object marking apply to any transitive verb, which does not  yield an interesting clustering of verb types). More generally for our  purposes, most relevant are those alternations which are fairly productive (not  restricted to a few lexical items), but &shy;&ndash; most importantly &ndash; are sensitive to  lexical classes. That is, we are interested in alternations which are  distinctive for the verbal lexicon (as sampled here) rather than in those which  apply across the board or apply to just few items.</p>
+      <p>One  of the alternants needs to be designated as &quot;basic&quot; for the purposes  of the database. In a coded alternation, this will be the alternant with no  coding on the verb. In an uncoded alternation (as well as in a doubly coded  alternation), the contributor has to choose one alternant as &quot;basic&quot;.  It is understood that a principled decision will often be difficult or  impossible, so an arbitrary decision can be taken.</p>
+      <p> Contributors  will ideally enter all (major) valency alternations of their language into the  &quot;alternations&quot; table of the database, but if there are more than ten  such alternations, then this will be a lot of work, and they should contact the  editors.</p>
+      <p> Then for each verb, they will have  to decide whether the verb occurs in the alternation or not, or whether it applies  only marginally.</p>
+      <div class="rectangle">
+        <p>DATABASE FIELDS:<br />
+          <strong>Alternation  name</strong>: Please find a language-specific name  (ideally capitalized) for your alternation. This has no theoretical  significance and is only for reference.<br />
+          <strong>Description</strong>:  Here you should describe what the alternation does. This might be done in terms  of basic and derived coding frame schemas, but often additional conditions will  have to be given in prose.<br />
+          <strong>Alternation  type:</strong> Specify whether it is a coded or an  uncoded alternation.<br />
+          relationships:<br />
+          <strong>Alternation  values</strong>: The alternation values (occurs  regularly, occurs marginally, occurs never, no data) are best entered on the  Verbs layout, but may alternatively be entered on the Alternations layout.<br />
+          <strong>Alternation examples</strong>: At  least one example needs to be entered (generally newly created) for each  alternation. This can be done on the Verbs layout, or on the Alternations  layout. </p>
+      </div>
+      <span style="float: right; margin-right: 2px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <p class="trennlinie"></p>
+      <h2>8.2. Examples of uncoded alternations</h2>
+      <p>In this subsection  only uncoded alternations are considered; discussion of coded alternations is  postponed to the next subsection. The two subsections should be seen as largely  complementary, as alternations will be coded by dedicated markers in some  languages (apparently especially languages with a richer morphology) and left  uncoded in other languages (like English). </p>
+      <p> We  begin with English, a rather atypical example of a language with a particularly  rich set of uncoded alternations. Levin (1993) mentions, in particular, the  following alternations. (The list below mentions only fairly productive  alternations and does not include verb-coded alternations like the passive  alternation; the terminology partially differs from Levin's.)</p>
+      <ol type="a">
+        <li>the  Ambitransitive Alternation (<em>John broke  the stick ~ The stick broke</em>)</li>
+        <li>the  Middle Alternation (<em>John cut the bread ~  The bread cuts easily</em>)</li>
+        <li>the  Reflexive Omission Alternation (<em>John  washed himself ~ John washed</em>)</li>
+        <li>the  Reciprocal Alternation (<em>John married Mary  ~ John and Mary married</em>)</li>
+        <li>the  Dative Alternation (<em>Mary gave the book to  John ~&nbsp; gave John the book</em>)</li>
+        <li>the  Locative Alternation <em>(John loaded the  truck with hay ~ the hay onto the truck</em>)</li>
+        <li>the  Conative Alternation (<em>John cut the bread  ~ cut at the bread</em>)</li>
+        <li>the  Object Omission Alternation (<em>John ate the  bread ~ John ate</em>).</li>
+      </ol>
+      <span style="float: right; margin-right: 2px; margin-top:-10px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <p class="trennlinie"></p>
+      <h2>8.3. Examples of coded alternations</h2>
+      <p>Languages with  richer morphology often use coded alternations for many argument alternations  left uncoded in English. Thus in Even, a Tungusic language, the &ldquo;middle  alternation&rdquo; is signaled by the mediopassive marker, the &ldquo;inchoative-causative  alternation&rdquo; is signaled by the causative marker (in competition with the  mediopassive), while equivalents of English verbs allowing for a &ldquo;reciprocal  alternation&rdquo; commonly involve a lexicalized sociative marker (e.g. <em>baka-lda</em> [find-SOC] &lsquo;meet&rsquo;).</p>
+      <p> One can use taxonomy for the domain of  verb-coded alternations, as we adopted for (uncoded) coding alternations:</p>
+      <p>&ndash;  Valency-reducing alternations, coming in several subtypes:</p>
+      <ol type="a">
+        <li>Subject-demoting/deleting  alternations
+          <ul type="disc">
+            <li>anticausative</li>
+            <li>middle</li>
+            <li>reflexive</li>
+            <li>reciprocal</li>
+          </ul>
+        </li>
+        <li>Object-demoting/deleting  alternations
+          <ul type="disc">
+            <li>antipassive</li>
+          </ul>
+        </li>
+        <li>Subject-Object rearranging  alternations
+          <ul type="disc">
+            <li>passive  (differs from anticausative in that A may be expressed, or is implied)</li>
+          </ul>
+        </li>
+      </ol>
+      <p>&ndash;&nbsp; Valency-increasing and valency-rearranging  alternations, especially causatives and applicatives; the latter however may  rearrange rather than increase the valency. In some languages, the same marker  is used both in causative and applicative functions; also for such cases it is  important to determine which verbs select for which function. </p>
+      <p>Note that some  languages have several causative markers, for example, for building  intransitive vs. transitive causatives. These can be used to test for  transitivity of less prototypical transitive verbs.</p>
+      <p>There may be several subtypes of  applicatives, depending on which object is promoted (for example, in Hooca&#808;k (Siouan), there are 4 different applicative markers, including the  benefactive applicative, the instrumental applicative and two types of locative  applicatives). On the other hand, the general applicative in Salish has been  claimed to have different meanings depending on the verb&rsquo;s class. Applicatives  may be used to render many of the alternations listed in &sect;8.2, including the  dative shift, or locative alternation (cf. (f)).&nbsp; Other languages may use directional markers  to code some of these alternations (cf.&nbsp;  Russian <strong><em>na</em></strong><em>-gruzit&rsquo; seno na telegu</em> [PREF-load hay on cart] &lsquo;to load the hay on the cart&rsquo; vs. <strong><em>za</em></strong><em>-gruzit&rsquo; telegu senom </em>[PREF-load cart hay.INS] &lsquo;to load the cart  with hay&rsquo;; German <em>laden</em> vs. <strong><em>be</em></strong><em>-laden</em>).</p>
+      <p>Not all alternations can be easily  classified as valency-increasing/rearranging or valency-reducing. For example,  some (Austronesian) languages show a variety of &ldquo;voice&rdquo; (or &ldquo;focus&rdquo;)&nbsp; forms (&ldquo;actor focus&rdquo;, &ldquo;goal focus&rdquo;, etc),  used for &lsquo;promotion&rsquo; of different objects to the subject position; for these  languages it will be relevant which Vs allow for which voice constructions. On  the other hand, head-marking languages of the &ldquo;hierarchical type&rdquo; show a  direct-inverse alternation triggered by the relative prominence of the A and P  arguments. In that case it is relevant to study the use of direct-inverse  alternations with different groups of two and three argument verbs (in the  latter case, it is also relevant which of the object arguments takes part in  the alternation; e.g., Theme or Recipient of a ditransitive verb). But also for  the domain of monotransitives some languages may show further differentiation;  e.g., some languages (like Tlapanec) may have different inverse forms for  different subtypes of 2-argument verbs.</p>
+      <span style="float: right; margin-right: 2px; margin-top:-10px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <a name="optional_advanced_features"></a><p class="trennlinie"></p>
+      <h2>9. Optional advanced features</h2>
+      <h2>9.1. Ten additional verb meanings</h2>
+      <p>For  ten additional verb meanings, counterparts may optionally be given, see Table  2.</p>
+      <p><strong>Table 2: Ten additional verb meanings</strong></p>
+      <table border="1" cellspacing="1" cellpadding="0" width="614">
+        <tr class="row_first">
+          <td width="76" valign="top">BRING</td>
+          <td width="210" valign="top">A brings    T to R</td>
+          <td width="316" valign="top">The girl    brought flowers to me.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="76" valign="top">PUSH</td>
+          <td width="210" valign="top">A pushes    P (somewhere (L))</td>
+          <td width="316" valign="top">The boy    pushed the girl (into the water).</td>
+        </tr>
+        <tr class="row_first">
+          <td width="76" valign="top">DIG</td>
+          <td width="210" valign="top">A digs    (for X)</td>
+          <td width="316" valign="top">The woman    is digging for potatoes.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="76" valign="top">WIPE</td>
+          <td width="210" valign="top">A wipes T    (off X)</td>
+          <td width="316" valign="top">The women    wiped dirt off the table.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="76" valign="top">STEAL</td>
+          <td width="210" valign="top">A steals    T (from X)</td>
+          <td width="316" valign="top">The thief    stole money from the old lady.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="76" valign="top">GRIND</td>
+          <td width="210" valign="top">A grinds    P (with I)</td>
+          <td width="316" valign="top">The women    ground the seeds (with mortar and pestle).</td>
+        </tr>
+        <tr class="row_first">
+          <td width="76" valign="top">HEAR</td>
+          <td width="210" valign="top">E hears M</td>
+          <td width="316" valign="top">The boy    heard the bear.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="76" valign="top">TEACH</td>
+          <td width="210" valign="top">A teaches    R T</td>
+          <td width="316" valign="top">The old    lady taught the girl a song.</td>
+        </tr>
+        <tr class="row_first">
+          <td width="76" valign="top">COOK</td>
+          <td width="210" valign="top">A cooks P</td>
+          <td width="316" valign="top">The women    cooked the meat.</td>
+        </tr>
+        <tr class="row_second">
+          <td width="76" valign="top">BOIL</td>
+          <td width="210" valign="top">S boils</td>
+          <td width="316" valign="top">The water    is boiling.</td>
+        </tr>
+      </table>
+      <span style="float: right; margin-right: 2px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <p class="trennlinie"></p>
+      <h2>9.2. Adding more verbs</h2>
+      <p>For  each <strong>alternation</strong>, and for each <strong>coding frame</strong>, optionally additional  verbs may be entered which are not counterparts of the pre-defined meanings and  which undergo the alternation and which occur in the coding frame. These  further verbs should be linked to newly created meanings (see &sect;9.3).</p>
+      <p>Ideally, the information provided on  these additional verbs would be complete, i.e. it would include the coding  frame (also if the verb is given as an additional example of an alternation)  and the behaviour in alternations (also if the verb is given as an additional  example of a coding frame).</p>
+      <span style="float: right; margin-right: 2px; margin-top:-10px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <p class="trennlinie"></p>
+      <h2><strong>9.3. Adding more verb meanings</strong></h2>
+      <p>In  addition to the 70 pre-defined verb meanings, users may create further verb  meanings if they want to enter verbs that have other meanings.</p>
+      <div class="rectangle">
+        <p>DATABASE FIELDS:<br />
+          <strong>Meaning  label</strong>: The meaning label is the closest  English verb, in capitals.<br />
+          <strong>Role  frame</strong>: Please give a role frame involving  variables for the arguments so that coding frames can be related to the  meanings of the verbs.<br />
+          <strong>Comments:</strong> You may give any kinds of comments. </p>
+      </div>
+      <span style="float: right; margin-right: 2px; margin-top:-10px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <p class="trennlinie"></p>
+      <h2>9.4. Characterizing  coding-frame classes</h2>
+      <p>If  a coding frame is used for an open class of verbs (i.e. if it is productive),  please specify (optionally) which verbs may belong to this class (in terms of  relevant semantic or formal features). This should be done in the field  &quot;Coding-frame class&quot;. (For highly restricted classes, the best way of  characterizing them would be to give additional verbs, see &sect;9.2.)</p>
+      <span style="float: right; margin-right: 2px; margin-top:-10px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <p class="trennlinie"></p>
+      <h2>References</h2>
+      <p>Apresjan, Jurij  D. 1967. <em>Eksperementaljnoe issledovanie  russkogo glagola</em>. Moskva: Nauka. </p>
+      <p>      Dixon R. M. W. 1991/2002. <em>A New Approach to English Grammar, on Semantic Principles</em>. Oxford:  Clarendon Press.</p>
+      <p>      Haspelmath,  Martin. 2005. Ditransitive Constructions: The Verb &lsquo;Give&rsquo;. In: Haspelmath &amp;  al. (eds.), 426-429.</p>
+      <p>      Levin, Beth.  1993. <em>English Verb Classes and Alternations</em>.  Chicago: University of Chicago Press</p>
+      <p>      Malchukov,  Andrej, Martin Haspelmath, and Bernard Comrie. 2010. Ditransitive  constructions: a typological overview. To appear in Malchukov, A., M.  Haspelmath, and B. Comrie (eds.). <em>Studies  in Ditransitive constructions. A comparative handbook</em>. Berlin: De Gruyter  Mouton. </p>
+      <p>      Sauerland, Uli. 1994.  German diathesis and verb morphology. In: Jones, Doug (ed). 1994. <em>Working Papers and Projects on Verb Class  Alternations in Bangla, German, English, and Korean</em>. MIT AI Memo 1517,  37-92. </p>
+  <span style="float: right; margin-right: 2px; margin-top:-10px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <p class="trennlinie"></p>
+      <div style="font-size:0.9em;">
+        <p>Footnotes:</p>
+        <div>
+          <p><em><a href="#ftnref1" name="ftn1" title=""> </a>1) Note  that the ordering of the verbs in Table 1 (from potentially/frequently  zero-valent, through monovalent and divalent to trivalent) is somewhat  different from the ordering in the database. The ordering is of course  irrelevant.</em></p>
+        </div>
+        <div>
+          <p><em><a href="#ftnref2" name="ftn2" title=""> </a>2) Please  note that the list of verbs was somewhat updated with respect to the June 2010  version of the questionnaire and of the database (at the time there were some  discrepancies between them).</em></p>
+        </div>
+        <div>
+          <p><em><a href="#ftnref3" name="ftn3" title=""> </a>3) In  some cases, it is impossible to give basic counterparts, as in the case where all  ditransitives including 'give' are derived (applicative, as in the Mayan  language Tzotzil).&nbsp; Therefore it is  important to provide information about morphological complexity of Vs. This  question is relevant also insofar as the morphological make-up may determine the  availability of a certain valency pattern. For example, in Malayalam, only  derived ditransitives (causatives of transitives), take a double object  construction, while basic (underived) ditransitives take a dative construction. </em></p>
+        </div>
+        <div>
+          <p><em><a href="#ftnref4" name="ftn4" title=""> </a> 4) This question is relevant insofar as  the valency pattern may be motivated through one of the meanings of the  polyfunctional item. For example, in some languages, which use the same verbs  for both &lsquo;hit&rsquo; and &lsquo;throw&rsquo;, this verb follows the allative pattern, as expected  for caused motion verbs. Similarly, a verb may have a valency pattern that is motivated by its  etymological meaning, not by any of the current meanings.</em></p>
+        </div>
+        <div>
+          <p><em><a href="#ftnref5" name="ftn5" title=""> </a>5) If the alternation patterns are different for different subclasses of  verbs, the contributor is requested to provide several examples illustrating  the differences (e.g., if the causative derivation produces different  structures when applied to intransitives and transitives, as is frequently the  case; here at least two examples of the causative construction should be  given). </em></p>
+        </div>
+        <div>
+          <p><em><a href="#ftnref6" name="ftn6" title=""> </a>6) We often use letters that can  be thought of as standing mnemonically for particular roles (A: agent, P:  patient, S: single central argument of intransitive verb, T: theme (of  ditransitive verb), R: recipient (of ditransitive verb), L: location (including  goal), I: instrument, E: experiencer, M: stimulus, X, Y, Z: other). No claims  are associated with the use of these letters, and they could be replaced by  other arbitrary variable symbols. </em></p>
+        </div>
+        <div>
+          <p><em><a href="#ftnref7" name="ftn7" title=""> </a>7) Some languages make  word-order distinctions depending on the valency class. Thus, in (Gao) Songhay,  canonical transitives (&lsquo;break&rsquo;, &lsquo;kill&rsquo;) have SOV order, while less canonical  bivalent verbs (&lsquo;see&rsquo;, &lsquo;follow&rsquo;, &lsquo;love&rsquo;) have SVO order.</em></p>
+        </div>
+        <div>
+          <p><em><a href="#ftnref8" name="ftn8" title=""> </a>8) Two coding frames may differ only in the optionality vs. obligatoriness  of a coding element. For example, in the Austronesian language Manam some  experiencer verbs (&lsquo;like&rsquo;, &lsquo;know&rsquo;, &lsquo;be bad at&rsquo;) use primary-object indexing  only when the primary object is prominent, while canonical transitives (like  &lsquo;break&rsquo;), invariably index the primary object. And in Newari, the availability  of an ergative pattern depends on tense, on the one hand, and on lexical class  of the verb, on the other hand, so that two-argument verbs deviating from the  transitive prototype can take the ergative pattern optionally. </em></p>
+        </div>
+        <div>
+          <p><em><a href="#ftnref9" name="ftn9" title=""> </a>9) We considered two ways of  avoiding an arbitrary choice: (i) by allowing the association of a verb with  two or more coding frames (but in this way, we would have lost the information  that the use of two coding frames is systematic rather than verb-specific), and  (ii) by capturing alternations in a very different way, not via a separate  alternations table, but via different coding frames that may be associated with  a single verb stem (but in this way, we would have lost the ability of  comparing alternations across languages). Clearly, no choice of representation  mode is ideal. </em></p>
+        </div>
+      </div>
+      <span style="float: right; margin-right: 2px;"><%= image_tag 'arrow_top.png', title: 'top'%><a href="#top">top</a></span>
+      <p>&nbsp;</p>
+    </div></div>
 
 <% content_for :footer do %>
-<div class="container">
-  <div class="row">
-    <div class="span12" style="text-align:center;position:absolute;bottom:10px;">
-      <%= image_tag 'logo_minerva.png', style: "width:80px;"%>
-      <p style="color:#177A74; font-size:12px; width:200px;margin:5px auto;">
-        Max Planck Institute for Evolutionary Anthropology, Leipzig
-      </p>
-    </div>
-  </div>
-</div>
 <% end  %>

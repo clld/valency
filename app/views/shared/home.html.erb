@@ -1,47 +1,73 @@
 <div class="row">
   <div class="span6 offset3">
-    <h1 style="text-align:center;">Welcome to <em>ValPaL</em> Preview!</h1>
+    <h1 style="text-align:center;">Welcome to <em>ValPaL</em><sup><sup>pre-release</sup></sup></h1>
     <p>
-      This is the preliminary version of the Valency Patterns Leipzig online database,
+      This is the pre-release version of the Valency Patterns Leipzig online database,
       which is one of the results of the Leipzig Valency Classes Project. 
     </p>
-<!--    <p>
-      This preview is exclusively for you as Data Contributors. Although several
-      features are still in development, you can browse and explore all of the data
-      that will be made publicly available in a few weeks.
-    </p>
--->
     <p>
       <a href="/languages">Start exploring the database</a> by selecting an item from the top menu bar. 
     </p>
-    <p>
-      We are looking forward to hearing your feedback, your ideas, and your criticism.
-      Just click the red <strong>Feedback</strong> link in the upper right corner to send
-      an email to our Web developer, <tt>alexander_jahraus@eva.mpg.de</tt>. Thanks!
-    </p>
-    
   </div>
 </div>
 <div class="new row">  
   <div class="span3 offset3">
     <a href ="/languages">
-    <%= image_tag 'logo_valpal_text.png', style: 'width:300px;margin:0 auto;display:block;' %>
+    <%= image_tag 'logo_valpal_text.png', style: 'width:200px;margin:0 auto;display:block;' %>
     </a>
   </div>
   <div class="span3">
-    <%= image_tag 'logo_valency.png', style: 'width:400px;margin:30px auto;display:block;' %>
+    <%= image_tag 'logo_valency.png', style: 'width:200px;margin:30px auto;display:block;' %>
   </div>
 </div>
+<div class="new_row">
+    <h2><a id="cite"></a>How to cite ValPaL database</h2>
+        <p>The ValPaL online database is an edited database consisting of different languages which should be regarded as separate publications, like chapters of an edited volume. These datasets exemplified by <a href="/languages/icelandic">Icelandic</a> should be cited as follows:
+        </p>
+            <pre>
+Barðdal, Jóhanna. 2013. Icelandic Valency Patterns.
+In: Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.) 2013.
+Valency Patterns Leipzig online database
+Leipzig: Max Planck Institute for Evolutionary Anthropology.
+(Available online at http://valpal.info, Accessed on <%= Time.now.strftime("%Y-%m-%d") %>) 
+            </pre>
+        <p>The complete work should be cited as follows:
+            <pre>
+Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.) 2013.
+Valency Patterns Leipzig online database
+Leipzig: Max Planck Institute for Evolutionary Anthropology.
+(Available online at http://valpal.info, Accessed on <%= Time.now.strftime("%Y-%m-%d") %>) 
+            </pre>
+        </p>
+</div>
+<div class="new_row">
+    <h2><a id="license"></a>Terms of use &nbsp;<a href="http://creativecommons.org/licenses/by/3.0/"><%= image_tag 'cc-by.png', style: "width:80px;"%></a></h2>
+        <p>
+          The content of this web site is published under a
+          <a href="http://creativecommons.org/licenses/by/3.0/" class="ext-link">Creative Commons Attribution 3.0 Unported License</a>.
+          Use of the Google base maps is subject to
+          <a href="http://www.google.com/permissions/geoguidelines.html" title="Google's permission guidelines" class="ext-link">Google's permission guidelines</a>.
+          We invite the community of users to think about further applications for the available data
+          and look forward to your comments, feedback, and questions.
+        </p>
+</div>
 
-<% content_for :footer do %>
 <div class="container">
   <div class="row">
-    <div class="span12" style="text-align:center;position:absolute;bottom:10px;">
-      <%= image_tag 'logo_minerva.png', style: "width:80px;"%>
-      <p style="color:#177A74; font-size:12px; width:200px;margin:5px auto;">
-        Max Planck Institute for Evolutionary Anthropology, Leipzig
-      </p>
+    <div class="span12" style="margin-top:30px;">
+        <center>
+        <table border=0>
+            <tr valign=center><td><a href="http://www.eva.mpg.de"><%= image_tag 'logo_minerva.png', style: "width:80px;"%></a></td>
+            <td align=left><span style="color:#177A74; font-size:12px; width:200px;margin:5px auto;">
+        Max Planck Institute for Evolutionary Anthropology, Leipzig<br>
+        Deutscher Platz 6<br>
+        04103 Leipzig (Germany)
+            </span></td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td><span style="color:#177A74; font-size:12px; width:200px;margin:5px auto;">Funded by "Deutsche Forschungsgemeinschaft"<br></span><a href="http://www.dfg.de" target="_blank"><%= image_tag 'dfg_logo.jpg', style: "width:300px;"%></a></td></tr>
+            <tr><td>&nbsp;</td></tr>
+      </table>
+      </center>
     </div>
   </div>
 </div>
-<% end  %>
