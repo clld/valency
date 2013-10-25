@@ -52,7 +52,7 @@ module ExamplesHelper
     
     link_or_text = link_to_if(wrap, first_line, [@language, ex], title: link_title)
     transl = "‘#{ex.translation}’" unless ex.translation.blank?
-    
+ 
     rendered_example = content_tag(:div, link_or_number.html_safe, class: "number")
     unless link_or_text.blank?
       rendered_example << content_tag(:div, class: "body") do
@@ -62,6 +62,21 @@ module ExamplesHelper
         content_tag(:div, transl, class: "translation")
       end
     end
+
+    if ex.comment
+      comment = truncate(ex.comment, :length => 2000, :separator =>'. ', :omission => '... ')
+      # if comment =~ /ex\s+(\d+)/
+      #   llnr = comment[/ex\s+(\d+)/,1]
+      #   ll = "ex #{link_to_if(true, llnr, [@language, ex], title: llnr)}"
+      #   comment = comment.gsub(/ex\s+(\d+)/, ll)
+      # end
+      # comment = "<a rel=\"popover\" class=\"info cursor-hand\" style=\"font-size:10pt;\" title=\"Comment\" data-content=\"" + CGI.escapeHTML(comment.gsub('"','\"')) + "\"><i class=\"icon-info-sign\"></i></a>"
+      sym = content_tag(:span, "★", title: "Click to show comment")
+      com = content_tag(:a, sym, rel: "popover", class: "info cursor-hand", title: "Comment", :data => {:content => comment})
+      dcom = content_tag(:div, com, class: "pull-right")
+      rendered_example << dcom
+    end
+    
     
     # wrap it in a <div> and serve it
     div_for(ex, class: css_class) { rendered_example }
