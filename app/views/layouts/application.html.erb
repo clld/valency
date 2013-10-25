@@ -47,6 +47,31 @@
   <footer>
     <%= yield :footer %>
     <!-- scripts for google maps go here -->
+    
+    <div class="container" style="display:<%= 
+        if(action_name == 'home')
+            "none"
+            end 
+    %>">
+      <div class="row" style="margin-top:30px;">
+        <div class="span12">
+            <center>
+            <table border=0 width=100%>
+                <tr align=center><td><a href="http://www.eva.mpg.de"><%= image_tag 'logo_minerva.png', style: "width:80px;"%></a></td>
+                <td valign=center></td>
+                <td>&nbsp;&nbsp;&nbsp;</td>
+                <td><a title="The content of this web site is published under a Creative Commons Attribution 3.0 Unported License." href="http://creativecommons.org/licenses/by/3.0/"><%= image_tag 'cc-by.png', style: "width:80px;"%></a><br />
+                <span style="color:#177A74; font-size:11px;">
+                    <strong><i>Valency Patterns Leipzig online database</i></strong> is edited by Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley<br />and is licensed under a <a title="The content of this web site is published under a Creative Commons Attribution 3.0 Unported License." href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.
+                </span></td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+          </table>
+          </center>
+        </div>
+      </div>
+    </div>
+    
     <%= yield :scripts %>
   </footer>
 </body>
