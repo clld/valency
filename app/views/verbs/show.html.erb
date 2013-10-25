@@ -31,8 +31,8 @@
 <div class="row">  
 	<!-- CODING FRAME --><div class="span4">
     <h2>Coding frame
-      <% definition = truncate(Term.find_by_term('Coding frame').definition, :length => 300, :separator =>'. ', :omission => '... ') %>
-      <a rel="popover" class="info cursor-hand" title="Coding frame"
+      <% definition = truncate(Term.find_by_term('Coding frame').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
+      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Coding frame"
          data-content="<%= definition %>">
          <i class="icon-info-sign"></i>
       </a>
@@ -60,7 +60,13 @@
 				<%= 'Example'.pluralize(@examples.size) %>
 			<% else %>
 			  <small>no examples given</small>
-			<% end %>
+			<% end %><% if Term.find_by_term('Example') %>
+      <% definition = truncate(Term.find_by_term('Example').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
+      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Example"
+         data-content="<%= definition %>">
+         <i class="icon-info-sign"></i>
+      </a>
+      <% end %>
 		</h2>
 		<% divide = @exs_of_cf.size if @exs_of_cf.size < @examples.size %>
 		<%= render partial: 'examples', object: @examples,
@@ -74,8 +80,32 @@
 	<!-- INDEX#, Microroles, Coding sets, Argument types -->
 	<div class="span12">
     <h2>
-      Verb <%= "meaning".pluralize meanings.size %>,
-      Microroles, Coding&nbsp;sets and Argument&nbsp;types
+      Verb <%= "meaning".pluralize meanings.size %><% if Term.find_by_term('Verb meaning') %>
+      <% definition = truncate(Term.find_by_term('Verb meaning').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
+      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Verb meaning"
+         data-content="<%= definition %>">
+         <i class="icon-info-sign"></i>
+      </a>
+      <% end %>,
+      Microroles<% if Term.find_by_term('Microroles') %>
+      <% definition = truncate(Term.find_by_term('Microroles').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
+      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Microroles"
+         data-content="<%= definition %>">
+         <i class="icon-info-sign"></i>
+      </a>
+      <% end %>, Coding&nbsp;sets<% if Term.find_by_term('Coding set') %>
+      <% definition = truncate(Term.find_by_term('Coding set').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
+      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Coding set"
+         data-content="<%= definition %>">
+         <i class="icon-info-sign"></i>
+      </a>
+      <% end %> and Argument&nbsp;types<% if Term.find_by_term('Argument type') %>
+      <% definition = truncate(Term.find_by_term('Argument type').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
+      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Argument type"
+         data-content="<%= definition %>">
+         <i class="icon-info-sign"></i>
+      </a>
+      <% end %>
     </h2>
     <% if cframe %>
       <% arguments = cframe.index_numbers_eager_load %>
@@ -128,7 +158,13 @@
 <div class="new row">
 	<!-- Alternations --><div class="span12 dt-with-filters">
 	  <% avs = @alternation_values %>
-    <h2 class="pull-left">Alternations</h2>
+    <h2 class="pull-left">Alternations<% if Term.find_by_term('Alternation') %>
+      <% definition = truncate(Term.find_by_term('Alternation').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
+      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Alternation"
+         data-content="<%= definition %>">
+         <i class="icon-info-sign"></i>
+      </a>
+      <% end %></h2>
     <% if @verb.av_data? then %>
     <form class="form-inline pull-left with-heading">
       <label class="checkbox inline"> also show: </label>
@@ -136,7 +172,13 @@
         <input type="checkbox" class="toggle-col" data-col="comment">Comments
       </label>
       <label class="checkbox inline">
-        <input type="checkbox" class="toggle-col" data-col="derived coding frame">Derived Coding frames
+        <input type="checkbox" class="toggle-col" data-col="derived coding frame">Derived Coding frames<% if Term.find_by_term('Derived Coding frame') %>
+      <% definition = truncate(Term.find_by_term('Derived Coding frame').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
+      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Derived Coding frame"
+         data-content="<%= definition %>">
+         <i class="icon-info-sign"></i>
+      </a>
+      <% end %>
       </label>
   	</form>        
 
