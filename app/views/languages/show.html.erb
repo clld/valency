@@ -105,7 +105,22 @@
       <% end %>
     <% end %>
 
-<h3><a id="cite"></a>How to cite the dataset for <%=     @language %></h3>
+<h2><a id="cite"></a>How to cite the dataset for <%=     @language %>&nbsp;<a rel="popover" class="info cursor-hand" style="text-decoration:none;cursor:pointer;" title="BibTeX" data-content="<span style='font-size:9pt;font-family:monospace;'>@inbook{valpal-<%=request.path_parameters[:id]%>,<br />
+&nbsp;&nbsp;publisher = {Max Planck Institute for Evolutionary Anthropology},<br />
+&nbsp;&nbsp;author    = <% n = Array.new %>
+<% @contributors.each do |c| %>
+<% a = c.name %>
+<% ix = a.rindex(/ /) %>
+<% n.push(a[ix+1..a.length] + ", " + a[0,ix])%>
+<% end %>
+{<%=n.join(' & ')%>},<br />
+&nbsp;&nbsp;url       = {http://valpal.info<%=request.fullpath%>},<br />
+&nbsp;&nbsp;booktitle = {Valency Patterns Leipzig Online Database},<br />
+&nbsp;&nbsp;year      = {2013},<br />
+&nbsp;&nbsp;editor    = {Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.)},<br />
+&nbsp;&nbsp;address   = {Leipzig},<br />
+&nbsp;&nbsp;title     = {<%= @language %> Valency Patterns}<br />
+}"><span class="label" style="font-weight:normal">BibTeX</span></a></h2>
             <pre><% n = Array.new %>
 <% @contributors.each do |c| %>
 <% a = c.name %>
@@ -114,10 +129,9 @@
 <% end %>
 <%= n.join(' & ')%>. 2013. <%= @language %> Valency Patterns.
 In: Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.) 2013.
-Valency Patterns Leipzig online database
+Valency Patterns Leipzig Online Database
 Leipzig: Max Planck Institute for Evolutionary Anthropology.
-(Available online at http://valpal.info, Accessed on <%= Time.now.strftime("%Y-%m-%d") %>) 
-            </pre>
+(Available online at http://valpal.info<%=request.fullpath%>, Accessed on <%= Time.now.strftime("%Y-%m-%d") %>)</pre>
     
 
   </div>
