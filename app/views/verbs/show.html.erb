@@ -31,12 +31,20 @@
 <div class="row">  
 	<!-- CODING FRAME --><div class="span4">
     <h2>Coding frame
-      <% definition = truncate(Term.find_by_term('Coding frame').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
-      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Coding frame"
-         data-content="<%= definition %>">
-         <i class="icon-info-sign"></i>
-      </a>
-      
+      <% definition = Term.find_by_term('Coding frame').definition %>
+      <%if !definition.blank? %>
+      <a href="#myModal1" data-toggle="modal"><i class="icon-info-sign"></i></a>
+      <div id="myModal1" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal1" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModal1">Coding frame</h3>
+        </div>
+        <div class="modal-body" style="color:#000;font-height:normal;font-size:11pt;font-weight:normal;">
+            <%= raw definition %>
+        </div>
+      </div>
+      <%end%>
+
     </h2> 
 		<% if cframe %>
     	<%= render_cf(cframe, link: true, css_class: "padded-box active big") if cframe %>
@@ -60,13 +68,21 @@
 				<%= 'Example'.pluralize(@examples.size) %>
 			<% else %>
 			  <small>no examples given</small>
-			<% end %><% if Term.find_by_term('Example') %>
-      <% definition = truncate(Term.find_by_term('Example').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
-      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Example"
-         data-content="<%= definition %>">
-         <i class="icon-info-sign"></i>
-      </a>
-      <% end %>
+			<% end %>
+            <% definition = Term.find_by_term('Example').definition %>
+      <%if !definition.blank? %>
+      <a href="#myModal2" data-toggle="modal"><i class="icon-info-sign"></i></a>
+      <div id="myModal2" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal2" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModal2">Example</h3>
+        </div>
+        <div class="modal-body" style="color:#000;font-height:normal;font-size:11pt;font-weight:normal;">
+            <%= raw definition %>
+        </div>
+      </div>
+      <%end%>
+
 		</h2>
 		<% divide = @exs_of_cf.size if @exs_of_cf.size < @examples.size %>
 		<%= render partial: 'examples', object: @examples,
@@ -80,32 +96,56 @@
 	<!-- INDEX#, Microroles, Coding sets, Argument types -->
 	<div class="span12">
     <h2>
-      Verb <%= "meaning".pluralize meanings.size %><% if Term.find_by_term('Verb meaning') %>
-      <% definition = truncate(Term.find_by_term('Verb meaning').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
-      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Verb meaning"
-         data-content="<%= definition %>">
-         <i class="icon-info-sign"></i>
-      </a>
-      <% end %>,
-      Microroles<% if Term.find_by_term('Microroles') %>
-      <% definition = truncate(Term.find_by_term('Microroles').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
-      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Microroles"
-         data-content="<%= definition %>">
-         <i class="icon-info-sign"></i>
-      </a>
-      <% end %>, Coding&nbsp;sets<% if Term.find_by_term('Coding set') %>
-      <% definition = truncate(Term.find_by_term('Coding set').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
-      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Coding set"
-         data-content="<%= definition %>">
-         <i class="icon-info-sign"></i>
-      </a>
-      <% end %> and Argument&nbsp;types<% if Term.find_by_term('Argument type') %>
-      <% definition = truncate(Term.find_by_term('Argument type').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
-      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Argument type"
-         data-content="<%= definition %>">
-         <i class="icon-info-sign"></i>
-      </a>
-      <% end %>
+      Verb <%= "meaning".pluralize meanings.size %><% definition = Term.find_by_term('Verb meaning').definition %>
+      <%if !definition.blank? %>
+      <a href="#myModal3" data-toggle="modal"><i class="icon-info-sign"></i></a>
+      <div id="myModal3" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal3" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModal3">Verb meaning</h3>
+        </div>
+        <div class="modal-body" style="color:#000;font-height:normal;font-size:11pt;font-weight:normal;">
+            <%= raw definition %>
+        </div>
+      </div>
+      <%end%>,
+      Microroles<% definition = Term.find_by_term('Microrole').definition %>
+      <%if !definition.blank? %>
+      <a href="#myModal4" data-toggle="modal"><i class="icon-info-sign"></i></a>
+      <div id="myModal4" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal4" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModal4">Microrole</h3>
+        </div>
+        <div class="modal-body" style="color:#000;font-height:normal;font-size:11pt;font-weight:normal;">
+            <%= raw definition %>
+        </div>
+      </div>
+      <%end%>, Coding&nbsp;sets<% definition = Term.find_by_term('Coding set').definition %>
+      <%if !definition.blank? %>
+      <a href="#myModal5" data-toggle="modal"><i class="icon-info-sign"></i></a>
+      <div id="myModal5" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal5" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModal5">Coding set</h3>
+        </div>
+        <div class="modal-body" style="color:#000;font-height:normal;font-size:11pt;font-weight:normal;">
+            <%= raw definition %>
+        </div>
+      </div>
+      <%end%> and Argument&nbsp;types<% definition = Term.find_by_term('Argument type').definition %>
+      <%if !definition.blank? %>
+      <a href="#myModal6" data-toggle="modal"><i class="icon-info-sign"></i></a>
+      <div id="myModal6" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal6" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModal6">Argument type</h3>
+        </div>
+        <div class="modal-body" style="color:#000;font-height:normal;font-size:11pt;font-weight:normal;">
+            <%= raw definition %>
+        </div>
+      </div>
+      <%end%>
     </h2>
     <% if cframe %>
       <% arguments = cframe.index_numbers_eager_load %>
@@ -158,13 +198,19 @@
 <div class="new row">
 	<!-- Alternations --><div class="span12 dt-with-filters">
 	  <% avs = @alternation_values %>
-    <h2 class="pull-left">Alternations<% if Term.find_by_term('Alternation') %>
-      <% definition = truncate(Term.find_by_term('Alternation').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
-      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Alternation"
-         data-content="<%= definition %>">
-         <i class="icon-info-sign"></i>
-      </a>
-      <% end %></h2>
+    <h2 class="pull-left">Alternations<% definition = Term.find_by_term('Alternation').definition %>
+      <%if !definition.blank? %>
+      <a href="#myModal7" data-toggle="modal"><i class="icon-info-sign"></i></a>
+      <div id="myModal7" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal7" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModal7">Alternation</h3>
+        </div>
+        <div class="modal-body" style="color:#000;font-height:normal;font-size:11pt;font-weight:normal;">
+            <%= raw definition %>
+        </div>
+      </div>
+      <%end%></h2>
     <% if @verb.av_data? then %>
     <form class="form-inline pull-left with-heading">
       <label class="checkbox inline"> also show: </label>
