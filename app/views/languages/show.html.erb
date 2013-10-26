@@ -6,13 +6,12 @@
       <h1 class="pull-left">
         <%= @language %>
         <% if @iso_code %>
-          <a title="Look up ISO code in Glottolog" href="http://www.glottolog.org/glottolog?iso=<%= @iso_code %>" 
+          <a title="Look up ISO code in Glottolog" href="http://glottolog.org/resource/languoid/iso/<%= @iso_code %>" 
              class="label" style="font-weight:normal;font-size:50%"><%= @iso_code %></a>
              <% if !@iso_code.match(/(ctn|czn|sci|ngh|nqn|jpn\-hok)/) %>
                <a title="Look up in WALS" href="http://wals.info/languoid/by_code/iso_639_3_<%= @iso_code %>">
                <%= image_tag('icons/wals.png', size: '16x16') %></a>
              <% end %>
-          
         <% end %>
       </h1>
       <div class="btn-group with-heading"><%= prev_next_links(@languages, @language) %></div>
