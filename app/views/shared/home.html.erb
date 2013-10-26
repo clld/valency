@@ -28,14 +28,26 @@ Leipzig: Max Planck Institute for Evolutionary Anthropology.
 (Available online at http://valpal.info, Accessed on <%= Time.now.strftime("%Y-%m-%d") %>)</pre>
         
         <p style="margin-top:15px">The complete work should be cited as follows: 
-            <a rel="popover" class="info cursor-hand" style="text-decoration:none;cursor:pointer;" title="BibTeX" data-content="<span style='font-size:9pt;font-family:monospace;'>@book{valpal,<br />
-&nbsp;&nbsp;publisher = {Max Planck Institute for Evolutionary Anthropology},<br />
-&nbsp;&nbsp;title     = {Valency Patterns Leipzig Online Database},<br />
-&nbsp;&nbsp;url       = {http://valpal.info/},<br />
-&nbsp;&nbsp;address   = {Leipzig},<br />
-&nbsp;&nbsp;editor    = {Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.)},<br />
-&nbsp;&nbsp;year      = {2013}<br />
-}"><span class="label" style="font-weight:normal">BibTeX</span></a>
+
+            <a href="#myModal" role="button" class="label" style="font-weight:normal;" data-toggle="modal">BibTeX</a>
+            <!-- Modal -->
+            <div id="myModal" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModalBibTeX" aria-hidden="true">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalBibTeX">BibTeX</h3>
+              </div>
+              <div class="modal-body"  style='font-size:10pt;font-family:monospace;line-height:normal;color:#000'>
+                  @book{valpal,<br />
+                  &nbsp;&nbsp;publisher = {Max Planck Institute for Evolutionary Anthropology},<br />
+                  &nbsp;&nbsp;title     = {Valency Patterns Leipzig Online Database},<br />
+                  &nbsp;&nbsp;url       = {http://valpal.info/},<br />
+                  &nbsp;&nbsp;address   = {Leipzig},<br />
+                  &nbsp;&nbsp;editor    = {Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.)},<br />
+                  &nbsp;&nbsp;year      = {2013}<br />
+                  }
+              </div>
+            </div>
+
 </p>
 <pre style="margin:auto; display:inline-block;">Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.) 2013.
 Valency Patterns Leipzig online database
