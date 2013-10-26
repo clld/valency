@@ -8,7 +8,7 @@
         <% if @iso_code %>
           <a title="Look up ISO code in Glottolog" href="http://glottolog.org/resource/languoid/iso/<%= @iso_code %>" 
              class="label" style="font-weight:normal;font-size:50%"><%= @iso_code %></a>
-             <% if !@iso_code.match(/(ctn|czn|sci|ngh|nqn|jpn\-hok)/) %>
+             <% if !@iso_code.nil? && !@iso_code.match(/(ctn|czn|sci|ngh|nqn|jpn\-hok)/) %>
                <a title="Look up in WALS" href="http://wals.info/languoid/by_code/iso_639_3_<%= @iso_code %>">
                <%= image_tag('icons/wals.png', size: '16x16') %></a>
              <% end %>
@@ -104,7 +104,17 @@
       <% end %>
     <% end %>
 
-<h2><a id="cite"></a>How to cite the dataset for <%=     @language %>&nbsp;<a rel="popover" class="info cursor-hand" style="text-decoration:none;cursor:pointer;" title="BibTeX" data-content="<span style='font-size:9pt;font-family:monospace;'>@inbook{valpal-<%=request.path_parameters[:id]%>,<br />
+<h2>How to cite the dataset for <%= @language %>&nbsp;
+    
+    <a href="#myModal" role="button" class="label" style="font-weight:normal;" data-toggle="modal">BibTeX</a>
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModalBibTeX" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalBibTeX">BibTeX</h3>
+      </div>
+      <div class="modal-body" style='font-size:10pt;font-family:monospace;line-height:normal;color:#000'>
+        @inbook{valpal-<%=request.path_parameters[:id]%>,<br />
 &nbsp;&nbsp;publisher = {Max Planck Institute for Evolutionary Anthropology},<br />
 &nbsp;&nbsp;author    = <% n = Array.new %>
 <% @contributors.each do |c| %>
@@ -119,7 +129,12 @@
 &nbsp;&nbsp;editor    = {Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.)},<br />
 &nbsp;&nbsp;address   = {Leipzig},<br />
 &nbsp;&nbsp;title     = {<%= @language %> Valency Patterns}<br />
-}"><span class="label" style="font-weight:normal">BibTeX</span></a></h2>
+}
+      </div>
+    </div>
+    
+    
+</h2>
             <pre style="margin:auto; display:inline-block;"><% n = Array.new %>
 <% @contributors.each do |c| %>
 <% a = c.name %>
