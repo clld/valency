@@ -48,7 +48,7 @@ class LanguagesController < ApplicationController
       marker.title lang.to_s
       # marker.sidebar "I am the sidebar"
       marker.picture({
-        picture: "http://wals.info/static/wals/images/icons/cf60.png",
+        picture: '/assets/cf60.png',
         width:  32,
         height: 32,
         marker_anchor: [16, 16]
