@@ -24,6 +24,11 @@ class LanguagesController < ApplicationController
   # GET /languages/1.json
   def show
     @language        = Language.includes(:verbs).find_by_name_for_url(params[:id])
+    # if no language found then redirect to all languages page
+    if(@language.nil?)
+      redirect_to('/languages')
+      return
+    end
     cookies[:current_language_id] = @language.id
     @iso_code        = @language.iso_code
     @contributors    = @language.get_contributors
