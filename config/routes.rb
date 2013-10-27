@@ -69,6 +69,9 @@ Valency::Application.routes.draw do
   #     resources :products
   #   end
 
+  match '/languages/iso/:id' => 'languages#showViaISOCode'
+  match '/languages/glottolog/:id' => 'languages#showViaGlottologCode'
+
   match '/about' => 'application#about'
   match '/about/:name' => 'application#about'
 
