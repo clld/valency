@@ -113,16 +113,10 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalBibTeX">BibTeX</h3>
       </div>
-      <div class="modal-body" style='font-size:10pt;font-family:monospace;line-height:normal;color:#000'>
-        @inbook{valpal-<%=request.path_parameters[:id]%>,<br />
+      <div class="modal-body modal-cite">
+@inbook{valpal-<%=request.path_parameters[:id]%>,<br />
 &nbsp;&nbsp;publisher = {Max Planck Institute for Evolutionary Anthropology},<br />
-&nbsp;&nbsp;author    = <% n = Array.new %>
-<% @contributors.each do |c| %>
-<% a = c.name %>
-<% ix = a.rindex(/ /) %>
-<% n.push(a[ix+1..a.length] + ", " + a[0,ix])%>
-<% end %>
-{<%=n.join(' & ')%>},<br />
+&nbsp;&nbsp;author    = {<%= swap_contibutors_name %>},<br />
 &nbsp;&nbsp;url       = {http://valpal.info<%=request.fullpath%>},<br />
 &nbsp;&nbsp;booktitle = {Valency Patterns Leipzig Online Database},<br />
 &nbsp;&nbsp;year      = {2013},<br />
@@ -131,17 +125,10 @@
 &nbsp;&nbsp;title     = {<%= @language %> Valency Patterns}<br />
 }
       </div>
-    </div>
-    
-    
+    </div>    
 </h2>
-            <pre style="margin:auto; display:inline-block;"><% n = Array.new %>
-<% @contributors.each do |c| %>
-<% a = c.name %>
-<% ix = a.rindex(/ /) %>
-<% n.push(a[ix+1..a.length] + ", " + a[0,ix])%>
-<% end %>
-<%= n.join(' & ')%>. 2013. <%= @language %> Valency Patterns.
+
+<pre style="margin:auto; display:inline-block;"><%= swap_contibutors_name %>. 2013. <%= @language %> Valency Patterns.
 In: Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.) 2013.
 Valency Patterns Leipzig Online Database
 Leipzig: Max Planck Institute for Evolutionary Anthropology.
