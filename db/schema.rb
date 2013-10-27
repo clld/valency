@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130818111418) do
+ActiveRecord::Schema.define(:version => 20131027120000) do
 
   create_table "alternation_values", :id => false, :force => true do |t|
     t.integer "verb_id",                 :limit => 8
@@ -164,6 +164,7 @@ ActiveRecord::Schema.define(:version => 20130818111418) do
     t.integer  "id",                                                   :limit => 8
     t.string   "name"
     t.string   "iso_code"
+    t.string   "glottolog_code"
     t.string   "family"
     t.string   "variety"
     t.datetime "created_at",                                                        :null => false
