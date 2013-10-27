@@ -38,15 +38,6 @@
       <% end %>
     </table>
 
-    <!-- <% if @language.comments %>
-    <div class="row" style="margin-left:0px;">
-    <form class="form-inline pull-left with-heading">
-      <a class="btn btn-mini toggle" data-toggle="comment">show comment</a>
-      <div class="comment" style="display:hidden"><p class="box"><%= raw @language.comments %></p></div>
-    </form>
-    </div>
-    <% end %> -->
-    
     <%= gmaps({
       map_options: {
         container_class: "map_container single",
@@ -138,13 +129,47 @@ Leipzig: Max Planck Institute for Evolutionary Anthropology.
   </div>
 </div>
 
-<% if @language.comments %>
+<% if @language.comments || @language.characterization_of_flagging_resources || @language.characterization_of_indexing_resources || @language.characterization_of_ordering_resources || @language.data_sources_generalizations_contributor_backgrounds || @language.alternation_occurs_judgement_criteria %>
 <div class="row">
   <div class="span12">
-
     <h2>Comments</h2>
-  <p><%= raw @language.comments %></p>
+  </div>
+  <% if @language.comments %>
+    <div class="span12">
+      <h3>General comment</h3>
+      <p><%= raw @language.comments %></p>
+    </div>
+  <% end %>
+  <% if @language.characterization_of_flagging_resources %>
+    <div class="span12">
+      <h3>Characterization of flagging resources</h3>
+      <p><%= raw @language.characterization_of_flagging_resources %></p>
+    </div>
+  <% end %>
+  <% if @language.characterization_of_indexing_resources %>
+    <div class="span12">
+      <h3>Characterization of indexing resources</h3>
+      <p><%= raw @language.characterization_of_indexing_resources %></p>
+    </div>
+  <% end %>
+  <% if @language.characterization_of_ordering_resources %>
+    <div class="span12">
+      <h3>Characterization of ordering resources</h3>
+      <p><%= raw @language.characterization_of_ordering_resources %></p>
+    </div>
+  <% end %>
+  <% if @language.alternation_occurs_judgement_criteria %>
+    <div class="span12">
+      <h3>Criteria used when judging if an alternation occurs regularly/marginally/never</h3>
+      <p><%= raw @language.alternation_occurs_judgement_criteria %></p>
+    </div>
+  <% end %>
+  <% if @language.data_sources_generalizations_contributor_backgrounds %>
+    <div class="span12">
+      <h3>Source of the data and generalizations/background of the contributor(s)</h3>
+      <p><%= raw @language.data_sources_generalizations_contributor_backgrounds %></p>
+    </div>
+  <% end %>
 </div>
 <% end %>
 
-<!-- all comments hidden for now .where(derived:'Basic')-->
