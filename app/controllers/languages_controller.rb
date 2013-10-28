@@ -21,45 +21,23 @@ class LanguagesController < ApplicationController
   end
   
   # GET /languages/glottolog
-  # GET /languages/glottolog.json
   def showViaGlottologCode
     @language = Language.find_by_glottolog_code(params[:id])
     if(@language.nil?)
       redirect_to('/languages')
       return
     end
-    cookies[:current_language_id] = @language.id
-    @iso_code        = @language.iso_code
-    @contributors    = @language.get_contributors
-    @native_speakers = @language.get_native_speakers
-
-    @map_data = get_map_data @language
-    
-    respond_to do |format|
-      format.html { render 'languages/show' }
-      format.json { render json: @language }
-    end
+    redirect_to("/languages/#{@language.name_for_url}")
   end
 
   # GET /languages/iso
-  # GET /languages/iso.json
   def showViaISOCode
     @language = Language.find_by_iso_code(params[:id])
     if(@language.nil?)
       redirect_to('/languages')
       return
     end
-    cookies[:current_language_id] = @language.id
-    @iso_code        = @language.iso_code
-    @contributors    = @language.get_contributors
-    @native_speakers = @language.get_native_speakers
-
-    @map_data = get_map_data @language
-    
-    respond_to do |format|
-      format.html { render 'languages/show' }
-      format.json { render json: @language }
-    end
+    redirect_to("/languages/#{@language.name_for_url}")
   end
   
   # GET /languages/1
