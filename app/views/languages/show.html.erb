@@ -84,18 +84,7 @@
 <div class="row">
   <div class="span12">
 
-    <h2>Data</h2>
-    <% readable = {'verbs'=>'Verb forms', 'examples'=>'glossed Examples'} %>
-    <% %w(verbs coding_frames alternations examples).each do |resource| %>
-      <% name = readable[resource] || resource.humanize %>
-      <%if resource == 'coding_frames'%>
-        <%= link_to "#{@language.send(resource).where(derived:'Basic').count} #{name}", send("language_#{resource}_path", @language), class: 'btn' %>
-      <% else %>
-        <%= link_to "#{@language.send(resource).count} #{name}", send("language_#{resource}_path", @language), class: 'btn' %>
-      <% end %>
-    <% end %>
-
-<h2>How to cite the dataset for <%= @language %>&nbsp;
+<h2>How to cite the <%= @language %> dataset&nbsp;
     
     <a href="#myModal" role="button" class="label" style="font-weight:normal;" data-toggle="modal">BibTeX</a>
     <!-- Modal -->
@@ -128,11 +117,22 @@ Leipzig: Max Planck Institute for Evolutionary Anthropology.
 
   </div>
 </div>
+<h2>Data</h2>
+<% readable = {'verbs'=>'Verb forms', 'examples'=>'glossed Examples'} %>
+<% %w(verbs coding_frames alternations examples).each do |resource| %>
+  <% name = readable[resource] || resource.humanize %>
+  <%if resource == 'coding_frames'%>
+    <%= link_to "#{@language.send(resource).where(derived:'Basic').count} #{name}", send("language_#{resource}_path", @language), class: 'btn' %>
+  <% else %>
+    <%= link_to "#{@language.send(resource).count} #{name}", send("language_#{resource}_path", @language), class: 'btn' %>
+  <% end %>
+<% end %>
+
 
 <% if @language.comments || @language.characterization_of_flagging_resources || @language.characterization_of_indexing_resources || @language.characterization_of_ordering_resources || @language.data_sources_generalizations_contributor_backgrounds || @language.alternation_occurs_judgement_criteria %>
 <div class="row">
   <div class="span12">
-    <h2>Comments</h2>
+    <h2 style="margin-bottom:0px">Comments</h2>
   </div>
   <% if @language.comments %>
     <div class="span12">
@@ -170,6 +170,5 @@ Leipzig: Max Planck Institute for Evolutionary Anthropology.
       <p><%= raw @language.data_sources_generalizations_contributor_backgrounds %></p>
     </div>
   <% end %>
-</div>
 <% end %>
-
+</div>
