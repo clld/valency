@@ -275,6 +275,10 @@ a:not([href]) {
   content: "\27B2\0020\0020";
 }
 
+body {
+ min-width:800px;
+}
+
 /**************** TABLES ****************/
 table {
   /* table without borders */
