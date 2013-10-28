@@ -62,25 +62,45 @@ module ExamplesHelper
         content_tag(:div, transl, class: "translation")
       end
     end
-
-    if ex.comment
-      comment = truncate(ex.comment, :length => 2000, :separator =>'. ', :omission => '... ')
-      # if comment =~ /ex\s+(\d+)/
-      #   llnr = comment[/ex\s+(\d+)/,1]
-      #   ll = "ex #{link_to_if(true, llnr, [@language, ex], title: llnr)}"
-      #   comment = comment.gsub(/ex\s+(\d+)/, ll)
-      # end
-      # comment = "<a rel=\"popover\" class=\"info cursor-hand\" style=\"font-size:10pt;\" title=\"Comment\" data-content=\"" + CGI.escapeHTML(comment.gsub('"','\"')) + "\"><i class=\"icon-info-sign\"></i></a>"
-      sym = content_tag(:span, "★", title: "Click to show comment")
-      com = content_tag(:a, sym, rel: "popover", class: "info cursor-hand", title: "Comment", :data => {:content => comment})
-      dcom = content_tag(:div, com, class: "pull-right")
-      rendered_example << dcom
-    end
-    
+    rendered_example << content_tag(:div, render_comment(ex), style:"position:absolute; bottom:10px;right:10px")
     
     # wrap it in a <div> and serve it
     div_for(ex, class: css_class) { rendered_example }
     
+  end
+
+  def render_comment ex
+    sym = content_tag(:span, "★", title: "Click to show more details")
+    d = ""
+    if ex.comment
+      c = truncate(ex.comment, :length => 2000, :separator =>'. ', :omission => '... ')
+      d << content_tag(:h3, "Comment")
+      d << content_tag(:p, c.html_safe, class: "span12", style: "margin-top:-9px")
+    end
+    if ex.example_type
+      d << content_tag(:h3, "Example Type")
+      d << content_tag(:p, ex.example_type, class: "span12", style: "margin-top:-9px")
+    end
+    # if ex.reference_id
+    #   d << content_tag(:h3, "Reference")
+    #   d << content_tag(:p, ex.reference_id, class: "span12", style: "margin-top:-9px")
+    # end
+    d << "<hr noshade>".html_safe
+    d << content_tag(:h3, "Example as plain text for copying")
+    d << "<pre>"
+    if ex.original_orthography
+      d << "#{ex.original_orthography}<br />"
+    end
+    if ex.primary_text
+      d << "#{ex.primary_text}<br />"
+    end
+    d << "#{ex.analyzed_text}<br />#{ex.gloss}<br />#{ex.translation}"
+    # if ex.reference_id
+    #   "<br /><br />Citation:<br />"
+    # end
+    d << "</pre>"
+    com = content_tag(:a, sym, rel: "popover", class: "info cursor-hand", title: "Details for #{@language} example #{ex.number}", :data => {:content => d})
+    com
   end
   
 end
