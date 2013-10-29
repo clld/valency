@@ -9,25 +9,31 @@
 
 <div class="new row">
   <div class="span12">
-    <table class="table table-bordered-sharp table-striped table-hover dataTable">
+    <table class="table table-bordered-sharp table-striped table-hover dataTable" width="100%">
     <thead>
       <tr>
         <th>Example</th>
+        <th width="1" class="" style="border:0px solid black"></th>
         <th width="100">Verb meaning</th>
         <th width="120">Example of...</th>
-        <!-- <th class="hidden">#</th> -->
+        <th class="hidden">#</th>
       </tr>
     </thead>
     <tbody>
     <% @examples.each do |ex| %>
     <% next unless (m = ex.get_meaning) %>
       <%= content_tag_for :tr, ex do %>
-        <td style="position:relative">
+
+        <td>
           <div class="pull-left">
             <%= render_example ex, {orig: true} %>
           </div>
         </td>
+        
+        <td class="" style="border-left:0px solid black"><%= render_comment ex %></td>
+        
         <td><%= link_to m, m unless m.nil? || m.to_s.blank? %></td>
+
         <td>
           <% thing = ex.exemplifies %>
           <% if thing.is_a? String %>
@@ -39,9 +45,11 @@
             the Verb form <span class="object-language"><%= link_to thing, [@language, thing] %></span>
           <% end %>
         </td>
+
         <td class="hidden">
-          <%= "#{}#{ex.number}" %>
+          <%= "#{ex.number}" %>
         </td>
+
       <% end %>
     <% end %>
   </tbody>
