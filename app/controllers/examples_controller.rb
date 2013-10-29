@@ -5,6 +5,7 @@ class ExamplesController < ApplicationController
   def get_language
     @language   = Language.includes(:examples, :gloss_meanings).find_by_name_for_url(params[:language_id])
     cookies[:current_language_id] = @language.id
+    @contributors    = @language.get_contributors
     @gloss_abbr = @language.gloss_meanings_hash
   end
   

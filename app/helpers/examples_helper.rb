@@ -77,18 +77,17 @@ module ExamplesHelper
     sym = content_tag(:span, "★", title: "Click to show more details")
     d = ""
     if ex.comment
-      # c = truncate(ex.comment, :length => 2000, :separator =>'. ', :omission => '... ')
       c = ex.comment
       d << content_tag(:h3, "Comment")
       d << content_tag(:p, c.html_safe, style: "margin-top:-9px")
     end
-    if ex.example_type
-      d << content_tag(:h3, "Example type")
-      d << content_tag(:p, ex.example_type, style: "margin-top:-9px")
-    end
     if ex.translation_other
       d << content_tag(:h3, "Other translation")
       d << content_tag(:p, ex.translation_other, style: "margin-top:-9px")
+    end
+    if ex.example_type
+      d << content_tag(:h3, "Example type")
+      d << content_tag(:p, ex.example_type, style: "margin-top:-9px")
     end
     if ex.reference_id
       d << content_tag(:h3, "Reference")
@@ -115,7 +114,7 @@ module ExamplesHelper
             r << ", pp. #{ex.reference_pages}"
           end
         end
-        d << content_tag(:p, "#{r}&nbsp;".html_safe << content_tag(:a, "⇢", href: "/references/#{ex.reference_id}"), class: "span12", style: "margin-top:-9px")
+        d << content_tag(:p, "#{r}&nbsp;".html_safe << content_tag(:a, "⇢", href: "/references/#{ex.reference_id}"), style: "margin-top:-9px")
       end
     end
     d << content_tag(:h3, "Example as plain text for copying")
@@ -126,10 +125,14 @@ module ExamplesHelper
     if ex.primary_text
       d << "#{ex.primary_text}<br />"
     end
+    
     d << "#{ex.analyzed_text}<br />#{ex.gloss}<br />#{ex.translation}"
-    # if ex.reference_id
-    #   "<br /><br />Citation:<br />"
-    # end
+    d << "<small><br /><br /><i>Cite:</i><br />"
+    d << "#{@language} example #{ex.number}<br />In: #{swap_contibutors_name} 2013. #{@language} Valency Patterns.
+In: Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.) 2013.
+Valency Patterns Leipzig online database
+Leipzig: Max Planck Institute for Evolutionary Anthropology.
+(Available online at http://valpal.info/languages/#{params[:language_id]}/examples/#{ex.number}, Accessed on #{Time.now.strftime('%Y-%m-%d')})"
     d << "</pre>"
     com = content_tag(:a, sym, rel: "popover", class: "info cursor-hand", title: "Details for #{@language} example #{ex.number}", :data => {:content => d})
     com
