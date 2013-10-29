@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131027120000) do
+ActiveRecord::Schema.define(:version => 20131029120000) do
 
   create_table "alternation_values", :id => false, :force => true do |t|
     t.integer "verb_id",                 :limit => 8
@@ -118,17 +118,16 @@ ActiveRecord::Schema.define(:version => 20131027120000) do
   add_index "contributions", ["person_id"], :name => "index_contributions_on_person_id"
 
   create_table "examples", :id => false, :force => true do |t|
-    t.integer "id",                   :limit => 8
-    t.integer "language_id",          :limit => 8
-    t.integer "reference_id",         :limit => 8
-    t.integer "person_id",            :limit => 8
+    t.integer "id",                            :limit => 8
+    t.integer "language_id",                   :limit => 8
+    t.integer "reference_id",                  :limit => 8
+    t.integer "person_id",                     :limit => 8
     t.string  "primary_text"
     t.text    "original_orthography"
     t.string  "analyzed_text"
     t.string  "gloss"
     t.text    "translation"
     t.text    "translation_other"
-    t.integer "language_id_translation_other"
     t.text    "comment"
     t.string  "media_file_name"
     t.string  "media_file_timecode"
@@ -168,31 +167,12 @@ ActiveRecord::Schema.define(:version => 20131027120000) do
     t.string   "glottolog_code"
     t.string   "family"
     t.string   "variety"
-    t.datetime "created_at",                                                        :null => false
-    t.datetime "updated_at",                                                        :null => false
     t.text     "alternation_occurs_judgement_criteria"
     t.text     "characterization_of_flagging_resources"
     t.text     "characterization_of_indexing_resources"
     t.text     "characterization_of_ordering_resources"
     t.text     "comments"
     t.text     "data_sources_generalizations_contributor_backgrounds"
-    t.string   "continent"
-    t.string   "name_for_url"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.float    "z_calc_alternation_occurs_nodata_percent"
-  end
-
-  add_index "languages", ["id"], :name => "index_languages_on_id", :unique => true
-  add_index "languages", ["name_for_url"], :name => "index_languages_on_name_for_url", :unique => true
-
-  create_table "languages_ref", :id => false, :force => true do |t|
-    t.integer  "id",                                                   :limit => 8
-    t.string   "name"
-    t.string   "iso_code"
-    t.string   "glottolog_code"
-    t.string   "family"
-    t.string   "variety"
     t.string   "continent"
     t.string   "name_for_url"
     t.float    "latitude"
