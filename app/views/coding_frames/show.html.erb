@@ -4,10 +4,18 @@
 
 <div class="row">
   <div class="<%= if @related_coding_frames.size > 0 then 'span4' else 'span6' end %>">
-    <h1 class="small"><%= cf.derived %> Coding frame</h1>
+    <h1 class="small"><%= cf.derived %> Coding frame </h1>
+
     <%= render_cf(cf, css_class: "padded-box active big") %>
     <% if cf.description %>
-      <div class="justify"><%= "(#{cf.description.strip})" %></div>
+      <h5>Description</h5>
+      <div class="justify" style="color:grey;margin-top:-10px"><%= "#{cf.description.strip}" %></div>
+    <% end %>
+    <% if cf.comment %>
+      <form class="form-inline pull-left with-heading">
+        <a class="btn btn-mini toggle" data-toggle="comment">show comment</a>
+        <div class="comment"><p class="box"><%= raw cf.comment %></p></div>
+      </form>
     <% end %>
     <table class="table table-bordered-sharp table-condensed" style="margin-top:1em">
       <thead>
