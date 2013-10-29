@@ -4,6 +4,7 @@ class VerbsController < ApplicationController
   def get_language
     @language = Language.includes(:verbs, :gloss_meanings).find_by_name_for_url(params[:language_id])
     cookies[:current_language_id] = @language.id
+    @contributors = @language.get_contributors
   end
   
   # GET /languages/1/verbs
