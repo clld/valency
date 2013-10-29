@@ -73,19 +73,44 @@ module ExamplesHelper
     sym = content_tag(:span, "★", title: "Click to show more details")
     d = ""
     if ex.comment
-      c = truncate(ex.comment, :length => 2000, :separator =>'. ', :omission => '... ')
+      # c = truncate(ex.comment, :length => 2000, :separator =>'. ', :omission => '... ')
+      c = ex.comment
       d << content_tag(:h3, "Comment")
-      d << content_tag(:p, c.html_safe, class: "span12", style: "margin-top:-9px")
+      d << content_tag(:p, c.html_safe, style: "margin-top:-9px")
     end
     if ex.example_type
-      d << content_tag(:h3, "Example Type")
-      d << content_tag(:p, ex.example_type, class: "span12", style: "margin-top:-9px")
+      d << content_tag(:h3, "Example type")
+      d << content_tag(:p, ex.example_type, style: "margin-top:-9px")
     end
-    # if ex.reference_id
-    #   d << content_tag(:h3, "Reference")
-    #   d << content_tag(:p, ex.reference_id, class: "span12", style: "margin-top:-9px")
-    # end
-    d << "<hr noshade>".html_safe
+    if ex.translation_other
+      d << content_tag(:h3, "Other translation")
+      d << content_tag(:p, ex.translation_other, style: "margin-top:-9px")
+    end
+    if ex.reference_id
+      d << content_tag(:h3, "Reference")
+      @ref = Reference.find_by_id(ex.reference_id)
+      a = @ref.authors
+      na = ""
+      a.split(/ +and +/).each do |fn|
+        fn1 = fn.split(/\s*,\s*/)
+        na << fn1[0]
+      end
+      r = "#{na}"
+      if @ref.year.to_i == 0
+        r << " (#{@ref.article_title})"
+      else
+        r << " #{@ref.year.to_i}#{@ref.year_disambiguation_letter}"
+      end
+      if ex.reference_pages
+        if ex.reference_pages.match(/^\d+$/)
+          r << ", p. #{ex.reference_pages}"
+        elsif ex.reference_pages.match(/^\d+[\-\/]\d+$/)
+          r << ", pp. #{ex.reference_pages}"
+        end
+      end
+      # ra = content_tag(:a, "⇢", href: "/references/#{ex.reference_id}") # "&nbsp;<a href='/references/#{ex.reference_id}'>⇢</a>".html_safe
+      d << content_tag(:p, "#{r}&nbsp;".html_safe << content_tag(:a, "⇢", href: "/references/#{ex.reference_id}"), class: "span12", style: "margin-top:-9px")
+    end
     d << content_tag(:h3, "Example as plain text for copying")
     d << "<pre>"
     if ex.original_orthography
