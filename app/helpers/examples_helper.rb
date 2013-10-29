@@ -134,7 +134,7 @@ Valency Patterns Leipzig online database
 Leipzig: Max Planck Institute for Evolutionary Anthropology.
 (Available online at http://valpal.info/languages/#{params[:language_id]}/examples/#{ex.number}, Accessed on #{Time.now.strftime('%Y-%m-%d')})"
     d << "</pre>"
-    com = content_tag(:a, sym, rel: "popover", class: "info cursor-hand", title: "Details for #{@language} example No. #{ex.number}", :data => {:content => d})
+    com = content_tag(:a, sym, rel: "popover", class: "info cursor-hand", title: "#{@language} example No. #{ex.number}", :data => {:content => d})
     com
   end
   
