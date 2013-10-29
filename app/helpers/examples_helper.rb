@@ -89,27 +89,30 @@ module ExamplesHelper
     if ex.reference_id
       d << content_tag(:h3, "Reference")
       @ref = Reference.find_by_id(ex.reference_id)
-      a = @ref.authors
-      na = ""
-      a.split(/ +and +/).each do |fn|
-        fn1 = fn.split(/\s*,\s*/)
-        na << fn1[0]
-      end
-      r = "#{na}"
-      if @ref.year.to_i == 0
-        r << " (#{@ref.article_title})"
-      else
-        r << " #{@ref.year.to_i}#{@ref.year_disambiguation_letter}"
-      end
-      if ex.reference_pages
-        if ex.reference_pages.match(/^\d+$/)
-          r << ", p. #{ex.reference_pages}"
-        elsif ex.reference_pages.match(/^\d+[\-\/]\d+$/)
-          r << ", pp. #{ex.reference_pages}"
+      if @ref
+        if @ref.authors
+          a = @ref.authors
+          na = ""
+          a.split(/ +and +/).each do |fn|
+            fn1 = fn.split(/\s*,\s*/)
+            na << fn1[0]
+          end
+          r = "#{na}"
         end
+        if @ref.year.to_i == 0
+          r << " (#{@ref.article_title})"
+        else
+          r << " #{@ref.year.to_i}#{@ref.year_disambiguation_letter}"
+        end
+        if ex.reference_pages
+          if ex.reference_pages.match(/^\d+$/)
+            r << ", p. #{ex.reference_pages}"
+          elsif ex.reference_pages.match(/^\d+[\-\/]\d+$/)
+            r << ", pp. #{ex.reference_pages}"
+          end
+        end
+        d << content_tag(:p, "#{r}&nbsp;".html_safe << content_tag(:a, "⇢", href: "/references/#{ex.reference_id}"), class: "span12", style: "margin-top:-9px")
       end
-      # ra = content_tag(:a, "⇢", href: "/references/#{ex.reference_id}") # "&nbsp;<a href='/references/#{ex.reference_id}'>⇢</a>".html_safe
-      d << content_tag(:p, "#{r}&nbsp;".html_safe << content_tag(:a, "⇢", href: "/references/#{ex.reference_id}"), class: "span12", style: "margin-top:-9px")
     end
     d << content_tag(:h3, "Example as plain text for copying")
     d << "<pre>"
