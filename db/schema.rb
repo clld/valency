@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20131027120000) do
     t.string  "gloss"
     t.text    "translation"
     t.text    "translation_other"
+    t.integer "language_id_translation_other"
     t.text    "comment"
     t.string  "media_file_name"
     t.string  "media_file_timecode"
@@ -175,6 +176,23 @@ ActiveRecord::Schema.define(:version => 20131027120000) do
     t.text     "characterization_of_ordering_resources"
     t.text     "comments"
     t.text     "data_sources_generalizations_contributor_backgrounds"
+    t.string   "continent"
+    t.string   "name_for_url"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.float    "z_calc_alternation_occurs_nodata_percent"
+  end
+
+  add_index "languages", ["id"], :name => "index_languages_on_id", :unique => true
+  add_index "languages", ["name_for_url"], :name => "index_languages_on_name_for_url", :unique => true
+
+  create_table "languages_ref", :id => false, :force => true do |t|
+    t.integer  "id",                                                   :limit => 8
+    t.string   "name"
+    t.string   "iso_code"
+    t.string   "glottolog_code"
+    t.string   "family"
+    t.string   "variety"
     t.string   "continent"
     t.string   "name_for_url"
     t.float    "latitude"
@@ -252,6 +270,7 @@ ActiveRecord::Schema.define(:version => 20131027120000) do
     t.string  "latex_cite_key"
     t.text    "additional_information"
     t.text    "full_reference"
+    t.integer "language_id"
   end
 
   add_index "references", ["id"], :name => "index_references_on_id", :unique => true
