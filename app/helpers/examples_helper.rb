@@ -74,7 +74,7 @@ module ExamplesHelper
   end
 
   def render_comment ex
-    sym = content_tag(:span, "★", title: "Click to show more details")
+    sym = content_tag(:span, "★", title: "Click here for additional information")
     d = ""
     if ex.comment
       c = ex.comment
@@ -128,13 +128,13 @@ module ExamplesHelper
     
     d << "#{ex.analyzed_text}<br />#{ex.gloss}<br />#{ex.translation}"
     d << "<small><br /><br /><i>Cite:</i><br />"
-    d << "#{@language} example #{ex.number}<br />In: #{swap_contibutors_name} 2013. #{@language} Valency Patterns.
+    d << "#{@language} example No. #{ex.number}<br />In: #{swap_contibutors_name} 2013. #{@language} Valency Patterns.
 In: Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.) 2013.
 Valency Patterns Leipzig online database
 Leipzig: Max Planck Institute for Evolutionary Anthropology.
 (Available online at http://valpal.info/languages/#{params[:language_id]}/examples/#{ex.number}, Accessed on #{Time.now.strftime('%Y-%m-%d')})"
     d << "</pre>"
-    com = content_tag(:a, sym, rel: "popover", class: "info cursor-hand", title: "Details for #{@language} example #{ex.number}", :data => {:content => d})
+    com = content_tag(:a, sym, rel: "popover", class: "info cursor-hand", title: "Details for #{@language} example No. #{ex.number}", :data => {:content => d})
     com
   end
   
