@@ -63,6 +63,11 @@ module ExamplesHelper
       end
     end
     rendered_example << content_tag(:div, render_comment(ex), style:"position:absolute; bottom:10px;right:10px")
+
+    # for linked examples show star at the end of the example
+    if options[:number_as_link]
+      rendered_example << render_comment(ex)
+    end
     
     # wrap it in a <div> and serve it
     div_for(ex, class: css_class) { rendered_example }
