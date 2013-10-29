@@ -62,7 +62,6 @@ module ExamplesHelper
         content_tag(:div, transl, class: "translation")
       end
     end
-    rendered_example << content_tag(:div, render_comment(ex), style:"position:absolute; bottom:10px;right:10px")
 
     # for linked examples show star at the end of the example
     if options[:number_as_link]
