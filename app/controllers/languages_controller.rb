@@ -67,21 +67,43 @@ class LanguagesController < ApplicationController
     @google_api_key ||= ENV['GOOGLE_API_KEY']
     
     language_set.to_gmaps4rails do |lang, marker|
-      marker.infowindow render_to_string(
-        partial: 'map_infowindow', object: lang, as: 'language'
-      )
-      marker.title lang.to_s
-      # marker.sidebar "I am the sidebar"
-      marker.picture({
-        picture: '/assets/cf60.png',
-        width:  32,
-        height: 32,
-        marker_anchor: [16, 16]
-      })
-      marker.json({
-        id:     dom_id(lang),
-        region: lang.region_id
-      })
+      if !lang.name.match(/(English|Ojibwe|Jaminjung)/) #HJBB tentative
+        marker.infowindow render_to_string(
+          partial: 'map_infowindow', object: lang, as: 'language'
+        )
+        marker.title lang.to_s
+        # marker.sidebar "I am the sidebar"
+        marker.picture({
+          picture: '/assets/cf60.png',
+          width:  32,
+          height: 32,
+          marker_anchor: [16, 16]
+        })
+        marker.json({
+          id:     dom_id(lang),
+          region: lang.region_id
+        })
+      else
+        l = lang
+        l.name = "#{lang} (coming soon)"
+        l.id = 0
+        l.name_for_url = ''
+        marker.infowindow render_to_string(
+          partial: 'map_infowindow', object: l, as: 'language'
+        )
+        marker.title "#{lang} (coming soon)".to_s
+        # marker.sidebar "I am the sidebar"
+        marker.picture({
+          picture: '/assets/cf60.png',
+          width:  32,
+          height: 32,
+          marker_anchor: [16, 16]
+        })
+        marker.json({
+          id:     dom_id(lang),
+          region: lang.region_id
+        })
+      end
     end
 
   end

@@ -18,8 +18,14 @@ module ApplicationHelper
         target = send('language_' << controller_name + '_path', lang)
         title  = controller_name.humanize + " of " + lang.name
       else
-        target = lang
-        title  = nil
+        if lang.name.match(/(English|Ojibwe|Jaminjung)/) #HJBB tentative
+          target = '/languages'
+          lang.name = "<i>#{lang.name} <small>(coming soon)</small></i>".html_safe
+          title  = "Coming soon"
+        else
+          target = lang
+          title  = nil
+        end
       end
       capture do
         content_tag(:li, class: css_class) do
