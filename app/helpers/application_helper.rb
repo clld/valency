@@ -20,7 +20,7 @@ module ApplicationHelper
       else
         if lang.name.match(/(English|Ojibwe|Jaminjung)/) #HJBB tentative
           target = '/languages'
-          lang.name = "<i>#{lang.name} <small>(coming soon)</small></i>".html_safe
+          lang.name = "<i>#{lang.name}</i>".html_safe
           title  = "Coming soon"
         else
           target = lang

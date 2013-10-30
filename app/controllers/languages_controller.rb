@@ -91,7 +91,7 @@ class LanguagesController < ApplicationController
         marker.infowindow render_to_string(
           partial: 'map_infowindow', object: l, as: 'language'
         )
-        marker.title "#{lang} (coming soon)".to_s
+        marker.title "#{lang}".to_s
         # marker.sidebar "I am the sidebar"
         marker.picture({
           picture: '/assets/cf60.png',
