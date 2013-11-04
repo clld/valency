@@ -1,20 +1,14 @@
 <!-- Coding set: show -->
 <h1 class="no-bold">
-  <%= @coding_set %>
+  <%= @coding_set %> <small>of <%= link_to @language, @language %></small>
 </h1>
-
-<div class="alert alert-block alert-error">
-  <button type="button" class="close" data-dismiss="alert">×</button>
-  <div><strong>Under Construction</strong></div>
-  This layout isn’t finished yet. Improvement suggestions are welcome.
-</div>
 
 <div class="row">
   <div class="span12">
-    
-    <p>The table is supposed to be similar to the
-      <a href="../coding_frames">Coding frames list</a>.
-    </p>
+      <div class="alert alert-block alert-error">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <div><strong>Under Construction</strong></div>
+      </div>
 
     <table class="table table-bordered-sharp table-striped table-hover dataTable">
       <thead>
@@ -25,20 +19,15 @@
         </tr>
       </thead>
       <tbody>
-
-        <tr>
-          <td>…</td>
-          <td class="number">40</td>
-          <td>…</td>
-        </tr>
-        <tr>
-          <td>…</td>
-          <td class="number">12</td>
-          <td>…</td>
-        </tr>
-
-
+          <% @coding_frames.each do |cf| %>
+            <tr>
+              <td><%= link_to cf, [@language, cf] unless cf.nil? || cf.to_s.blank? %></td>
+              <td class="text"></td>
+              <td class="text"></td>
+            </tr>
+          <% end %>
       </tbody>
+          </tbody>
     </table>
   </div>
 </div>
