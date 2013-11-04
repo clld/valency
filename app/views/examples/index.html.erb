@@ -14,8 +14,8 @@
       <tr>
         <th>Example</th>
         <th width="1" class="" style="border:0px solid black"></th>
-        <th width="100">Verb meaning</th>
-        <th width="120">Example of...</th>
+        <th width="80">Verb&nbsp;meaning</th>
+        <th width="200">Example of...</th>
         <th class="hidden">#</th>
       </tr>
     </thead>
@@ -40,7 +40,8 @@
             <%= thing %>
           <% elsif [CodingFrame,Alternation].include? thing.class %>
             <% name = thing.class.to_s.underscore.humanize %>
-            <%= "a#{'n' if name[0].match /[AEIOU]/}" %> <%= link_to name, [@language, thing] %>
+            <%= "a#{'n' if name[0].match /[AEIOU]/} " %> <%= link_to name, [@language, thing] %>
+            <br /><small>[<%= raw thing %>]</small>
           <% elsif thing.class == Verb %>
             the Verb form <span class="object-language"><%= link_to thing, [@language, thing] %></span>
           <% end %>
