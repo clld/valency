@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20131029120000) do
     t.string  "gloss"
     t.text    "translation"
     t.text    "translation_other"
+    t.integer "language_id_translation_other"
     t.text    "comment"
     t.string  "media_file_name"
     t.string  "media_file_timecode"
@@ -159,6 +160,14 @@ ActiveRecord::Schema.define(:version => 20131029120000) do
 
   add_index "gloss_meanings", ["gloss"], :name => "index_gloss_meanings_on_gloss"
   add_index "gloss_meanings", ["language_id"], :name => "index_gloss_meanings_on_language_id"
+
+  create_table "languagerefs", :id => false, :force => true do |t|
+    t.integer  "id",                                                   :limit => 8
+    t.string   "name"
+    t.float    "nodata"
+  end
+
+  add_index "languagerefs", ["id"], :name => "index_languageref_on_id", :unique => true
 
   create_table "languages", :id => false, :force => true do |t|
     t.integer  "id",                                                   :limit => 8
