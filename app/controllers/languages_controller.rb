@@ -44,6 +44,12 @@ class LanguagesController < ApplicationController
   # GET /languages/1.json
   def show
     @language        = Language.includes(:verbs).find_by_name_for_url(params[:id])
+    @language_ref    = Languageref.find_by_id(@language.id)
+    if @language_ref.nil?
+      @data_available = ""
+    else
+      @data_available = " (#{100-@language_ref.nodata}% avail.)"
+    end
     # if no language found then redirect to all languages page
     if(@language.nil?)
       redirect_to('/languages')
