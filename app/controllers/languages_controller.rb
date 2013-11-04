@@ -67,7 +67,7 @@ class LanguagesController < ApplicationController
     @google_api_key ||= ENV['GOOGLE_API_KEY']
     
     language_set.to_gmaps4rails do |lang, marker|
-      if !lang.name.match(/(English|Ojibwe|Jaminjung)/) #HJBB tentative
+      if !lang.name.match(/(English|Ojibwe|Jaminjung|Balinese)/) #HJBB tentative
         marker.infowindow render_to_string(
           partial: 'map_infowindow', object: lang, as: 'language'
         )

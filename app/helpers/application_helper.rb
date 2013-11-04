@@ -18,7 +18,7 @@ module ApplicationHelper
         target = send('language_' << controller_name + '_path', lang)
         title  = controller_name.humanize + " of " + lang.name
       else
-        if lang.name.match(/(English|Ojibwe|Jaminjung)/) #HJBB tentative
+        if lang.name.match(/(English|Ojibwe|Jaminjung|Balinese)/) #HJBB tentative
           target = '/languages'
           lang.name = "<i>#{lang.name}</i>".html_safe
           title  = "Coming soon"
