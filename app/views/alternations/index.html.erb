@@ -52,7 +52,7 @@
 
         <td>
           <% if exs.first.is_a? Example %>
-          <%= render_example exs.first %>
+          <%= render_example exs.first, {number_as_link: true}%>
           <% end %>
         </td>
         
