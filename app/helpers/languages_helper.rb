@@ -1,15 +1,5 @@
 module LanguagesHelper
 
-  def swap_contibutors_name
-    n = Array.new
-    @contributors.each do |c|
-      a = c.name
-      ix = a.rindex(/ +/)
-      n.push(a[ix+1..a.length] + ", " + a[0,ix])
-    end
-    n.join(' & ')
-  end
-
   def contributors_as_links lang, with_link = true
     lang.get_contributors.map do |contr|
       content_tag( :span, class: 'person') do

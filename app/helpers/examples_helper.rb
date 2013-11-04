@@ -1,6 +1,16 @@
 # coding: utf-8
 module ExamplesHelper
-  
+
+  def swap_contibutors_name
+    n = Array.new
+    @contributors.each do |c|
+      a = c.name
+      ix = a.rindex(/ +/)
+      n.push(a[ix+1..a.length] + ", " + a[0,ix])
+    end
+    n.join(' & ')
+  end
+
   # returns a div with class "gloss-unit" for each gloss to be aligned
   def format_gloss ex
     return '&nbsp;'.html_safe unless ex.analyzed_text.respond_to? :split
@@ -64,7 +74,7 @@ module ExamplesHelper
     end
 
     # for linked examples show star at the end of the example
-    if options[:number_as_link]
+    if number_as_link or wrap
       rendered_example << render_comment(ex)
     end
     

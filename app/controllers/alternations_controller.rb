@@ -5,6 +5,7 @@ class AlternationsController < ApplicationController
     @language = Language.includes(:alternations, :gloss_meanings).find_by_name_for_url(params[:language_id])
     cookies[:current_language_id] = @language.id
     @gloss_abbr = @language.gloss_meanings_hash
+    @contributors    = @language.get_contributors
   end
   
   # GET /languages/german/alternations[.json]
