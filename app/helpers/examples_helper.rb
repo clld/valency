@@ -88,14 +88,14 @@ module ExamplesHelper
     d = ""
     if ex.translation_other
       d << content_tag(:h3, "Other translation")
-      olg = Language.find_by_id(ex.language_id_translation_other)
+      olg = Languageref.find_by_id(ex.language_id_translation_other)
       otrans = ""
       if not olg.nil?
-        otrans << "#{olg.name}: #{ex.translation_other}"
+        otrans << content_tag(:i, "#{olg.name}:") << " #{ex.translation_other}"
       else
         otrans << ex.translation_other
       end
-      d << content_tag(:p, otrans, style: "margin-top:-9px")
+      d << content_tag(:p, otrans.html_safe, style: "margin-top:-9px")
     end
     if ex.comment
       c = ex.comment
