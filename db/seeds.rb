@@ -41,6 +41,7 @@ class FieldFinder
       Contribution              => "Language_contributors (table)",
       MeaningsVerb              => "Verb_meanings (table)",
       ExamplesVerb              => "Verb_examples (table)",
+      Languageref               => "Languages (Editors' layout)",
       AlternationValuesExample  => "Alternation_value_examples (table)",
       CodingFrameExample        => "Verb_coding_frame_examples (table)",
       CodingFrameIndexNumbersMicrorole => "Coding_frame_Microrole_index_numbers (table)"
@@ -62,6 +63,11 @@ class FieldFinder
       },
       Language=> {
         'name_for_url' => 'z_calc_language_name_for_url'
+      },
+      Languageref=> {
+        'id' => 'language_id',
+        'name' => 'language_name',
+        'nodata' => 'z_calc_alternation_occurs_nodata_percent'
       },
       CodingFrame => {
         'derived' => 'z_calc_basic_or_derived'
