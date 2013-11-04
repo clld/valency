@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(:version => 20131029120000) do
     t.string  "gloss"
     t.text    "translation"
     t.text    "translation_other"
-    t.integer "language_id_translation_other"  :limit => 8
+    t.integer "language_id_translation_other",  :limit => 8
     t.text    "comment"
     t.string  "media_file_name"
     t.string  "media_file_timecode"
