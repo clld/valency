@@ -83,7 +83,14 @@ module ExamplesHelper
     end
     if ex.translation_other
       d << content_tag(:h3, "Other translation")
-      d << content_tag(:p, ex.translation_other, style: "margin-top:-9px")
+      olg = Language.find_by_id(ex.language_id_translation_other)
+      otrans = ""
+      if not olg.nil?
+        otrans << "#{olg.name}: #{ex.translation_other}"
+      else
+        otrans << ex.translation_other
+      end
+      d << content_tag(:p, otrans, style: "margin-top:-9px")
     end
     if ex.example_type
       d << content_tag(:h3, "Example type")
