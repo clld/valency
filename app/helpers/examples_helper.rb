@@ -76,11 +76,6 @@ module ExamplesHelper
   def render_comment ex
     sym = content_tag(:span, "★", title: "Click here for additional information")
     d = ""
-    if ex.comment
-      c = ex.comment
-      d << content_tag(:h3, "Comment")
-      d << content_tag(:p, c.html_safe, style: "margin-top:-9px")
-    end
     if ex.translation_other
       d << content_tag(:h3, "Other translation")
       olg = Language.find_by_id(ex.language_id_translation_other)
@@ -91,6 +86,11 @@ module ExamplesHelper
         otrans << ex.translation_other
       end
       d << content_tag(:p, otrans, style: "margin-top:-9px")
+    end
+    if ex.comment
+      c = ex.comment
+      d << content_tag(:h3, "Comment")
+      d << content_tag(:p, c.html_safe, style: "margin-top:-9px")
     end
     if ex.example_type
       d << content_tag(:h3, "Example type")
