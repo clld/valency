@@ -77,7 +77,7 @@
       </div>
     <% end %>
     
-    <% if @refs %>
+    <% if @refs && @refs.short_citation %>
       <br /><b>Reference</b>
       <ul>
         <li><%= content_tag(:a, @refs.short_citation, href: "/references/#{@refs.id}") %></li>
