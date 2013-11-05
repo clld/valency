@@ -59,6 +59,7 @@ class LanguagesController < ApplicationController
     @iso_code        = @language.iso_code
     @contributors    = @language.get_contributors
     @native_speakers = @language.get_native_speakers
+    @refs            = Reference.find_by_language_id(@language.id)
 
     @map_data = get_map_data @language
     

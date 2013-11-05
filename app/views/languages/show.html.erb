@@ -76,7 +76,13 @@
         <b>with data contributions by <%= pluralize @native_speakers.size, "native speaker" %></b>
       </div>
     <% end %>
-        
+    
+    <% if @refs %>
+      <br /><b>Reference</b>
+      <ul>
+        <li><%= content_tag(:a, @refs.short_citation, href: "/references/#{@refs.id}") %></li>
+      <ul>
+    <% end %>
     
   </div><!-- .span6 -->
 </div><!-- .row -->
@@ -131,7 +137,6 @@ Leipzig: Max Planck Institute for Evolutionary Anthropology.
     <% end %>
   <% end %>
 <% end %>
-
 
 <% if @language.comments || @language.characterization_of_flagging_resources || @language.characterization_of_indexing_resources || @language.characterization_of_ordering_resources || @language.data_sources_generalizations_contributor_backgrounds || @language.alternation_occurs_judgement_criteria %>
 <div class="row">

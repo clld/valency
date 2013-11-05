@@ -259,7 +259,8 @@ ActiveRecord::Schema.define(:version => 20131029120000) do
     t.string  "latex_cite_key"
     t.text    "additional_information"
     t.text    "full_reference"
-    t.integer "language_id"
+    t.string  "short_citation"
+    t.integer "language_id",                 :limit => 8
   end
 
   add_index "references", ["id"], :name => "index_references_on_id", :unique => true
