@@ -48,7 +48,7 @@
 
         <td><%= altn.coded_y_n %></td>
         
-        <td><%= raw desc %></td>
+        <td><%= raw desc.gsub('6px;vertical-align: text-bottom','9px;vertical-align: sub') %></td>
 
         <td>
           <% if exs.first.is_a? Example %>
