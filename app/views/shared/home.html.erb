@@ -1,41 +1,41 @@
-
-<h1 style="text-align:center;">Welcome to <em>ValPaL</em><sup><sup>pre-release</sup></sup></h1>
-<div style="margin-top:-20px;margin-bottom:-30px">
-    <center>
-    <table border="0" width="95%">
-        <tr>
-        <td align="center">
-        This is the <strong>pre-release</strong> version of the<br /><big><strong>Valency Patterns Leipzig Online Database</strong></big>,<br />
-        which is one of the results of the<br />Leipzig Valency Classes Project. 
-        </td>
-        <td align="center">
-        <a href="/languages"><big><strong>Start exploring the database</strong></big></a><br />by selecting an item from the top menu bar. 
-        </td>
-        <td align="center">
-        <a href ="/languages">
-        <%= image_tag 'logo_valpal_text.png', style: 'width:160px;' %>
-        </a>
-        </td>
-        <td align="center">
-        <%= image_tag 'logo_valency.png', style: 'width:160px;' %>
-        </td>
-        </tr>
-    </table>
-    </center>
-</div>
-
-<hr noshade>
-
-<div class="pull-left" style="width:50%;margin-top:-30px;">
-    <h2><a id="cite"></a>How to cite ValPaL</h2>
-    <p>The ValPaL online database is an edited database consisting of different languages which should be regarded as separate publications, like chapters of an edited volume. These language specific datasets should be cited as shown at the language home pages<br />(e.g. for <a href="/languages/icelandic">Icelandic</a>).
+<div class="row">
+    <h1 style="text-align:center;">Welcome to <em>ValPaL</em><sup><sup>pre-release</sup></sup></h1>
+    <p align="center">
+        This is the <b>pre-release</b> version of the <strong>Valency Patterns Leipzig Online Database</strong>,<br />
+        which is one of the results of the Leipzig Valency Classes Project. 
     </p>
+    <p align="center">
+        <a href="/languages"><strong><big>Start exploring the database</big></strong></a><br />by selecting an item from the top menu bar. 
+    </p>
+</div>
+<div class="new row" style="text-align:center">
+
+    <a href="http://www.dfg.de" title="Funded by “Deutsche Forschungsgemeinschaft”" target="_blank"><%= image_tag 'dfg_logo.jpg', style: "width:180px;"%></a>
+
+    <font size="36pt" color="grey"><b>&nbsp;+&nbsp;</b></font>
+
+    <a href="http://www.eva.mpg.de"><%= image_tag 'logo_minerva.png', style: "width:100px;"%></a>
+
+    <font size="36pt" color="grey"><b>&nbsp;=&nbsp;</b></font>
+
+    <%= image_tag 'logo_valency.png', style: 'width:180px;' %>
+
+    <font size="36pt" color="grey"><b>&nbsp;⇒&nbsp;</b></font>
+    
+    <a href ="/languages"><%= image_tag 'logo_valpal_text.png', style: 'width:180px;' %></a>
+    
+</div>
+<hr noshade>
+<div class="new_row">
+    <h2><a id="cite"></a>How to cite ValPaL</h2>
+        <p>The ValPaL online database is an edited database consisting of different languages which should be regarded as separate publications, like chapters of an edited volume. These datasets exemplified by <a href="/languages/icelandic">Icelandic</a> should be cited as follows:
+        </p>
             
-<!-- <div style="width:450px;padding:2px;position:relative;left:10px;bottom:-5px;background-color:#eeaa11;text-align:center;font-size:10pt">Please do <b>not</b> cite the ValPaL <b>pre-release</b> version in any scientific work!</div><pre style="margin:auto; display:inline-block;"><small>Barðdal, Jóhanna. 2013. Icelandic Valency Patterns.
+<div style="width:450px;padding:2px;position:relative;left:10px;bottom:-5px;background-color:#eeaa11;text-align:center;font-size:10pt">Please do <b>not</b> cite the ValPaL <b>pre-release</b> version in any scientific work!</div><pre style="margin:auto; display:inline-block;"><small>Barðdal, Jóhanna. 2013. Icelandic Valency Patterns.
 In: Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.) 2013.
 Valency Patterns Leipzig online database
 Leipzig: Max Planck Institute for Evolutionary Anthropology.
-(Available online at http://valpal.info/languages/icelandic, Accessed on <%= Time.now.strftime("%Y-%m-%d") %>)</small></pre> -->
+(Available online at http://valpal.info/languages/icelandic, Accessed on <%= Time.now.strftime("%Y-%m-%d") %>)</small></pre>
         
         <p style="margin-top:15px">The complete work should be cited as follows: 
 
@@ -58,16 +58,13 @@ Leipzig: Max Planck Institute for Evolutionary Anthropology.
               </div>
             </div>
 
-        </p>
-<div style="width:440px;padding:1px;position:relative;left:5px;bottom:-5px;background-color:#eeaa11;text-align:center;font-size:10pt">Please do <b>not</b> cite the ValPaL <b>pre-release</b> version in any scientific work!</div>
-<pre style="margin:auto; display:inline-block;"><small>Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.) 2013.
+</p>
+<div style="width:450px;padding:2px;position:relative;left:10px;bottom:-5px;background-color:#eeaa11;text-align:center;font-size:10pt">Please do <b>not</b> cite the ValPaL <b>pre-release</b> version in any scientific work!</div><pre style="margin:auto; display:inline-block;"><small>Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.) 2013.
 Valency Patterns Leipzig Online Database
 Leipzig: Max Planck Institute for Evolutionary Anthropology.
 (Available online at http://valpal.info, Accessed on <%= Time.now.strftime("%Y-%m-%d") %>)</small></pre>
 </div>
-
-
-<div class="pull-right" style="width:50%;margin-top:-30px;">
+<div class="new_row">
     <h2><a id="license"></a>Terms of use &nbsp;<a href="http://creativecommons.org/licenses/by/3.0/"><%= image_tag 'cc-by.png', style: "width:80px;"%></a></h2>
         <p>
           The content of this web site is published under a
