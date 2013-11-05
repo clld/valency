@@ -11,7 +11,7 @@
   <div class="span6">
     <% unless a.description.nil? %>
       <h2>Description</h2>
-      <div class="justify"><%= raw a.description %></div>
+      <div class="justify"><%= raw a.description.gsub('6px;vertical-align: text-bottom','9px;vertical-align: sub') %></div>
     <% end %>
   </div>
 </div>
