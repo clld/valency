@@ -9,7 +9,7 @@
     <%= render_cf(cf, css_class: "padded-box active big") %>
     <% if cf.description %>
       <h5>Description</h5>
-      <div class="justify" style="color:grey;margin-top:-10px"><%= "#{cf.description.strip}" %></div>
+      <div class="justify" style="color:grey;margin-top:-10px"><%= raw "#{cf.description.strip.gsub('6px;vertical-align: text-bottom','9px;vertical-align: sub')}" %></div>
     <% end %>
     <% if cf.comment %>
       <form class="form-inline pull-left with-heading">
