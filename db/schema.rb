@@ -268,7 +268,7 @@ ActiveRecord::Schema.define(:version => 20131029120000) do
   create_table "terms", :force => true do |t|
     t.string "term"
     t.string "description"
-    t.text   "definition"
+    t.text   "definition", :limit => nil
     t.string "see_also"
   end
 
