@@ -77,10 +77,12 @@
       </div>
     <% end %>
     
-    <% if @refs && @refs.short_citation %>
-      <br /><b>Reference</b>
+    <% if @refs && @refs.count > 0 %>
+      <h2>Reference<%= (@refs.count > 1) ? "s" : "" %></h2>
       <ul>
-        <li><%= content_tag(:a, @refs.short_citation, href: "/references/#{@refs.id}") %></li>
+        <% @refs.each do |r| %>
+        <li><%= content_tag(:a, r.short_citation, href: "/references/#{r.id}") %></li>
+        <% end %>
       <ul>
     <% end %>
     
@@ -114,11 +116,11 @@
     </div>    
 </h2>
 
-<div style="width:450px;padding:2px;position:relative;left:10px;bottom:-5px;background-color:#eeaa11;text-align:center;font-size:10pt">Please do <b>not</b> cite the ValPaL <b>pre-release</b> version in any scientific work!</div><pre style="margin:auto; display:inline-block;"><%= swap_contibutors_name %>. 2013. <%= @language %> Valency Patterns.
+<div style="width:450px;padding:2px;position:relative;left:10px;bottom:-5px;background-color:#eeaa11;text-align:center;font-size:10pt">Please do <b>not</b> cite the ValPaL <b>pre-release</b> version in any scientific work!</div><pre style="margin:auto; display:inline-block;"><small><%= swap_contibutors_name %>. 2013. <%= @language %> Valency Patterns.
 In: Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.) 2013.
 Valency Patterns Leipzig Online Database
 Leipzig: Max Planck Institute for Evolutionary Anthropology.
-(Available online at http://valpal.info<%=request.fullpath%>, Accessed on <%= Time.now.strftime("%Y-%m-%d") %>)</pre>
+(Available online at http://valpal.info<%=request.fullpath%>, Accessed on <%= Time.now.strftime("%Y-%m-%d") %>)</small></pre>
     
 
   </div>

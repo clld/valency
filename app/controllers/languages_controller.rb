@@ -59,7 +59,7 @@ class LanguagesController < ApplicationController
     @iso_code        = @language.iso_code
     @contributors    = @language.get_contributors
     @native_speakers = @language.get_native_speakers
-    @refs            = Reference.find_by_language_id(@language.id)
+    @refs            = Reference.where(language_id: @language.id).order('short_citation ASC')
 
     @map_data = get_map_data @language
     
