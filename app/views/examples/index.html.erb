@@ -40,8 +40,8 @@
             <%= thing %>
           <% elsif [CodingFrame,Alternation].include? thing.class %>
             <% name = thing.class.to_s.underscore.humanize %>
-            <%= "a#{'n' if name[0].match /[AEIOU]/} " %> <%= link_to name, [@language, thing] %>
-            <br /><small>[<%= raw thing %>]</small>
+            <%= "a#{'n' if name[0].match /[AEIOU]/} " %> <%= link_to name, [@language, thing] %>:
+            <br /><small><%= raw thing %></small>
           <% elsif thing.class == Verb %>
             the Verb form <span class="object-language"><%= link_to thing, [@language, thing] %></span>
           <% end %>
