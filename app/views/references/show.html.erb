@@ -1,12 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h2>ValPaL Reference</h2>
+<h2>ValPaL Reference <small>&nbsp;&nbsp;<span style="text-weight:normal;"><%= @reference.short_citation%></span></small></h2>
 <div class="span6">
-<p>
-  <b>ValPaL Id:</b>
-  <%= @reference.id %>
-</p>
-
 <% if @reference.authors %>
 <p>
   <b>Authors:</b>
