@@ -48,7 +48,7 @@ class LanguagesController < ApplicationController
     if @language_ref.nil?
       @data_available = ""
     else
-      @data_available = " (#{100-@language_ref.nodata}% avail.)"
+      @data_available = " (#{'%.1f' % (100-@language_ref.nodata)}% avail.)"
     end
     # if no language found then redirect to all languages page
     if(@language.nil?)
