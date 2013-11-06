@@ -1,98 +1,143 @@
 <p id="notice"><%= notice %></p>
 
+<h2>ValPaL Reference</h2>
+<div class="span6">
 <p>
-  <b>Id:</b>
+  <b>ValPaL Id:</b>
   <%= @reference.id %>
 </p>
 
+<% if @reference.authors %>
 <p>
   <b>Authors:</b>
   <%= @reference.authors %>
 </p>
+<% end %>
 
+<% if @reference.year %>
 <p>
   <b>Year:</b>
-  <%= @reference.year %>
+  <%= @reference.year.to_i %>
 </p>
+<% end %>
 
+<% if @reference.year_disambiguation_letter %>
 <p>
   <b>Year disambiguation letter:</b>
   <%= @reference.year_disambiguation_letter %>
 </p>
+<% end %>
 
+<% if @reference.article_title %>
 <p>
   <b>Article title:</b>
   <%= @reference.article_title %>
 </p>
+<% end %>
 
+<% if @reference.editors %>
 <p>
   <b>Editors:</b>
   <%= @reference.editors %>
 </p>
+<% end %>
 
+<% if @reference.bibtex_type %>
 <p>
   <b>Bibtex type:</b>
   <%= @reference.bibtex_type %>
 </p>
+<% end %>
 
+<% if @reference.book_title %>
 <p>
   <b>Book title:</b>
   <%= @reference.book_title %>
 </p>
+<% end %>
 
+<% if @reference.city %>
 <p>
   <b>City:</b>
   <%= @reference.city %>
 </p>
+<% end %>
 
+<% if @reference.issue %>
 <p>
   <b>Issue:</b>
   <%= @reference.issue %>
 </p>
+<% end %>
 
+<% if @reference.journal %>
 <p>
   <b>Journal:</b>
   <%= @reference.journal %>
 </p>
+<% end %>
 
+<% if @reference.pages %>
 <p>
   <b>Pages:</b>
   <%= @reference.pages %>
 </p>
+<% end %>
 
+<% if @reference.publisher %>
 <p>
   <b>Publisher:</b>
   <%= @reference.publisher %>
 </p>
+<% end %>
 
+<% if @reference.series_title %>
 <p>
   <b>Series title:</b>
   <%= @reference.series_title %>
 </p>
+<% end %>
 
+<% if @reference.url %>
 <p>
   <b>Url:</b>
   <%= @reference.url %>
 </p>
+<% end %>
 
+<% if @reference.volume %>
 <p>
   <b>Volume:</b>
   <%= @reference.volume %>
 </p>
+<% end %>
 
+<% if @reference.latex_cite_key %>
 <p>
   <b>Latex cite key:</b>
   <%= @reference.latex_cite_key %>
 </p>
+<% end %>
 
+<% lang = Language.find_by_id(@reference.language_id) %>
+<% if lang %>
+<p>
+  <b>Language:</b>
+  <%= content_tag(:a, lang.name, href:"/languages/#{lang.name_for_url}") %>
+</p>
+<% end %>
+
+<% if @reference.additional_information %>
 <p>
   <b>Additional information:</b>
   <%= @reference.additional_information %>
 </p>
+<% end %>
 
+<% if @reference.full_reference %>
 <p>
   <b>Full reference:</b>
   <%= @reference.full_reference %>
 </p>
-
-<%= link_to 'Back', references_path %>
+<% end %>
+</div>
