@@ -31,7 +31,7 @@
 <div class="row">  
 	<!-- CODING FRAME --><div class="span4">
     <h2>Coding frame
-      <% definition = Term.find_by_term('Coding frame').definition %>
+      <% definition = Term.find_by_term('Coding frame').description %>
       <%if !definition.blank? %>
       <a href="#myModal1" data-toggle="modal"><i class="icon-info-sign"></i></a>
       <div id="myModal1" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal1" aria-hidden="true">
@@ -69,7 +69,7 @@
 			<% else %>
 			  <small>no examples given</small>
 			<% end %>
-            <% definition = Term.find_by_term('Example').definition %>
+            <% definition = Term.find_by_term('Example').description %>
       <%if !definition.blank? %>
       <a href="#myModal2" data-toggle="modal"><i class="icon-info-sign"></i></a>
       <div id="myModal2" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal2" aria-hidden="true">
@@ -96,7 +96,7 @@
 	<!-- INDEX#, Microroles, Coding sets, Argument types -->
 	<div class="span12">
     <h2>
-      Verb <%= "meaning".pluralize meanings.size %><% definition = Term.find_by_term('Verb meaning').definition %>
+      Verb <%= "meaning".pluralize meanings.size %><% definition = Term.find_by_term('Verb meaning').description %>
       <%if !definition.blank? %>
       <a href="#myModal3" data-toggle="modal"><i class="icon-info-sign"></i></a>
       <div id="myModal3" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal3" aria-hidden="true">
@@ -109,7 +109,7 @@
         </div>
       </div>
       <%end%>,
-      Microroles<% definition = Term.find_by_term('Microrole').definition %>
+      Microroles<% definition = Term.find_by_term('Microrole').description %>
       <%if !definition.blank? %>
       <a href="#myModal4" data-toggle="modal"><i class="icon-info-sign"></i></a>
       <div id="myModal4" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal4" aria-hidden="true">
@@ -121,7 +121,7 @@
             <%= raw definition %>
         </div>
       </div>
-      <%end%>, Coding&nbsp;sets<% definition = Term.find_by_term('Coding set').definition %>
+      <%end%>, Coding&nbsp;sets<% definition = Term.find_by_term('Coding set').description %>
       <%if !definition.blank? %>
       <a href="#myModal5" data-toggle="modal"><i class="icon-info-sign"></i></a>
       <div id="myModal5" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal5" aria-hidden="true">
@@ -133,7 +133,7 @@
             <%= raw definition %>
         </div>
       </div>
-      <%end%> and Argument&nbsp;types<% definition = Term.find_by_term('Argument type').definition %>
+      <%end%> and Argument&nbsp;types<% definition = Term.find_by_term('Argument type').description %>
       <%if !definition.blank? %>
       <a href="#myModal6" data-toggle="modal"><i class="icon-info-sign"></i></a>
       <div id="myModal6" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal6" aria-hidden="true">
@@ -198,7 +198,7 @@
 <div class="new row">
 	<!-- Alternations --><div class="span12 dt-with-filters">
 	  <% avs = @alternation_values %>
-    <h2 class="pull-left">Alternations<% definition = Term.find_by_term('Alternation').definition %>
+    <h2 class="pull-left">Alternations<% definition = Term.find_by_term('Alternation').description %>
       <%if !definition.blank? %>
       <a href="#myModal7" data-toggle="modal"><i class="icon-info-sign"></i></a>
       <div id="myModal7" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal7" aria-hidden="true">
@@ -219,7 +219,7 @@
       </label>
       <label class="checkbox inline">
         <input type="checkbox" class="toggle-col" data-col="derived coding frame">Derived Coding frames<% if Term.find_by_term('Derived Coding frame') %>
-      <% definition = truncate(Term.find_by_term('Derived Coding frame').definition, :length => 2000, :separator =>'. ', :omission => '... ') %>
+      <% definition = truncate(Term.find_by_term('Derived Coding frame').description, :length => 2000, :separator =>'. ', :omission => '... ') %>
       <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Derived Coding frame"
          data-content="<%= definition %>">
          <i class="icon-info-sign"></i>
