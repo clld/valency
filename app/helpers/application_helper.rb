@@ -13,20 +13,24 @@ module ApplicationHelper
     keep_controller = link_to_same_controller && (@language || @current_language) && 
       LANGUAGE_SPECIFIC.include?(controller_name)
     @languages.map do |lang|
-      css_class = 'active' if lang == (@language || @current_language)
-      if keep_controller
-        target = send('language_' << controller_name + '_path', lang)
-        title  = controller_name.humanize + " of " + lang.name
+
+      if lang.name.match(/(English|Ojibwe|Jaminjung|Balinese)/) #HJBB tentative
+        target = '/languages'
+        lang.name = "<i>#{lang.name}</i>".html_safe
+        title  = "Coming soon"
       else
-        if lang.name.match(/(English|Ojibwe|Jaminjung|Balinese)/) #HJBB tentative
-          target = '/languages'
-          lang.name = "<i>#{lang.name}</i>".html_safe
-          title  = "Coming soon"
+
+        css_class = 'active' if lang == (@language || @current_language)
+        if keep_controller
+          target = send('language_' << controller_name + '_path', lang)
+          title  = controller_name.humanize + " of " + lang.name
         else
           target = lang
           title  = nil
         end
+
       end
+
       capture do
         content_tag(:li, class: css_class) do
           link_to_unless_current lang, target, title: title do
