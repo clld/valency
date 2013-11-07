@@ -5,18 +5,28 @@
   <div class="contributor" id="<%= dom_id(c) %>">
 
     <% if with_photos %>
-      <div class="photo-container">
+      <div class="photo-container" style="width:157px;height:200px;">
         <% if photos[c] %>
-          <% photo = capture { image_tag(photos[c], class: 'img-polaroid photo') } %>
+          <% photo = capture { image_tag(photos[c], class: 'img-polaroid photo', style: 'height:100%;') } %>
           <%= link_to_if c.url, photo, c.url %>
+          <% else %>
+              <div class="photo-container">
+                  <% photo = capture { image_tag("/assets/photos/valpal_dummy.jpg", class: 'img-polaroid photo', style: 'height:100%;') } %>
+                  <%= link_to_if c.url, photo, c.url %>
+              </div>
         <% end %>
       </div>
+    <% else %>
+        <div class="photo-container">
+            <% photo = capture { image_tag("/assets/photos/valpal_dummy.jpg", class: 'img-polaroid photo', style: 'height:100%;') } %>
+            <%= link_to_if c.url, photo, c.url %>
+        </div>
     <% end %>
 
     <%if c.url.nil?%>
     <%c.url = ''%>
     <%end%>
-    <p class="contributor-name "><%= link_to_if c.url, c.name, c.url, class:c.url.match('eva\.mpg')?'':'ext-link' %></p>
+    <p class="contributor-name "  style="width:150px;"><%= link_to_if c.url, c.name, c.url, class:c.url.match('eva\.mpg') ? '' : 'ext-link' %></p>
     <% if c.affiliation %>
       <p><%= c.affiliation %></p>
     <% end %>
