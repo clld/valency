@@ -48,8 +48,10 @@
 
         <td><%= altn.coded_y_n %></td>
         
-        <td><%= raw desc.gsub('6px;vertical-align: text-bottom','9px;vertical-align: sub') %></td>
-
+        <td>
+            <% if desc %>
+            <%= raw desc.gsub('6px;vertical-align: text-bottom','9px;vertical-align: sub') %></td>
+            <% end %>
         <td>
           <% if exs.first.is_a? Example %>
           <%= render_example exs.first, {number_as_link: true}%>
