@@ -68,7 +68,7 @@ Valency::Application.configure do
   
   # Secure production environment with a password (using HTTP basic authentication):
   # Thanks to this excellent blog post: http://is.gd/Geqpco
-  config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "ValPaL Preview") do |u, p|
-    [u, p] == [ENV['HTTP_USER'], ENV['HTTP_PASSWORD']]
-  end
+  # config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "ValPaL Preview") do |u, p|
+  #   [u, p] == [ENV['HTTP_USER'], ENV['HTTP_PASSWORD']]
+  # end
 end
