@@ -110,6 +110,7 @@ module ExamplesHelper
       d << content_tag(:h3, "Reference")
       @ref = Reference.find_by_id(ex.reference_id)
       if @ref
+        r = ""
         if @ref.authors
           a = @ref.authors
           na = ""
