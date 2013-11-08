@@ -148,7 +148,7 @@ module ExamplesHelper
     d << "<small><br /><br /><i>Cite:</i><br />"
     d << "#{@language} example No. #{ex.number}<br />In: #{swap_contibutors_name} 2013. #{@language} Valency Patterns.
 In: Hartmann, Iren &amp; Haspelmath, Martin &amp; Taylor, Bradley (eds.) 2013.
-Valency Patterns Leipzig online database
+Valency Patterns Leipzig
 Leipzig: Max Planck Institute for Evolutionary Anthropology.
 (Available online at http://valpal.info/languages/#{params[:language_id]}/examples/#{ex.number}, Accessed on #{Time.now.strftime('%Y-%m-%d')})"
     d << "</pre>"
