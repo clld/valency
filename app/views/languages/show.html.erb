@@ -89,7 +89,11 @@
                   <% @refs.each do |r| %>
                   <% rm = "" %>
                   <% if r.authors %>
-                    <% rm << "#{r.authors}<br />&nbsp;&nbsp;"%>
+                    <% rm << "#{r.authors}" %>
+                    <% if (r.year.to_i > 0) %>
+                      <% rm << ". #{r.year.to_i.to_s}" %>
+                    <% end %>
+                    <% rm << "<br />&nbsp;&nbsp;"%>
                   <% end %>
                   <% if r.article_title %>
                     <% rm << "“#{r.article_title}”"%>
@@ -99,10 +103,6 @@
                       <% rm << " In: "%>
                     <% end %>
                     <% rm << "“#{r.book_title}”"%>
-                  <% end %>
-                  <% rm << ". " %>
-                  <% if r.year %>
-                    <% rm << r.year.to_i.to_s %>
                   <% end %>
                   <li><%= content_tag(:a, rm.html_safe(), href: "/references/#{r.id}") %></li>
                   <% end %>
