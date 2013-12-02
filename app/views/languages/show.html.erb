@@ -78,12 +78,38 @@
     <% end %>
     
     <% if @refs && @refs.count > 0 %>
-      <h2>Reference<%= (@refs.count > 1) ? "s" : "" %></h2>
-      <ul>
-        <% @refs.each do |r| %>
-        <li><%= content_tag(:a, r.short_citation, href: "/references/#{r.id}") %></li>
-        <% end %>
-      <ul>
+          <a href="#myModal4" role="button" class="btn" style="font-weight:normal;margin-top:10px" data-toggle="modal"><%= (@refs.count > 1) ? "#{@refs.count} " : "" %>Reference<%= (@refs.count > 1) ? "s" : "" %></a>
+          <div id="myModal4" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal4" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModal4">Reference<%= (@refs.count > 1) ? "s" : "" %> for <%= @language %></h3>
+            </div>
+            <div class="modal-body" style="color:#000;font-height:normal;font-size:11pt;font-weight:normal;">
+                <ul>
+                  <% @refs.each do |r| %>
+                  <% rm = "" %>
+                  <% if r.authors %>
+                    <% rm << "#{r.authors}<br />&nbsp;&nbsp;"%>
+                  <% end %>
+                  <% if r.article_title %>
+                    <% rm << "“#{r.article_title}”"%>
+                  <% end %>
+                  <% if r.book_title %>
+                    <% if r.article_title %>
+                      <% rm << " In: "%>
+                    <% end %>
+                    <% rm << "“#{r.book_title}”"%>
+                  <% end %>
+                  <% rm << ". " %>
+                  <% if r.year %>
+                    <% rm << r.year.to_i.to_s %>
+                  <% end %>
+                  <li><%= content_tag(:a, rm.html_safe(), href: "/references/#{r.id}") %></li>
+                  <% end %>
+                <ul>
+            </div>
+          </div>
+    
     <% end %>
     
   </div><!-- .span6 -->
