@@ -218,15 +218,21 @@
         <input type="checkbox" class="toggle-col" data-col="comment">Comments
       </label>
       <label class="checkbox inline">
-        <input type="checkbox" class="toggle-col" data-col="derived coding frame">Derived Coding frames<% if Term.find_by_term('Derived Coding frame') %>
-      <% definition = truncate(Term.find_by_term('Derived Coding frame').description, :length => 2000, :separator =>'. ', :omission => '... ') %>
-      <a rel="popover" class="info cursor-hand" style="font-size:10pt;" title="Derived Coding frame"
-         data-content="<%= definition %>">
-         <i class="icon-info-sign"></i>
-      </a>
-      <% end %>
+        <input type="checkbox" class="toggle-col" data-col="derived coding frame">Derived Coding frames<% definition = Term.find_by_term('Derived coding frame').description %>
+        <% if !definition.blank? %>
+        <a href="#myModal8" data-toggle="modal"><sup><i class="icon-info-sign"></i></sup></a>
+        <div id="myModal8" class="modal hide fade" style="width:700px" tabindex="-1" role="dialog" aria-labelledby="myModal8" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModal8">Derived coding frame</h3>
+          </div>
+          <div class="modal-body" style="color:#000;font-height:normal;font-size:11pt;font-weight:normal;">
+              <%= raw definition %>
+          </div>
+        </div>
+        <% end %>
       </label>
-  	</form>        
+    </form>
 
     <div class="row">
       <div class="span12">
