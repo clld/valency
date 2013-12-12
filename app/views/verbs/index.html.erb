@@ -4,25 +4,53 @@
   <small>of <%= link_to @language.name, @language %></small>
 </h1>
 
-<table id="verbs_list" class="table table-striped table-bordered-sharp dataTable">
+
+<div class="row">
+  <div class="span12 dt-with-filters">
+    <div class="form-inline dt-filters"><!-- filters for dataTable -->
+        <label> Show only </label>
+        <div class="btn-group filter-col" data-toggle="buttons-checkbox" data-col="complexity">
+          <button class="btn btn-mini"> Complex </button>
+          <button class="btn btn-mini"> Simplex </button>
+        </div> verb forms.
+        <div class="btn-group">
+          <a class="btn btn-mini clear-filters"><i class="icon-remove"></i> Clear filter
+          </a>
+        </div>
+    </div><!-- end .dt-filters-->
+
+<table id="verbs_list" class="table dataTable table-striped table-bordered-sharp table-hover">
   <thead>
     <tr>
       <th>Verb form</th>
       <th class="<%= 'hidden' unless @orig_script %>">Original script</th>
       <th>Verb meanings</th>
       <th>Basic Coding frame</th>
+      <th class="hidden">Complexity</th>
     </tr>
   </thead>
 <tbody>
 <% @verbs.each do |verb| %>
 <% cf = verb.coding_frame %>
+<% csvf = verb.simplex_or_complex %>
   <tr>
 
     <td class="object-language">
-      <%= link_to verb, [@language, verb] %>
+        <div class="cell">
+            <% if csvf == "Complex" %>
+              <span class="label" title="Complex verb form">C</span>
+            <% elsif csvf == "Simplex" %>
+              <span class="label" title="Simplex verb form">S</span>
+            <% else %>
+              <span class="label" title="No information on verb form complexity" style="font-style:normal;font-size:75%">∅</span>
+            <% end %>
+        </div><div class="cell">
+            <%= link_to verb, [@language, verb] %>    
+        </div>
+      
     </td>
-
-   	<td><%= verb.original_script if @orig_script %></td>
+      
+    <td><%= verb.original_script if @orig_script %></td>
 
     <td><%= meaning_list(verb) %></td>
 
@@ -32,9 +60,14 @@
       <% end %>
     </td>
 
+    <td>
+      <%= csvf %>
+    </td>
+
   </tr>
 <% end %>
 </tbody>
 </table>
+</div>
 
 <br />

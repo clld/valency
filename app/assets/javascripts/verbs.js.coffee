@@ -75,6 +75,12 @@ oDTSettings =
 				sDom: "<'row'<'span4'i><'span8'f>>t"
 				aoColumnDefs: [
 					{
+						aTargets:[0] # Verb form
+						sType: "html"
+						asSorting: ['asc','desc']
+						mDataProp: ns.coding_frame_sorter(0)
+					},
+					{
 						aTargets:[3] # Coding frame
 						sType: "html"
 						asSorting: ['asc','desc']
