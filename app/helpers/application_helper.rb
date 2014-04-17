@@ -14,7 +14,8 @@ module ApplicationHelper
       LANGUAGE_SPECIFIC.include?(controller_name)
     @languages.map do |lang|
 
-      if lang.name.match(/(English|Ojibwe|Jaminjung|Balinese)/) #HJBB tentative
+      # if lang.name.match(/(English|Ojibwe|Jaminjung|Balinese)/) #HJBB tentative
+      if lang.name.match(/(Ojibwe)/) #HJBB tentative
         target = '/languages'
         lang.name = "<i>#{lang.name}</i>".html_safe
         title  = "Coming soon"
