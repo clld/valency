@@ -15,11 +15,11 @@ module ApplicationHelper
     @languages.map do |lang|
 
       # if lang.name.match(/(English|Ojibwe|Jaminjung|Balinese)/) #HJBB tentative
-      if lang.name.match(/(Ojibwe)/) #HJBB tentative
-        target = '/languages'
-        lang.name = "<i>#{lang.name}</i>".html_safe
-        title  = "Coming soon"
-      else
+      # if lang.name.match(/(Ojibwe)/) #HJBB tentative
+      #   target = '/languages'
+      #   lang.name = "<i>#{lang.name}</i>".html_safe
+      #   title  = "Coming soon"
+      # else
 
         css_class = 'active' if lang == (@language || @current_language)
         if keep_controller
@@ -30,7 +30,7 @@ module ApplicationHelper
           title  = nil
         end
 
-      end
+      # end
 
       capture do
         content_tag(:li, class: css_class) do
