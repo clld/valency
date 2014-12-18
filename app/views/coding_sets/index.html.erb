@@ -22,6 +22,7 @@
       </thead>
       <tbody>
       <% @coding_sets.each do |cs| %>
+          <% if cs.coding_frames.count > 0 %>
         <tr>
           <td><%= link_to cs, [@language, cs] unless cs.to_s.blank? %></td>
           <td><%= cs.comment %></td>
@@ -29,6 +30,8 @@
           <td class="number"><%= cs.verb_count %></td>
           <td class="number"><%= cs.microrole_count %></td>
         </tr>
+        
+      <% end %>
       <% end %>
 
       </tbody>
