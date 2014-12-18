@@ -32,7 +32,7 @@ module ExamplesHelper
     gloss_chunks = at_chunks.zip(gl_chunks).map! do |word, gloss|
       capture do
         content_tag(:div, word) <<
-        content_tag(:div, gloss, {class: "gl"}, false)
+        content_tag(:div, gloss.gsub(/&.*?27;/, "'"), {class: "gl"}, false)
       end
     end
     gloss_chunks.map! do |chunk|
