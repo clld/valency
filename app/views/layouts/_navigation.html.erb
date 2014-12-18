@@ -77,9 +77,9 @@
         </a>
         <ul class="dropdown-menu">
           <% if @language %>
-            <li><a target="_blank" href="/public/<%= @language.name_for_url %>_valency_data.zip">Data set for <%= @language.to_s %> <i><small>(zipped CSV files)</small></i></a></li>
+            <li><a target="_blank" href="/public/<%= @language.name_for_url %>_valency_data.zip">Data set for <%= @language.to_s %> <i><small>(zipped TSV files)</small></i></a></li>
           <% end %>
-          <li><a target="_blank" href="/public/all_lgs_valency_data.zip">Data set for all languages <i><small>(zipped CSV files)</small></i></a></li>
+          <li><a target="_blank" href="/public/all_lgs_valency_data.zip">Data set for all languages <i><small>(zipped TSV files)</small></i></a></li>
           <!-- <li><a href="#">Data set for all languages <i><small>(SQLite file)</small></i></a></li> -->
         </ul>
       </li>
