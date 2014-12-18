@@ -76,10 +76,11 @@
           Export&nbsp;<b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
-          <!-- <% if @language %>
-            <li><a href="#">Data set for <%= @language.to_s %></a></li>
-          <% end %> -->
-          <li><a href="#">Coming soon</a></li>
+          <% if @language %>
+            <li><a target="_blank" href="/public/<%= @language.name_for_url %>_valency_data.zip">Data set for <%= @language.to_s %> <i><small>(zipped CSV files)</small></i></a></li>
+          <% end %>
+          <li><a target="_blank" href="/public/all_lgs_valency_data.zip">Data set for all languages <i><small>(zipped CSV files)</small></i></a></li>
+          <!-- <li><a href="#">Data set for all languages <i><small>(SQLite file)</small></i></a></li> -->
         </ul>
       </li>
       <li class="divider-vertical"></li>
@@ -161,11 +162,11 @@
     <li class="divider-vertical"></li>
     <li class="dropdown" id="dummy_dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        Coding&nbsp;sets
+        <!-- Coding&nbsp;sets -->
       </a>
-      <ul class="dropdown-menu">
-        <li><a href="#">Coming soon</a></li>
-      </ul>
+      <!-- <ul class="dropdown-menu">
+        <li><a href="#">Not implemented</a></li>
+      </ul> -->
     </li>
     <li class="divider-vertical"></li>
     
