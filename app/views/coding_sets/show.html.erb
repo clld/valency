@@ -1,20 +1,29 @@
 <!-- Coding set: show -->
-<h1 class="no-bold">
-  <%= @coding_set %> <small>of <%= link_to @language, @language %></small>
-</h1>
+<% cs = @coding_set # alias %>
+
+<p id="notice"><%= notice %></p>
 
 <div class="row">
   <div class="span12">
-      <div class="alert alert-block alert-error">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <div><strong>Under Construction</strong></div>
-      </div>
 
-    <table class="table table-bordered-sharp table-striped table-hover dataTable">
+    <!-- <div class="alert alert-block alert-error">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <div><strong>Under Construction</strong></div>
+    </div> -->
+
+    <h1 class="small">Coding set <span style="color:grey;font-weight:normal"><%= cs %></span><small> of <%= link_to @language, @language %></small></h1>
+    
+    <% if cs.comment %>
+      <form class="form-inline pull-left with-heading">
+        <a class="btn btn-mini toggle" data-toggle="comment" style="margin-top:-20px">show comment</a>
+        <div class="comment"><p class="box"><%= raw cs.comment %></p></div>
+      </form>
+    <% end %>
+    
+    <table  id="cs_list" class="table table-bordered-sharp table-striped table-hover dataTable" style="margin-top:60px">
       <thead>
         <tr>
           <th>Coding frame</th>
-          <th># Microroles</th>
           <th>Microrole + Verb form(s), sorted by microrole</th>
         </tr>
       </thead>
@@ -22,8 +31,16 @@
           <% @coding_frames.each do |cf| %>
             <tr>
               <td><%= link_to cf, [@language, cf] unless cf.nil? || cf.to_s.blank? %></td>
-              <td class="text"></td>
-              <td class="text"></td>
+
+              <td class="text">
+                <% @coding_set.microroles.each do |m| %>
+                <%= m.name %>
+                <br/>
+                <% end %>
+                  
+                  
+              </td>
+
             </tr>
           <% end %>
       </tbody>
