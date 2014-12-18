@@ -24,7 +24,7 @@
       <thead>
         <tr>
           <th>Coding frame</th>
-          <th>Microrole + Verb form(s)</th>
+          <th>Microrole(s)</th>
         </tr>
       </thead>
       <tbody>
@@ -33,9 +33,9 @@
               <td><%= link_to cf, [@language, cf] unless cf.nil? || cf.to_s.blank? %></td>
 
               <td class="text">
+                  
                 <% @coding_set.microroles.each do |m| %>
-                <%= m.name %>
-                <br/>
+                <%= link_to m, m %><span style="margin-right:2em"></span>
                 <% end %>
                   
                   

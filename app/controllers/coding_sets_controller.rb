@@ -20,12 +20,6 @@ class CodingSetsController < ApplicationController
     @coding_set = @language.coding_sets.includes(:coding_frame_index_numbers => [:coding_frame, :microroles]).find(params[:id])
     @coding_frames = @coding_set.coding_frames
 
-    # @cf_index_numbers = @coding_frames.coding_frame_index_numbers.includes(:microroles, :coding_set)
-    # 
-    # @verbs   = @coding_frames.related_verbs.includes(:meanings)
-    # verb_ids = @coding_frames.related_verb_ids
-
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @coding_sets }
