@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 3.2.3'
+gem 'rails', '3.2.22.5'
 
 gem 'ginjo-rfm' # up-to-date fork of Ruby FileMaker API
 
