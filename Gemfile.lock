@@ -67,7 +67,7 @@ GEM
     hike (1.2.3)
     hirb (0.7.1)
     http_parser.rb (0.5.3)
-    i18n (0.6.4)
+    i18n (0.6.6)
     journey (1.0.4)
     jquery-datatables-rails (1.11.2)
       jquery-rails
@@ -78,7 +78,7 @@ GEM
     libv8 (3.11.8.13)
     listen (0.7.3)
     lumberjack (1.0.2)
-    mail (2.5.4)
+    mail (2.5.5)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.1)
